@@ -1,0 +1,214 @@
+\documentclass[a4paper,11pt]{article}
+
+\author{Sebastian Pancratz, Jan Tuitman}
+\title{Improvements to the deformation method}
+
+% Geometry and page layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[hmargin=3.2cm,vmargin=3.2cm,a4paper,centering,twoside]{geometry}
+
+% Other packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+\usepackage{ifpdf}
+
+% hyperref %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,   % false: boxed links; true: colored links
+    citecolor=green,    % color of links to bibliography
+    filecolor=magenta,  % color of file links
+    linkcolor=red,      % color of internal links
+    urlcolor=blue       % color of external links
+}
+
+\makeatletter
+\newcommand\org@hypertarget{}
+\let\org@hypertarget\hypertarget
+\renewcommand\hypertarget[2]{%
+    \Hy@raisedlink{\org@hypertarget{#1}{}}#2%
+} 
+\makeatother
+
+\ifpdf
+    \hypersetup{
+        pdftitle={Deformation method},
+        pdfauthor={Sebastian Pancratz, Jan Tuitman},
+        pdfsubject={Computational Number Theory},
+        bookmarks=true,
+        bookmarksnumbered=true,
+        unicode=true,
+        pdfstartview={FitH},
+        pdfpagemode={UseOutlines}
+    }
+\fi
+
+% algorithmic %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[section]{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+% natbib %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{natbib}
+
+\bibpunct{[}{]}{,}{n}{}{}
+
+% url %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{url}
+
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+\urlstyle{leostyle}
+
+% Enumeration %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{paralist}
+
+\setlength{\pltopsep}{0.24em}
+\setlength{\plpartopsep}{0em}
+\setlength{\plitemsep}{0.24em}
+
+% This should do what we want
+%   \setdefaultenum{(i)}{(a)}{1.}{A}
+% but it does not work for references, dropping the parentheses.  The following
+% hack does work.
+
+\renewcommand{\theenumi}{(\roman{enumi})}
+\renewcommand{\theenumii}{(\alph{enumii})}
+\renewcommand{\theenumiii}{\arabic{enumiii}.}
+\renewcommand{\theenumiv}{\Alph{enumiv}}
+
+\renewcommand{\labelenumi}{\theenumi}
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\labelenumiii}{\theenumiii}
+\renewcommand{\labelenumiv}{\theenumiv}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mathematics
+
+% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amsthm,amscd,amsfonts,amssymb}
+\usepackage{cases}
+\usepackage[all]{xy}
+
+\allowdisplaybreaks[4]
+\numberwithin{equation}{section}
+
+% Customised notation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providecommand{\abs}[1]{\lvert#1\rvert}                 % Absolute value
+\providecommand{\absbig}[1]{\bigl\lvert#1\bigr\rvert}    % Absolute value
+\providecommand{\absBig}[1]{\Bigl\lvert#1\Bigr\rvert}    % Absolute value
+\providecommand{\absbigg}[1]{\biggl\lvert#1\biggr\rvert} % Absolute value
+
+\providecommand{\norm}[1]{\lVert#1\rVert}              % Norm
+\providecommand{\normbig}[1]{\bigl\lVert#1\bigr\rVert} % Norm
+\providecommand{\normBig}[1]{\Bigl\lVert#1\Bigr\rVert} % Norm
+
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}   % Floor
+\providecommand{\floorts}[1]{\lfloor#1\rfloor}            % Floor
+\providecommand{\floorbig}[1]{\bigl\lfloor#1\bigr\rfloor} % Floor
+\providecommand{\floorBig}[1]{\Bigl\lfloor#1\Bigr\rfloor} % Floor
+
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}   % Ceiling
+\providecommand{\ceilts}[1]{\lceil#1\rceil}            % Ceiling
+\providecommand{\ceilbig}[1]{\bigl\lceil#1\bigr\rceil} % Ceiling
+\providecommand{\ceilBig}[1]{\Bigl\lceil#1\Bigr\rceil} % Ceiling
+
+\newcommand{\NN}{\mathbf{N}} % Natural numbers
+\newcommand{\ZZ}{\mathbf{Z}} % Integers
+\newcommand{\QQ}{\mathbf{Q}} % Rationals
+\newcommand{\RR}{\mathbf{R}} % Real numbers
+\newcommand{\CC}{\mathbf{C}} % Complex numbers
+\newcommand{\FF}{\mathbf{F}} % Finite field
+
+\renewcommand{\to}{\rightarrow}        % Right arrow
+\newcommand{\into}{\hookrightarrow}    % Injection arrow
+\newcommand{\onto}{\twoheadrightarrow} % Surjection arrow
+
+\DeclareMathOperator{\fCoKer}{coker} % Cokernel
+\DeclareMathOperator{\fKer}{ker}     % Kernel
+\DeclareMathOperator{\fIm}{im}       % Image
+
+\DeclareMathOperator{\Res}{Res}   % Resultant
+\DeclareMathOperator{\Tr}{Tr}     % Trace
+\DeclareMathOperator{\Trace}{Tr}  % Trace
+\DeclareMathOperator{\Norm}{N}    % Norm
+\DeclareMathOperator{\Disc}{Disc} % Discriminant
+
+\DeclareMathOperator{\Gal}{Gal}          % Galois group
+\DeclareMathOperator{\ord}{ord}          % Order
+\DeclareMathOperator{\sgn}{sgn}          % Sign, signature
+\DeclareMathOperator{\Frob}{\mathcal{F}} % Frobenius
+\DeclareMathOperator{\Hom}{Hom}          % Space of homomorphisms
+\DeclareMathOperator{\Spec}{Spec}        % Spectrum
+
+\providecommand{\HdR}{H_{\text{dR}}}    % de Rham cohomology
+\providecommand{\Het}{H_{\text{\'et}}}  % etale cohomology
+\providecommand{\Hrig}{H_{\text{rig}}}  % rigid cohomology
+
+\providecommand{\cB}{\mathcal{B}} % Basis
+\providecommand{\cR}{\mathcal{R}} % Row index set
+\providecommand{\cC}{\mathcal{C}} % Column index set
+
+\providecommand{\BigOh}{\mathcal{O}} % Big-oh notation
+
+% Theorems etc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{prob}[thm]{Problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+[[TEST:  This is just a stupid sentence to test the references~\citep{Gerkmann2007}.]]
+
+\section{Introduction}
+
+\section{Theoretical background}
+
+\section{Computing in de~Rham cohomology}
+
+\section{Frobenius on diagonal hypersurfaces}
+
+\section{Solving Picard--Fuchs differential systems}
+
+\section{Analytic continuation and evaluation}
+
+\section{Recovering zeta functions}
+
+\section{Complexity analysis}
+
+\section{Examples}
+
+\phantomsection
+
+\bibliographystyle{plainnat}
+\bibliography{deformation}
+
+\end{document}
+
