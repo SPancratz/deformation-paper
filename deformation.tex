@@ -190,6 +190,55 @@
 
 \section{Introduction}
 
+\subsection{Overview of the algorithm}
+
+We now provide an outline of the deformation method.  The list below 
+includes nearly full details of the computation, omitting only the 
+specific choice of precisions $N_0, \dotsc, N_5$, and $K_1, K_2$.  
+These are provided and justified in subsequent sections.
+
+\begin{enumerate}
+\item[Step~$I$.]
+Let $\Phi_0$ denote the matrix for $p^{-1} \Frob_p$ on 
+$\Hrig^{n}(U_0)$ with entries in~$\mathbf{Q}_p$.  
+We require an approximation to $p$-adic precision~$N_5$.
+\item[Step~$II$.]
+Let $M$ denote the connection matrix on $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
+with entries in~$\mathbf{Q}(t)$.  We require an approximation 
+to precision~$N_4$.
+\item[Step~$III$.]
+Let $C$ denote the matrix over $\mathbf{Q}[[t]]$ for the local 
+expansion of the solution to the $p$-adic differential equation 
+$\bigl(\tfrac{d}{dt} + M\bigr) C = 0$.  We compute an approximation 
+modulo~$t^{K_2}$ to $p$-adic precision~$N_3$.  We also compute an 
+approximation for the matrix~$C(t^p)^{-1}$ modulo~$t^{K_2}$ to $p$-adic 
+precision~$N_3'$.
+\item[Step~$IV$.]
+Let $\Phi(t)$ denote the matrix for the action of $p^{-1} \Frob_p$ on 
+$\Hrig^{n}(U/S)$, which satisfies the equation 
+$\Phi(t) = C(t) \Phi_0 C(t^p)^{-1}$ and has entries in 
+$\mathbf{Q}_p\langle t,r(t)^{-1}\rangle^{\dagger}$.  We compute 
+a power series approximation modulo~$t^{K_2}$ to $p$-adic precision~$N_2$.
+\item[Step~$V$.]
+Let $\Phi_{t_1}$ denote the matrix for the action of $p^{-1} \Frob_p$ 
+on $\Hrig^{n}(U_{t_1})$, which has entries in $\mathbf{Q}_q$. 
+Firstly, we compute an approximation to $\Psi(t) = r(t)^{K_1} \Phi(t)$ 
+modulo~$t^{K_2}$ to $p$-adic precision~$N_2$.  We can then compute 
+an approximation for $\Phi_{t_1}$ to $p$-adic precision~$N_2$ 
+as $r(\hat{t}_1)^{-K_1} \Psi(\hat{t}_1)$.
+\item[Step~$VI$.]
+Let $\Phi_{t_1}^{(q)}$ denote the matrix for the action of $q^{-1} \Frob_q$ on 
+$\Hrig^{n}(U_{t_1})$, which satisfies 
+$\Phi_{t_1}^{(q)} = \Phi_{t_1} \sigma(\Phi_{t_1}) \dotsm \sigma^{a-1}(\Phi_{t_1})$ 
+and has entries in $\mathbf{Q}_q$.  We compute an approximation to this 
+matrix with $p$-adic precision~$N_1$.
+\item[Step~$VII$.]
+Let $p(T) = \det\bigl(1 - T q^{-1} \Frob_q | \Hrig^n(U_{t_1})\bigr)$, 
+which is an integer polynomial.  We recover this exactly 
+by computing an approximation to the reverse characteristic polynomial 
+of $\Phi_{t_1}^{(q)}$ to $p$-adic precision~$N_0$.
+\end{enumerate}
+
 \section{Theoretical background}
 
 \section{Computing in de~Rham cohomology}
@@ -1056,9 +1105,9 @@ of the algorithm which contribute significantly to the runtime can be
 carried out in parallel:
 \begin{itemize}
 \item In the implementation of the computation of $p^{-1} \Frob_p$ 
-      on $\Hrig^{n}(\mathcal{U}_0)$ which is quasi-cubic in the 
-      precision, the elements of the sequence $(\mu_m)_{m=0}^{M}$ 
-      can be computed independently.
+      on $\Hrig^{n}(U_0)$ which is quasi-cubic in the precision, 
+      the elements of the sequence $(\mu_m)_{m=0}^{M}$ can be computed 
+      independently.
 \item The computation of the connection matrix can be parallelised 
       as the computations of the images of the basis vectors for 
       $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ are independent.
@@ -1069,19 +1118,19 @@ carried out in parallel:
       as $C_{i}$ depends on certain $C_{j}$ with $j < i$, the 
       matrix products in the inner loop are independent.
 \item The computation of the $q_2$th-power Frobenius 
-      $\Phi^{(q_1)} \sigma(\Phi^{(q_1)}) \dotsm \sigma^{a_2-1}(\Phi^{(q_1)})$, 
-      where $a_2 = \log_{q_1} q_2$, can be carried out in parallel.  This can 
+      $\Phi^{(q)} \sigma(\Phi^{(q)}) \dotsm \sigma^{a-1}(\Phi^{(q)})$, 
+      where $a = \log_{p} q$, can be carried out in parallel.  This can 
       be achieved if, instead of computing a running product from left to 
       right, we express the matrix in a product tree.  We formalise this in 
       Algorithm~\ref{alg:ParallelProduct}, assuming for simplicity 
-      that $a_2 = 2^k$.  In this notation, the execution of the 
+      that $a = 2^k$.  In this notation, the execution of the 
       loops indexed by~$i$ can be parallelised.
       \begin{algorithm}
-      \caption{Parallel computation of $q_2^{-1} \Frob_{q_2} | \Hrig^{n}(\mathcal{U}_{t_1})$}
+      \caption{Parallel computation of $q^{-1} \Frob_{q} | \Hrig^{n}(U_{t_1})$}
       \label{alg:ParallelProduct}
       \begin{algorithmic}
       \vspace{1mm}
-      \For{$i \gets 0$ \textbf{to} $a_2-1$}
+      \For{$i \gets 0$ \textbf{to} $a-1$}
           \State $G_i \gets \sigma^{i}(F)$
       \EndFor
       \For{$j=k-1$ \textbf{to} $0$}
