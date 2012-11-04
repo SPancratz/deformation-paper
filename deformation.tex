@@ -1272,6 +1272,134 @@ over~$\mathbf{Q}_p[t]$ to $p$-adic precision~$N_2$.
 \section{Recovering zeta functions}
 \label{sec:ZetaFunctions}
 
+Recall that the zeta function of the hypersurface~$X_{t_1}$ is of the form,
+\begin{equation}
+Z(X_{t_1},T) = \frac{p(T)^{(-1)^n}}{(1 - T) (1 - qT) \dotsm (1 - q^{n-1}T)}
+\end{equation}
+where $p(T) = \det \bigl( 1 - T q^{-1} \Frob_q | \Hrig^n(U_{t_1}) \bigr)$ 
+is a polynomial defined over the integers.
+Thus, the remaining two steps in the deformation method are now clear.  
+Firstly, we determine the action of the $q$th-power Frobenius 
+from that of the $p$th-power Frobenius.  Secondly, we compute 
+its reverse characteristic polynomial to suitable \mbox{$p$-adic} 
+precision in order to recover the zeta function.
+
+\subsection{Computing the action of $q^{-1} \Frob_q$ on $\Hrig^{n}(U_{t_1})$}
+
+As before, let $\Phi_{t_1}$ and $\Phi_{t_1}^{(q)}$ denote the matrices 
+representing the actions of $p^{-1} \Frob_p$ and $q^{-1} \Frob_q$ 
+on~$\Hrig^{n}(U_{t_1})$, respectively.  As the action of $p^{-1} \Frob_p$ 
+is $\sigma$-semilinear, we have that 
+\begin{equation}
+\Phi_{t_1}^{(q)} = 
+    \Phi_{t_1} \sigma(\Phi_{t_1}) \dotsm \sigma^{a-1}(\Phi_{t_1}),
+\end{equation}
+where $a = \log_p q$.  Note that the lift of Frobenius~$\sigma$ 
+is valuation preserving and hence the valuations of the matrices 
+$\Phi_{t_1}, \sigma(\Phi_{t_1}), \dotsc, \sigma^{a-1}(\Phi_{t_1})$ 
+are at least $-\delta$ by [[TODO: Reference]].
+In particular, it follows that in order to determine $\Phi_{t_1}^{(q)}$ 
+to $p$-adic precision~$N_1$ it suffices to provide $\Phi_{t_1}$ to 
+precision $N_2 \geq N_1 + (a-1) \delta$.
+
+\subsection{Computing Weil polynomials}
+
+Before considering Weil polynomials, we briefly address the loss 
+of precision when computing the reverse characteristic polynomial 
+$\det(1 - t A)$ of a $b \times b$ matrix~$A$ given to finite precision 
+over $\mathbf{Q}_p$.  In general, from the elementary definition of the 
+determinant function, it appears that the precision loss could be as 
+great as $(b-1) \ord_p(A)$.  However, in the case of matrices representing 
+the action of Frobenius on $\Hrig^n(U_{t_1})$, much better bounds are 
+available:
+
+\begin{lem}
+Define $\delta = \delta(n,p)$ as in Lemma~[[TODO: Reference]] and 
+suppose that $\tilde{\Phi}_{t_1}^{(q)}$ is an approximation to 
+$\Phi_{t_1}^{(q)}$ with 
+$\ord_p\bigl(\Phi_{t_1}^{(q)}-\tilde{\Phi}_{t_1}^{(q)}\bigr) \geq N + \delta$.
+Then 
+\begin{equation}
+\ord_p \Bigl( \det\bigl(1 - t \Phi_{t_1}^{(q)}\bigr) 
+            - \det\bigl(1 - t \tilde{\Phi}_{t_1}^{(q)}\bigr) \Bigr) \geq N.
+\end{equation}
+\end{lem}
+
+\begin{proof} 
+See Gerkmann~\citep[Lemma~3.3, Lemma~3.4]{Gerkmann2007}.
+\end{proof}
+
+The previous lemma allows us to take $N_1 = N_0 + \delta$ in our 
+description of the deformation algorithm.
+
+Finally, we compute the 
+reverse characteristic polynomial $p(T)$ of the matrix $\Phi_{t_1}^{(q)}$, 
+which represents $q^{-1} \Frob_q$ on $\Hrig^n(U_{t_1})$, to some finite 
+$p$-adic precision.  Which precision~$N_0$ is necessary in order to 
+correctly recover the polynomial~$p(T)$ over the integers?
+
+\begin{thm} \label{thm:N0}
+In order to recover $p(T)$ over $\mathbf{Z}$ it suffices to compute 
+an approximation modulo~$p^N$ where 
+\begin{equation}
+p^N > 2 \max_{0 \leq i \leq b} \binom{b}{i} q^{i (n-1) / 2}.
+\end{equation}
+Moreover, this can be improved to 
+\begin{equation}
+p^N > 2 \binom{b}{\floor{b/2}} q^{\floor{b/2} (n-1) / 2}
+\end{equation}
+provided that the sign $\epsilon = \sgn(\det(F_q))$ of the 
+functional equation for the zeta function is known.
+\end{thm}
+
+\begin{proof}
+This is a slight reformulation of {Theorem~3.2} in~\citep{Gerkmann2007}, 
+which follows readily from its proof.
+\end{proof}
+
+\begin{rem}
+We observe that the sign $\epsilon = \sgn(\det(q^{-1} \Frob_q)) = 1$ 
+whenever $n$ is even.  [[TODO: Give justification.  If nothing else, 
+include this in the statement of the Weil conjectures.]]
+\end{rem}
+
+\begin{rem}
+In the case that $n$ is odd, the sign~$\epsilon$ of the functional 
+equation is unknown a priori.  However, in practice it is often still 
+possible to avoid having to use the greater of the two precisions in 
+Theorem~\ref{thm:N0} by just computing one additional coefficient 
+exactly.  Writing $p(T) = \sum_{i=0}^{b} a_i T^i$, we can recover 
+$a_0, \dotsc, a_{\floor{b/2}+1}$ exactly provided 
+\begin{equation}
+p^N > 2 \max\biggl\{\binom{b}{\floor{b/2}} q^{\floor{b/2} (n-1) / 2}, 
+                   \binom{b}{\floor{b/2}+1} q^{(\floor{b/2}+1) (n-1)/2} \biggr\}.
+\end{equation}
+This allows us to determine the sign~$\epsilon$ from the two 
+coefficients $a_{\ceil{b/2}-1}$ and $a_{\floor{b/2}+1}$, provided 
+that they are non-zero, and we can then recover the remaining 
+coefficients using the functional equation.
+\end{rem}
+
+\begin{rem} \label{rem:N0Surfaces}
+In the case of smooth projective surfaces, when $p > 2$ and subject to 
+certain technical conditions, we can often exploit the growing divisibility 
+of the coefficients of $p(T)$ ensured by the Hodge polygon.  For such a surface 
+of degree~$d$, we know that the Hodge numbers $h_{0,2}$, $h_{1,1}$ and $h_{2,0}$ 
+satisfy $h_{0,2} = h_{2,0} = \binom{d-1}{3}$ and $2 h_{0,2} + h_{1,1} = b$. 
+It is now easier to determine the integer coefficients of the 
+polynomial~$q^{h_{0,2}} p(T/q)$ as the roots of the polynomial $p(T/q)$ lie 
+on the unit circle.  This allows us to take 
+\begin{align*}
+N_0 & = a h_{0,2} + \floor{\log_p \biggl( 2 \binom{b}{\floor{b/2}}\biggr)} + 1,\\
+N_1 & = N_0 + a,
+\end{align*}
+where $N_0$ here refers to the required precision for $q^{h_{0,2}} p(T/q)$ 
+and $N_1$ as before refers to the precision required for the matrix 
+representing $q^{-1} \Frob_q$ on $\Hrig^{n}(U_{t_1})$.
+For further details, we refer the reader to 
+Lauder~\citep[\S 9.3.2, Proposition~9.6]{Lauder2006}.
+\end{rem}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Complexity analysis}
