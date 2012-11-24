@@ -1,0 +1,10 @@
+# These files are text and should be normalized (convert crlf => lf)
+# in the repository.
+
+.gitignore      text
+.gitattributes  text
+Makefile        text
+README.md       text
+deformation.bib text
+deformation.tex text
+
