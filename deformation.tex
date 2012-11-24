@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt]{article}
 
 \author{Sebastian Pancratz, Jan Tuitman}
-\title{Improvements to the deformation method}
+\title{Practical improvements to the deformation method for counting points on smooth projective hypersurfaces}
 
 % Geometry and page layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -99,7 +99,7 @@
 % Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{amsmath,amsthm,amscd,amsfonts,amssymb}
-\usepackage{cases}
+\usepackage{cases,verbatim}
 \usepackage[all]{xy}
 
 \allowdisplaybreaks[4]
@@ -178,6 +178,13 @@
 \newtheorem{rem}[thm]{Remark}
 \newtheorem{prob}[thm]{Problem}
 
+% Roman numerals %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DOCUMENT                                                                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -193,55 +200,6 @@
 \section{Introduction}
 \label{sec:Introduction}
 
-\subsection{Overview of the algorithm}
-
-We now provide an outline of the deformation method.  The list below 
-includes nearly full details of the computation, omitting only the 
-specific choice of precisions $N_0, \dotsc, N_5$, and $K_1, K_2$.  
-These are provided and justified in subsequent sections.
-
-\begin{enumerate}
-\item[Step~$I$.]
-Let $\Phi_0$ denote the matrix for $p^{-1} \Frob_p$ on 
-$\Hrig^{n}(U_0)$ with entries in~$\mathbf{Q}_p$.  
-We require an approximation to $p$-adic precision~$N_5$.
-\item[Step~$II$.]
-Let $M$ denote the connection matrix on $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
-with entries in~$\mathbf{Q}(t)$.  We require an approximation 
-to precision~$N_4$.
-\item[Step~$III$.]
-Let $C$ denote the matrix over $\mathbf{Q}[[t]]$ for the local 
-expansion of the solution to the $p$-adic differential equation 
-$\bigl(\tfrac{d}{dt} + M\bigr) C = 0$.  We compute an approximation 
-modulo~$t^{K_2}$ to $p$-adic precision~$N_3$.  We also compute an 
-approximation for the matrix~$C(t^p)^{-1}$ modulo~$t^{K_2}$ to $p$-adic 
-precision~$N_3'$.
-\item[Step~$IV$.]
-Let $\Phi(t)$ denote the matrix for the action of $p^{-1} \Frob_p$ on 
-$\Hrig^{n}(U/S)$, which satisfies the equation 
-$\Phi(t) = C(t) \Phi_0 C(t^p)^{-1}$ and has entries in 
-$\mathbf{Q}_p\langle t,r(t)^{-1}\rangle^{\dagger}$.  We compute 
-a power series approximation modulo~$t^{K_2}$ to $p$-adic precision~$N_2$.
-\item[Step~$V$.]
-Let $\Phi_{t_1}$ denote the matrix for the action of $p^{-1} \Frob_p$ 
-on $\Hrig^{n}(U_{t_1})$, which has entries in $\mathbf{Q}_q$. 
-Firstly, we compute an approximation to $\Psi(t) = r(t)^{K_1} \Phi(t)$ 
-modulo~$t^{K_2}$ to $p$-adic precision~$N_2$.  We can then compute 
-an approximation for $\Phi_{t_1}$ to $p$-adic precision~$N_2$ 
-as $r(\hat{t}_1)^{-K_1} \Psi(\hat{t}_1)$.
-\item[Step~$VI$.]
-Let $\Phi_{t_1}^{(q)}$ denote the matrix for the action of $q^{-1} \Frob_q$ on 
-$\Hrig^{n}(U_{t_1})$, which satisfies 
-$\Phi_{t_1}^{(q)} = \Phi_{t_1} \sigma(\Phi_{t_1}) \dotsm \sigma^{a-1}(\Phi_{t_1})$ 
-and has entries in $\mathbf{Q}_q$.  We compute an approximation to this 
-matrix with $p$-adic precision~$N_1$.
-\item[Step~$VII$.]
-Let $p(T) = \det\bigl(1 - T q^{-1} \Frob_q | \Hrig^n(U_{t_1})\bigr)$, 
-which is an integer polynomial.  We recover this exactly 
-by computing an approximation to the reverse characteristic polynomial 
-of $\Phi_{t_1}^{(q)}$ to $p$-adic precision~$N_0$.
-\end{enumerate}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Theoretical background}
@@ -250,77 +208,192 @@ of $\Phi_{t_1}^{(q)}$ to $p$-adic precision~$N_0$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Computing in de~Rham cohomology}
+\subsection{Computing the cohomology}
 \label{sec:deRham}
 
-In this section we present a concrete representation of the algebraic 
-de~Rham cohomology spaces $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$, 
-restricted to the case of the complement $\mathfrak{U}/\mathfrak{S}$ 
-of a smooth projective family $\mathfrak{X} / \mathfrak{S}$.  We first 
-follow Abbott, Kedlaya and Roe~\citep[Remark~3.2.5]{AbbottKedlayaRoe2006} 
-in the description of the so-called \emph{reduction of poles} procedure for 
-the de~Rham cohomology $L$-vector space $\HdR^{n}(\mathfrak{U} / L)$, 
-considering $\mathfrak{U}$ as a scheme over $L = \QQ_{p}(t)$.
+In this section we recall how to compute in the algebraic de~Rham cohomology space 
+$\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ of the complement $\mathfrak{U}/\mathfrak{S}$ 
+of a family of smooth hypersurfaces $\mathfrak{X}/\mathfrak{S}$ contained in 
+$\mathbf{P}^n_{\mathfrak{S}}$ following the method of Griffiths and Dwork. 
+Actually, because we prefer to do linear algebra over a field, we will mainly work with 
+the de Rham cohomology vector space $\HdR^{n}(\mathfrak{U}_L)$ of the generic fiber 
+$\mathfrak{U}_L = \mathfrak{U}/\mathfrak{S} \times_{\mathfrak{S}} \Spec{L}$,
+where $L=K(t)$ denotes the function field of $\mathfrak{S}$. 
 
 \begin{thm}
-Let $\Omega$ denote the $n$-form $\Omega$ in $\HdR^{n}(\mathfrak{U}/L)$ 
+Let $\Omega$ denote the $n$-form $\Omega$ in $\HdR^{n}(\mathfrak{U}_L)$ 
 defined by 
 \begin{equation}
 \Omega = \sum_{i=0}^n (-1)^i x_i d x_0 \wedge \dotsb \wedge \widehat{d x_i} \wedge \dotsb \wedge d x_n.
 \end{equation}
-The algebraic de~Rham cohomology space $\HdR^{n}(\mathfrak{U}/L)$ is 
-isomorphic as a $L$-vector space to the quotient of the group of $n$-forms 
-$Q \Omega / P^k$ with $k \in \NN$ and $Q \in L[x_0, x_1, \dotsc, x_n]$ 
-homogeneous of degree $k d - (n + 1)$ by the subgroup generated by the 
-relation 
+The algebraic de~Rham cohomology space $\HdR^{n}(\mathfrak{U}_L)$ is 
+isomorphic as an $L$-vector space to the quotient of the space of closed $n$-forms 
+$Q \Omega / P^k$, with $k \in \NN$ and $Q \in L[x_0, x_1, \dotsc, x_n]$ 
+homogeneous of degree $k d - (n + 1)$, by the subspace of exact $n$-forms generated by
 \begin{equation} \label{eq:deRhamRel}
-\frac{(\partial_i Q) \Omega}{P^k} - k \frac{Q (\partial_i P) \Omega}{P^{k+1}}
+\frac{(\partial_i Q) \Omega}{P^k} - k \frac{Q (\partial_i P) \Omega}{P^{k+1}},
 \end{equation}
-for all $0 \leq i \leq n$, where here and in the following $\partial_i$ 
-denotes the partial derivative operator with respect to~$x_i$.
+with $k \in \NN$ and $Q \in L[x_0, x_1, \dotsc, x_n]$ 
+homogeneous of degree $kd-n$, where $\partial_i$ 
+denotes the partial derivative operator with respect to~$x_i$ for $0 \leq i \leq n$.
 \end{thm}
 
 \begin{proof}
-This result follows from a calculation as 
-in Griffiths~\citep[\S 4]{Griffiths1969}.
+See for example Griffiths~\citep[\S 4]{Griffiths1969}.
 \end{proof}
 
-It is clear that $\HdR^{n}(\mathfrak{U}/L)$ can be equipped with a 
-filtration whose $i$th parts consists of all elements which can be 
-represented by $n$-forms with degree $\deg Q = kd - (n + 1)$ for 
-$1 \leq k \leq i + 1$. We can obtain a basis for $\HdR^{n}(\mathfrak{U}/L)$ 
-respecting this filtration as follows.  For every $k \in \NN$, we find 
-an independent set $B_k$ of polynomials of degree $kd-(n+1)$ generating 
-the quotient of the space of all such polynomials by the Jacobian ideal 
-$(\partial_0 P, \dotsc, \partial_n P)$.  This yields a generating set 
-$\bigcup_{k \in \NN} \cB_k$ for $\HdR^n(\mathfrak{U}/L)$ where 
-$\cB_k = \{Q \Omega / P^k : Q \in B_k\}$.  It follows from a theorem of 
-Macaulay~\citep[\S 4, (4.11)]{Griffiths1969} that in fact the set 
-$\cB = \cB_1 \cup \dotsb \cup \cB_n$ already forms a generating set.  
-Later we shall exhibit an explicit basis of monomials in the case where 
-the family of projective hypersurfaces contains a diagonal fibre.
+The cohomology space $\HdR^{n}(\mathfrak{U}_L)$ is equipped with an 
+increasing filtration  of $L$-vector spaces $\{\mathcal{F}_k \HdR^{n}(\mathfrak{U}_L) \}_{k \geq 0}$ 
+for which $\mathcal{F}_k \HdR^{n}(\mathfrak{U}_L)$ consists of all elements that
+can be represented by $n$-forms $Q \Omega / P^k$  with $Q \in L[x_0, x_1, \dotsc, x_n]$ 
+homogeneous of degree $kd - (n + 1)$. It follows from a theorem of Macaulay~\citep[\S 4, (4.11)]{Griffiths1969} 
+that $\mathcal{F}_n \HdR^{n}(\mathfrak{U}_L)= \HdR^{n}(\mathfrak{U}_L)$. Therefore, a basis for 
+$\HdR^{n}(\mathfrak{U}_L)$ can in principle be computed using (finite dimensional) linear algebra. 
+However, we will define an explicit basis of a very simple form for $\HdR^{n}(\mathfrak{U}_L)$ for the
+families that we are interested in.
+%TODO perhaps mention that all spaces of polynomials contain Q=0 (annoying)
+%TODO mention that F_i is the (reverse) Hodge filtration on H^{n-1}(X) with the correct indices
 
-Now, to obtain a unique representative for the class of $Q \Omega / P^k$ 
-in terms of the basis elements in $\cB$, we express $Q$ in terms of 
-$\partial_0 P, \dotsc, \partial_n P$ as well as elements of $B_k$, and 
-then iteratively reduce the pole order of the first part according to 
-the relations given by the expressions from equation~\eqref{eq:deRhamRel}. 
-Assume that we have at our disposal a routine {\sc Decompose} which, 
-given a polynomial $Q$ of degree $kd - (n+1)$ in the ideal generated by 
-$(\partial_0 P, \dotsc, \partial_n P)$ and $B_k$, returns an expression 
-$Q = Q_0 \partial_0 P + \dotsb + Q_n \partial_n P + \gamma_k$ with 
-$Q_0, \dotsc, Q_n$ homogeneous polynomials in $L[x_0, \dotsc, x_n]$ and 
-$\gamma_k$ in the $L$-span of $B_k$.  The reduction of poles procedure can 
-then be formalised as in Algorithm~\ref{alg:PoleRed} below, which we will 
-refer to as {\sc Reduce}.  In this generality, the correctness of the 
-algorithm depends on a theorem of Macaulay~\citep[\S 4, (4.11)]{Griffiths1969}.
+\begin{defn} \label{defn:MonBasis}
+For $k \in \NN$, we define the following sets of monomials: 
+\begin{align*}
+F_k & = \{ x^i : i \in \mathbf{N}_{0}^{n+1}, \abs{i} = k d - (n+1) \}, \\
+B_k & = \{ x^i : i \in \mathbf{N}_{0}^{n+1}, \abs{i} = k d - (n+1) \text{ and $i_j < d-1$ for $0 \leq j \leq n$}\},
+\end{align*}
+where $x^i = x_0^{i_0} \dotsm x_n^{i_n}$ and 
+$\abs{i} = i_0 + \dotsb + i_n$. We write $\cB_k= \{Q \Omega / P^k : Q \in B_k\}$, $B = B_1 \cup \dotsc \cup B_n$, 
+and $\cB = \cB_1 \cup \dotsc \cup \cB_n$.
+\end{defn}
+
+%TODO remark that B_k \subset F_k and B_k=0 for k > n
+
+We will show below that if the family $\mathfrak{X}/{\mathfrak{S}}$ contains a diagonal fiber, 
+then the set $\cB$ forms a basis for $\HdR^n(\mathfrak{U}_L)$ .
+
+\begin{defn} \label{defn:IndexSets}
+For $k \in \NN$, we define the following sets of monomials in 
+$L[x_0, \dotsc, x_n]$.  Let $R_k = F_k - B_k$ be the set of monomials of 
+total degree $kd-(n+1)$ and partial degree at least $d-1$ with respect to some 
+of the $n+1$ variables.  Let $C_k^{(0)}$ be the set of monomials of total 
+degree $(k-1)d - n$, and then inductively, for $j = 1, \dotsc, n$, define 
+$C_k^{(j)}$ to be the set of monomials in $C_k^{(j-1)}$ except for those 
+divisible by $x_{j-1}^{d-1}$.  Moreover, we define the multi-set $C_k$ as 
+the disjoint union of $C_k^{(0)}, \dotsc, C_k^{(n)}$.  We shall write an 
+element of this multi-set as $(j, g)$, when referring to a monomial~$g$ 
+in~$C_k^{(j)}$.
+\end{defn}
+
+\begin{thm} \label{thm:Isomorphism}
+Suppose that the family $\mathfrak{X}/\mathfrak{S}$ of smooth projective
+hypersurfaces given by the polynomial~$P$ in $K[t][x_0, \dotsc, x_n]$ contains 
+a diagonal fibre.  For $k \in \NN$ and $0 \leq j \leq n$, let $V_k^{(j)}$ be 
+the $L$-vector space of polynomials with basis $C_k^{(j)}$. Let $V_k$ denote the 
+cartesian product $V_k = V_k^{(0)} \times \dotsb \times V_k^{(n)}$, and let $W_k$ be 
+the $L$-vector space of polynomials with basis~$R_k$.  Then the map 
+\begin{equation}
+\phi_k \colon V_k \to W_k, 
+(Q_0, \dotsc, Q_n) \mapsto Q_0 \partial_0 P + \dotsb + Q_n \partial_n P
+\end{equation}
+is an isomorphism of $L$-vector spaces.
+\end{thm}
+%TODO check whether having a diagonal fiber is necessary
+%TODO! why is phi_k even well defined? 
+
+\begin{proof}
+We first show that, for all $k \in \NN$, the multi-sets $R_k$ and $C_k$ 
+have the same cardinality.
+
+We construct a bijection $R_k \to C_k$, representing the 
+monomials by their exponent tuples.  Let $i = (i_0, \dotsc, i_n)$ be an
+element of $R_k$.  If $i_0 \geq d-1$, we define the image as
+$(i_0-d-1, i_1, \dotsc, i_n) \in C_k^{(0)}$.  More generally, if 
+$i_0 < d-1, \dotsc, i_{j-1} < d-1$ and $i_j \geq d-1$, we define the image as 
+$(i_0, \dotsc, i_{j-1}, i_j-(d-1), i_{j+1}, \dotsc, i_n) \in C_k^{(j)}$.  
+It is easy to verify that this map is indeed a bijection.
+
+If $R_k$ and $C_k$ are empty, then $V_k$ and $W_k$ are the zero vector spaces, and
+the theorem holds trivially. So suppose that $R_k$ and $C_k$ are nonempty, that is to
+say, $k \geq n/d + 1$.
+
+In order to establish that the map $\phi_k \colon V_k \to W_k$ is an 
+isomorphism of $L$-vector spaces, we look at its matrix with respect to 
+the given bases. We define the auxiliary matrix $\Delta_k$ with 
+row and column index sets $R_k$ and $C_k$, respectively, as follows.  
+Given $f \in R_k$ and $(j,g) \in C_k$, we set the corresponding entry in 
+$\Delta_k$ to be the coefficient of the monomial $f/g$ in $\partial_j P$ if 
+$g$ divides $f$ and $0$ otherwise.  It is immediate that $\Delta_k$ is the 
+matrix representing $\phi_k$ with respect to the bases $C_k$ and $R_k$ of 
+$V_k$ and $W_k$, respectively.
+
+The assumption that the family~$\mathfrak{X}/\mathfrak{S}$ contains a diagonal 
+hypersurface means that for some~$t_0$ the fibre $\mathfrak{X}_{t_0}$ is 
+defined by a polynomial of the form 
+\begin{equation}
+P_{t_0}(x_0, \dotsc, x_n) = a_0 x_0^d + \dotsb a_n x_n^d
+\end{equation}
+with $a_0, \dotsc, a_n \in K^{\times}$.
+
+We can now show that the determinant of $\Delta_k$ is nonzero in~$L$.  Since 
+specialisation to the diagonal fibre i.e., evaluation of the matrix at 
+$t = t_0$, commutes with computing the determinant, it suffices to show that 
+the determinant of $(\Delta_k) \big |_{t=t_0}$ is nonzero.
+Since for $0 \leq j \leq n$, we have $\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, 
+there is precisely one non-zero entry in each column and each row of $\Delta_k$:  in column 
+$(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is the non-zero entry 
+$d \alpha_j$, concluding the proof. \end{proof}
+
+We can use Theorem \ref{thm:Isomorphism} to give a routine {\sc Decompose} (formalised in
+Algorithm \ref{alg:Decompose} below) which, 
+given $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$, 
+returns an expression 
+\begin{equation}
+Q = Q_0 \partial_0 P + \dotsb + Q_n \partial_n P + \gamma_k,
+\end{equation} 
+with $Q_0, \dotsc, Q_n \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd-n$ and 
+$\gamma_k$ in the $L$-span of $B_k$. We can in turn use {\sc Decompose}
+to furnish another routine {\sc Reduce} (formalised in Algorithm~\ref{alg:PoleRed} below) 
+which, given a closed $n$-form $Q\Omega/P^k$ with $Q \in L[x_0, \dotsc, x_n]$ homogeneous 
+of degree $kd - (n+1)$ returns an expression
+\begin{equation}
+Q \Omega / P^k \equiv \gamma_{1} \Omega / P^{1} + \dotsb + \gamma_n \Omega / P^n,
+\end{equation}
+with $\gamma_i$ in the $L$-span of $B_i$ for $1 \leq i \leq n$, and where $\equiv$ denotes 
+equality in cohomology.
+
+\begin{algorithm}[ht]
+\caption{Obtain coordinates for $Q$ in the Jacobian ideal modulo basis elements}
+\label{alg:Decompose}
+\begin{algorithmic}
+\Require $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
+\Ensure  $Q_0, \dotsc, Q_n \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
+         $k(d-1)-n$, and $\gamma_k$ in the $L$-span of $B_k$, such that 
+         $Q = Q_0 \partial P_0 + \dotsb + Q_n \partial_n P +\gamma_k$.
+\Procedure{Decompose}{$Q, \partial_0 P, \dotsc, \partial_n P, B_k$}
+\State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
+\item Let $b$ be the vector of length $\abs{R_k}$ such that the entry 
+      corresponding to the monomial $x^i \in R_k$ is the coefficient of 
+      $x^i$ in $Q$.
+\item Let $v$ be the unique vector of length $\abs{C_k}$ satisfying 
+      $\Delta_k v = b$.  From the description of $C_k$ as a disjoint union, 
+      we can write $v$ accordingly as $\bigl(v^{(0)}, \dotsc, v^{(n)}\bigr)$ 
+      where $v^{(j)}$ is a vector of length 
+      $\abs{C_k^{(j)}}$ for $0 \leq j \leq n$.
+\item For $j = 0, \dotsc, n$, set $Q_j = \sum_{g \in C_k^{(j)}} v_g^{(j)} g$,
+      where $v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to the 
+      monomial $g \in C_k^{(j)}$, and set $\gamma_k = Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$.
+\item \textbf{return} $Q_0, \dotsc, Q_n,\gamma_k$.
+\end{compactenum}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \begin{algorithm}
-\caption{Reduce $Q \Omega / P^k$ in $\HdR^n(\mathfrak{U}/L)$}
+\caption{Reduce $Q \Omega / P^k$ in $\HdR^n(\mathfrak{U}_L)$}
 \label{alg:PoleRed}
 \begin{algorithmic}
 \vspace{1mm}
 \Require $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
-\Ensure  $\gamma_i$ in the $L$-span of $B_i$, for $1 \leq i \leq n$, with  
+\Ensure  $\gamma_i$ in the $L$-span of $B_i$ for $1 \leq i \leq n$, with  
          $Q \Omega / P^k \equiv \gamma_{1} \Omega / P^{1} + \dotsb + \gamma_n \Omega / P^n$.
 \Procedure{Reduce}{$P, B_1, \dotsc, B_n, Q$}
 \While{$k \geq n+1$}
@@ -328,7 +401,6 @@ algorithm depends on a theorem of Macaulay~\citep[\S 4, (4.11)]{Griffiths1969}.
 \State $k \gets k-1$
 \State $Q \gets k^{-1} \sum_{i=0}^n \partial_i Q_i$
 \EndWhile
-\State $\gamma_{k+1}, \dotsc, \gamma_{n} \gets 0$
 \While{$Q \not \in B_k$}
 \State $Q_0, \dotsc, Q_n, \gamma_k \gets \Call{Decompose}{Q, \partial_0 P, \dotsc, \partial_n P, B_k}$
 \State $k \gets k-1$
@@ -344,288 +416,87 @@ algorithm depends on a theorem of Macaulay~\citep[\S 4, (4.11)]{Griffiths1969}.
 \end{algorithmic}
 \end{algorithm}
 
-We now specialise to the case of a smooth family of projective 
-hypersurfaces containing a diagonal fibre.  We exhibit a basis 
-of monomials~$B = B_1 \cup \dotsb \cup B_n$ such that the 
-corresponding set~$\cB$ forms a basis for $\HdR^n(\mathfrak{U}/L)$ 
-and re-express the problem of decomposing a homogeneous polynomial 
-in the language of linear algebra.  From this description, we furnish 
-an explicit reduction procedure in terms of matrices.  The approach 
-is based on a generalisation of Sylvester matrices from two 
-polynomials to $n+1$~polynomials, following Macaulay~\citep{Macaulay1994}.
-
-\begin{defn} \label{defn:MonBasis}
-For $k \in \NN$, we define the following sets of monomials, 
-\begin{align*}
-F_k & = \{ x^i : i \in \mathbf{N}_{0}^{n+1}, \abs{i} = k d - (n+1) \}, \\
-B_k & = \{ x^i : i \in \mathbf{N}_{0}^{n+1}, \abs{i} = k d - (n+1) \text{ and $i_j < d-1$ for $0 \leq j \leq n$}\},
-\end{align*}
-where $x^i = x_0^{i_0} \dotsm x_n^{i_n}$ and 
-$\abs{i} = i_0 + \dotsb + i_n$.
-\end{defn}
-
-In order to ensure that our computations are not vacuous, we assume 
-that $\HdR^n(\mathfrak{U}/L)$ is non-zero.  After setting 
-\begin{equation}
-\ell = \ceil{\frac{n+1}{d}}, \quad u = \floor{\frac{(n+1)(d-1)}{d}} = n+1 - \ell,
-\end{equation}
-we note that $B_k$ is non-empty if and only if $\ell \leq k \leq u$.  The 
-assumption is thus that $\ell \leq u$, which is equivalent to the statement 
-that $d \geq 2$ whenever $n$ is odd and $d \geq 3$ whenever $n$ is even.
-
-In the case when the family $\mathfrak{X}/\mathfrak{S}$ contains a 
-diagonal fibre, it turns out that we can add additional constraints 
-to our decomposition problem:
-
-\begin{prob} \label{prob:Decomposition}
-Given a homogeneous multivariate polynomial $Q \in L[x_0, \dotsc, x_n]$ 
-of degree \mbox{$k d - (n + 1)$}, for some $k \in \NN$, we try to find 
-homogeneous polynomials $Q_0, \dotsc, Q_n$ in $L[x_0, \dotsc, x_n]$ such 
-that 
-\begin{equation} \label{eq:Decomposition}
-Q \equiv Q_0 \partial_0 P + \dotsb + Q_n \partial_n P
-\end{equation}
-modulo the $L$-span of $B_k$.  Moreover, for each $1 \leq j \leq n$,  the 
-polynomial $Q_j$ may only contain non-zero coefficients for monomials of 
-degree $(k-1)d-n$ that are not divisible by any of the monomials 
-$x_0^{d-1}, \dotsc, x_{j-1}^{d-1}$.
-\end{prob}
-
-\begin{rem}
-Immediately, we see that, for each $0 \leq i \leq n$, either $Q_i$ is 
-identically zero or has degree $(k - 1) d - n$ since $\partial_i P$ is 
-homogeneous of degree $d - 1$ and the elements of $B_k$ have degree 
-$kd - (n+1)$.
-\end{rem}
-
-\begin{defn} \label{defn:IndexSets}
-For $k \in \NN$, we define the following sets of monomials in 
-$L[x_0, \dotsc, x_n]$.  Let $R_k = F_k - B_k$ be the set of monomials of 
-total degree $kd-(n+1)$ and partial degree at least $d-1$ with respect to some 
-of the $n+1$ variables.  Let $C_k^{(0)}$ be the set of monomials of total 
-degree $(k-1)d - n$, and then inductively, for $j = 1, \dotsc, n$, define 
-$C_k^{(j)}$ to be the set of monomials in $C_k^{(j-1)}$ except for those 
-divisible by $x_{j-1}^{d-1}$.  Moreover, we define the multi-set $C_k$ as 
-the disjoint union of $C_k^{(0)}, \dotsc, C_k^{(n)}$.  We shall write an 
-element of this multi-set as $(j, g)$, referring to a monomial~$g$ 
-in~$C_k^{(j)}$.
-\end{defn}
-
-With this set-up, the following theorem provides a solution to 
-Problem~\ref{prob:Decomposition} in the cases that we are interested in:
-
-\begin{thm} \label{thm:Isomorphism}
-Suppose that the family of projective hypersurfaces given by the 
-polynomial~$P$ in $L[x_0, \dotsc, x_n]$ contains a diagonal fibre.  
-Let $k \in \NN$ and suppose that $R_k$ and $C_k$ are non-empty.  For 
-$0 \leq j \leq n$, let $V_k^{(j)}$ be the $L$-vector space of 
-polynomials with basis $C_k^{(j)}$, and let $V_k$ denote their cartesian 
-product $V_k = V_k^{(0)} \times \dotsb \times V_k^{(n)}$.  Let $W_k$ be 
-the $L$-vector space of polynomials with basis~$R_k$.  Then the $L$-linear 
-map 
-\begin{equation}
-\phi_k \colon V_k \to W_k, 
-(Q_0, \dotsc, Q_n) \mapsto Q_0 \partial_0 P + \dotsb + Q_n \partial_n P
-\end{equation}
-is an isomorphism of $L$-vector spaces.
-\end{thm}
-
-\begin{proof}
-We first show that, for all $k \in \NN$, the multi-sets $R_k$ and $C_k$ 
-have the same cardinality:
-
-We construct the following bijection $R_k \to C_k$, representing the 
-monomials by their exponent tuple.  Let $i = (i_0, \dotsc, i_n)$ be in 
-$R_k$.  If $i_0 \geq d-1$, we define the image as
- $(i_0-d-1, i_1, \dotsc, i_n) \in C_k^{(0)}$.  More generally, if 
-$i_0 < d-1, \dotsc, i_{j-1} < d-1$ and $i_j \geq d-1$, the image is 
-$(i_0, \dotsc, i_{j-1}, i_j-d-1, i_{j+1}, \dotsc, i_n) \in C_k^{(j)}$.  
-It is easy to verify that this map is indeed a bijection.
-
-In order to establish that the map $\phi_k \colon V_k \to W_k$ is an 
-isomorphism of $L$-vector spaces, we now exhibit its matrix with respect to 
-the given basis:
-
-Let $k \in \NN$ and suppose that $R_k$ and $C_k$ are non-empty, that is 
-to say, $k \geq n/d + 1$.  We define the auxiliary matrix $\Delta_k$ with 
-row and column index sets $R_k$ and $C_k$, respectively, as follows.  
-Given $f \in R_k$ and $(j,g) \in C_k$, we set the corresponding entry in 
-$\Delta_k$ to be the monomial coefficient of $f/g$ in $\partial_j P$ if 
-$g$ divides $f$ and $0$ otherwise.  It is immediate that $\Delta_k$ is the 
-matrix representing $\phi_k$ with respect to the bases $C_k$ and $R_k$ of 
-$V_k$ and $W_k$, respectively.
-
-The assumption that the family~$\mathfrak{X}$ of projective hypersurfaces 
-given by~$P$ contains a diagonal hypersurface means that for some~$t_0$ 
-the fibre $\mathfrak{X}_{t_0}$ is given by an equation of the form 
-\begin{equation}
-P_{t_0}(x_0, \dotsc, x_n) = a_0 x_0^d + \dotsb a_n x_n^d = 0
-\end{equation}
-with $a_0, \dotsc, a_n \in L^{\times}$.
-
-We show that the determinant of $\Delta_k$ is non-zero in~$L$.  Since 
-the specialisation to the diagonal fibre viz.\ evaluation of the matrix at 
-$t = t_0$ commutes with computing the determinant, it suffices to show that 
-the determinant of $(\Delta_k) \big |_{t=t_0}$ is non-zero in~$L$.
-Since, for $0 \leq j \leq n$, 
-$\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, there is 
-precisely one non-zero entry in each column of $\Delta_k$.  Namely, in column 
-$(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is the non-zero entry 
-$d \alpha_j$, concluding the proof.
-\end{proof}
-
-In principle, by including any of the methods available for solving linear 
-systems, we are in a position to furnish a routine {\sc Decompose}, which 
-we formalise in Algorithm~\ref{alg:Decompose}.
-
-\begin{algorithm}[ht]
-\caption{Obtain co-ordinates for $Q$ in the Jacobian ideal modulo basis elements}
-\label{alg:Decompose}
-\begin{algorithmic}
-\Require $Q$ is a homogeneous polynomial of degree $kd - (n+1)$.
-\Ensure  Homogeneous polynomials $Q_0, \dotsc, Q_n$ such that 
-         $Q \equiv Q_0 \partial P_0 + \dotsb + Q_n \partial_n P$ modulo the 
-         $L$-span of $B_k$.
-\Procedure{Decompose}{$Q, \partial_0 P, \dotsc, \partial_n P, B_k$}
-\State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
-\item Let $b$ be the vector of length $\abs{R_k}$ such that the entry 
-      corresponding to the monomial $x^i \in R_k$ is the coefficient of 
-      $x^i$ in $Q$.
-\item Let $v$ be the unique vector of length $\abs{C_k}$ satisfying 
-      $\Delta_k v = b$.  From the description of $C_k$ as a disjoint union, 
-      we can write $v$ accordingly as $\bigl(v^{(0)}, \dotsc, v^{(n)}\bigr)$ 
-      where, for $0 \leq j \leq n$, $v^{(j)}$ is a vector of length 
-      $\abs{C_k^{(j)}}$.
-\item For $j = 0, \dotsc, n$, set $Q_j = \sum_{g \in C_k^{(j)}} v_g^{(j)} g$,
-      where $v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to the 
-      monomial $g \in C_k^{(j)}$.
-\item \textbf{return} $Q_0, \dotsc, Q_n$
-\end{compactenum}
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
-We now establish that the set $\cB$ is indeed a basis for 
-$\HdR^n(\mathfrak{U}/L)$, as claimed earlier, using the 
-reduction of poles procedure.
+We now finally establish that the set $\cB$ indeed forms a basis for 
+$\HdR^n(\mathfrak{U}_L)$, as announced before.
 
 \begin{thm} \label{thm:Basis}
-Suppose that the family of projective hypersurfaces $\mathfrak{X}$ contains 
-a diagonal fibre.  Then the set $\cB$ as in Definition~\ref{defn:MonBasis} 
-is a basis for the $L$-vector space $\HdR^n(\mathfrak{U}/L)$.
+Suppose that the family of projective hypersurfaces $\mathfrak{X}/\mathfrak{S}$ 
+contains a diagonal fibre.  Then the set $\cB$ from Definition~\ref{defn:MonBasis} 
+is a basis for the $L$-vector space $\HdR^n(\mathfrak{U}_L)$.
 \end{thm}
 
 \begin{proof}
-We know that $\HdR^n(\mathfrak{U}/L)$ is spanned by the classes of the 
-$n$-forms $Q \Omega / P^k$ for all homogeneous polynomials~$Q$ of degree 
-$kd-(n+1)$ and $k \in \NN$.  
-By a theorem of Macaulay~\citep[\S 4, (4.11)]{Griffiths1969}, 
-we may assume that $1 \leq k \leq n$, that is to say, any class in 
-$\HdR^n(\mathfrak{U}/L)$ can be represented by an $n$-form with a pole 
-of order at most~$n$.
+We already know that $\HdR^n(\mathfrak{U}_L)$ is spanned by the classes of the 
+$n$-forms $Q \Omega / P^k$ with $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
+$kd - (n+1)$ for $k \in \NN$. Applying Algorithm ~\ref{alg:PoleRed}, we obtain an 
+expression for the class of $Q \Omega / P^k$ as an $L$-linear combination of 
+elements in $\cB$.  This shows that the set $\cB$ spans the vector space 
+$\HdR^n(\mathfrak{U}_L)$.
 
-Without loss of generality, we may thus start the reduction of poles 
-procedure with a homogeneous polynomial~$Q$ of degree $(n+1)d-(n+1)$.  Then, 
-since $B_{n+1} = \emptyset$ and $R_{n+1} = F_{n+1}$, 
-Theorem~\ref{thm:Isomorphism} shows that there exist homogeneous polynomials 
-$Q_0, \dotsc, Q_n$ either zero or homogeneous of degree $nd-(n+1)$ such that 
-$Q = Q_0 \partial_0 P + \dotsb + Q_n \partial_n P$.  Continuing with the 
-reduction of poles procedure as described in Algorithm~\ref{alg:PoleRed}, 
-we obtain an expression for $Q \Omega / P^{n+1}$ as an $L$-linear combination 
-of elements in $\cB$.  This shows that this set spans the vector space 
-$\HdR^n(\mathfrak{U}/L)$.
+%TODO fix this, argument is not complete
+%include counting argument to show that cardinality of B is dimension of
+%cohomology, so B is a basis (if possible comparing the dimensions of the graded
+%parts, to show that B_k is a basis for F_k/F_{k-1} (so 'compatible' with the
+%filtration).
 
-To see that this set is linearly independent, note that it contains only 
-monomials whose partial degrees are strictly less than $d-1$.  However, since 
-$P$ is a homogeneous polynomial of degree $d$ and the family of hypersurfaces 
-contains a diagonal fibre, it follows that, for each $0 \leq i \leq n$, the 
-partial derivative $\partial_i P$ is a homogeneous polynomial of degree $d-1$ 
-and contains precisely one monomial term with partial degree equal to $d-1$, 
-namely that of the monomial $x_i^{d-1}$.  It follows that the elements of~$B$ 
-cannot be reduced further modulo the Jacobian ideal and hence that the 
-set~$\cB$ is linearly independent.
+%To see that the set $\cB$ is linearly independent, note that it contains only 
+%monomials whose partial degrees are strictly less than $d-1$.  However, since 
+%$P$ is a homogeneous polynomial of degree $d$ and the family of hypersurfaces 
+%contains a diagonal fibre, it follows that, for each $0 \leq i \leq n$, the 
+%partial derivative $\partial_i P$ is a homogeneous polynomial of degree $d-1$ 
+%and contains precisely one monomial term with partial degree equal to $d-1$, 
+%namely that of the monomial $x_i^{d-1}$.  It follows that the elements of~$B$ 
+%cannot be reduced further modulo the Jacobian ideal and hence that the 
+%set~$\cB$ is linearly independent.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Constructing the connection matrix}
+\subsection{Computing the connection matrix}
 \label{sec:Connection}
 
-Following the description of the Gauss--Manin connection 
-in~[[TODO:  Reference]]
-and the practical description by Kedlaya~\citep[\S 3.2]{Kedlaya2008a}, 
-we now provide an explicit algorithm for computing the action of the 
-Gauss--Manin connection.  Once again, we consider $\mathfrak{X}$ and 
-$\mathfrak{U}$ as schemes over $L = \mathbf{Q}_p(t)$ and let $K = \mathbf{Q}_p$.
-As $\Spec(L)$ is affine, we may apply the global section functor $\Gamma(L, -)$ 
-throughout in Equation~[[TODO: Reference]] and consider
-\begin{equation}
-\nabla \colon \HdR^j(\mathfrak{X}/L) \to 
-    \Omega_{L/K}^1 \otimes_{L} \HdR^j(\mathfrak{X}/L).
+We now describe the action of the Gauss--Manin connection~$\nabla$ on 
+$\HdR^n(\mathfrak{U}_L)$.  Suppose that we are given a basis element 
+$x^i \Omega / P^k \in \cB_k$.  Following the description in Section [], we compute
+\begin{equation} \label{eqn:nabla}
+\nabla \biggl(\frac{x^i \Omega}{P^k}\biggr) \equiv dt \otimes \frac{k x^i P_t \Omega}{P^{k+1}},
 \end{equation}
-The action of $\nabla$ can be computed as follows.  Given 
-$\omega \in \HdR^j(\mathfrak{X}/L)$, we arbitrarily lift this to 
-$\tilde{\omega} \in \Omega_{\mathfrak{X}/K}^j$.  After computing the 
-exterior derivative, which decomposes as 
-\mbox{$d_{\mathfrak{X}/K} = d_{L} + d_{\mathfrak{X}/L}$}, 
-the image of $\omega$ under the Gauss--Manin connection is given as 
-the projection of $d_{\mathfrak{X}/K}(\tilde{\omega})$ onto 
-$\Omega_{L/K}^1 \otimes_{L} \HdR^j(\mathfrak{X}/L)$.
-
-Since the fibres of the relative de~Rham cohomology 
-$\HdR^j(\mathfrak{X}/L)$ can be identified with the de~Rham 
-cohomology $\HdR^j(\mathfrak{X}_t/K)$ of the fibres, it 
-follows that we can compute the action of the Gauss--Manin connection 
-$\nabla \colon \HdR^{n-1}(\mathfrak{X}/L) \to 
-\Omega_{L/K}^1 \otimes_{L} \HdR^{n-1}(\mathfrak{X}/L)$
-via the induced map 
-$\HdR^n(\mathfrak{U}/L) \to 
-\Omega_{L/K}^1 \otimes_{L} \HdR^n(\mathfrak{U}/L)$, 
-which by abuse of notation we shall refer to as $\nabla$, too.  
-Let $\omega \in \HdR^{n}(\mathfrak{U}/L)$, where we may 
-assume it is of the form $Q \Omega / P^k$ as described in the 
-previous section.  Since $\Spec(L)$ is an affine curve, we have 
-that $\Omega_{L/K}^1$ is free of rank one, generated by the symbol~$dt$. 
-The action of $\nabla$ is then given by 
-\begin{equation}
-\nabla \colon \omega \mapsto d_{\mathfrak{U}}(\omega) = 
-    d_{L}(\omega) + d_{\mathfrak{U}/L}(\omega) = 
-    \frac{\partial}{\partial t} \omega \wedge dt
-\end{equation}
-where the term $d_{\mathfrak{U}/L}(\omega)$ vanishes by 
-definition of $\Omega$.  A unique representative for the 
-right-hand side can then be obtained using the reduction 
-of poles procedure.  We formalise this in Algorithm~\ref{alg:Connection}.
+%TODO changed sign, should be right like this (because dt \wedge should be on the left)
+where $P_t = dP/dt$ and $\equiv$ denotes equality in $\Omega_{L} \otimes \HdR^n(\mathfrak{U}_L)$. 
+We apply Algorithm \ref{alg:PoleRed} in order to write
+\begin{equation*}
+dt \otimes \frac{k x^i P_t \Omega}{P^{k+1}} \equiv 
+dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega
+\end{equation*}
+where $\gamma_i$ is an element in the $L$-span of~$B_i$ for $1 \leq i \leq n$. This is
+formalised in Algorithm \ref{alg:Connection} below.
 
 \begin{algorithm}
-\caption{Computing the Gauss--Manin connection matrix}
+\caption{Compute the Gauss--Manin connection matrix}
 \label{alg:Connection}
 \begin{algorithmic}
-\Require Homogeneous polynomial $P$ in $K[t][x_0, \dotsc, x_n]$ of degree $d$, 
-         defining a family of smooth projective hypersurfaces containing 
-         a diagonal fibre.
-\Ensure  Basis $B_1 \cup \dotsb \cup B_n$ for 
-         $\HdR^n(\mathfrak{U}/L)$;  connection matrix~$M$ with 
-         respect to this basis.
+\Require $P$ in $K[t][x_0, \dotsc, x_n]$ homogeneous of degree $d$, 
+         defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
+         hypersurfaces that contains a diagonal fibre.
+\Ensure  The matrix~$M$ of $\nabla$ with respect to $\cB$.
 \Procedure{GMConnection}{$P$}
 \State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
-\item Compute the partial and exterior derivatives 
-      $\partial_0 P, \dotsc, \partial_n P$ and $dP/dt$.
-\item Compute the basis $B = B_1 \cup \dotsb \cup B_n$.  In the following, 
-      we let $(i,f)$ denote the polynomial $f \in B_i$.
-\item Compute the auxiliary matrices $\Delta_k$ for 
-      $k = \floor{n/d}+1, \dotsc, n+1$ as described 
-      in Section~\ref{sec:deRham}, including pre-processing.
-\item For all $(j, g) \in B$, let $Q = -j g P_t$ and set 
-      $\gamma_{1}, \dotsc, \gamma_n$ to the output of 
-      {\sc Reduce($P, B_1, \dotsc, B_n, Q$)}.  
-      Then, for each $(i, f) \in B$, let $M_{(i,f),(j,g)}$ 
-      be the coefficient of $f$ in $\gamma_i$.
-\item \textbf{return} $B$, $M$
+\item Compute the auxiliary matrices $\Delta_k$  as defined 
+      in the proof of Theorem \ref{thm:Isomorphism}
+      for $k = \floor{n/d}+1, \dotsc, n+1$.
+\item For each $g \in B$, let $k=(\deg(g)+(n+1))/d$, and put $Q = k g P_t$. Set 
+      $\gamma_{1}, \dotsc, \gamma_n$ to the output of {\sc Reduce($P, B_1, \dotsc, B_n, Q$)}.  
+      For each $f \in B$ let $M_{f,g}$ be the coefficient of $f$ in $\gamma_i$.
+\item \textbf{return} $M$.
 \end{compactenum}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+%TODO for the three algorithms decide whether P and B_i should be in the input
+%right now it's not consistent at all
+
+%TODO there should be a remark, or small subsection, on sparse linear algebra
+%here.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -634,86 +505,89 @@ of poles procedure.  We formalise this in Algorithm~\ref{alg:Connection}.
 
 \subsection{Introduction}
 
-In this section we discuss the action of Frobenius on the vector 
+In this section we compute the action of Frobenius on the cohomology 
 space $\Hrig^{n}(U_0) \cong \HdR^{n}(\mathfrak{U}_0)$ associated 
-to the diagonal fibre.  We describe a method based on an explicit 
-formula due to Dwork~\citep[\S 4]{Dwork1964}, following the expositions 
-Lauder~\citep[\S 6]{Lauder2004b} and Gerkmann~\citep[\S 4.4]{Gerkmann2007}. 
-We present an algorithm which is suboptimal asymptotically but 
-performs very well in practice.
+to the diagonal fibre of the family. Our method is based on an 
+explicit formula of Dwork~\citep[\S 4]{Dwork1964} that has already appeared
+in the work of Lauder~\citep[\S 6]{Lauder2004b} and 
+Gerkmann~\citep[\S 4.4]{Gerkmann2007}. However, by rewriting this formula 
+a little, we obtain an algorithm that performs a lot better (in practice,
+not asymptotically) than a more straightforward implementation.
 
 In order to simplify our notation, we temporarily suppress the earlier 
-setup of a family of hypersurfaces. Thus, we consider a smooth, 
-projective, diagonal hypersurface~$\mathcal{X}$ over $\ZZ_p$ given by 
-a polynomial $P \in \ZZ[x_0, \dotsc, x_n]$ of homogeneous degree~$d$ 
-and its reduction~$X$ over $\mathbf{F}_p$ given by 
+setup of a family of hypersurfaces. Thus, we consider a single smooth 
+projective diagonal hypersurface~$\mathcal{X}$ over $\ZZ_p$ defined by 
+a polynomial $P \in \ZZ_p[x_0, \dotsc, x_n]$ of the form
 \begin{equation}
-\tilde{P}(x_0, x_1, \dotsc, x_n) = 
-    a_0 x_0^d + a_1 x_1^d + \dotsb + a_n x_n^d = 0
+P(x_0, x_1, \dotsc, x_n) = 
+    a_0 x_0^d + a_1 x_1^d + \dotsb + a_n x_n^d
 \end{equation}
-where $a_0, a_1, \dotsc, a_n \in \FF_p^{\times}$ and $p \nmid d$.  
+where $a_0, a_1, \dotsc, a_n \in \ZZ_p^{\times}$ and $p \nmid d$.  
+%TODO change p to q if this doesn't cause significant problems
 We also define the generic fibre and the various complements as 
-before.  We fix our choice of basis for $\HdR^{n}(\mathfrak{U})$ 
-as in Definition~\ref{defn:MonBasis}, that is, 
+before.  We fix our choice of basis $\cB$ for $\HdR^{n}(\mathfrak{U})$ 
+as in Definition~\ref{defn:MonBasis}, that is, $\cB = \cB_1 \cup \cdots \cup \cB_n$
+with $\mathcal{B}_k  = \{x^i \Omega / P^k : x^i \in B_k \}$, where 
 \begin{align}
-B_k & = \{ x^i : \text{$\abs{i} = kd - (n+1)$ and $0 \leq i_j < d-1$, for all $j$} \}, \\
-\mathcal{B}_k & = \{x^i \Omega / P^k : x^i \in B_k \}.
+B_k & = \{ x^i : \text{$\abs{i} = kd - (n+1)$ and $0 \leq i_j < d-1$, for all $j$} \},
 \end{align}
-Finally, we recall the condition that $d \geq 2$ whenever $n$ is 
+and we denote $B = B_1 \cup \cdots \cup B_n$.
+
+Finally, we recall the assumption that $d \geq 2$ whenever $n$ is 
 odd and $d \geq 3$ whenever $n$ is even.  Our goal is to compute 
 the matrix~$\Phi$ representing the action of $p^{-1} \Frob_p$ on 
-$\Hrig^n(U) \cong \HdR^n(\mathfrak{U})$ to $p$-adic precision~$N$.
+$\Hrig^n(U) \cong \HdR^n(\mathfrak{U})$, with respect to the basis
+$\cB$, to $p$-adic precision~$N$.
 
 We first describe an explicit formula for the $\dim \HdR^n(\mathfrak{U})$ 
-non-zero coefficients of~$\Phi$ due to Dwork~\citep{Dwork1964}, see 
-e.g.\ Lauder~\citep[\S 6.1]{Lauder2004b}.   We work over the ramified 
-extension~$\QQ_p(\pi)$ where $\pi^{p-1} = -p$, and we normalise 
-the valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}.
+non-zero coefficients of~$\Phi$ due to Dwork~\citep{Dwork1964}. 
+% see e.g.\ Lauder~\citep[\S 6.1]{Lauder2004b}.   
+We work over the ramified extension~$\QQ_p(\pi)$ where $\pi^{p-1} = -p$, 
+and normalise the valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}.
 
-Let $u = (u_0, \dotsc, u_n)$ and $v = (v_0, \dotsc, v_n)$ be tuples such 
-that $x^u, x^v \in B_1 \cup \dotsb \cup B_n$,  and let $u'$ and $v'$ 
-denote integers such that $d u' = \sum_{i=0}^n (u_i + 1)$ and similarly 
-for $v'$.  Finally, for $m \geq 0$, let $\lambda_m$ denote the coefficient 
-of $z^m$ in the expansion of $\exp \pi (z - z^p)$ and define products 
-$(w)_r = \prod_{j=0}^{r-1} (w + j)$ for $w \in \QQ$ and $r \geq 0$. 
+Let $u = (u_0, \dotsc, u_n)$ and $v = (v_0, \dotsc, v_n)$ be tuples of integers such 
+that $x^u, x^v \in B$,  and let $k_u$ and $k_v$ 
+denote integers such that $d k_u = \sum_{i=0}^n (u_i + 1)$ and similarly 
+for $k_v$.  For $m \geq 0$, let $\lambda_m$ denote the coefficient 
+of $z^m$ in the power series expansion of $\exp \pi (z - z^p)$ and define 
+products $(w)_r = \prod_{j=0}^{r-1} (w + j)$ for $w \in \QQ$ and $r \geq 0$. 
 We introduce terms~$\alpha_{u,v}$, 
 \begin{equation} \label{eq:alpha}
-\alpha_{u,v} = \pi^{v' - u'} \prod_{i = 0}^n \sum_{m, r} \lambda_m (u_i / d)_r (-1)^r \pi^{-r} {\hat{a}_i}^{m-r}
+\alpha_{u,v} = \pi^{k_v - k_u} \prod_{i = 0}^n \sum_{m, r} \lambda_m (u_i / d)_r (-1)^r \pi^{-r} {\hat{a}_i}^{m-r}
 \end{equation}
-where $\hat{a}_i$ is the Teichm\"uller lift of $a_i \in \mathbf{F}_p$ 
-to $\QQ_p$ and the summation indices $m, r \geq 0$ satisfy 
-$p u_i - v_i = d (m - pr)$.
+where $\hat{a}_i \in \ZZ_p$ denotes the Teichm\"uller lift of $a_i \in \mathbf{F}_p$ 
+and the summation indices $m, r \geq 0$ satisfy $p u_i - v_i = d (m - pr)$.
 
 \begin{thm} \label{thm:01-03-diagfrob}
-Let $\omega_1$ and $\omega_2$ denote the forms in 
-$\cB_1 \cup \dotsb \cup \cB_n$ corresponding to $u$ and $v$, 
-respectively.  Then $p^{-1} \Frob_p (\omega_1) = 0$ unless, 
-for all $i = 0, \dotsc, n$, $p (u_i + 1) \equiv v_i + 1 \pmod{d}$.  
-In this case, 
+Let $\omega_1$ denote an element of $\cB$ corresponding to a tuple $u \in \ZZ^{n+1}$,
+and let $\omega_2$ denote the unique element of $\cB$ corresponding to 
+a tuple $v \in \ZZ^{n+1}$ such that for all $i = 0, \dotsc, n$ we have 
+$p (u_i + 1) \equiv v_i + 1 \pmod{d}$. Then
 \begin{equation}
 p^{-1} \Frob_p (\omega_1) = 
-    (-1)^{u' + v'} \frac{(v' - 1)!}{(u' - 1)!} p^n \alpha_{u+1,v+1}^{-1} \omega_2
+    (-1)^{k_u + k_v} \frac{(k_v - 1)!}{(k_u - 1)!} p^n \alpha_{u+1,v+1}^{-1} \omega_2
 \end{equation}
 where $u + 1 = (u_0 + 1, \dotsc, u_n + 1)$ and similarly for $v + 1$.
 \end{thm}
 
 \begin{proof}
-See Dwork~\citep[\S 4]{Dwork1964} for Dwork's original work, or 
+See Dwork~\citep[\S 4]{Dwork1964} or 
+%TODO take out reference to Lauder if Dwork reference is readable
 Lauder~\citep[\S 6.1]{Lauder2004b}.  Both references also treat the 
-more general case when $\mathcal{X}$ is a smooth, projective, 
+more general case when $\mathcal{X}$ is a smooth projective 
 diagonal hypersurface over $\ZZ_q$, for $q$ a prime power.
 \end{proof}
 
 \subsection{Improvements}
 
-It appears that this computation genuinely has to take place over 
+At first sight it appears that this computation genuinely has to take place in 
 the extension field $\QQ_p(\pi)$.  This is, however, not the case 
-as we will show now.  Indeed, the terms $\alpha_{u+1,v+1}$ are $p$-adic 
-integers and we provide expressions for these that are more suitable 
-computationally.
+as we will show now.  The terms $\alpha_{u+1,v+1}$ will turn out to be elements 
+of $\ZZ_p$. We provide expressions for them that are more suitable
+for computations.
 
-We first obtain a more explicit description for the coefficients~$\lambda_m$ 
-via an elementary calculation:
+First, it is easy to obtain a more explicit description of the 
+coefficients~$\lambda_m$ via an elementary calculation:
 
 \begin{lem} \label{lem:lambdam}
 Let $\pi^{p-1} = -p$ and, for $m \geq 0$, let $\lambda_m$ 
@@ -728,16 +602,16 @@ division by $p-1$. \hfill $\qedsymbol$
 
 We can apply this lemma in conjunction with the definition 
 of the quantities $\alpha_{u+1, v+1}$.  Upon observing that 
-$m - r \bmod{(p-1)}$ is invariant under changes in the summation 
-indices $m, r$, we obtain the following theorem:
+$m - r \bmod{(p-1)}$ only depends on $u$ and $v$, we obtain the 
+following theorem:
 
 \begin{thm} \label{thm:alpha}
 Let $u, v \in \ZZ^{n+1}$ be such that 
-$x^u, x^v \in B_1 \cup \dotsb \cup B_n$ and satisfy, 
-for all~$i$, $p (u_i + 1) \equiv v_i + 1 \pmod{d}$. 
+$x^u, x^v \in B$ and 
+$p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$. 
 Then 
 \begin{equation}
-\alpha_{u+1,v+1} = (-p)^{u'} \prod_{i=0}^n 
+\alpha_{u+1,v+1} = (-p)^{k_u} \prod_{i=0}^n 
     \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} 
     \Bigl(\frac{u_i+1}{d}\Bigr)_r 
     \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)! k!}.
@@ -745,20 +619,22 @@ Then
 where $m, r \geq 0$ satisfy $p (u_i + 1) - (v_i + 1) = d (m - pr)$.
 \hfill \qedsymbol
 \end{thm}
+%TODO perhaps put proof back in, not that easy?
 
 In particular, Theorem~\ref{thm:alpha} implies that 
-$\alpha_{u+1, v+1} \in \QQ_p$.  Our next aim is to obtain 
-expressions for $\alpha_{u+1,v+1}$ which are defined over 
-$\ZZ_p$.  But before progressing, we collect a few 
+$\alpha_{u+1, v+1} \in \QQ_p$.  Our next aim is to show
+that $\alpha_{u+1,v+1}$ is integral.  First, we collect a few 
 intermediate results.
 
 \begin{prop} \label{prop:mpr1}
-Let $u, v \in B_1 \cup \dotsb \cup B_n$, $i \in \{0,\dotsc,n\}$ and 
-let $m, r \geq 0$ satisfy $d(m-pr) = p(u_i + 1) - (v_i + 1)$.  Then 
+Let $x^u, x^v \in B$ and 
+$m, r \geq 0$ such that $d(m-pr) = p(u_i + 1) - (v_i + 1)$ for all $i$.  Then 
 \begin{equation*}
 0 \leq m - p r \leq \frac{p(d-1)-1}{d}.
 \end{equation*}
-In particular, $m = m(r) = pr + d^{-1}\bigl(p(u_i+1)-(v_i+1)\bigr) \geq 0$.
+%TODO rewrite next line if we need it, m is already assumed to be >=0
+
+%In particular, $m = m(r) = pr + d^{-1}\bigl(p(u_i+1)-(v_i+1)\bigr) \geq 0$.
 \end{prop}
 
 \begin{proof}
@@ -767,8 +643,8 @@ and $m - pr \in \ZZ$.
 \end{proof}
 
 \begin{prop} \label{prop:mpr2}
-Let $u, v \in B_1 \cup \dotsb \cup B_n$, $i \in \{0,\dotsc,n\}$ and 
-let $m, r \geq 0$ satisfy $d(m-pr) = p(u_i + 1) - (v_i + 1)$.  Then 
+Let $x^u, x^v \in B$
+and $m, r \geq 0$ such that $d(m-pr) = p(u_i + 1) - (v_i + 1)$ for all $i$.  Then 
 \begin{equation*}
 r - \floor{\frac{m}{p}} \geq 0.
 \end{equation*}
@@ -783,7 +659,7 @@ r - \floor{\frac{m}{p}}
 = -1 + \ceil{\frac{p + 1}{pd}} 
 = 0 
 \end{equation*}
-as $p \geq 2$, $d \geq 2$.
+as $p \geq 2$ and $d \geq 2$.
 \end{proof}
 
 \begin{prop} \label{prop:rfac}
@@ -795,9 +671,10 @@ For all integers $u, d \geq 1$ and $r \geq 0$ with $p \nmid d$,
 
 \begin{proof}
 Let $s_p(r)$ denote the sum of digits in the $p$-adic expansion of~$r$ 
-and observe that $s_p(r) \leq \floor{\log_p(r) + 1}$.  Using the fact that 
-$\ord_p\bigl((u/d)_r\bigr) \geq \ord_p(r!)$ from 
-Clark~\citep[p.~265]{Clark1966} it follows that 
+and observe that $s_p(r) \leq (p-1)\floor{\log_p(r) + 1}$.  Using the standard fact that 
+$\ord_p\bigl((u/d)_r\bigr) \geq \ord_p(r!)$, 
+%from Clark~\citep[p.~265]{Clark1966} 
+it follows that 
 \begin{equation*}
 \ord_p\Bigl(\frac{u}{d}\Bigr)_r \geq \ord_p(r!) = \frac{r - s_p(r)}{p-1} \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}
 \end{equation*}
@@ -817,7 +694,7 @@ For $p = 2$ we define a sequence $\bigl(\mu_m^{(2)}\bigr)$ by
 \end{equation}
 where $\nu_m$ is equal to one whenever $m = 3, 7$ and zero otherwise, 
 and we write $\mu_m =\mu_m^{(2)}$ whenever this does not cause confusion. 
-Then $\mu_m \in \ZZ_p$ for all $m \geq 0$.
+Then $\mu_m \in \ZZ_2$ for all $m \geq 0$.
 \end{lem}
 
 \begin{proof}
@@ -838,14 +715,14 @@ Dwork~\citep[pp.~55--57]{Dwork1962}, we obtain the lower bound
 
 \begin{thm} \label{thm:alpha2}
 Let $p = 2$ and suppose $u, v \in \ZZ^{n+1}$ are such that 
-$x^u, x^v \in B_1 \cup \dotsb \cup B_n$ and satisfy, for all~$i$, 
-$p (u_i + 1) \equiv v_i + 1 \pmod{d}$.  Then $\alpha_{u+1,v+1}$ 
+$x^u, x^v \in B$ and  
+$p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$.  Then $\alpha_{u+1,v+1}$ 
 can be expressed as 
 \begin{equation} \label{eq:alpha2.0}
-\alpha_{u+1,v+1} = (-2)^{u'} \prod_{i=0}^n \sum_{m,r} 
+\alpha_{u+1,v+1} = (-2)^{k_u} \prod_{i=0}^n \sum_{m,r} 
     \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{-\floor{(m+1)/4}+\nu_m} \mu_m, 
 \end{equation}
-and $\alpha_{u+1,v+1}$ is a $p$-adic integer.
+and $\alpha_{u+1,v+1}$ is a $2$-adic integer.
 \end{thm}
 
 \begin{proof}
@@ -853,7 +730,7 @@ The expression for $\alpha_{u+1,v+1}$ is an immediate consequence
 of Theorem~\ref{thm:alpha} and Lemma~\ref{lem:mu2}, together with 
 Proposition~\ref{prop:mpr1} implying $0 \leq m - 2r \leq 1$ and 
 hence $r = \floor{m/2}$.  It remains to prove that 
-$\alpha_{u+1,v+1}$ is a $p$-adic integer.  Following Lemma~\ref{lem:mu2}, 
+$\alpha_{u+1,v+1}$ is a $2$-adic integer.  Following Lemma~\ref{lem:mu2}, 
 it suffices to show that the valuation of the factor 
 \begin{equation*}
 \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{- \floor{(m+1)/4} + \nu_m}
@@ -869,20 +746,22 @@ is bounded below by
 \begin{equation}
 \floor{\frac{m}{2}} - \floor{\frac{m+1}{4}} - \floor{\log_2 m}
 \end{equation}
-which is non-negative whenever $m \geq 12$.  In the remaining 
+which is nonnegative whenever $m \geq 12$.  In the remaining 
 cases $m = 0, \dotsc, 11$, we explicitly verify that the 
-lower bound in~\eqref{eq:alpha2.1} is non-negative.
+lower bound in~\eqref{eq:alpha2.1} is nonnegative.
+%TODO k_u \geq 1, so to show alpha is integral you need less 
 \end{proof}
 
+\begin{comment}
 \begin{rem}
 We observe that in equation~\eqref{eq:alpha2.0} the exponent 
-$-\floor{(m+1)/4}+\nu_m$ is non-positive for each value $m \geq 0$, 
+$-\floor{(m+1)/4}+\nu_m$ is nonpositive for each value $m \geq 0$, 
 which suggests the computational question of how to determine the 
 sequence of factors 
 \begin{equation*}
 \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{- \floor{(m+1)/4} + \nu_m}
 \end{equation*}
-to $p$-adic precision $\tilde{N}$ without intermediate precision loss.
+to $2$-adic precision $\tilde{N}$ without intermediate precision loss.
 Changing our notation slightly, suppose we wish to compute the sequence
 \begin{equation*}
 f_r = 2^{- \floor{(m+1)/4} + \nu_m} \prod_{j=0}^{r-1} (u + j d)
@@ -906,8 +785,9 @@ an even integer, it is clear that this computation can be carried
 out without precision loss despite reducing previous values of~$f_r$ 
 modulo~$p^{\tilde{N}}$.
 \end{rem}
+\end{comment}
 
-\subsubsection{The case of odd primes}
+\subsubsection{The case $p \neq 2$}
 
 \begin{lem} \label{lem:mup}
 Let $p \geq 3$ be an odd prime and define a sequence 
@@ -938,10 +818,10 @@ provided that $p \geq 3$.
 
 \begin{thm} \label{thm:alphap}
 Let $p \geq 3$ and suppose that $u, v \in \ZZ^{n+1}$ are such 
-that $x^u, x^v \in B_1 \cup \dotsb \cup B_n$ and satisfy, for all~$i$, 
-$p (u_i + 1) \equiv v_i + 1 \pmod{d}$. Then 
+that $x^u, x^v \in B$ and 
+$p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all $i$. Then 
 \begin{equation} \label{eq:alphap.0}
-\alpha_{u+1,v+1} = (-p)^{u'} \prod_{i=0}^n 
+\alpha_{u+1,v+1} = (-p)^{k_u} \prod_{i=0}^n 
     \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} 
     \Bigl(\frac{u_i+1}{d}\Bigr)_r p^{r - \floor{m/p}} \mu_m
 \end{equation}
@@ -956,6 +836,7 @@ and Lemma~\ref{lem:mup}.
 
 \subsection{Description of the algorithm}
 
+%TODO replace \tilde{N} by N if there's no other N in this section
 Up to this point, the double sum over $m,r$ in our expressions 
 for $\alpha_{u+1,v+1}$ has been an infinite sum.  We now present 
 a convergence result, which will allow us to derive a finite 
@@ -973,12 +854,7 @@ y - \log_b y \geq c.
 We first note that the function $y \mapsto y - \log_b y$ is increasing 
 for $y \geq 2$ because it has derivative $1 - \log_b(e)/y > 0$.  Thus, it 
 suffices to verify the result for $x$.  Indeed, as $c \geq 2$ we have 
-that 
-\begin{gather}
-\log_b c + 1 \leq c \\
-\intertext{and hence}
-c + \log_b c + 1 \leq b^{\log_b c + 1}
-\end{gather}
+that $\log_b c + 1 \leq c$, hence $c + \log_b c + 1 \leq b^{\log_b c + 1}$,
 which upon taking logarithms and rearranging yields the result.
 \end{proof}
 
@@ -994,6 +870,7 @@ M = \floor{ p^2 \biggl( \frac{\tilde{N}}{p-1}
 
 \begin{proof}
 This follows from~\citep[\S 6.2]{Lauder2004b} and Lemma~\ref{lem:log}.
+%TODO check this in Lauder's paper
 \end{proof}
 
 Finally, we describe how to compute an approximation to the matrix~$\Phi$ 
@@ -1001,9 +878,9 @@ representing the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U)$ using our
 previous results.
 
 \begin{prop}
-The valuation of $(u'-1)! \alpha_{u+1,v+1}$ is bounded from above by 
+The valuation of $(k_u-1)! \alpha_{u+1,v+1}$ satisfies
 \begin{equation}
-\ord_p\bigl((u'-1)! \alpha_{u+1,v+1}\bigr) 
+\ord_p\bigl((k_u-1)! \alpha_{u+1,v+1}\bigr) 
     \leq \ord_p\bigl((n-1)!\bigr) + n + \delta
 \end{equation}
 where $\delta = \ord_p\bigl((n-1)!\bigr) + (n+1) \floor{\log_p(n-1)}$. 
@@ -1014,11 +891,11 @@ Recall from Gerkmann~\citep[Lemma~3.3]{Gerkmann2007} that the valuations
 of the entries of the matrix~$\Phi$ are bounded from below by $-\delta$. 
 Thus, by Theorem~\ref{thm:01-03-diagfrob}, 
 \begin{equation}
--\delta \leq \ord_p\bigl((v'-1)!\bigr) + n 
-           - \ord_p\bigl((u'-1)! \alpha_{u+1,v+1}\bigr)
+-\delta \leq \ord_p\bigl((k_v-1)!\bigr) + n 
+           - \ord_p\bigl((k_u-1)! \alpha_{u+1,v+1}\bigr)
 \end{equation}
-Noting that $d v' = \sum_{i=0}^n (v_i + 1) \leq n d$ and 
-hence $v' \leq n$, the result follows.
+Noting that $d k_v = \sum_{i=0}^n (v_i + 1) \leq n d$ and 
+hence $k_v \leq n$, the result follows.
 \end{proof}
 
 This allows us to formalise the procedure for computing the 
@@ -1030,8 +907,7 @@ below.
 \label{alg:Diabfrob}
 \begin{algorithmic}
 \vspace{1mm}
-\Require Polynomial $a_0 x_0^d + \dotsb + a_n x_n^d$, 
-         prime~$p$, precision~$N \geq 0$.
+\Require Polynomial $a_0 x_0^d + \dotsb + a_n x_n^d$ with $a_0,\cdots,a_n \in \ZZ_p^{\times}$, $p$-adic precision~$N \geq 0$.
 \Ensure  Matrix for $p^{-1} \Frob_p$ on $\HdR^n(\mathfrak{U})$ modulo $p^N$.
 \Procedure{DiagFrob}{$n, d, p, N, a_0, \dotsc, a_n$}
 \begin{enumerate}
@@ -1040,15 +916,15 @@ below.
       $\tilde{N} = N - n + 2 C$, $M = M(\tilde{N}, p)$, and 
       $R = R(\tilde{N}, p) = \floor{M/p}$.
 \item Precompute the Teichm\"uller lifts $\hat{a}_0, \dotsc, \hat{a}_n$, 
-      and the sequences $(d^{-r})_{r=0}^R$, and $(\mu_m)_{m=0}^{M}$ 
-      to precision~$\tilde{N}$.
-\item For each monomial $u = (u_0, \dotsc, u_n) \in B_1 \cup \dotsb \cup B_n$, 
-      determine the unique monomial $v = (v_0, \dotsc, v_n)$ such that 
+      and the sequences $(d^{-r})_{r=0}^R$ and $(\mu_m)_{m=0}^{M}$, 
+      to p-adic precision~$\tilde{N}$.
+\item For each monomial $x^u \in B$, 
+      determine the unique monomial $x^v$ such that 
       $v_i = p (u_i + 1) - 1 \bmod{d}$.  Use the following steps to 
       compute the entry at position $(u,v)$ in the matrix.
-\item Compute the expression $x_1 = (-1)^{u'+v'} (v'-1)! p^n$ as an 
+\item Compute the expression $x_1 = (-1)^{k_u+k_v} (k_v-1)! p^n$ as an 
       exact integer and observe that \mbox{$\ord_p(x_1) \geq n$}.
-\item Compute the expression $x_2 = (u' - 1)! \alpha_{u+1,v+1}$ to 
+\item Compute the expression $x_2 = (k_u - 1)! \alpha_{u+1,v+1}$ to 
       precision~$\tilde{N}$ using equation~\eqref{eq:alpha2.0} or 
       \eqref{eq:alphap.0} depending on whether $p$ is even or odd. 
 \item Compute the inverse $x_2^{-1}$ to precision $N - n$.
@@ -1076,6 +952,9 @@ integers of size $\BigOh(m \log m)$ bits, which also allows us to
 avoid performing intermediate reductions modulo~$p^{\tilde{N}}$.
 \end{rem}
 
+%TODO put all the complexity stuff together at the end, and max a couple
+%of pages total
+\begin{comment}
 \begin{thm} \label{thm:DiagfrobComplexity1}
 The time complexity of Algorithm~\ref{alg:Diabfrob} is given by 
 \begin{equation*}
@@ -1178,10 +1057,11 @@ occurs in {Step~(v)}, where for each matrix entry we have to consider
 $\BigOh(n R)$ multiplications in~$\QQ_p(\pi)$ instead 
 of~$\ZZ_p$.
 \end{proof}
+\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Solving Picard--Fuchs differential systems}
+\section{Solving the differential equation}
 \label{sec:DifferentialSystem}
 
 In this section we describe how to solve the $p$-adic differential 
@@ -1482,7 +1362,7 @@ over~$\mathbf{Q}_p[t]$ to $p$-adic precision~$N_2$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Recovering zeta functions}
+\section{Recovering the zeta function of a fiber}
 \label{sec:ZetaFunctions}
 
 Recall that the zeta function of the hypersurface~$X_{t_1}$ is of the form,
@@ -1615,9 +1495,54 @@ Lauder~\citep[\S 9.3.2, Proposition~9.6]{Lauder2006}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Complexity analysis}
-\label{sec:Complexity}
+\section{The algorithm}
+\label{sec:Algorithm}
 
+\subsection{Overview of the algorithm}
+
+We now provide an outline of the deformation method.  The list below 
+includes nearly full details of the computation, omitting only the 
+specific choices of precisions $N_1, \dotsc, N_7$
+and $K_1, K_2$. These will be provided and justified later.
+
+\begin{enumerate}
+\item[Step~$\Rmnum{1}$.]
+Compute the matrix $\Phi_0 \in M_{b \times b}(\mathbf{Q}_q)$ for the action of $p^{-1} \Frob_p$ on 
+$\Hrig^{n}(U_0)$ with respect to the standard basis to $p$-adic precision~$N_1$.  
+\item[Step~$\Rmnum{2}$.]
+Compute the matrix $M \in M_{b \times b}(\mathbf{Q}_q(t))$ of the Gauss-Manin connection $\nabla$ on 
+$\HdR^{n}(\mathfrak{U}_L)$ 
+with respect to the standard basis to $p$-adic precision~$N_2$.
+\item[Step~$\Rmnum{3}$.]
+Let $C \in M_{b \times b} (\mathbf{Q}_q[[t]])$ denote the matrix of local solutions of the connection $\nabla$ around zero i.e., 
+the matrix that satisfies the $p$-adic differential equation $\bigl(\tfrac{d}{dt} + M\bigr) C = 0$ with
+initial condition $C(0)=I$.  We compute an approximation for the matrices~$C$ and~$C^{\sigma}(t^p)^{-1}$
+modulo~$t^{K_1}$ to $p$-adic precision~$N_3$.
+\item[Step~$\Rmnum{4}$.]
+Let $\Phi(t) \in M_{b \times b}(\mathbf{Q}_p\langle t,r(t)^{-1}\rangle^{\dagger})$ denote the matrix for the action of $p^{-1} \Frob_p$ on 
+$\Hrig^{n}(U/S)$ with respect to the standard basis (which is only a basis generically). One can show that 
+this matrix satisfies $\Phi(t) = C(t) \Phi_0 C^{\sigma}(t^p)^{-1}$.  
+Using this formula we compute a power series approximation of $\Phi(t)$ modulo~$t^{K_1}$ to $p$-adic precision~$N_4$.
+\item[Step~$\Rmnum{5}$.]
+Let $\Phi_{t_1} \in M_{b \times b}(\mathbf{Q}_q)$ denote the matrix for the action of $p^{-1} \Frob_p$ 
+on $\Hrig^{n}(U_{t_1})$. First we compute $\Psi(t) = r(t)^{K_2} \Phi(t)$ modulo~$t^{K_1}$ to $p$-adic precision~$N_5$.  Then we compute  
+an approximation $r(\hat{t}_1)^{-K_1} \Psi(\hat{t}_1)$ for $\Phi_{t_1}$ to $p$-adic precision~$N_5$.
+\item[Step~$\Rmnum{6}$.]
+Let $\Phi_{t_1}^{(q^m)}$ denote the matrix for the action of $q^{-m} \Frob_{q^m}$ on 
+$\Hrig^{n}(U_{t_1})$, which satisfies 
+$\Phi_{t_1}^{(q^m)} = \Phi_{t_1} \sigma(\Phi_{t_1}) \dotsm \sigma^{a-1}(\Phi_{t_1})$ 
+and has entries in $\mathbf{Q}_{q^m}$.  We compute an approximation to this matrix with $p$-adic precision~$N_6$.
+%TODO change notation for q^m power Frobenius matrix, looks like power of matrix
+\item[Step~$\Rmnum{7}$.]
+Let $p(T) = \det\bigl(1 - T (q^m)^{-1} \Frob_{q^m} | \Hrig^n(U_{t_1})\bigr)$, 
+which is an integer polynomial.  We recover this exactly 
+by computing an approximation to the reverse characteristic polynomial 
+of $\Phi_{t_1}^{(q^m)}$ to $p$-adic precision~$N_7$.
+\end{enumerate}
+
+\subsection{Precisions}
+
+\subsection{Complexity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Examples}
