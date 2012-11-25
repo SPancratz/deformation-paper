@@ -422,7 +422,73 @@ where $\equiv$ denotes equality in cohomology.
 \end{algorithm}
 
 We now finally establish that the set~$\cB$ indeed forms a basis for 
-$\HdR^n(\mathfrak{U}_L)$, as announced before.
+$\HdR^n(\mathfrak{U}_L)$, as announced before.  We begin with an 
+auxiliary result describing the cardinality of the set~$\cB$.
+
+\begin{prop} \label{prop:BasisSize}
+Let $n \geq 1$ and $d \geq 1$.  The set of $n$-tuples 
+\begin{equation}
+\mathfrak{I}(n,d) = 
+    \{ i \in (\ZZ / d \ZZ)^{n} : \abs{i} = -n \text{ and, for all $j$, } i_j \neq -1 \}
+\end{equation}
+has cardinality $\bigl((d-1)/d\bigr) \bigl((d-1)^{n-1} - (-1)^{n-1}\bigr)$.
+\end{prop}
+
+\begin{proof}
+As a slight generalisation, let $I(n,d,x)$ denote the cardinality of the set 
+\begin{equation}
+\mathfrak{I}(n,d,x) = 
+    \{ i \in (\ZZ / d \ZZ)^{n} : \abs{i} = x \text{ and, for all $j$, } i_j \neq -1 \}
+\end{equation}
+so that $\abs{\mathfrak{I}(n,d)} = I(n,d,-n)$.  We claim that the function 
+$I(n,d,x)$ has the following properties:
+\begin{enumerate}
+\item For all $d \geq 1$ and $x \in \ZZ / d \ZZ$, 
+      $I(1,d,x) = \mathbf{1}\{x \neq -1\}$.
+\item For all $n \geq 1$ and $x \in \ZZ / 1 \ZZ$, $I(n,1,x) = 0$.
+\item For fixed $n \geq 1$ and $d \geq 2$, let $x_{n+1}, x_{n}$ 
+      denote any two elements of $\ZZ / d \ZZ$ such that 
+      $x_{n+1} \neq -(n+1), x_{n} \neq -n$.  Then 
+      \begin{align}
+      I(n+1,d,x_{n+1}) & = (d-1) I(n,d,x_n) + (-1)^n, \\
+      I(n+1,d,-(n+1))  & = (d-1) I(n,d,x_n).
+      \end{align}
+      In particular, $I(n,d,x)$ is constant on $\{ x \neq -n \}$.
+\end{enumerate}
+The first two properties are easily verified.  We now prove the 
+third property by induction on $n$.  From the definition of 
+$\mathfrak{I}(n+1,d,x)$, we observe that 
+\begin{equation}
+I(n+1,d,x) = \sum_{y \neq x+1} I(n,d,y).
+\end{equation}
+We first consider the case that $x \neq -(n+1)$.  Using the 
+above summation and the inductive hypothesis,
+\begin{equation}
+\begin{split}
+I(n+1,d,x) & = \sum_{y \neq x+1} I(n,d,y) \\
+           & = \sum_{y \not \in \{ x+1, -n \}} I(n,d,y) + I(n,d,-n)) \\
+           & = (d - 2) I(n,d,x_{n}) + I(n,d,x_n) - (-1)^{n-1} \\
+           & = (d - 1) I(n,d,x_{n}) + (-1)^n,
+\end{split}
+\end{equation}
+where $x_n$ is any element with $x_n \neq -n$.  When $x = -(n+1)$ 
+we find that 
+\begin{equation}
+I(n+1,d,-(n+1)) = \sum_{y \neq -n} I(n,d,y) = (d-1) I(n,d,x_{n}),
+\end{equation}
+completing the proof of our claim.
+
+The above three properties in fact uniquely determine $I(n,d,x)$ 
+for any $n \geq 1$, $d \geq 1$ and $x \in \ZZ / d \ZZ$.  Moreover, 
+$I(n,d,-n)$ satisfies the recurrence 
+\begin{align}
+I(1,d,-1) & = 0, \\
+I(n+1,d,-(n+1)) & = (d-1) \bigl( I(n,d,-n) - (-1)^n \bigr).
+\end{align}
+An easy calculation confirms that the expression 
+$\bigl( (d-1)/d \bigr) \bigl( (d-1)^{n-1} - (-1)^{n-1} \bigr)$ also 
+satisfies this recurrence, completing the proof.
+\end{proof}
 
 \begin{thm} \label{thm:Basis}
 Suppose that the family of projective hypersurfaces $\mathfrak{X}/\mathfrak{S}$ 
@@ -435,24 +501,14 @@ We already know that $\HdR^n(\mathfrak{U}_L)$ is spanned by the classes of the
 $n$-forms $Q \Omega / P^k$ with $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
 $kd - (n+1)$ for $k \in \NN$. Applying Algorithm ~\ref{alg:PoleRed}, we obtain an 
 expression for the class of $Q \Omega / P^k$ as an $L$-linear combination of 
-elements in $\cB$.  This shows that the set $\cB$ spans the vector space 
+elements in $\cB$.  This shows that the set~$\cB$ spans the vector space 
 $\HdR^n(\mathfrak{U}_L)$.
 
-%TODO fix this, argument is not complete
-%include counting argument to show that cardinality of B is dimension of
-%cohomology, so B is a basis (if possible comparing the dimensions of the graded
-%parts, to show that B_k is a basis for F_k/F_{k-1} (so 'compatible' with the
-%filtration).
-
-%To see that the set $\cB$ is linearly independent, note that it contains only 
-%monomials whose partial degrees are strictly less than $d-1$.  However, since 
-%$P$ is a homogeneous polynomial of degree $d$ and the family of hypersurfaces 
-%contains a diagonal fibre, it follows that, for each $0 \leq i \leq n$, the 
-%partial derivative $\partial_i P$ is a homogeneous polynomial of degree $d-1$ 
-%and contains precisely one monomial term with partial degree equal to $d-1$, 
-%namely that of the monomial $x_i^{d-1}$.  It follows that the elements of~$B$ 
-%cannot be reduced further modulo the Jacobian ideal and hence that the 
-%set~$\cB$ is linearly independent.
+It now suffices to prove that $\abs{\cB} = \dim \HdR^n(\mathfrak{U}_L)$. 
+From [[TODO:  Reference]], we know that $\dim \HdR^n(\mathfrak{U}_L) = 
+\bigl((d-1)/d\bigr) \bigl( (d-1)^n - (-1)^n \bigr)$.  
+Applying Proposition~\ref{prop:BasisSize} and noting that 
+$\abs{\cB} = \abs{\mathfrak{I}(n+1,d)}$, the proof is complete.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
