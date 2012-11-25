@@ -757,7 +757,7 @@ lower bound in~\eqref{eq:alpha2.1} is nonnegative.
 [[TODO: $k_u \geq 1$, so to show $\alpha$ is integral you need less]]
 
 \begin{rem}
-We observe that in equation~\eqref{eq:alpha2.0} the exponent 
+We observe that in Equation~\eqref{eq:alpha2.0} the exponent 
 $-\floor{(m+1)/4}+\nu_m$ is nonpositive for each value $m \geq 0$, 
 which suggests the computational question of how to determine the 
 sequence of factors 
@@ -928,7 +928,7 @@ below.
 \item Compute the expression $x_1 = (-1)^{k_u+k_v} (k_v-1)! p^n$ as an 
       exact integer and observe that \mbox{$\ord_p(x_1) \geq n$}.
 \item Compute the expression $x_2 = (k_u - 1)! \alpha_{u+1,v+1}$ to 
-      precision~$\tilde{N}$ using equation~\eqref{eq:alpha2.0} or 
+      precision~$\tilde{N}$ using Equation~\eqref{eq:alpha2.0} or 
       \eqref{eq:alphap.0} depending on whether $p$ is even or odd. 
 \item Compute the inverse $x_2^{-1}$ to precision $N - n$.
 \item Finally, compute the product $x_1 x_2^{-1}$ to precision~$N$.
@@ -1032,7 +1032,7 @@ and $\tilde{N} \in \BigOh(N + n \log_p n)$, $M \in \BigOh(p \tilde{N})$.
 
 \begin{proof}
 The key idea is to slightly modify Algorithm~\ref{alg:Diabfrob} 
-and use equation~\eqref{eq:alpha}, working directly with the sequence 
+and use Equation~\eqref{eq:alpha}, working directly with the sequence 
 $(\lambda_m)_{m=0}^{M}$.  As we will be using operations in the 
 totally ramified extension~$\QQ_p(\pi)$ to 
 $p$-adic precision~$\tilde{N}$, we remark that the cost of 
@@ -1042,7 +1042,7 @@ achieved by polynomial multiplication based on the fast Fourier
 transform.
 
 We first observe that the valuation of the summands in 
-equation~\eqref{eq:alpha} can be bounded by 
+Equation~\eqref{eq:alpha} can be bounded by 
 $\ord_p \bigl(\lambda_m (u_i / d)_r (-1)^r \pi^{-r} {\hat{a}_i}^{m-r} \bigr) \geq - 1/2$.
 As the only term with negative valuation is $\pi^{-r}$ and 
 $R \in \BigOh(\tilde{N})$, it suffices to precompute 
@@ -1105,7 +1105,7 @@ power series solution $C(t) = \sum_{i \geq 0} C_i t^i$ around $t=0$ for
 r(t) \frac{dC}{dt} + B(t) C(t) = 0
 \end{equation}
 using the recursion 
-\begin{equation}
+\begin{equation} \label{eq:Ci}
 C_{i+1} = \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(B)\}}}^i B_{i-j} C_j + 
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} j C_j \biggr).
@@ -1201,8 +1201,8 @@ $\sigma(C)^{-1} = C(t^p)^{-1} = C^{-1}(t^p)$.
 The matrix~$C^{-1}$ could be computed using matrix inversion 
 over the ring $\mathbf{Q}_p[[t]]$.  An alternative approach 
 follows from observing that whenever $C$ satisfies 
-equation~\eqref{eq:01-GMDE-Homogenous}, its inverse~$C^{-1}$ 
-satisfies the related differential equation~\eqref{eq:01-GMDE-Dual}. 
+Equation~\eqref{eq:01-GMDE-Homogenous}, its inverse~$C^{-1}$ 
+satisfies the related Equation~\eqref{eq:01-GMDE-Dual}. 
 In practice, solving this equation for $C^{-1}$ is typically favourable 
 compared to inverting the matrix~$C$.
 \end{rem}
@@ -1344,7 +1344,7 @@ bounds are often closer to the result of Kedlaya and Tuitman than to the
 estimates provided by Gerkmann.
 
 The contribution of the terms $\max_i \lambda_i - p \min_i \lambda_i$ 
-in equation~\eqref{eq:KedlayaTuitman} typically is small compared to the 
+in Equation~\eqref{eq:KedlayaTuitman} typically is small compared to the 
 term~$p g(N_2)$. Therefore, in a heuristic implementation, one 
 could choose e.g.\ $K_1 = 1.1 \times p N_2$ and $K_2 = (\deg(r) + 1) K_1$.
 \end{rem}
@@ -1567,7 +1567,7 @@ carried out in parallel:
 \item The major contributor to the runtime in many examples is the 
       computation of the matrix~$C(t)$ which is the local solution 
       of the differential equation.  While the outer loop in 
-      Equation~[[TODO: Reference]] cannot be parallelised easily 
+      Equation~\eqref{eq:Ci} cannot be parallelised easily 
       as $C_{i}$ depends on certain $C_{j}$ with $j < i$, the 
       matrix products in the inner loop are independent.
 \item The computation of the $q$th-power Frobenius 
