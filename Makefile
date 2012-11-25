@@ -3,7 +3,5 @@ pdf: deformation.tex deformation.bib
 	bibtex deformation
 	pdflatex deformation.tex
 	pdflatex deformation.tex
-
-clean: 
 	rm *.aux *.log *.bbl *.blg *.out *.toc
 
