@@ -459,13 +459,13 @@ We now describe the action of the Gauss--Manin connection~$\nabla$ on
 $\HdR^n(\mathfrak{U}_L)$.  Suppose that we are given a basis element 
 $x^i \Omega / P^k \in \cB_k$.  Following the description in Section [], we compute
 \begin{equation} \label{eqn:nabla}
-\nabla \biggl(\frac{x^i \Omega}{P^k}\biggr) \equiv dt \otimes \frac{k x^i P_t \Omega}{P^{k+1}},
+\nabla \biggl(\frac{x^i \Omega}{P^k}\biggr) \equiv dt \otimes \frac{- k x^i P_t \Omega}{P^{k+1}},
 \end{equation}
 %TODO changed sign, should be right like this (because dt \wedge should be on the left)
 where $P_t = dP/dt$ and $\equiv$ denotes equality in $\Omega_{L} \otimes \HdR^n(\mathfrak{U}_L)$. 
 We apply Algorithm \ref{alg:PoleRed} in order to write
 \begin{equation*}
-dt \otimes \frac{k x^i P_t \Omega}{P^{k+1}} \equiv 
+dt \otimes \frac{- k x^i P_t \Omega}{P^{k+1}} \equiv 
 dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega
 \end{equation*}
 where $\gamma_i$ is an element in the $L$-span of~$B_i$ for $1 \leq i \leq n$. This is
@@ -484,7 +484,7 @@ formalised in Algorithm \ref{alg:Connection} below.
 \item Compute the auxiliary matrices $\Delta_k$  as defined 
       in the proof of Theorem \ref{thm:Isomorphism}
       for $k = \floor{n/d}+1, \dotsc, n+1$.
-\item For each $g \in B$, let $k=(\deg(g)+(n+1))/d$, and put $Q = k g P_t$. Set 
+\item For each $g \in B$, let $k=(\deg(g)+(n+1))/d$, and put $Q = - k g P_t$. Set 
       $\gamma_{1}, \dotsc, \gamma_n$ to the output of {\sc Reduce($P, B_1, \dotsc, B_n, Q$)}.  
       For each $f \in B$ let $M_{f,g}$ be the coefficient of $f$ in $\gamma_i$.
 \item \textbf{return} $M$.
