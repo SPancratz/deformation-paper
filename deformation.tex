@@ -1510,42 +1510,51 @@ and $K_1, K_2$. These will be provided and justified later.
 
 \begin{enumerate}
 \item[Step~$\Rmnum{1}$.]
-Compute the matrix $\Phi_0 \in M_{b \times b}(\mathbf{Q}_q)$ for the action of $p^{-1} \Frob_p$ on 
-$\Hrig^{n}(U_0)$ with respect to the standard basis to $p$-adic precision~$N_1$.  
+Compute the matrix $\Phi_0 \in M_{b \times b}(\mathbf{Q}_q)$ for the action 
+of $p^{-1} \Frob_p$ on $\Hrig^{n}(U_0)$ with respect to the standard basis 
+to $p$-adic precision~$N_1$.  
 \item[Step~$\Rmnum{2}$.]
-Compute the matrix $M \in M_{b \times b}(\mathbf{Q}_q(t))$ of the Gauss-Manin connection $\nabla$ on 
-$\HdR^{n}(\mathfrak{U}_L)$ 
-with respect to the standard basis to $p$-adic precision~$N_2$.
+Compute the matrix $M \in M_{b \times b}(\mathbf{Q}_q(t))$ of the 
+Gauss--Manin connection $\nabla$ on $\HdR^{n}(\mathfrak{U}_L)$ with 
+respect to the standard basis to $p$-adic precision~$N_2$.
 \item[Step~$\Rmnum{3}$.]
-Let $C \in M_{b \times b} (\mathbf{Q}_q[[t]])$ denote the matrix of local solutions of the connection $\nabla$ around zero i.e., 
-the matrix that satisfies the $p$-adic differential equation $\bigl(\tfrac{d}{dt} + M\bigr) C = 0$ with
-initial condition $C(0)=I$.  We compute an approximation for the matrices~$C$ and~$C^{\sigma}(t^p)^{-1}$
-modulo~$t^{K_1}$ to $p$-adic precision~$N_3$.
+Let $C \in M_{b \times b} (\mathbf{Q}_q[[t]])$ denote the matrix of 
+local solutions of the connection~$\nabla$ around zero, i.e., 
+the matrix that satisfies the $p$-adic differential equation 
+$\bigl(\tfrac{d}{dt} + M\bigr) C = 0$ with initial condition $C(0)=I$.  
+We compute an approximation for the matrices~$C$ and 
+$C^{\sigma}(t^p)^{-1}$ modulo~$t^{K_1}$ to $p$-adic precision~$N_3$.
 \item[Step~$\Rmnum{4}$.]
-Let $\Phi(t) \in M_{b \times b}(\mathbf{Q}_p\langle t,r(t)^{-1}\rangle^{\dagger})$ denote the matrix for the action of $p^{-1} \Frob_p$ on 
-$\Hrig^{n}(U/S)$ with respect to the standard basis (which is only a basis generically). One can show that 
-this matrix satisfies $\Phi(t) = C(t) \Phi_0 C^{\sigma}(t^p)^{-1}$.  
-Using this formula we compute a power series approximation of $\Phi(t)$ modulo~$t^{K_1}$ to $p$-adic precision~$N_4$.
+Let $\Phi(t) \in M_{b \times b}(\mathbf{Q}_p\langle t,r(t)^{-1}\rangle^{\dagger})$ 
+denote the matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
+respect to the standard basis (which is only a basis generically).  One can 
+show that this matrix satisfies $\Phi(t) = C(t) \Phi_0 C^{\sigma}(t^p)^{-1}$.
+Using this formula we compute a power series approximation of $\Phi(t)$ 
+modulo~$t^{K_1}$ to $p$-adic precision~$N_4$.
 \item[Step~$\Rmnum{5}$.]
-Let $\Phi_{t_1} \in M_{b \times b}(\mathbf{Q}_q)$ denote the matrix for the action of $p^{-1} \Frob_p$ 
-on $\Hrig^{n}(U_{t_1})$. First we compute $\Psi(t) = r(t)^{K_2} \Phi(t)$ modulo~$t^{K_1}$ to $p$-adic precision~$N_5$.  Then we compute  
-an approximation $r(\hat{t}_1)^{-K_1} \Psi(\hat{t}_1)$ for $\Phi_{t_1}$ to $p$-adic precision~$N_5$.
+Let $\Phi_{t_1} \in M_{b \times b}(\mathbf{Q}_q)$ denote the matrix for 
+the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U_{t_1})$. First we compute 
+$\Psi(t) = r(t)^{K_2} \Phi(t)$ modulo~$t^{K_1}$ to $p$-adic precision~$N_5$. 
+Then we compute an approximation $r(\hat{t}_1)^{-K_1} \Psi(\hat{t}_1)$ for 
+$\Phi_{t_1}$ to $p$-adic precision~$N_5$.
 \item[Step~$\Rmnum{6}$.]
-Let $\Phi_{t_1}^{(q^m)}$ denote the matrix for the action of $q^{-m} \Frob_{q^m}$ on 
-$\Hrig^{n}(U_{t_1})$, which satisfies 
+Let $\Phi_{t_1}^{(q^m)}$ denote the matrix for the action of 
+$q^{-m} \Frob_{q^m}$ on $\Hrig^{n}(U_{t_1})$, which satisfies 
 $\Phi_{t_1}^{(q^m)} = \Phi_{t_1} \sigma(\Phi_{t_1}) \dotsm \sigma^{a-1}(\Phi_{t_1})$ 
-and has entries in $\mathbf{Q}_{q^m}$.  We compute an approximation to this matrix with $p$-adic precision~$N_6$.
+and has entries in $\mathbf{Q}_{q^m}$.  We compute an approximation to 
+this matrix with $p$-adic precision~$N_6$.
 %TODO change notation for q^m power Frobenius matrix, looks like power of matrix
 \item[Step~$\Rmnum{7}$.]
 Let $p(T) = \det\bigl(1 - T (q^m)^{-1} \Frob_{q^m} | \Hrig^n(U_{t_1})\bigr)$, 
-which is an integer polynomial.  We recover this exactly 
-by computing an approximation to the reverse characteristic polynomial 
-of $\Phi_{t_1}^{(q^m)}$ to $p$-adic precision~$N_7$.
+which is an integer polynomial.  We recover this exactly by computing an 
+approximation to the reverse characteristic polynomial of $\Phi_{t_1}^{(q^m)}$
+to $p$-adic precision~$N_7$.
 \end{enumerate}
 
 \subsection{Precisions}
 
 \subsection{Complexity}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Examples}
