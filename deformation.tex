@@ -340,9 +340,9 @@ specialisation to the diagonal fibre, that is, evaluation of the matrix at
 $t = t_0$, commutes with computing the determinant, it suffices to show that 
 the determinant of $(\Delta_k) \big |_{t=t_0}$ is nonzero.  Since, for 
 $0 \leq j \leq n$, we have $\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, 
-there is precisely one non-zero entry in each column and each row of $\Delta_k$.  
+there is precisely one nonzero entry in each column and each row of $\Delta_k$.  
 Namely, in column $(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is the 
-non-zero entry $d \alpha_j$, concluding the proof.
+nonzero entry $d \alpha_j$, concluding the proof.
 \end{proof}
 
 We can use Theorem~\ref{thm:Isomorphism} to give a routine {\sc Decompose}, 
@@ -425,72 +425,37 @@ $\HdR^n(\mathfrak{U}_L)$, as announced before.  We begin with an
 auxiliary result describing the cardinality of the set~$\cB$.
 
 \begin{prop} \label{prop:BasisSize}
-Let $n \geq 1$ and $d \geq 1$.  The set of $n$-tuples 
+The set $\cB$ has cardinality
 \begin{equation}
-\mathfrak{I}(n,d) = 
-    \{ i \in (\ZZ / d \ZZ)^{n} : \abs{i} = -n \text{ and, for all $j$, } i_j \neq -1 \}
+\bigl((d-1)/d\bigr) \bigl((d-1)^{n} - (-1)^{n}\bigr).
 \end{equation}
-has cardinality $\bigl((d-1)/d\bigr) \bigl((d-1)^{n-1} - (-1)^{n-1}\bigr)$.
 \end{prop}
 
 \begin{proof}
-As a slight generalisation, let $I(n,d,x)$ denote the cardinality of the set 
-\begin{equation}
-\mathfrak{I}(n,d,x) = 
-    \{ i \in (\ZZ / d \ZZ)^{n} : \abs{i} = x \text{ and, for all $j$, } i_j \neq -1 \}
-\end{equation}
-so that $\abs{\mathfrak{I}(n,d)} = I(n,d,-n)$.  We claim that the function 
-$I(n,d,x)$ has the following properties:
-\begin{enumerate}
-\item For all $d \geq 1$ and $x \in \ZZ / d \ZZ$, 
-      $I(1,d,x) = \mathbf{1}\{x \neq -1\}$.
-\item For all $n \geq 1$ and $x \in \ZZ / 1 \ZZ$, $I(n,1,x) = 0$.
-\item For fixed $n \geq 1$ and $d \geq 2$, let $x_{n+1}, x_{n}$ 
-      denote any two elements of $\ZZ / d \ZZ$ such that 
-      $x_{n+1} \neq -(n+1), x_{n} \neq -n$.  Then 
-      \begin{align}
-      I(n+1,d,x_{n+1}) & = (d-1) I(n,d,x_n) + (-1)^n, \\
-      I(n+1,d,-(n+1))  & = (d-1) I(n,d,x_n).
-      \end{align}
-      In particular, $I(n,d,x)$ is constant on $\{ x \neq -n \}$.
-\end{enumerate}
-The first two properties are easily verified.  We now prove the 
-third property by induction on $n$.  From the definition of 
-$\mathfrak{I}(n+1,d,x)$, we observe that 
-\begin{equation}
-I(n+1,d,x) = \sum_{y \neq x+1} I(n,d,y).
-\end{equation}
-We first consider the case that $x \neq -(n+1)$.  Using the 
-above summation and the inductive hypothesis,
-\begin{equation}
-\begin{split}
-I(n+1,d,x) & = \sum_{y \neq x+1} I(n,d,y) \\
-           & = \sum_{y \not \in \{ x+1, -n \}} I(n,d,y) + I(n,d,-n)) \\
-           & = (d - 2) I(n,d,x_{n}) + I(n,d,x_n) - (-1)^{n-1} \\
-           & = (d - 1) I(n,d,x_{n}) + (-1)^n,
-\end{split}
-\end{equation}
-where $x_n$ is any element with $x_n \neq -n$.  When $x = -(n+1)$ 
-we find that 
-\begin{equation}
-I(n+1,d,-(n+1)) = \sum_{y \neq -n} I(n,d,y) = (d-1) I(n,d,x_{n}),
-\end{equation}
-completing the proof of our claim.
-
-The above three properties in fact uniquely determine $I(n,d,x)$ 
-for any $n \geq 1$, $d \geq 1$ and $x \in \ZZ / d \ZZ$.  Moreover, 
-$I(n,d,-n)$ satisfies the recurrence 
-\begin{align}
-I(1,d,-1) & = 0, \\
-I(n+1,d,-(n+1)) & = (d-1) \bigl( I(n,d,-n) - (-1)^n \bigr).
-\end{align}
-An easy calculation confirms that the expression 
-$\bigl( (d-1)/d \bigr) \bigl( (d-1)^{n-1} - (-1)^{n-1} \bigr)$ also 
-satisfies this recurrence, completing the proof.
+First note that if we denote
+\begin{align*}
+V &= \{(i_0,\cdots,i_n) \in (\ZZ/d\ZZ)^{n+1} : \sum_{j=0}^n i_j = n+1\}, \\
+H_j &= \{(i_0,\cdots,i_n) \in (\ZZ/d\ZZ)^{n+1} : i_j = -1 \},
+\end{align*}
+then  $\cB$ is in one-to-one correspondence with the set $V-(H_0 \cup \cdots \cup H_n)$. Now by the inclusion-exclusion
+principle, 
+\begin{align*}
+\abs{V \cap (H_0 \cup \cdots \cup H_n)} &= \sum_{j=0}^n \abs{V \cap H_j} - \sum_{0 \leq j < k \leq n} \abs{V \cap H_j \cap H_k}
++ \cdots + (-1)^{n} \abs{V \cap H_0 \cap \cdots \cap H_n} \\
+&= {n+1 \choose 1} d^{n-1} -{n+1 \choose 2} d^{n-2} + \cdots + (-1)^{n-1} {n+1 \choose n} + (-1)^{n} \\
+&= (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}\bigr)+(-1)^n,
+\end{align*}
+so that
+\begin{align*}
+\abs{V-(H_0 \cup \cdots \cup H_n)}&=\abs{V}-\abs{V \cap (H_0 \cup \cdots \cup H_n)} \\
+&= d^n - (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}+d (-1)^n \bigr) \\
+&= \bigl((d-1)/d\bigr) \bigl((d-1)^{n} - (-1)^{n}\bigr),
+\end{align*}
+and the proof is complete.
 \end{proof}
 
 \begin{thm} \label{thm:Basis}
-Suppose that the family of projective hypersurfaces $\mathfrak{X}/\mathfrak{S}$ 
+Suppose that the family of smooth projective hypersurfaces $\mathfrak{X}/\mathfrak{S}$ 
 contains a diagonal fibre.  Then the set~$\cB$ from Definition~\ref{defn:MonBasis} 
 is a basis for the $L$-vector space $\HdR^n(\mathfrak{U}_L)$.
 \end{thm}
@@ -500,14 +465,11 @@ We already know that $\HdR^n(\mathfrak{U}_L)$ is spanned by the classes of the
 $n$-forms $Q \Omega / P^k$ with $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
 $kd - (n+1)$ for $k \in \NN$. Applying Algorithm ~\ref{alg:PoleRed}, we obtain an 
 expression for the class of $Q \Omega / P^k$ as an $L$-linear combination of 
-elements in $\cB$.  This shows that the set~$\cB$ spans the vector space 
-$\HdR^n(\mathfrak{U}_L)$.
-
-It now suffices to prove that $\abs{\cB} = \dim \HdR^n(\mathfrak{U}_L)$. 
-From [[TODO:  Reference]], we know that $\dim \HdR^n(\mathfrak{U}_L) = 
-\bigl((d-1)/d\bigr) \bigl( (d-1)^n - (-1)^n \bigr)$.  
-Applying Proposition~\ref{prop:BasisSize} and noting that 
-$\abs{\cB} = \abs{\mathfrak{I}(n+1,d)}$, the proof is complete.
+elements in $\cB$.  This shows that $\cB$ spans the vector space 
+$\HdR^n(\mathfrak{U}_L)$. However, we know from [[TODO reference]] that 
+$\dim \HdR^n(\mathfrak{U}_L) = \bigl((d-1)/d\bigr) \bigl( (d-1)^n - (-1)^n \bigr)$.  
+Therefore, it follows from Proposition~\ref{prop:BasisSize} that $\cB$ is linearly 
+independent as well.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -599,7 +561,7 @@ $\Hrig^n(U) \cong \HdR^n(\mathfrak{U})$, with respect to the basis~$\cB$,
 to $p$-adic precision~$N$.
 
 We first describe an explicit formula for the $\dim \HdR^n(\mathfrak{U})$ 
-non-zero coefficients of~$\Phi$ due to Dwork~\citep{Dwork1964}. 
+nonzero coefficients of~$\Phi$ due to Dwork~\citep{Dwork1964}. 
 see e.g.\ Lauder~\citep[\S 6.1]{Lauder2004b}.  
 We work over the ramified extension~$\QQ_p(\pi)$ where $\pi^{p-1} = -p$, 
 and normalise the valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}.
@@ -793,7 +755,7 @@ it suffices to show that the valuation of the factor
 \begin{equation}
 \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{- \floor{(m+1)/4} + \nu_m}
 \end{equation}
-in each summand is non-negative.  From the proof of 
+in each summand is nonnegative.  From the proof of 
 Proposition~\ref{prop:rfac} we obtain that 
 \begin{equation} \label{eq:alpha2.1}
 \ord_p \biggl( \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{- \floor{(m+1)/4} + \nu_m} \biggr)
@@ -1372,7 +1334,7 @@ $\Hrig^n(U/S)$, suppose that the matrix
 for the connection~$\nabla$ has at most a simple pole at~$z$ 
 and that the exponents $\lambda_1, \dotsc, \lambda_{b}$, 
 which are defined as the eigenvalues of $(t - z) M \vert_{t=z}$ 
-and known to be rational numbers, have non-negative $p$-adic 
+and known to be rational numbers, have nonnegative $p$-adic 
 valuation.  Then the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ 
 has a pole at $z$ of order at most 
 \begin{equation} \label{eq:KedlayaTuitman}
@@ -1527,7 +1489,7 @@ p^N > 2 \max\biggl\{\binom{b}{\floor{b/2}} q^{\floor{b/2} (n-1) / 2},
 \end{equation}
 This allows us to determine the sign~$\epsilon$ from the two 
 coefficients $a_{\ceil{b/2}-1}$ and $a_{\floor{b/2}+1}$, provided 
-that they are non-zero, and we can then recover the remaining 
+that they are nonzero, and we can then recover the remaining 
 coefficients using the functional equation.
 \end{rem}
 
