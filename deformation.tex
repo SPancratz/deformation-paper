@@ -591,8 +591,8 @@ notation, we will keep the index $m$.
 \begin{thm} \label{thm:01-03-diagfrob}
 Let $\omega_1$ denote an element of $\cB$ corresponding to a tuple 
 $u \in \ZZ^{n+1}$ and let $\omega_2$ denote the unique element of~$\cB$ 
-corresponding to a tuple $v \in \ZZ^{n+1}$ such that for all 
-$i$ we have $p (u_i + 1) \equiv v_i + 1 \pmod{d}$. Then
+corresponding to a tuple $v \in \ZZ^{n+1}$ such that
+we have $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all $i$. Then
 \begin{equation}
 p^{-1} \Frob_p (\omega_1) = 
     (-1)^{k_u + k_v} \frac{(k_v - 1)!}{(k_u - 1)!} p^n \alpha_{u,v}^{-1} \omega_2.
@@ -788,7 +788,7 @@ f_0 &=1, f_1=\frac{u_i+1}{d} \\
 f_r & = f_{r-2} \frac{(u + (r - 2)d)(u + (r - 1)d)}{2d^2} ,
 \end{align*}
 (Strictly speaking this formula only holds for $r \neq 5$, but one can write down a similar formula for $r=5$).
-Since $d$ is odd for $p=2$, the numerator is always even and the denominator is odd,
+Since $d$ is odd when $p=2$, the numerator is always even and the denominator is odd,
 so this computation can be carried out without precision loss.
 \end{rem}
 
@@ -903,11 +903,12 @@ which upon taking logarithms and rearranging yields the result.
 
 \begin{prop}
 In order to compute $(k_u-1)!\alpha_{u,v} \bmod p^{\tilde{N}}$, it 
-suffices to restrict the inner sum in [] to pairs $m,r \geq 0$ such 
-that $m \leq M$, or equivalently $r \leq R$, where 
+suffices to restrict the inner sum in Equation~\eqref{eq:alpha2.0} or 
+\eqref{eq:alphap.0} to pairs $m,r \geq 0$ such that $m \leq M$, or 
+equivalently $r \leq R$, where 
 \begin{equation}
 M = \floor{ p^2 \biggl( \frac{\tilde{N}}{p-1} +2 
-            + \log_p\Bigl(\frac{\tilde{N}}{p-1} + 2\Bigr) + 1 \biggr)}, R=\floor{M/p}.
+            + \log_p\Bigl(\frac{\tilde{N}}{p-1} + 2\Bigr) + 1 \biggr)}, \; \; \; R=\floor{M/p}.
 \end{equation}
 \end{prop}
 
@@ -1086,104 +1087,106 @@ of~$\ZZ_p$.
 \section{Solving the differential equation}
 \label{sec:DifferentialSystem}
 
-In this section we describe how to solve the $p$-adic differential 
-system governed by the Gauss--Manin connection in order to obtain 
-a local expansion of the matrix for the action of $p^{-1} \Frob_p$ 
-on $\Hrig^{n}(U/S)$.  Our discussion largely follows the work of 
-Lauder~\citep{Lauder2006}.
+In this section we explain how to solve the $p$-adic differential 
+equation describing the horizontal sections of the Gauss--Manin 
+connection $\nabla$, in order to obtain a local expansion of the 
+matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$.  
+Our discussion largely follows the work of Lauder~\citep{Lauder2006}, 
+but incorporates improved convergence bounds from Kedlaya~\citep{Kedlaya2010}.
 
-Recall that $\Phi$ denotes the matrix for the $\sigma$-semilinear action 
+Recall that $\Phi$ denotes the matrix for the $\sigma$-semilinear action
 of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$, where $\sigma$ is the standard lift 
-of the $p$th-power Frobenius to~$\mathbf{Q}_q$ and~$\mathbf{Q}_q(t)$ sending 
-$t \mapsto t^p$, and $M$ the matrix for the Leibniz-linear connection on 
-$\HdR^n(\mathfrak{U}/\mathfrak{S})$.
-As we saw before, these matrices satisfy the following differential system,
-\begin{equation}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M).
+of the $p$th-power Frobenius sending $t \mapsto t^p$, and that $M$ denotes the 
+matrix for the Gauss--Manin connection $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
+As we saw in section [[TODO]], these matrices satisfy the differential equation
+\begin{equation} \label{eq:Phi}
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
 \end{equation}
-Our goal is the computation of a power series expansion of~$\Phi$ around 
-the origin, satisfying the above differential equation and the initial 
-condition that~$\Phi_0$ be the matrix for the action of $p^{-1} \Frob_p$ 
-on $\Hrig^n(U_0)$.  We begin by observing that, upon setting 
-\begin{equation}
-\Phi = C \Phi_0 \sigma(C)^{-1},
-\end{equation}
-the above differential system is equivalent to the homogeneous system 
+where $\Phi(0)$ is the matrix for the action of $p^{-1} \Frob_p$ 
+on $\Hrig^n(U_0)$. Our goal is the computation of a power series expansion 
+of~$\Phi$ around the origin.
+
+We first observe that if $C$ denotes the unique solution to the homogeneous
+system
 \begin{equation} \label{eq:01-GMDE-Homogenous}
-\Bigl(\frac{d}{dt} + M\Bigr) C = 0
+\Bigl(\frac{d}{dt} + M\Bigr) C = 0, \; \; \; C(0)=I,
 \end{equation}
-with the initial condition that $C(0)$ is the identity matrix.  Let us write 
+where $I$ denotes the identity matrix, then the matrix
 \begin{equation}
-M(t) = \frac{B(t)}{r(t)}
+\Phi = C \Phi_0 \sigma(C)^{-1}
 \end{equation}
-where $B(t) = \sum_{i=0}^{\deg(B)} B_i t^i$ is a matrix over $\mathbf{Q}[t]$ 
-with $\deg(B) = \max_{i,j} \deg(B_{ij})$ and $r(t) \in \mathbf{Z}[t]$ is the 
-\emph{Macaulay resultant} for the polynomial~$P$.  We can now obtain a 
-power series solution $C(t) = \sum_{i \geq 0} C_i t^i$ around $t=0$ for 
+satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation 
+\eqref{eq:01-GMDE-Homogenous}.
+
+Let us write 
 \begin{equation}
-r(t) \frac{dC}{dt} + B(t) C(t) = 0
+M = \frac{B(t)}{r(t)},
 \end{equation}
-using the recursion 
-\begin{equation} \label{eq:Ci}
-C_{i+1} = \frac{-1}{r_0 (i+1)} \biggl(
+where $B(t) = \sum_{i=0}^{\deg(B)} B_i t^i$ and $r(t)= \sum_{i=0}^{\deg(r)} r_i t^i$,
+with $B_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. By our assumption 
+[[TODO]], we may suppose that $r_0 \neq 0 \pmod{p}$ (so in particular $r_0 \neq 0$).
+
+We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ around $t=0$ for 
+the equation
+\begin{equation}
+r \frac{dC}{dt} + B C = 0, \; \; \; C(0)=I,
+\end{equation}
+which is clearly equivalent to Equation \eqref{eq:01-GMDE-Homogenous}, using the recursion 
+\begin{align} \label{eq:Ci}
+C_0 &= I, \\
+C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(B)\}}}^i B_{i-j} C_j + 
-    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} j C_j \biggr).
-\end{equation}
-where we recall that by assumption $r_0 \neq 0 \pmod{p}$ and so, 
-in particular, $r_0 \neq 0$.  [[TODO:  Reference where we place 
-the assumption.]]
+    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr).
+\end{align}
 
-From a computational perspective, we are only interested in a power 
-series solution to some $p$-adic and $t$-adic precisions $N$ and $K_2$, 
-respectively, as discussed in the next two sections.  As such we need 
-to understand the loss of $p$-adic precision involved in the computation 
-of $C_0, C_1, \dotsc, C_{K_2-1}$.  Specifically, let $D_0, D_1, \dotsc$ 
-denote an approximation defined by $D_0 = I$ and 
-\begin{equation*}
-D_{i+1} = \frac{-1}{r_0 (i+1)} \biggl(
-    \sum_{j=\max{\{0,i-\deg(B)\}}}^i B_{i-j} D_j + 
-    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} j D_j \biggr) + 
-    p^{\tilde{N}} E_{i+1},
-\end{equation*}
-where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices. 
-
-The relationship between the desired precision~$N$ and the working 
-precision~$\tilde{N}$ is described by Lauder~\citep[Theorem~5.1]{Lauder2006}, 
-but this can be improved significantly by including recent bounds on the 
-valuation of $C_0, C_1, \dotsc$ by Kedlaya~\citep{Kedlaya2010}.
+However, we will carry out this computation to some finite $p$-adic working precision $\tilde{N}$. If
+we want $C$ to be correct to $p$-adic precision $N$, then $\tilde{N}$ has to be somewhat greater than $N$, 
+because of error propagation. A bound for $\tilde{N}$, in terms of $N$ and the desired $t$-adic precision, 
+was given by Lauder~\citep[Theorem~5.1]{Lauder2006}, but this can be improved significantly by including 
+more recent bounds on the valuation of $C_0, C_1, \dotsc$ by Kedlaya~\citep{Kedlaya2010}.  
 
 \begin{thm} \label{thm:valC}
-For all $i \geq 0$, the $p$-adic valuation of the matrix~$C_i$ 
-can be bounded by 
+For all $i \geq 1$, the $p$-adic valuation of the matrix~$C_i$ 
+satisfies 
 \begin{equation}
 \ord_p(C_i) \geq - \bigl(2 \delta + (n - 1)\bigr) \ceil{\log_p i}.
 \end{equation}
 \end{thm}
 
 \begin{proof}
-Let us recall from Lemma~[[TODO: Reference]] that 
-$\ord_p(\Phi) \geq -\delta$, and hence $\ord_p(p^{n-1}\Phi^{-1}) \geq -\delta$ 
-by Poincar\'e duality.  Thus, we see that 
+Let us recall from [[TODO]] that 
+$\ord_p(\Phi) \geq -\delta$ and $\ord_p(p^{n-1}\Phi^{-1}) \geq -\delta$. 
+Thus, we see that 
 \begin{equation}
 \ord_p(\Phi) + \ord_p(\Phi^{-1}) \geq - 2 \delta - (n-1)
 \end{equation}
-and the bound follows now from Theorem~{18.3.3} by 
-Kedlaya~\citep{Kedlaya2010}.
+and the bound follows now from Theorem~{18.3.3} in Kedlaya~\citep{Kedlaya2010}.
 \end{proof}
 
 \begin{rem}
-Kedlaya~\citep[Remark~18.3.4]{Kedlaya2010} also includes another bound,
+Kedlaya~\citep[Remark~18.3.4]{Kedlaya2010} also includes the bound
 \begin{equation}
 \ord_p(C_i) \geq (b - 1) \ord_p(M) 
             - \bigl(2 \delta + (n - 1)\bigr) \floor{\log_p i},
 \end{equation}
-which is better than the estimate used in the previous theorem whenever 
-$\ord_p(M)$ is positive.
+which can sometimes be used to improve the previous theorem slightly, for example 
+when $\ord_p(M)$ is positive.
 \end{rem}
 
+Now let $D_0, D_1, \dotsc$ denote an approximation to $C_0, C_1, \dotsc$ 
+defined by the recursion
+\begin{align*}
+D_0 &= I \\
+D_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
+    \sum_{j=\max{\{0,i-\deg(B)\}}}^i B_{i-j} D_j + 
+    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} j D_j \biggr) + 
+    p^{\tilde{N}} E_{i+1},
+\end{align*}
+where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices i.e., $D_0, D_1, \dotsc$
+are computed with working precision $\tilde{N}$.
+
 \begin{thm}
-Let the sequences of matrices $(C_i)$ and $(D_i)$ over $\mathbf{Q}$ and 
-$\mathbf{Q}_p$, respectively, be defined as above.  Then, for all $i \geq 0$, 
+For all $i \geq 1$, 
 \begin{equation*}
 \ord_p(C_i - D_i) \geq 
     \tilde{N} - \Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p i}.
@@ -1191,20 +1194,21 @@ $\mathbf{Q}_p$, respectively, be defined as above.  Then, for all $i \geq 0$,
 \end{thm}
 
 \begin{proof}
-This follows analogously to the result of 
+This follows analogously to
 Lauder~\citep[Theorem~5.1]{Lauder2006}.  
-Indeed, its proof shows more specifically that 
+Indeed, the proof there shows that 
 \begin{equation}
 \ord_p(C_i - D_i) \geq 
     \tilde{N} + \min_{k+\ell=i} \Bigl(\ord_p(C_k) + 
                                       \ord_p(\ell^{-1} C_{\ell-1}^{-1})\Bigr).
 \end{equation}
-We use the bound from Theorem~\ref{thm:valC} and observe that they 
-also apply to the inverse matrix~$C^{-1}$, as this matrix satisfies 
-the related differential equation 
+We use the bound from Theorem~\ref{thm:valC} and observe that it 
+also applies to the inverse matrix~$C^{-1}$, as this matrix satisfies 
+the dual differential equation 
 \begin{equation} \label{eq:01-GMDE-Dual}
-\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0.
+\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0,
 \end{equation}
+that carries a Frobenius structure given by the matrix $\bigl(\Phi^{-1}\bigr)^t$. 
 The result now follows.
 \end{proof}
 
