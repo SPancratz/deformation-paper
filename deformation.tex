@@ -262,7 +262,8 @@ that we are interested in.
 For $k \in \NN$, we define the following sets of monomials: 
 \begin{align*}
 F_k & = \{ x^i : i \in \mathbf{N}_{0}^{n+1}, \abs{i} = k d - (n+1) \}, \\
-B_k & = \{ x^i : i \in \mathbf{N}_{0}^{n+1}, \abs{i} = k d - (n+1) \text{ and $i_j < d-1$ for all $j$}\},
+B_k & = \{ x^i : i \in \mathbf{N}_{0}^{n+1}, \abs{i} = k d - (n+1) \text{ and $i_j < d-1$ for all $j$}\}, \\
+R_k & = F_k - B_k,
 \end{align*}
 where $x^i = x_0^{i_0} \dotsm x_n^{i_n}$ and $\abs{i} = i_0 + \dotsb + i_n$. 
 We also write $\cB_k = \{Q \Omega / P^k : Q \in B_k\}$ and let 
@@ -273,11 +274,8 @@ We will show below that if the family $\mathfrak{X}/{\mathfrak{S}}$ contains
 a diagonal fiber then the set $\cB$ forms a basis for $\HdR^n(\mathfrak{U}_L)$.
 
 \begin{defn} \label{defn:IndexSets}
-For $k \in \NN$, we define the following sets of monomials in 
-$L[x_0, \dotsc, x_n]$.  Let $R_k = F_k - B_k$ be the set of monomials of 
-total degree $kd-(n+1)$ and partial degree at least $d-1$ with respect to some 
-of the $n+1$ variables.  Let $C_k^{(0)}$ be the set of monomials of total 
-degree $(k-1)d - n$, and then inductively, for $j = 1, \dotsc, n$, define 
+For $k \in \NN$, we let $C_k^{(0)}$ be the set of monomials of total 
+degree $(k-1)d - n$ and then inductively, for $j = 1, \dotsc, n$, define 
 $C_k^{(j)}$ to be the set of monomials in $C_k^{(j-1)}$ except for those 
 divisible by $x_{j-1}^{d-1}$.  Moreover, we define the multi-set $C_k$ as 
 the disjoint union of $C_k^{(0)}, \dotsc, C_k^{(n)}$.  We shall write an 
@@ -292,11 +290,12 @@ a diagonal fibre.  For $k \in \NN$ and $0 \leq j \leq n$, let $U_k^{(j)}$ be
 the $L$-vector space of polynomials with basis $C_k^{(j)}$, and let $U_k$ 
 denote the cartesian product $U_k = U_k^{(0)} \times \dotsb \times U_k^{(n)}$. 
 Moreover, let $V_k$ and $W_k$ be the $L$-vector spaces of polynomials with 
-bases $F_k$ and $R_k$, respectively, and let $\pi \colon V_k \onto W_k$ 
-denote the projection onto the subspace $W_k \leq V_k$. [[TODO projection
-not unique, reformulate]] Then the map 
+bases $F_k$ and $R_k$, respectively, and let $\pi \colon V_k \rightarrow W_k$ 
+denote the linear map that sends the elements of $B_k$ to zero and the 
+elements of $R_k$ to themselves. %safer formulation, projection not unique
+Then the map 
 \begin{equation}
-\phi_k \colon U_k \to W_k,
+\phi_k \colon U_k \to W_k, \; \; \;
 (Q_0, \dotsc, Q_n) \mapsto \pi \bigl( Q_0 \partial_0 P + \dotsb + Q_n \partial_n P \bigr)
 \end{equation}
 is an isomorphism of $L$-vector spaces.
@@ -369,11 +368,13 @@ where $\equiv$ denotes equality in cohomology.
 \caption{Obtain coordinates in the Jacobian ideal modulo basis elements}
 \label{alg:Decompose}
 \begin{algorithmic}
-\Require $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
+\Require  $P$ in $K[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
+         defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
+         hypersurfaces that contains a diagonal fibre, $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
 \Ensure  $Q_0, \dotsc, Q_n \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
          $k(d-1)-n$, and $\gamma_k$ in the $L$-span of $B_k$, such that 
          $Q = Q_0 \partial P_0 + \dotsb + Q_n \partial_n P +\gamma_k$.
-\Procedure{Decompose}{$\partial_0 P, \dotsc, \partial_n P, Q$}
+\Procedure{Decompose}{$P,Q$}
 \State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
 \item Let $b$ be the vector of length $\abs{R_k}$ such that the entry 
       corresponding to the monomial $x^i \in R_k$ is the coefficient of 
@@ -397,17 +398,20 @@ where $\equiv$ denotes equality in cohomology.
 \label{alg:PoleRed}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
+\Require  $P$ in $K[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
+         defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
+         hypersurfaces that contains a diagonal fibre, $Q \in L[x_0, \dotsc, x_n]$ 
+         homogeneous of degree $kd - (n+1)$.
 \Ensure  $\gamma_i$ in the $L$-span of $B_i$ for $1 \leq i \leq n$, with  
          $Q \Omega / P^k \equiv \gamma_{1} \Omega / P^{1} + \dotsb + \gamma_n \Omega / P^n$.
-\Procedure{Reduce}{$P, Q$}
+\Procedure{Reduce}{$P,Q$}
 \While{$k \geq n+1$}
-\State $Q_0, \dotsc, Q_n, \bullet \gets \Call{Decompose}{Q, \partial_0 P, \dotsc, \partial_n P, B_k}$
+\State $Q_0, \dotsc, Q_n, \bullet \gets \Call{Decompose}{Q}$
 \State $k \gets k-1$
 \State $Q \gets k^{-1} \sum_{i=0}^n \partial_i Q_i$
 \EndWhile
 \While{$Q \not \in B_k$}
-\State $Q_0, \dotsc, Q_n, \gamma_k \gets \Call{Decompose}{Q, \partial_0 P, \dotsc, \partial_n P, B_k}$
+\State $Q_0, \dotsc, Q_n, \gamma_k \gets \Call{Decompose}{Q}$
 \State $k \gets k-1$
 \State $Q \gets k^{-1} \sum_{i=0}^n \partial_i Q_i$
 \EndWhile
@@ -511,7 +515,7 @@ formalised in Algorithm~\ref{alg:Connection} below.
       for $k = \floor{n/d}+1, \dotsc, n+1$.
 \item For each $g \in B$, let $k = (\deg(g)+(n+1))/d$ and $Q = - k g P_t$. 
       Set $\gamma_{1}, \dotsc, \gamma_n$ to the output of 
-      {\sc Reduce($P, B_1, \dotsc, B_n, Q$)}. For each $f \in B$ let $M_{f,g}$ 
+      {\sc Reduce($P,Q$)}. For each $f \in B$ let $M_{f,g}$ 
       be the coefficient of $f$ in $\gamma_i$.
 \item \textbf{return} $M$.
 \end{compactenum}
@@ -544,7 +548,7 @@ projective diagonal hypersurface~$\mathcal{X}$ over $\ZZ_p$ defined by
 a polynomial $P \in \ZZ_p[x_0, \dotsc, x_n]$ of the form
 \begin{equation}
 P(x_0, x_1, \dotsc, x_n) = 
-    a_0 x_0^d + a_1 x_1^d + \dotsb + a_n x_n^d
+    a_0 x_0^d + a_1 x_1^d + \dotsb + a_n x_n^d,
 \end{equation}
 where $a_0, a_1, \dotsc, a_n \in \ZZ_p^{\times}$ and $p \nmid d$. 
 Let $\mathfrak{X} = \mathcal{X} \otimes_{\ZZ_p} \QQ_p$ denote the generic 
@@ -784,7 +788,7 @@ so at first sight it seems that the computation of the $f_r$ from
 \eqref{eq:fr} will suffer from precision loss. However, the $f_r$
 can be computed recursively using:
 \begin{align*}
-f_0 &=1, f_1=\frac{u_i+1}{d} \\
+f_0 &=1, \; \; \; f_1=\frac{u_i+1}{d} \\
 f_r & = f_{r-2} \frac{(u + (r - 2)d)(u + (r - 1)d)}{2d^2} ,
 \end{align*}
 (Strictly speaking this formula only holds for $r \neq 5$, but one can write down a similar formula for $r=5$).
@@ -1102,7 +1106,7 @@ As we saw in section [[TODO]], these matrices satisfy the differential equation
 \begin{equation} \label{eq:Phi}
 \Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
 \end{equation}
-where $\Phi(0)$ is the matrix for the action of $p^{-1} \Frob_p$ 
+where $\Phi_0$ is the matrix for the action of $p^{-1} \Frob_p$ 
 on $\Hrig^n(U_0)$. Our goal is the computation of a power series expansion 
 of~$\Phi$ around the origin.
 
@@ -1112,25 +1116,25 @@ system
 \Bigl(\frac{d}{dt} + M\Bigr) C = 0, \; \; \; C(0)=I,
 \end{equation}
 where $I$ denotes the identity matrix, then the matrix
-\begin{equation}
+\begin{equation*}
 \Phi = C \Phi_0 \sigma(C)^{-1}
-\end{equation}
+\end{equation*}
 satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation 
 \eqref{eq:01-GMDE-Homogenous}.
 
 Let us write 
-\begin{equation}
+\begin{equation*}
 M = \frac{B(t)}{r(t)},
-\end{equation}
+\end{equation*}
 where $B(t) = \sum_{i=0}^{\deg(B)} B_i t^i$ and $r(t)= \sum_{i=0}^{\deg(r)} r_i t^i$,
 with $B_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. By our assumption 
 [[TODO]], we may suppose that $r_0 \neq 0 \pmod{p}$ (so in particular $r_0 \neq 0$).
 
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ around $t=0$ for 
 the equation
-\begin{equation}
+\begin{equation*}
 r \frac{dC}{dt} + B C = 0, \; \; \; C(0)=I,
-\end{equation}
+\end{equation*}
 which is clearly equivalent to Equation \eqref{eq:01-GMDE-Homogenous}, using the recursion 
 \begin{align} \label{eq:Ci}
 C_0 &= I, \\
@@ -1142,24 +1146,24 @@ C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
 However, we will carry out this computation to some finite $p$-adic working precision $\tilde{N}$. If
 we want $C$ to be correct to $p$-adic precision $N$, then $\tilde{N}$ has to be somewhat greater than $N$, 
 because of error propagation. A bound for $\tilde{N}$, in terms of $N$ and the desired $t$-adic precision, 
-was given by Lauder~\citep[Theorem~5.1]{Lauder2006}, but this can be improved significantly by including 
+was given by Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be improved significantly by including 
 more recent bounds on the valuation of $C_0, C_1, \dotsc$ by Kedlaya~\citep{Kedlaya2010}.  
 
 \begin{thm} \label{thm:valC}
 For all $i \geq 1$, the $p$-adic valuation of the matrix~$C_i$ 
 satisfies 
-\begin{equation}
+\begin{equation*}
 \ord_p(C_i) \geq - \bigl(2 \delta + (n - 1)\bigr) \ceil{\log_p i}.
-\end{equation}
+\end{equation*}
 \end{thm}
 
 \begin{proof}
 Let us recall from [[TODO]] that 
 $\ord_p(\Phi) \geq -\delta$ and $\ord_p(p^{n-1}\Phi^{-1}) \geq -\delta$. 
 Thus, we see that 
-\begin{equation}
+\begin{equation*}
 \ord_p(\Phi) + \ord_p(\Phi^{-1}) \geq - 2 \delta - (n-1)
-\end{equation}
+\end{equation*}
 and the bound follows now from Theorem~{18.3.3} in Kedlaya~\citep{Kedlaya2010}.
 \end{proof}
 
@@ -1197,11 +1201,11 @@ For all $i \geq 1$,
 This follows analogously to
 Lauder~\citep[Theorem~5.1]{Lauder2006}.  
 Indeed, the proof there shows that 
-\begin{equation}
+\begin{equation*}
 \ord_p(C_i - D_i) \geq 
     \tilde{N} + \min_{k+\ell=i} \Bigl(\ord_p(C_k) + 
                                       \ord_p(\ell^{-1} C_{\ell-1}^{-1})\Bigr).
-\end{equation}
+\end{equation*}
 We use the bound from Theorem~\ref{thm:valC} and observe that it 
 also applies to the inverse matrix~$C^{-1}$, as this matrix satisfies 
 the dual differential equation 
@@ -1214,18 +1218,11 @@ The result now follows.
 
 \begin{rem}
 In order to determine the power series expansion of the matrix~$\Phi$, 
-we also need to compute the matrix $\sigma(C)^{-1}$.  As we assume that 
-the family~$\mathcal{X}$ of hypersurfaces is defined over $\mathbf{Z}_p$, 
-the connection matrix~$M$ is a matrix over $\mathbf{Q}_p[t,r(t)^{-1}]$ 
-and the local solution~$C$ has entries in~$\mathbf{Q}_p[[t]]$.  
-As $\sigma$ acts trivially on~$\mathbf{Q}_p$, we have that 
-$\sigma(C)^{-1} = C(t^p)^{-1} = C^{-1}(t^p)$. 
-
-The matrix~$C^{-1}$ could be computed using matrix inversion 
-over the ring $\mathbf{Q}_p[[t]]$.  An alternative approach 
-follows from observing that whenever $C$ satisfies 
+we also need to compute the matrix $\sigma(C)^{-1}$. The matrix~$C^{-1}$ 
+can be computed using matrix inversion over the ring $\mathbf{Q}_q[[t]]$.  
+An alternative approach follows from observing that whenever $C$ satisfies 
 Equation~\eqref{eq:01-GMDE-Homogenous}, its inverse~$C^{-1}$ 
-satisfies the related Equation~\eqref{eq:01-GMDE-Dual}. 
+satisfies the dual Equation~\eqref{eq:01-GMDE-Dual}. 
 In practice, solving this equation for $C^{-1}$ is typically favourable 
 compared to inverting the matrix~$C$.
 \end{rem}
