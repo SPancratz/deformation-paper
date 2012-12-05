@@ -1098,20 +1098,25 @@ matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$.
 Our discussion largely follows the work of Lauder~\citep{Lauder2006}, 
 but incorporates improved convergence bounds from Kedlaya~\citep{Kedlaya2010}.
 
+
+
 Recall that $\Phi$ denotes the matrix for the $\sigma$-semilinear action
-of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$, where $\sigma$ is the standard lift 
-of the $p$th-power Frobenius sending $t \mapsto t^p$, and that $M$ denotes the 
-matrix for the Gauss--Manin connection $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
-As we saw in section [[TODO]], these matrices satisfy the differential equation
+of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with respect to the basis $\cB$, 
+where $\sigma$ is the standard lift of the $p$th-power Frobenius sending 
+$t \mapsto t^p$. Also recall that $M \in M_{b \times b}(\QQ_q(t))$ denotes 
+the matrix for the Gauss--Manin connection $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$
+with respect to the same basis. As we saw in section [[TODO]], these matrices 
+satisfy the differential equation
+
 \begin{equation} \label{eq:Phi}
 \Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
 \end{equation}
-where $\Phi_0$ is the matrix for the action of $p^{-1} \Frob_p$ 
-on $\Hrig^n(U_0)$. Our goal is the computation of a power series expansion 
-of~$\Phi$ around the origin.
+where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action of $p^{-1} \Frob_p$ 
+on $\Hrig^n(U_0)$, again with respect to the basis $\cB$. Our goal is 
+the computation of a power series expansion of~$\Phi$ around the origin.
 
-We first observe that if $C$ denotes the unique solution to the homogeneous
-system
+We first observe that if $C \in M_{b \times b}(\QQ_q[[t]])$ denotes the unique solution to the 
+homogeneous system
 \begin{equation} \label{eq:01-GMDE-Homogenous}
 \Bigl(\frac{d}{dt} + M\Bigr) C = 0, \; \; \; C(0)=I,
 \end{equation}
@@ -1128,7 +1133,7 @@ M = \frac{B(t)}{r(t)},
 \end{equation*}
 where $B(t) = \sum_{i=0}^{\deg(B)} B_i t^i$ and $r(t)= \sum_{i=0}^{\deg(r)} r_i t^i$,
 with $B_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. By our assumption 
-[[TODO]], we may suppose that $r_0 \neq 0 \pmod{p}$ (so in particular $r_0 \neq 0$).
+[[TODO]], we may suppose that $r_0 \neq 0 \pmod{p}$, so in particular $r_0 \neq 0$.
 
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ around $t=0$ for 
 the equation
@@ -1137,7 +1142,7 @@ r \frac{dC}{dt} + B C = 0, \; \; \; C(0)=I,
 \end{equation*}
 which is clearly equivalent to Equation \eqref{eq:01-GMDE-Homogenous}, using the recursion 
 \begin{align} \label{eq:Ci}
-C_0 &= I, \\
+C_0 &= I, \\ \label{eq:recursion}
 C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(B)\}}}^i B_{i-j} C_j + 
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr).
@@ -1147,7 +1152,7 @@ However, we will carry out this computation to some finite $p$-adic working prec
 we want $C$ to be correct to $p$-adic precision $N$, then $\tilde{N}$ has to be somewhat greater than $N$, 
 because of error propagation. A bound for $\tilde{N}$, in terms of $N$ and the desired $t$-adic precision, 
 was given by Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be improved significantly by including 
-more recent bounds on the valuation of $C_0, C_1, \dotsc$ by Kedlaya~\citep{Kedlaya2010}.  
+more recent bounds on the valuation of $C_0, C_1, \dotsc$ by Kedlaya~\citep{Kedlaya2010}, as we will now show.  
 
 \begin{thm} \label{thm:valC}
 For all $i \geq 1$, the $p$-adic valuation of the matrix~$C_i$ 
@@ -1158,23 +1163,26 @@ satisfies
 \end{thm}
 
 \begin{proof}
-Let us recall from [[TODO]] that 
-$\ord_p(\Phi) \geq -\delta$ and $\ord_p(p^{n-1}\Phi^{-1}) \geq -\delta$. 
-Thus, we see that 
+It follows from Theorem~{18.3.3} in Kedlaya~\citep{Kedlaya2010} that
 \begin{equation*}
-\ord_p(\Phi) + \ord_p(\Phi^{-1}) \geq - 2 \delta - (n-1)
+\ord_p(C_i) \geq \bigl( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \bigr) \ceil{\log_p i}.
 \end{equation*}
-and the bound follows now from Theorem~{18.3.3} in Kedlaya~\citep{Kedlaya2010}.
+However, by [[TODO]], we know that $\ord_p(\Phi) \geq -\delta$ and 
+$\ord_p(p^{n-1}\Phi^{-1}) \geq -\delta$, so
+\begin{equation*}
+\ord_p(\Phi) + \ord_p(\Phi^{-1}) \geq - 2 \delta - (n-1),
+\end{equation*}
+and the result follows.
 \end{proof}
 
 \begin{rem}
 Kedlaya~\citep[Remark~18.3.4]{Kedlaya2010} also includes the bound
-\begin{equation}
+\begin{equation*}
 \ord_p(C_i) \geq (b - 1) \ord_p(M) 
-            - \bigl(2 \delta + (n - 1)\bigr) \floor{\log_p i},
-\end{equation}
-which can sometimes be used to improve the previous theorem slightly, for example 
-when $\ord_p(M)$ is positive.
+            - \bigl( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \bigr) \floor{\log_p i},
+\end{equation*}
+which can sometimes be used to improve the bound from the previous theorem slightly, 
+for example when $\ord_p(M)$ is positive.
 \end{rem}
 
 Now let $D_0, D_1, \dotsc$ denote an approximation to $C_0, C_1, \dotsc$ 
@@ -1186,7 +1194,7 @@ D_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} j D_j \biggr) + 
     p^{\tilde{N}} E_{i+1},
 \end{align*}
-where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices i.e., $D_0, D_1, \dotsc$
+where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices i.e., the matrices $D_0, D_1, \dotsc$
 are computed with working precision $\tilde{N}$.
 
 \begin{thm}
@@ -1210,7 +1218,7 @@ We use the bound from Theorem~\ref{thm:valC} and observe that it
 also applies to the inverse matrix~$C^{-1}$, as this matrix satisfies 
 the dual differential equation 
 \begin{equation} \label{eq:01-GMDE-Dual}
-\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0,
+\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0, \; \; \; C^{-1}(0)=I
 \end{equation}
 that carries a Frobenius structure given by the matrix $\bigl(\Phi^{-1}\bigr)^t$. 
 The result now follows.
@@ -1220,25 +1228,22 @@ The result now follows.
 In order to determine the power series expansion of the matrix~$\Phi$, 
 we also need to compute the matrix $\sigma(C)^{-1}$. The matrix~$C^{-1}$ 
 can be computed using matrix inversion over the ring $\mathbf{Q}_q[[t]]$.  
-An alternative approach follows from observing that whenever $C$ satisfies 
-Equation~\eqref{eq:01-GMDE-Homogenous}, its inverse~$C^{-1}$ 
-satisfies the dual Equation~\eqref{eq:01-GMDE-Dual}. 
-In practice, solving this equation for $C^{-1}$ is typically favourable 
-compared to inverting the matrix~$C$.
+An alternative approach follows from observing that $C^{-1}$ 
+satisfies Equation~\eqref{eq:01-GMDE-Dual}. In practice, solving this 
+equation for $C^{-1}$ is typically favourable compared to inverting 
+the matrix~$C$.
 \end{rem}
 
-With $p$-adic approximations to the power series modulo $t^{K_2}$ available 
-for $C$, $\Phi_0$, and $\sigma(C)^{-1}$, we are in a position to determine 
-the power series for $\Phi = C \Phi_0 \sigma(C)^{-1}$.  The final issue 
-to address in this section is the $p$-adic precision that we require for 
-the three matrices $C$, $\Phi_0$, and $C^{-1}$.
-We begin by developing generic bounds on the products of $p$-adic numbers 
-and matrices.
+We need to recall some bounds on the loss of $p$-adic precision when
+multiplying $p$-adic numbers and matrices.
+
+%Todo perhaps move the following propositions somewhere else, they don't
+%really belong here.
 
 \begin{prop} \label{prop:productval}
-Let $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_p$, where $\ell \geq 2$, 
+Let $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$, where $\ell \geq 2$, 
 be given as $x_i = p^{v_i} u_i$ with $v_i = \ord_p(x_i) \in \mathbf{Z}$ 
-and $u_i \in \mathbf{Z}_p^{\times}$ whenever $x_i \neq 0$ and 
+and $u_i \in \mathbf{Z}_q^{\times}$ whenever $x_i \neq 0$ and 
 $u_i = v_i = 0$ otherwise.  Suppose that $N \in \mathbf{Z}$ is given 
 such that $N > \sum_{j=1}^{\ell} v_j$ and, for all $i$, $N > \sum_{j \neq i} v_j$.
 
@@ -1252,11 +1257,11 @@ for all $i$.  Then
 
 \begin{proof}
 The proof is straightforward, relying only on elementary properties on 
-the $p$-adic valuation on $\mathbf{Q}_p$.
+the $p$-adic valuation.
 \end{proof}
 
 \begin{prop} \label{prop:matrixproductval}
-Let $A_1, \dotsc, A_{\ell}$ be $b \times b$ matrices over $\mathbf{Q}_p$, 
+Let $A_1, \dotsc, A_{\ell}$ be $b \times b$ matrices over $\mathbf{Q}_q$, 
 where $\ell \geq 2$, given as $A_i = p^{v_i} U_i$ with 
 $v_i = \ord_p(A_i) \in \mathbf{Z}$ and at least one entry of $U_i$ a 
 $p$-adic unit $A_i \neq 0$ and $v_i = 0$ and $U_i$ the zero matrix 
@@ -1273,29 +1278,29 @@ for all $i$.  Then
 
 \begin{proof}
 We can follow the proof of Proposition~\ref{prop:productval}, 
-observing that, for matrices $A$, $B$ over $\mathbf{Q}_p$, 
+observing that, for matrices $A$, $B$ over $\mathbf{Q}_q$, 
 we have $\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$.
 \end{proof}
 
-\begin{cor}
-Suppose that $K_2, N_2$ are positive integers such that $N_2$ is greater than 
-the sum of two or three of $\ord_p(\Phi_0)$, $\ord_p\bigl(C \bmod t^{K_2}\bigr)$, 
-and $\ord_p\bigl(C^{-1} \bmod{t^{\ceil{K_2/p}}}\bigr)$.
-In order to compute the power series expansion around the origin 
-of the matrix~$\Phi$ modulo~$t^{K_2}$ to $p$-adic precision~$N_2$, it 
-suffices to compute the matrices $C$, $C^{-1}$ and $\Phi_0$ to 
-$p$-adic precision $N_3$, $N_3'$ and $N_4$, respectively, where 
-\begin{align*}
-N_3  & \geq N_2 + \bigl(2\delta+(n-1)\bigr) \ceil{\log_p \ceil{K_2/p}} + \delta, \\
-N_3' & \geq N_2 + \bigl(2\delta+(n-1)\bigr) \ceil{\log_p K_2} + \delta, \\
-N_4  & \geq N_2 + \bigl(2\delta+(n-1)\bigr) \bigl(\ceil{\log_p K_2} + \ceil{\log_p \ceil{K_2/p}}\bigr).
-\end{align*}
-\end{cor}
+\begin{thm}
+In order to compute the power series expansion of the matrix $\Phi$ at $t=0$ with $t$-adic
+precision $K$ and $p$-adic precsion $N$ (i.e., modulo $t^K$ and $p^N$), it is sufficient
+to compute:
+\begin{itemize}
+\item $\Phi_0$ to $p$-adic precision $N+\bigl(2\delta+(n-1)\bigr) \bigl(\ceil{\log_p K} + \ceil{\log_p \floor{K/p}}\bigr)$,
+\item $C$ to $t$-adic precision $K$ and $p$-adic precision $N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p \floor{K/p}} + \delta$,
+\item $C^{-1}$ to $t$-adic precision $\floor{K/p}$ and $p$-adic precision $N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p K} + \delta$.
+\end{itemize}
+Therefore, while solving Equation \eqref{eq:01-GMDE-Homogenous} for $C$ and Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$, using 
+a recursion like Equation \eqref{eq:recursion}, it is sufficient to use $p$-adic working precision
+\begin{itemize}
+\item $\tilde{N}=N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p K}$ and 
+\item $\tilde{N}=N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p \floor{K/p}}$, respectively.
+\end{itemize}
+\end{thm}
 
 \begin{proof}
-This follows from Proposition~\ref{prop:matrixproductval}, the bounds 
-on the valuations of $C$ and $C^{-1}$ from Theorem~\ref{thm:valC} and 
-the bound $\ord_p(\Phi_0) \geq - \delta$ from Lemma~[[TODO: Reference]].
+
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
