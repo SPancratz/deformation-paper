@@ -1241,35 +1241,35 @@ multiplying $p$-adic numbers and matrices.
 %really belong here.
 
 \begin{prop} \label{prop:productval}
-Let $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$, where $\ell \geq 2$, 
-be given as $x_i = p^{v_i} u_i$ with $v_i = \ord_p(x_i) \in \mathbf{Z}$ 
-and $u_i \in \mathbf{Z}_q^{\times}$ whenever $x_i \neq 0$ and 
-$u_i = v_i = 0$ otherwise.  Suppose that $N \in \mathbf{Z}$ is given 
-such that $N > \sum_{j=1}^{\ell} v_j$ and, for all $i$, $N > \sum_{j \neq i} v_j$.
-
-Let $\tilde{x}_1, \dotsc, \tilde{x}_{\ell}$ be $p$-adic approximations 
-satisfying $\ord_p(x_i - \tilde{x}_i) \geq N - \sum_{j \neq i} v_j$ 
+Let $N \in \mathbf{Z}$ and $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$  
+be such that $N \geq \sum_{j=1}^{\ell} \ord_p(x_j)$, and let 
+$\tilde{x}_1, \dotsc, \tilde{x}_{\ell}$ denote $p$-adic approximations to 
+$x_1, \dotsc, x_{\ell}$ satisfying $\ord_p(x_i - \tilde{x}_i) \geq N - \sum_{j \neq i} v_j$ 
 for all $i$.  Then 
-\begin{equation}
+\begin{equation*}
 \ord_p(x_1 \dotsm x_{\ell} - \tilde{x}_1 \dotsm \tilde{x}_{\ell}) \geq N.
-\end{equation}
+\end{equation*}
+[[TODO]] I weakened the conditions, check!
 \end{prop}
 
 \begin{proof}
-The proof is straightforward, relying only on elementary properties on 
-the $p$-adic valuation.
+Note that, for all $i$,
+\begin{align*}
+\ord_p(\tilde{x}_i) &\geq \min \{ \ord_p(x_i-\tilde{x}_i), \ord_p(x_i) \} \\
+                    &\geq \min \{ N- \sum_{j \neq i} \ord_p(x_j), \ord_p(x_i)\} = \ord_p(x_i).
+\end{align*}
+Therefore, we also have
+\begin{align*}
+\ord_p \bigl( (x_{i}-\tilde{x}_{i})(\tilde{x}_1 \dotsc \tilde{x}_{i-1} x_{i+1} \dotsc x_{\ell} \bigr) \geq N,
+\end{align*}
+for all $i$. The result now follows by combining these inequalities.
 \end{proof}
 
 \begin{prop} \label{prop:matrixproductval}
-Let $A_1, \dotsc, A_{\ell}$ be $b \times b$ matrices over $\mathbf{Q}_q$, 
-where $\ell \geq 2$, given as $A_i = p^{v_i} U_i$ with 
-$v_i = \ord_p(A_i) \in \mathbf{Z}$ and at least one entry of $U_i$ a 
-$p$-adic unit $A_i \neq 0$ and $v_i = 0$ and $U_i$ the zero matrix 
-otherwise.  Suppose that $N \in \mathbf{Z}$ is given such that 
-$N > \sum_{j=1}^{\ell} v_j$ and, for all $i$, $N > \sum_{j \neq i} v_j$.
-
-Let $\tilde{A}_1, \dotsc, \tilde{A}_{\ell}$ be $p$-adic approximations 
-satisfying $\ord_p(A_i - \tilde{A}_i) \geq N - \sum_{j \neq i} v_j$ 
+Let $N \in \mathbf{Z}$ and $A_1, \dotsc, A_{\ell} \in M_{b \times b}(\QQ_q)$
+be such that $N \geq \sum_{j=1}^{\ell} v_j$, and let
+$\tilde{A}_1, \dotsc, \tilde{A}_{\ell}$ denote $p$-adic approximations 
+to $A_1, \dotsc A_{\ell}$ satisfying $\ord_p(A_i - \tilde{A}_i) \geq N - \sum_{j \neq i} v_j$ 
 for all $i$.  Then 
 \begin{equation}
 \ord_p(A_1 \dotsm A_{\ell} - \tilde{A}_1 \dotsm \tilde{A}_{\ell}) \geq N.
@@ -1278,29 +1278,36 @@ for all $i$.  Then
 
 \begin{proof}
 We can follow the proof of Proposition~\ref{prop:productval}, 
-observing that, for matrices $A$, $B$ over $\mathbf{Q}_q$, 
-we have $\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$.
+observing that, for matrices $A$, $B$ we have 
+$\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$.
 \end{proof}
 
 \begin{thm}
-In order to compute the power series expansion of the matrix $\Phi$ at $t=0$ with $t$-adic
-precision $K$ and $p$-adic precsion $N$ (i.e., modulo $t^K$ and $p^N$), it is sufficient
-to compute:
+Let $N \in \ZZ$ and suppose that $N \geq \ord_p(\Phi_0)$ [[TODO, try to get rid of this]]. In order to compute the power series expansion 
+of the matrix $\Phi$ at $t=0$ with $t$-adic precision $K$ and $p$-adic precision $N$ 
+%(i.e., to compute $\Phi$ as an element of $M_{b \times b}(\QQ_q[[t]])$ modulo $t^K$ and $p^N$), 
+it is sufficient to compute:
 \begin{itemize}
 \item $\Phi_0$ to $p$-adic precision $N+\bigl(2\delta+(n-1)\bigr) \bigl(\ceil{\log_p K} + \ceil{\log_p \floor{K/p}}\bigr)$,
 \item $C$ to $t$-adic precision $K$ and $p$-adic precision $N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p \floor{K/p}} + \delta$,
 \item $C^{-1}$ to $t$-adic precision $\floor{K/p}$ and $p$-adic precision $N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p K} + \delta$.
 \end{itemize}
 Therefore, while solving Equation \eqref{eq:01-GMDE-Homogenous} for $C$ and Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$, using 
-a recursion like Equation \eqref{eq:recursion}, it is sufficient to use $p$-adic working precision
+a recursion like in Equation \eqref{eq:recursion}, it is sufficient to use $p$-adic working precisions
 \begin{itemize}
-\item $\tilde{N}=N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p K}$ and 
-\item $\tilde{N}=N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p \floor{K/p}}$, respectively.
+\item $\tilde{N}_C=N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p K}$, 
+\item $\tilde{N}_{C^{-1}}=N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p \floor{K/p}}$.
 \end{itemize}
 \end{thm}
 
 \begin{proof}
-
+Recall that $\Phi = C \Phi_0 \sigma(C)^{-1}$. The bounds on the $t$-adic precisions are obvious. 
+Since $\ord_p(C) \leq 0$ and $\ord_p(\sigma(C)^{-1}) \leq 0$, we have that 
+\[
+N \geq \ord_p(C) + \ord_p(\Phi_0) + \ord_p(\sigma(C)^{-1}),
+\]
+so we can apply Proposition \ref{prop:matrixproductval}, using Theorem \ref{thm:valC} (for both $C$ and $C^{-1}$) 
+and the fact that $\ord_p(\Phi_0) \geq -\delta$, to finish the proof.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
