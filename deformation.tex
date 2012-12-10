@@ -1197,7 +1197,7 @@ D_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
 where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices i.e., the matrices $D_0, D_1, \dotsc$
 are computed with working precision $\tilde{N}$.
 
-\begin{thm}
+\begin{thm} \label{thm:errorprop}
 For all $i \geq 1$, 
 \begin{equation*}
 \ord_p(C_i - D_i) \geq 
@@ -1278,7 +1278,7 @@ for all $i$.  Then
 
 \begin{proof}
 We can follow the proof of Proposition~\ref{prop:productval}, 
-observing that, for matrices $A$, $B$ we have 
+observing that for matrices $A$, $B$ we have 
 $\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$.
 \end{proof}
 
@@ -1301,13 +1301,15 @@ a recursion like in Equation \eqref{eq:recursion}, it is sufficient to use $p$-a
 \end{thm}
 
 \begin{proof}
-Recall that $\Phi = C \Phi_0 \sigma(C)^{-1}$. The bounds on the $t$-adic precisions are obvious. 
+Recall that $\Phi = C \Phi_0 \sigma(C)^{-1}$. The sufficient $t$-adic precisions are clear. 
 Since $\ord_p(C) \leq 0$ and $\ord_p(\sigma(C)^{-1}) \leq 0$, we have that 
 \[
-N \geq \ord_p(C) + \ord_p(\Phi_0) + \ord_p(\sigma(C)^{-1}),
+N \geq \ord_p(C) + \ord_p(\Phi_0) + \ord_p(\sigma(C)^{-1}).
 \]
-so we can apply Proposition \ref{prop:matrixproductval}, using Theorem \ref{thm:valC} (for both $C$ and $C^{-1}$) 
-and the fact that $\ord_p(\Phi_0) \geq -\delta$, to finish the proof.
+So we can apply Proposition \ref{prop:matrixproductval}, using Theorem \ref{thm:valC} (for both $C$ and $C^{-1}$) 
+and the fact that $\ord_p(\Phi_0) \geq -\delta$, to obtain the sufficient $p$-adic precisions for the matrices 
+$\Phi_0$, $C$ and $C^{-1}$. The sufficient working precisions $\tilde{N}_C$ and $\tilde{N}_{C^{-1}}$
+now follow from Theorem \ref{thm:errorprop}.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1315,86 +1317,116 @@ and the fact that $\ord_p(\Phi_0) \geq -\delta$, to finish the proof.
 \section{Analytic continuation and evaluation}
 \label{sec:Evaluation}
 
-In the previous section we described how to compute the matrix~$\Phi$ 
-for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ 
-as a local power series expansion around $t = 0$.  In order to evaluate it 
-at a second point $t = t_1$, we wish to $p$-adically approximate it 
-using rational functions with denominators a power of $r(t)$, which 
-is possible as the entries of the matrix~$\Phi$ are overconvergent 
-functions.
+In the previous section we described how to compute the power series expansion at $t=0$ of
+the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$. We now want to
+evaluate $\Phi$ at the Teichm\"uller lift $\hat{\tau}$ of some $\tau \neq 0 \in S(\overline{\FF}_q)$,
+but the power series expansion of $\Phi$ at $t=0$ usually only converges on the open 
+unit disc $|t|<1$, and so cannot be evaluated at $\hat{\tau}$. 
 
-The analytic continuation of the local expansion is described by Lauder 
-in~\citep[\S 5.2]{Lauder2006} and the computational details are explained 
-in~\citep[\S 8.1]{Lauder2004a}.  Combining this step with the subsequent 
-evaluation, our specific problem is the following.  Given a desired 
-$p$-adic precision~$N_2$, we would like to determine integers~$K_1$ 
-and~$K_2$ such that, modulo~$p^{N_2}$, the entries of the matrix 
-$\Psi(t) = r(t)^{K_1} \Phi(t)$ truncated modulo~$t^{K_2}$ allow us to 
-compute the matrix $\Phi_{t_1}$ for the action of $p^{-1} \Frob_p$ 
-on $\Hrig^{n}(U_{t_1})$ as $r(\hat{t_1})^{-1} \Psi(\hat{t_1})$.
+However, since $\Phi$ is a matrix of overconvergent functions i.e., 
+\[
+\Phi \in M_{b \times b}(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag}),
+\]
+it can be approximated to any given $p$-adic precision $N$ by a matrix of rational 
+functions, that can be evaluated at $\hat{\tau}$. To convert the power series expansion
+for $\Phi$ to such an approximation by rational functions, we need a bound on the pole order
+of these rational functions at their poles, as a function of $N$. 
 
-Besides the work of Lauder~\citep[\S 8.1]{Lauder2004a}, there are also 
-suitable results by Gerkmann~\citep[\S 6]{Gerkmann2007}, however the 
-estimates are not sharp in practice.  There has been recent progress by 
-Kedlaya and Tuitman~\citep[Theorem~2.1]{KedlayaTuitman2012}, which we 
-present in a slightly simplified form:
+The bounds that
+Lauder ~\citep[\S 8.1]{Lauder2004a} and Gerkmann~\citep[\S 6]{Gerkmann2007} used
+were very far from being sharp, which significantly slowed down their algorithms.
+Recently, under a small additional assumption, Kedlaya and the second 
+author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a much sharper bound,
+that we recall here.
 
 \begin{thm} \label{thm:KedlayaTuitman}
-Let $\mathfrak{Z}$ denote the complement of the open dense 
-subscheme $\mathfrak{S}$ of $\mathbf{P}^{1}(\mathbf{Q}_q)$ 
-and let $z$ be an unramified geometric point of $\mathfrak{Z}$ 
-such that $\mathfrak{Z}$ does not contain any other points 
-with the same reduction modulo~$p$.  For a fixed a basis for 
-$\Hrig^n(U/S)$, suppose that the matrix 
-for the connection~$\nabla$ has at most a simple pole at~$z$ 
-and that the exponents $\lambda_1, \dotsc, \lambda_{b}$, 
-which are defined as the eigenvalues of $(t - z) M \vert_{t=z}$ 
-and known to be rational numbers, have nonnegative $p$-adic 
-valuation.  Then the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ 
-has a pole at $z$ of order at most 
-\begin{equation} \label{eq:KedlayaTuitman}
-\max_{i} \lambda_i - p \min_{i} \lambda_i + p g(N)
-\end{equation}
-where $g(N)$ is defined by 
-\begin{equation}
-g(N) = \max\Bigl\{ i \in \mathbf{N} : i - \delta - \bigl(2\delta + (n-1)\bigr) \ceil{\log_p i} < N \Bigr\}.
-\end{equation}
+Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in $\mathbf{P}^{1}_{\mathbf{Q}_q}$, 
+and let $z$ be an unramified geometric point of $\mathfrak{Z}$ such that $\mathfrak{Z}$ does not 
+contain any other points with the same reduction modulo~$p$.  Suppose that $[v_1,\dotsc,v_b]$ is 
+a basis for $\Hrig^n(U/S)$ with respect to which the matrix $M$ for the connection~$\nabla$ 
+has at most a simple pole at~$z$. Moreover, assume that the exponents $\{ \lambda_1, \dotsc, \lambda_{b} \}$ 
+of $M$ at $z$, which are defined as the eigenvalues of $(t - z) M \vert_{t=z}$, and known to be rational 
+numbers, have nonnegative $p$-adic valuations. Let $\Phi$ denote the matrix of the action of $p^{-1} \Frob_p$ 
+on $\Hrig^{n}(U/S)$, with respect to the basis $[v_1,\dotsc,v_b]$, and denote
+$w=\ord_p(\Phi)+\ord_p(\Phi^{-1})$. For $i \in \NN$, put
+\begin{align*}
+f(i)=\max \{w \lceil \log_p(i) \rceil, 
+(b-1) \ord_p(M) + w \lfloor \log_p(i) \rfloor \},
+\end{align*}
+and define 
+\begin{align*}
+c = \begin{cases}
+0 & \mbox{if $\ord_p(M) \geq 0$} \\
+\min\{0, i + f(i): i \in \NN\} & \mbox{if $\ord_p(N) < 0$}.
+\end{cases}
+\end{align*}
+For $N \in \NN$, put
+\begin{align*}
+g(N) &= \max \{i \in \NN \; | \; i+ \ord_p(\Phi) + c + f(i)  < N \},
+\end{align*}
+and define
+\begin{align*}
+\alpha_1 &= \lfloor -p \min_i \{ \lambda_i \} + \max_{i} \{\lambda_i\} \rfloor, \\ 
+\alpha_2 &=  \left \{ 
+         \begin{array}{cl}
+         0  & \mbox{if $M$ does not have a pole at $z$},  \\
+         0  & \mbox{if $z \in \{0,\infty \}$}, \\
+         g(N) & \mbox{otherwise}.
+         \end{array}
+         \right. 
+\end{align*}
+Then $\Phi$ is congruent modulo $p^{N}$ to a matrix of rational functions of order greater 
+than or equal to $-(\alpha_1+p \alpha_2)$ at $z$ (that is, the entries of the difference between 
+the two matrices all have $p$-adic valuation at least $N$). 
 \end{thm}
 
 \begin{proof}
-See \citep[Theorem~2.1]{KedlayaTuitman2012}.
+Since the matrix $\Phi$ defines a Frobenius structure on the vector bundle $\Hrig^n(U/S)$ with
+connection $\nabla$, this is \citep[Theorem~2.1]{KedlayaTuitman2012}. 
 \end{proof}
 
-[[TODO:  Please rewrite the above theorem and include whichever 
-form and notation you see fit.]]
-
-\begin{rem} \label{rem:KedlayaTuitman}
-In practice, it might be convenient to avoid computing the exponents and 
-verifying the hypotheses of the previous theorem.  This is particularly 
-relevant since even when the hypotheses are not satisfied, the required 
-bounds are often closer to the result of Kedlaya and Tuitman than to the 
-estimates provided by Gerkmann.
-
-The contribution of the terms $\max_i \lambda_i - p \min_i \lambda_i$ 
-in Equation~\eqref{eq:KedlayaTuitman} typically is small compared to the 
-term~$p g(N_2)$. Therefore, in a heuristic implementation, one 
-could choose e.g.\ $K_1 = 1.1 \times p N_2$ and $K_2 = (\deg(r) + 1) K_1$.
+\begin{rem}
+In practice the constants $w,c$ and $\alpha_1$ are always very small, so that $g(N)$ is 
+about $N$, and the lower bound for the order of $\Phi$ modulo $p^N$ at $z$ is roughly
+$-pN$.
 \end{rem}
 
-Having obtained an expression for the action of~$p^{-1} \Frob_p$ 
-on~$\Hrig^{n}(U_{t_1})$ in terms of rational functions, we can 
-compute the matrix $\Phi_{t_1}$ representing $p^{-1} \Frob_p$ on 
-$\Hrig^{n}(U_{t_1})$ modulo~$p^{N_2}$ as 
-\begin{equation}
-\Phi_{t_1} = 
-    r(\hat{t}_1)^{-K_1} 
-    \Bigl( r(t)^{K_1} \Phi(t) \bmod{t^{K_2}} \Bigr) \Big\vert_{t=\hat{t}_1} \pmod{p^{N_2}}.
-\end{equation}
-Since, by assumption, $r(t_1)$ is a $p$-adic unit and hence so is 
-$r(\hat{t}_1)^{-K_1}$ we observe that it suffices to compute the 
-Teichm\"uller lift~$\hat{t}_1$ and the matrix~$r(t)^{K_1} \Phi(t)$ 
-over~$\mathbf{Q}_p[t]$ to $p$-adic precision~$N_2$.
+\begin{rem}
+Note that if $\ord_p(\Phi)$ or $\ord_p(\Phi)$ are not known, then we can
+use the lower bounds [[TODO Jan]] for these instead, at the expense of a slightly
+worse bound.
+\end{rem}
 
+\begin{rem}
+The assumptions in the theorem are a lot less restrictive than one might think
+at first.
+
+That $M$ has a simple pole at $z$ is not a serious restriction, since
+one can always change the basis $[v_1,\dotsc,v_b]$ such that this condition is
+satisfied, because the Gauss--Manin connection is known to be regular singular. 
+Applying the theorem to this new basis and transforming back to the old one, one
+obtains more or less the same bound as before \citep[Corollary~2.6]{KedlayaTuitman2012}.
+
+That the exponents are $p$-adically integral turns out to be an unnecessary 
+condition [[TODO Jan, this seems to contradict one of Seb's examples, check]], since it is 
+implied already by the existence of a Frobenius structure [[TODO]].
+At least one of the authors of \cite{KedlayaTuitman2012} did not realize this
+at the time it was written.
+
+The only real restriction is therefore that $\mathfrak{Z}$ does not contain any points
+with the same reduction modulo $p$ as $z$. However, this condition is almost always
+satisfied, and even when it is not, Theorem \ref{thm:KedlayaTuitman} still seems
+to hold experimentally.
+\end{rem}
+
+If we want to compute the matrix $\Phi_{\tau}$ of the action of
+$p^{-1} \Frob_p$ on $\Hrig^{n}(U_{\tau})$ to $p$-adic precision $N$, then we
+can use Theorem \ref{thm:KedlayaTuitman} to find $m,K \in \NN$ such that
+$r(t)^m \Phi(t)$ is congruent modulo $p^N$ to a matrix of polynomials of degree
+at most $K$. We then compute
+\begin{equation}
+\Phi_{\tau} = r(\hat{\tau})^{-m} \bigl( r(t)^m \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
+\end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Recovering the zeta function of a fiber}
