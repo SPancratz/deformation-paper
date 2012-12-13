@@ -1438,9 +1438,9 @@ our family $X/S$ lying over some $\tau \in S(\FF_{\mathfrak{q}})$ with $\mathfra
 for some $f \in \NN$. Recall that the 
 zeta function of $X_{\tau}$ is of the form
 \begin{equation}
-Z(X_{\tau},T) = \frac{p(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)},
+Z(X_{\tau},T) = \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)},
 \end{equation}
-where $p(T) = \det \bigl( 1 - T \mathfrak{q}^{-1} \Frob_{\mathfrak{q}} | \Hrig^n(U_{\tau}) \bigr) \in \ZZ[T]$ 
+where $\chi(T) = \det \bigl( 1 - T \mathfrak{q}^{-1} \Frob_{\mathfrak{q}} | \Hrig^n(U_{\tau}) \bigr) \in \ZZ[T]$ 
 denotes the reverse characteristic polynomial of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ 
 on $\Hrig^n(U_{\tau})$.
 
@@ -1452,38 +1452,39 @@ carried out to high enough $p$-adic precision in order to recover the exact zeta
 We start by computing the matrix of the action of 
 $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$.
 Let us denote $a=\log_p(\mathfrak{q})$. Recall that $\Phi_{\tau}$ denotes the matrix of the action 
-of $p^{-1} \Frob_p$ on~$\Hrig^{n}(U_{\tau})$. As this action is $\sigma$-semilinear, we have that 
+of $p^{-1} \Frob_p$ on~$\Hrig^{n}(U_{\tau})$ with respect to the basis $\cB$. As this action is 
+$\sigma$-semilinear, we have that 
 \begin{equation}
 \Phi_{\tau}^{(a)} = 
     \Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau})
 \end{equation}
 is the matrix of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$. 
 
+\begin{comment}
 \begin{thm}
 In order to determine $\Phi_{\tau}^{(a)}$ to $p$-adic precision~$N \geq 0$, it suffices to 
 compute $\Phi_{\tau}$ to precision $N + (a-1) \delta$.
 \end{thm}
 
 \begin{proof}
-Since~$\sigma$ preserves $p$-adic valuations, the valuations of the matrices 
+Since we have that $\ord_p(\Phi_{\tau}) \geq -\delta$ by [[TODO Jan]], the valuations of the matrices 
 $\Phi_{\tau}, \sigma(\Phi_{\tau}), \dotsc, \sigma^{a-1}(\Phi_{\tau})$ 
-are all at least $-\delta$ by [[TODO Jan]]. So the theorem follows from
-Proposition \ref{prop:matrixproductval}. 
+are all at least $-\delta$. The theorem now follows from Proposition 
+\ref{prop:matrixproductval}. 
 \end{proof}
+\end{comment}
 
 We now address the loss of $p$-adic precision when computing the reverse
-characteristic polynomial $\det \bigl( 1 - T \mathfrak{q}^{-1} \Frob_{\mathfrak{q}} | \Hrig^n(U_{\tau}) \bigr)$.  
-From the definition of the determinant, it appears that the precision loss could be as 
-great as $(b-1) \ord_p(\Phi_{\tau}^{(a)})$.  However, because of the special properties of $\Phi_{\tau}^{(a)}$,
-we have a much better bound:
+characteristic polynomial $\det( 1 - T \Phi_{\tau}^{(a)})$
+staring from the matrix $\Phi_{\tau}$.  
 
 \begin{thm}
-Suppose that $\tilde{\Phi}_{\tau}^{(a)}$ is an approximation to 
-$\Phi_{\tau}^{(a)}$ with 
+Suppose that $\tilde{\Phi}_{\tau}$ is an approximation to 
+$\Phi_{\tau}$ with 
 \[
-\ord_p\bigl(\Phi_{\tau}^{(a)}-\tilde{\Phi}_{\tau}^{(a)}\bigr) \geq N + \delta.
+\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N + \delta,
 \]
-Then we have
+with $N \geq 0$ and $\delta$ defined as in [[TODO Jan]]. Then
 \begin{equation}
 \ord_p \Bigl( \det\bigl(1 - T \Phi_{\tau}^{(a)}\bigr) 
             - \det\bigl(1 - T \tilde{\Phi}_{\tau}^{(a)}\bigr) \Bigr) \geq N.
@@ -1491,53 +1492,94 @@ Then we have
 \end{thm}
 
 \begin{proof} 
-See Gerkmann~\citep[Lemma~3.3, Lemma~3.4]{Gerkmann2007}. [[TODO Jan, check Gerkmann and include proof]]
+Recall from [[TODO Jan]] that there exists a matrix $W \in M_{b \times b}(\QQ_q)$
+which satisfies $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, 
+such that for $\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ we have that $\ord_p(\Phi_{\tau}') \geq 0$. 
+Defining the matrix $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma(W)^{-1}$,
+we find that $\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N$, and in particular
+also $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we get that
+\[
+\ord_p \Bigl( \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr) 
+            - \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr) \Bigr) \geq N.
+\] 
+Note that $(\Phi'_{\tau})^{(a)}= W \Phi_{\tau}^{(a)} W^{-1}$
+and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
+$\det\bigl(1 - T (\Phi_{\tau})^{(a)}\bigr)=\det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr)$
+and 
+$\det\bigl(1 - T (\tilde{\Phi}_{\tau})^{(a)}\bigr)=\det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr)$.
+This finishes the proof.
 \end{proof}
-Finally, we ask to what $p$-adic precision~$N$ we need to compute
+Now we ask to what $p$-adic precision~$N$ we need to compute
 $\det\bigl(1 - T \Phi_{\tau}^{(a)} \bigr)$ in order to recover 
-$p(T)$.
+$\chi(T)$.
 
 \begin{thm} \label{thm:N0}
-In order to recover $p(T)$, it suffices to compute 
+In order to recover $\chi(T)$, it suffices to compute 
 $\det\bigl(1 - T \Phi_{\tau}^{(a)} \bigr)$ to $p$-adic precision
-$N$, where 
+$N$ satisfying
 \begin{equation}
-p^N > 2 \max_{0 \leq i \leq b} \binom{b}{i} \mathfrak{q}^{i (n-1) / 2}.
+p^N > 2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \}.
 \end{equation}
-Moreover, this can be improved to 
+Moreover, if  the sign $\epsilon = \pm 1$ is known for which $\det(\Phi^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, then this can be improved to
 \begin{equation}
-p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}
+p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
 \end{equation}
-provided that the sign $\epsilon = \sgn(\det(\Phi^{(a)}))$ is known.
 \end{thm}
 
 \begin{proof}
-This is a slight reformulation of {Theorem~3.2} in~\citep{Gerkmann2007}, 
-which follows readily from its proof.
-\end{proof}
+Recall that [[TODO Jan]]
+\[
+\chi(T)=\prod_{i=1}^b (1-\alpha_i T),
+\]
+where the $\alpha_i$ are algebraic integers of absolute value $\mathfrak{q}^{(n-1)/2}$ that are
+permuted under the map $\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$. If we denote
+$\chi(T) = \sum_{i=0}^{b} \chi_i T^i$, then this implies that $|\chi_i| \leq \binom{b}{i} \mathfrak{q}^{i (n-1)/2}$.
+Therefore, if we compute $\chi(t)$ with $p$-adic precision $N$ satisfying
+\[
+p^N > 2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \},
+\] 
+then we know it exactly.
 
-\begin{rem}
-It is well known that $\epsilon = 1$ when $n$ is even.
-\end{rem}
-
-\begin{rem}
-When $n$ is odd, $\epsilon$ is usually not known. However, in practice it is often still 
-possible to avoid having to use the greater of the two precisions in Theorem~\ref{thm:N0} by
-computing $\epsilon$ first.  Writing $p(T) = \sum_{i=0}^{b} a_i T^i$, we can recover 
-$a_0, \dotsc, a_{\floor{b/2}+1}$ provided 
+Since $\prod_{i=1}^b \alpha_i = \epsilon \mathfrak{q}^{b(n-1)/2}$, and the $\alpha_i$ are permuted
+under the map $\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$ [[TODO Jan]], we have that
 \begin{equation}
-p^N > 2 \max\biggl\{\binom{b}{\floor{b/2}} q^{\floor{b/2} (n-1) / 2}, 
-                   \binom{b}{\floor{b/2}+1} q^{(\floor{b/2}+1) (n-1)/2} \biggr\}.
+\chi_{b-i}=\epsilon (-1)^{b} \mathfrak{q}^{(n-1)(b/2-i)} \chi_b. 
 \end{equation}
-This allows us to determine the sign~$\epsilon$ from the two 
-coefficients $a_{\ceil{b/2}-1}$ and $a_{\floor{b/2}+1}$, provided 
-that they are nonzero, and we can then recover the remaining 
-coefficients using the functional equation.
+So if $\epsilon$ is known, then
+$\chi(T)$ is uniquely determined already by $\chi_0,\dotsc,\chi_{\lfloor b/2 \rfloor}$,
+and it is sufficient to compute this polynomial with $p$-adic precision $N$ satisfying
+\[
+p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
+\]
+\end{proof}
+\begin{rem}
+It is well known that $\epsilon = 1$ when $n$ is even, but when $n$ is odd
+$\epsilon$ is usually not known. In practice it is often still possible to avoid having to 
+use the greater of the two precisions in Theorem~\ref{thm:N0} by
+computing $\epsilon$ first.  Writing $\chi(T) = \sum_{i=0}^{b} \chi_i T^i$, we can recover 
+$\chi_0, \dotsc, \chi_{\floor{b/2}+1}$ provided that
+\begin{equation}
+p^N > 2 \max\biggl\{\binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}, 
+                   \binom{b}{\floor{b/2}+1} \mathfrak{q}^{(\floor{b/2}+1) (n-1)/2} \biggr\}.
+\end{equation}
+This allows us to determine $\epsilon$ from the two 
+coefficients $\chi_{\ceil{b/2}-1}$ and $\chi_{\floor{b/2}+1}$, if 
+these are nonzero, and we can then recover the remaining 
+coefficients using the functional equation. [[TODO Seb, so what
+is the recommended strategy?]]
+%TODO I thought a bit about this, and think the best is to first compute
+%with the precision from this remark, and only when this is not sufficient,
+%so when \chi_{\ceil{b/2}-1} turns out to be zero and both epsilons give a 
+%Weil polynomial, raise the precision according to the largest i< \ceil{b/2}-1
+%such that \chi_i is nonzero. This is perhaps a bit annoying to write down, but
+%is it at least the 'optimal strategy'? What about that trick from Kedlaya to
+%almost completely get rid of the binomial coefficients? He definitely used more
+%about Weil polynomials then just the functional equation. 
 \end{rem}
 
 \begin{comment}
-[[TODO it does not make sense to state this only for surfaces, either state it
-in general, or take out]]
+[[TODO It does not make sense to state this only for surfaces, either state it
+more generally (possibly sketchy), or take out completely]]
 \begin{rem} \label{rem:N0Surfaces}
 In the case of smooth projective surfaces, when $p > 2$ and subject to 
 certain technical conditions, we can often exploit the growing divisibility 
