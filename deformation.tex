@@ -970,22 +970,19 @@ below.
 \end{algorithmic}
 \end{algorithm}
 
-
 \begin{rem} \label{rem:mup}
-The expressions for $\mu_m$ can be computed efficiently 
+The expressions for $\mu_m$ can be computed using integer arithmetic 
 modulo~$p^{\tilde{N}}$ via 
 \begin{equation}
 \mu_m^{(p)} = \begin{cases}
-\frac{2^{\floor{3m/4}}}{m!} 
-    \sum_{k=0}^{\floor{m/2}} \frac{m!}{2^k (m-2k)! k!}
+\frac{1}{m!} \sum_{k=0}^{\floor{m/2}} 2^{\floor{3m/4} - k} \frac{m!}{(m-2k)! k!}
     & \text{if $p = 2$, $m \neq 3, 7$} \\
-\frac{p^{\floor{m/p}}}{m!} 
-    \sum_{k=0}^{\floor{m/p}} \frac{m!}{p^k (m-pk)! k!}
+\frac{1}{m!} \sum_{k=0}^{\floor{m/p}} p^{\floor{m/p} - k} \frac{m!}{(m-pk)! k!}
     & \text{if $p$ is odd},
 \end{cases}
 \end{equation}
-using only one $p$-adic inversion [[TODO: don't understand]].  
-We observe that the summands are integers of size $\BigOh(m \log m)$ bits, 
+with only one $p$-adic inversion as all summands are integers. Moreover, 
+we observe that the summands are integers of size $\BigOh(m \log m)$ bits, 
 which also allows us to avoid performing intermediate reductions 
 modulo~$p^{\tilde{N}}$.
 \end{rem}
