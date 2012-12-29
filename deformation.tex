@@ -649,9 +649,23 @@ Then
     \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)! k!}.
 \end{equation}
 where $m, r \geq 0$ satisfy $p (u_i + 1) - (v_i + 1) = d (m - pr)$.
-\hfill \qedsymbol
 \end{thm}
-%TODO perhaps put proof back in, not that easy?  YES
+
+\begin{proof}
+We begin from the definition of $\alpha_{u+1,v+1}$ 
+and use Lemma~\ref{lem:lambdam} to find that $\alpha_{u+1,v+1}$ 
+is equal to 
+\begin{gather*}
+\pi^{k_v-k_u} \prod_{i=0}^n \sum_{m,r} (-1)^{\floor{m/(p-1)}} \pi^{m \bmod{(p-1)}} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{\floor{m/(p-1)}-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \pi^{-r} \hat{a}_i^{m-r}.
+\intertext{We now write $m = \floor{m/(p-1)} (p-1) + \bigl(m \bmod{(p-1)}\bigr)$ and simplify by $\pi^{p-1} = -p$, so this expression is equal to}
+\pi^{k_v-k_u} \prod_{i=0}^n \sum_{m,r} \pi^{m - r} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \hat{a}_i^{m-r}. \\
+\intertext{Using that $m-r = (p-1)r + \bigl(p(u_i+1) - (v_i+1)\bigr)/d$, we arrive at}
+\pi^{k_v-k_u} \prod_{i=0}^n \pi^{(p (u_i + 1) - (v_i + 1))/d} \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r \\
+\intertext{and finally}
+(-p)^{k_u} \prod_{i=0}^n \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} \Bigl( \frac{u_i+1}{d} \Bigr)_r \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!},
+\end{gather*}
+as required.
+\end{proof}
 
 In particular, Theorem~\ref{thm:alpha} implies that 
 $\alpha_{u, v} \in \QQ_p$.  Our next aim is to show
