@@ -413,21 +413,26 @@ where $\equiv$ denotes equality in cohomology.
          $k(d-1)-n$, and $\gamma_k$ in the $L$-span of $B_k$, such that 
          $Q = Q_0 \partial P_0 + \dotsb + Q_n \partial_n P +\gamma_k$.
 \Procedure{Decompose}{$P,Q$}
-\State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
+\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
 \item Let $b$ be the vector of length $\abs{R_k}$ such that the entry 
-      corresponding to the monomial $x^i \in R_k$ is the coefficient of 
+      corresponding to $x^i \in R_k$ is the coefficient of 
       $x^i$ in $Q$.
-\item Let $v$ be the unique vector of length $\abs{C_k}$ satisfying 
-      $\Delta_k v = b$.  From the definition of $C_k$, we can write $v$ 
-      accordingly as $\bigl(v^{(0)}, \dotsc, v^{(n)}\bigr)$ 
+\item Solve for the unique vector $v$ of length $\abs{C_k}$ satisfying 
+      $\Delta_k v = b$.  Note that we can write $v$ 
+      as $\bigl(v^{(0)}, \dotsc, v^{(n)}\bigr)$ 
       where $v^{(j)}$ is a vector of length $\abs{C_k^{(j)}}$ 
       for $0 \leq j \leq n$.
-\item For $j = 0, \dotsc, n$, set $Q_j = \sum_{g \in C_k^{(j)}} v_g^{(j)} g$,
-      where $v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to the 
-      monomial $g \in C_k^{(j)}$, and set $\gamma_k = Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$.
+\item \begin{algorithmic} 
+      \For{$j=0$ \textbf{to} $n$}
+        \State $Q_j \gets \sum_{g \in C_k^{(j)}} v_g^{(j)} g$ ($v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to $g \in C_k^{(j)}$)
+      \EndFor
+      \State $\gamma_k \gets Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$
+      \end{algorithmic}
+%For $j = 0, \dotsc, n$, set $Q_j = \sum_{g \in C_k^{(j)}} v_g^{(j)} g$,
+%where $v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to the 
+%monomial $g \in C_k^{(j)}$, and set $\gamma_k = Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$.
 \item \textbf{return} $Q_0, \dotsc, Q_n,\gamma_k$.
 \end{compactenum}
-\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
@@ -558,17 +563,17 @@ formalised in Algorithm~\ref{alg:Connection} below.
 \end{algorithm}
 
 \begin{defn} \label{defn:resultant}
-We define the resultant $r \in \ZZ_q[t]$ of the polynomial $P$ with respect to the
+We define the resultant $\Delta \in \ZZ_q[t]$ of the polynomial $P$ with respect to the
 basis $\cB$ by
 \[
-r = \prod_{k=\lfloor n/d \rfloor+1}^{n+1} \bigl( \det(\Delta_k) \bigr),
+\Delta = \prod_{k=\lfloor n/d \rfloor+1}^{n+1}  \det(\Delta_k),
 \]
 with the matrices $\Delta_k$ defined as in the proof of Theorem~\ref{thm:Isomorphism}.
 \end{defn}
 
 \begin{thm} \label{thm:denom}
 The matrix $M$ of $\nabla$ with respect to $\cB$ is of the form
-$G/r$, with $G \in M_{b \times b}(\QQ_q[t])$.
+$H/\Delta$, with $H \in M_{b \times b}(\QQ_q[t])$.
 \end{thm}
 
 \begin{proof}
@@ -576,7 +581,7 @@ The only time in Algorithm \ref{alg:Connection} that nonconstant denominators ar
 \end{proof}
 
 \begin{assump} \label{assump:r0}
-We will always assume that $r(0) \neq 0 \bmod p$ so that the matrix $M$ does not have any pole in the residue disk around $0$.
+We will always assume that $\Delta(0) \neq 0 \bmod p$ so that the matrix $M$ does not have any pole in the residue disk around $0$.
 \end{assump}
 
 \begin{rem} \mbox{ }
@@ -588,7 +593,7 @@ We will always assume that $r(0) \neq 0 \bmod p$ so that the matrix $M$ does not
 \section{Frobenius on diagonal hypersurfaces}
 \label{sec:Diagonal}
 
-\subsection{Introduction}
+\subsection{A formula of Dwork}
 
 In this section we compute the action of Frobenius on the cohomology 
 space $\Hrig^{n}(U_0) \cong \HdR^{n}(\mathfrak{U}_0)$ associated 
@@ -602,10 +607,10 @@ than direct implementation.
 We consider a single smooth 
 projective diagonal hypersurface~$\mathcal{X}_0$ over $\ZZ_p$ defined by 
 a polynomial $P_0 \in \ZZ_p[x_0, \dotsc, x_n]$ of the form
-\begin{equation}
+\begin{equation*}
 P_0(x_0, x_1, \dotsc, x_n) = 
     a_0 x_0^d + a_1 x_1^d + \dotsb + a_n x_n^d,
-\end{equation}
+\end{equation*}
 where $a_0, a_1, \dotsc, a_n \in \ZZ_p^{\times}$ and $p \nmid d$. 
 Let $\mathfrak{X}_0 = \mathcal{X}_0 \otimes_{\ZZ_p} \QQ_p$ denote the generic 
 fibre of $\mathcal{X}_0$ and let $\mathcal{U}_0$ and $\mathfrak{U}_0$ be the complements
@@ -616,11 +621,9 @@ as in Definition~\ref{defn:MonBasis}.
 Our goal is to compute 
 the matrix~$\Phi_0$ representing the action of $p^{-1} \Frob_p$ on 
 $\Hrig^n(U_0) \cong \HdR^n(\mathfrak{U}_0)$, with respect to the basis~$\cB$, 
-to $p$-adic precision~$N$.
+to $p$-adic precision~$N$. It will turn out that this matrix has only one
+nonzero element in every row and column.
 
-We first describe an explicit formula for the $\dim \HdR^n(\mathfrak{U}_0)$ 
-nonzero coefficients of~$\Phi_0$ due to Dwork~\citep{Dwork1964},
-see also Lauder~\citep[\S 6.1]{Lauder2004b}.  
 We work over the ramified extension~$\QQ_p(\pi)$ where $\pi^{p-1} = -p$, 
 and normalise the valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}.
 
@@ -653,10 +656,10 @@ Let $\omega_1$ denote an element of $\cB$ corresponding to a tuple
 $u \in \ZZ^{n+1}$ and let $\omega_2$ denote the unique element of~$\cB$ 
 corresponding to a tuple $v \in \ZZ^{n+1}$ such that
 we have $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all $i$. Then
-\begin{equation}
+\begin{equation*}
 p^{-1} \Frob_p (\omega_1) = 
     (-1)^{k_u + k_v} \frac{(k_v - 1)!}{(k_u - 1)!} p^n \alpha_{u,v}^{-1} \omega_2.
-\end{equation}
+\end{equation*}
 \end{thm}
 
 \begin{proof}
@@ -666,7 +669,7 @@ a smooth projective diagonal hypersurface over $\ZZ_q$, for $q$ a prime
 power.
 \end{proof}
 
-\subsection{Improvements}
+\subsection{Improved formulas}
 
 At first sight it appears that this computation genuinely has to 
 take place in the extension field~$\QQ_p(\pi)$.  This is, however, 
@@ -681,44 +684,36 @@ of the coefficients~$\lambda_m$ via an elementary calculation:
 Let $\pi^{p-1} = -p$ and, for $m \geq 0$, let $\lambda_m$ 
 be the coefficient of $z^m$ in the power series expansion 
 of $\exp \pi (z - z^p)$ in $\QQ_p[[z]]$.  Then 
-\begin{equation}
+\begin{equation*}
 \pi^{- (m \bmod{(p-1)})} \lambda_m = (-1)^{\floor{m/(p-1)}} \sum_{k=0}^{\floor{m/p}} p^{\floor{m/(p-1)} - k} \frac{1}{(m-pk)! k!}
-\end{equation}
+\end{equation*}
 where $m \bmod{(p-1)}$ denotes the remainder of $m$ upon Euclidean 
 division by $p-1$. \hfill $\qedsymbol$
 \end{lem}
-
-We can apply this lemma in conjunction with the definition 
-of the quantities $\alpha_{u, v}$.  Upon observing that 
-$m - r \bmod{(p-1)}$ only depends on $u$ and $v$, we obtain 
-the following theorem.
 
 \begin{thm} \label{thm:alpha}
 Let $u, v \in \ZZ^{n+1}$ be such that 
 $x^u, x^v \in B$ and 
 $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$. 
 Then 
-\begin{equation}
+\begin{equation*}
 \alpha_{u,v} = (-p)^{k_u} \prod_{i=0}^n 
     \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} 
     \Bigl(\frac{u_i+1}{d}\Bigr)_r 
     \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)! k!}.
-\end{equation}
+\end{equation*}
 where $m, r \geq 0$ satisfy $p (u_i + 1) - (v_i + 1) = d (m - pr)$.
 \end{thm}
 
 \begin{proof}
-We begin from the definition of $\alpha_{u+1,v+1}$ 
-and use Lemma~\ref{lem:lambdam} to find that $\alpha_{u+1,v+1}$ 
+We start from Equation \eqref{eq:alpha} and use Lemma~\ref{lem:lambdam} to find that $\alpha_{u,v}$ 
 is equal to 
 \begin{gather*}
 \pi^{k_v-k_u} \prod_{i=0}^n \sum_{m,r} (-1)^{\floor{m/(p-1)}} \pi^{m \bmod{(p-1)}} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{\floor{m/(p-1)}-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \pi^{-r} \hat{a}_i^{m-r}.
-\intertext{We now write $m = \floor{m/(p-1)} (p-1) + \bigl(m \bmod{(p-1)}\bigr)$ and simplify by $\pi^{p-1} = -p$, so this expression is equal to}
-\pi^{k_v-k_u} \prod_{i=0}^n \sum_{m,r} \pi^{m - r} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \hat{a}_i^{m-r}. \\
-\intertext{Using that $m-r = (p-1)r + \bigl(p(u_i+1) - (v_i+1)\bigr)/d$, we arrive at}
-\pi^{k_v-k_u} \prod_{i=0}^n \pi^{(p (u_i + 1) - (v_i + 1))/d} \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r \\
-\intertext{and finally}
-(-p)^{k_u} \prod_{i=0}^n \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} \Bigl( \frac{u_i+1}{d} \Bigr)_r \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!},
+\intertext{Now we write $m = \floor{m/(p-1)} (p-1) + \bigl(m \bmod{(p-1)}\bigr)$, and simplify using $\pi^{p-1} = -p$, to obtain}
+\alpha_{u,v}=\pi^{k_v-k_u} \prod_{i=0}^n \sum_{m,r} \pi^{m - r} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \hat{a}_i^{m-r}. \\
+\intertext{Using that $m-r = (p-1)r + \bigl(p(u_i+1) - (v_i+1)\bigr)/d$, we finally arrive at}
+\alpha_{u,v}=(-p)^{k_u} \prod_{i=0}^n \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} \Bigl( \frac{u_i+1}{d} \Bigr)_r \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!},
 \end{gather*}
 as required.
 \end{proof}
@@ -731,9 +726,9 @@ intermediate results.
 \begin{prop} \label{prop:mpr1}
 Let $x^u, x^v \in B$ and 
 $m, r \geq 0$ such that $d(m-pr) = p(u_i + 1) - (v_i + 1)$ for all $i$.  Then 
-\begin{equation}
+\begin{equation*}
 0 \leq m - p r \leq \frac{p(d-1)-1}{d}.
-\end{equation}
+\end{equation*}
 \end{prop}
 
 \begin{proof}
@@ -744,28 +739,28 @@ and $m - pr \in \ZZ$.
 \begin{prop} \label{prop:mpr2}
 Let $x^u, x^v \in B$ and $m, r \geq 0$ such that 
 $d(m-pr) = p(u_i + 1) - (v_i + 1)$ for all~$i$.  Then 
-\begin{equation}
+\begin{equation*}
 r - \floor{\frac{m}{p}} \geq 0.
-\end{equation}
+\end{equation*}
 \end{prop}
 
 \begin{proof}
 Using the previous proposition,
-\begin{equation}
+\begin{equation*}
 r - \floor{\frac{m}{p}} 
 = - \floor{\frac{m-pr}{p}} 
 \geq - \floor{\frac{p(d-1)-1}{pd}} 
 = -1 + \ceil{\frac{p + 1}{pd}} 
 = 0 
-\end{equation}
+\end{equation*}
 as $p \geq 2$ and $d \geq 2$.
 \end{proof}
 
 \begin{prop} \label{prop:rfac}
 For all integers $u, d \geq 1$ and $r \geq 0$ with $p \nmid d$, 
-\begin{equation}
+\begin{equation*}
 \ord_p\Bigl(\frac{u}{d}\Bigr)_r \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}.
-\end{equation}
+\end{equation*}
 \end{prop}
 
 \begin{proof}
@@ -773,9 +768,9 @@ Let $s_p(r)$ denote the sum of digits in the $p$-adic expansion of~$r$
 and observe that $s_p(r) \leq (p-1)\floor{\log_p(r) + 1}$.  Using the 
 standard fact that $\ord_p\bigl((u/d)_r\bigr) \geq \ord_p(r!)$, 
 it follows that 
-\begin{equation}
+\begin{equation*}
 \ord_p\Bigl(\frac{u}{d}\Bigr)_r \geq \ord_p(r!) = \frac{r - s_p(r)}{p-1} \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}
-\end{equation}
+\end{equation*}
 as required.
 \end{proof}
 
@@ -786,10 +781,10 @@ $\lambda_m$ in Lemma~\ref{lem:lambdam} can be simplified:
 
 \begin{lem} \label{lem:mu2}
 For $p = 2$ we define a sequence $\bigl(\mu_m^{(2)}\bigr)$ by 
-\begin{equation}
+\begin{equation*}
 \mu_m^{(2)} = 
     \sum_{k=0}^{\floor{m/2}} \frac{2^{\floor{3m/4} - \nu_m - k}}{(m-2k)! k!}
-\end{equation}
+\end{equation*}
 where $\nu_m$ is equal to one whenever $m = 3, 7$ and zero otherwise, 
 and we write $\mu_m =\mu_m^{(2)}$ whenever this does not cause confusion. 
 Then $\mu_m \in \ZZ_2$ for all $m \geq 0$.
@@ -815,10 +810,10 @@ Dwork~\citep[pp.~55--57]{Dwork1962}, we obtain that
 Let $p = 2$ and suppose $u, v \in \ZZ^{n+1}$ are such that 
 $x^u, x^v \in B$ and $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ 
 for all~$i$.  Then $\alpha_{u,v}$ can be expressed as 
-\begin{equation} \label{eq:alpha2.0}
+\begin{equation*}
 \alpha_{u,v} = (-2)^{k_u} \prod_{i=0}^n \sum_{m,r} 
     \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{-\floor{(m+1)/4}+\nu_m} \mu_m, 
-\end{equation}
+\end{equation*}
 and $\alpha_{u,v}$ is a $2$-adic integer.
 \end{thm}
 
@@ -840,16 +835,16 @@ Proposition~\ref{prop:rfac} we get that
 \end{equation}
 Applying Proposition~\ref{prop:rfac}, we see that the right-hand side 
 is bounded below by 
-\begin{equation}
+\begin{equation*}
 \floor{\frac{m}{2}} - \floor{\frac{m+1}{4}} - \floor{\log_2 m}
-\end{equation}
+\end{equation*}
 which is nonnegative whenever $m \geq 12$.  In the remaining 
 cases $m = 0, \dotsc, 11$, we explicitly verify that the 
 lower bound in~\eqref{eq:alpha2.1} is nonnegative.
 \end{proof}
 
 \begin{rem}
-We observe that in Equation~\eqref{eq:alpha2.0} the exponent 
+We observe that in Theorem \ref{thm:alpha2} the exponent 
 $-\floor{(m+1)/4}+\nu_m$ is nonpositive for each value $m \geq 0$, 
 so at first sight it seems that the computation of the $f_r$ from
 \eqref{eq:fr} will suffer from precision loss. However, the $f_r$
@@ -868,9 +863,9 @@ so this computation can be carried out without precision loss.
 \begin{lem} \label{lem:mup}
 Let $p \geq 3$ be an odd prime and define a sequence 
 $\bigl(\mu_m^{(p)}\bigr)$ by 
-\begin{equation}
+\begin{equation*}
 \mu_m^{(p)} = \sum_{k=0}^{\floor{m/p}} \frac{p^{\floor{m/p} - k}}{(m-pk)! k!}, 
-\end{equation}
+\end{equation*}
 where we write $\mu_m = \mu_m^{(p)}$ when the prime can be identified 
 from the context.  Then $\mu_m \in \ZZ_p$ for all $m \geq 0$.
 \end{lem}
@@ -880,14 +875,14 @@ It is clear that $\mu_m \in \QQ$.  From Lemma~\ref{lem:lambdam}
 we observe that $\lambda_m = \pi^m p^{- \floor{m/p}} \mu_m$.  Using the 
 bound $\ord_p(\lambda_m) \geq \bigl((p-1)/p^2\bigr) m$ 
 from Dwork~\citep[pp.~55--57]{Dwork1962}, it follows that 
-\begin{equation}
+\begin{equation*}
 \ord_p (\mu_m) \geq \frac{p-1}{p^2} m + \floor{\frac{m}{p}} - \frac{m}{p-1}.
-\end{equation}
+\end{equation*}
 Let us write $m = q p + r$ with $0 \leq r \leq p-1$.  As the valuation 
 of $\mu_m$ is an integer, it suffices to show that, for $q \geq 0$, 
-\begin{equation}
+\begin{equation*}
 \frac{p-1}{p} q + q - \frac{q p + p - 1}{p - 1} > -1,
-\end{equation}
+\end{equation*}
 which is equivalent to $p^2 - 3p + 1 > 0$, and this holds true 
 provided that $p \geq 3$.
 \end{proof}
@@ -896,11 +891,11 @@ provided that $p \geq 3$.
 Let $p \geq 3$ and suppose that $u, v \in \ZZ^{n+1}$ are such 
 that $x^u, x^v \in B$ and 
 $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$. Then 
-\begin{equation} \label{eq:alphap.0}
+\begin{equation*}
 \alpha_{u,v} = (-p)^{k_u} \prod_{i=0}^n 
     \hat{a}_i^{(p (u_i + 1) - (v_i + 1))/d} \sum_{m,r} 
     \Bigl(\frac{u_i+1}{d}\Bigr)_r p^{r - \floor{m/p}} \mu_m
-\end{equation}
+\end{equation*}
 where $m, r \geq 0$ satisfy $p (u_i + 1) - (v_i + 1) = d (m - pr)$. 
 In particular, $\alpha_{u, v} \in \ZZ_p$. 
 \end{thm}
@@ -910,7 +905,7 @@ This follows from Theorem~\ref{thm:alpha}, Proposition~\ref{prop:mpr2}
 and Lemma~\ref{lem:mup}.
 \end{proof}
 
-\subsection{Algorithm}
+\subsection{Estimates}
 
 If we want to use Theorem \ref{thm:01-03-diagfrob} to compute the matrix 
 $\Phi$ to $p$-adic precision $N$, then we have to compute the elements
@@ -923,31 +918,31 @@ on the $p$-adic valuation of the elements $(k_u-1)!\alpha_{u,v}$.
 
 \begin{prop}
 The valuation of $(k_u-1)! \alpha_{u,v}$ satisfies
-\begin{equation}
+\begin{equation*}
 \ord_p\bigl((k_u-1)! \alpha_{u,v}\bigr) 
     \leq \ord_p\bigl((n-1)!\bigr) + n + \delta,
-\end{equation}
-where $\delta = \ord_p\bigl((n-1)!\bigr) + (n+1) \floor{\log_p(n-1)}$. 
+\end{equation*}
+where $\delta$ is defined as in [[TODO Jan]]. 
 \end{prop}
 
 \begin{proof}
 Recall from section [[TODO Jan]] that the valuations 
 of the entries of the matrix~$\Phi$ are bounded from below by $-\delta$. 
 Thus, by Theorem~\ref{thm:01-03-diagfrob}, 
-\begin{equation}
+\begin{equation*}
 -\delta \leq \ord_p\bigl((k_v-1)!\bigr) + n 
            - \ord_p\bigl((k_u-1)! \alpha_{u,v}\bigr)
-\end{equation}
+\end{equation*}
 Noting that $d k_v = \sum_{i=0}^n (v_i + 1) \leq n d$ and 
 hence $k_v \leq n$, the result follows.
 \end{proof}
 
-\begin{cor}
+\begin{cor} \label{cor:Ntilde}
 To compute the matrix $\Phi$ with $p$-adic precision $N$, it is sufficient to compute the elements 
 $(k_u-1)!\alpha_{u,v}$ with $p$-adic precision
-\begin{equation}
+\begin{equation*}
 \tilde{N}=N-n+2(\ord_p\bigl((n-1)!\bigr)+n+\delta).
-\end{equation}
+\end{equation*}
 \end{cor}
 
 Up to this point, the sum over $m,r$ in our expressions 
@@ -959,9 +954,9 @@ start with an elementary lemma.
 \begin{lem} \label{lem:log}
 Given integers $b,c \geq 2$ and defining $x = c + \log_b c + 1$ 
 we have that, for all real numbers $y \geq x$, 
-\begin{equation}
+\begin{equation*}
 y - \log_b y \geq c.
-\end{equation}
+\end{equation*}
 \end{lem}
 
 \begin{proof}
@@ -972,15 +967,15 @@ that $\log_b c + 1 \leq c$, hence $c + \log_b c + 1 \leq b^{\log_b c + 1}$,
 which upon taking logarithms and rearranging yields the result.
 \end{proof}
 
-\begin{prop}
+\begin{prop} \label{prop:MR}
 In order to compute $(k_u-1)!\alpha_{u,v} \bmod p^{\tilde{N}}$, it 
-suffices to restrict the inner sum in Equation~\eqref{eq:alpha2.0} or 
-\eqref{eq:alphap.0} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or 
+suffices to restrict the inner sum in Theorem \ref{thm:alpha2} or 
+Theorem \ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or 
 equivalently $r \leq \mathcal{R}$, where 
-\begin{equation}
+\begin{equation*}
 \mathcal{M} = \floor{ p^2 \biggl( \frac{\tilde{N}}{p-1} +2 
             + \log_p\Bigl(\frac{\tilde{N}}{p-1} + 2\Bigr) + 1 \biggr)}, \; \; \; \mathcal{R}=\floor{\mathcal{M}/p}.
-\end{equation}
+\end{equation*}
 \end{prop}
 
 \begin{proof}
@@ -1003,44 +998,41 @@ below.
          $p$-adic precision~$N \geq 0$.
 \Ensure  Matrix $\Phi$ for action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ modulo $p^N$.
 \Procedure{DiagFrob}{$P_0,N$}
-\State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
-\item Determine $\tilde{N}$, $\mathcal{M}$ and $\mathcal{R}$. Precompute the Teichm\"uller lifts $\hat{a}_0, \dotsc, \hat{a}_n$, 
-      and the sequences $(d^{-r})_{r=0}^{\mathcal{R}}$ and $(\mu_m)_{m=0}^{\mathcal{M}}$, 
+\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
+\item Determine $\tilde{N}$ from Corollary \ref{cor:Ntilde}, and $\mathcal{M}$,$\mathcal{R}$ from Proposition \ref{prop:MR}. 
+\item Compute the Teichm\"uller lifts $\hat{a}_0, \dotsc, \hat{a}_n$, 
+      and the sequences $(d^{-r})_{r=0}^{\mathcal{R}}$, $(\mu_m)_{m=0}^{\mathcal{M}}$ 
       to $p$-adic precision~$\tilde{N}$.
-\item For each monomial $x^u \in B$, 
-      determine the unique monomial $x^v \in B$ such that 
-      $v_i = p (u_i + 1) - 1 \bmod{d}$.  Use the following steps to 
-      compute the entry at position $(u,v)$ in the matrix $\Phi$.
-      \begin{enumerate}
-\item Compute the expression $x_1 = (-1)^{k_u+k_v} (k_v-1)! p^n$ as an 
-      exact integer [[TODO Seb, what is the right precision here?]].
-\item Compute the expression $x_2 = (k_u - 1)! \alpha_{u,v}$ to 
-      precision~$\tilde{N}$ using Equation~\eqref{eq:alpha2.0} or 
-      \eqref{eq:alphap.0}, depending on whether $p$ is even or odd. 
-\item Compute the inverse $x_2^{-1}$ to precision $N - n$.
-\item Finally, compute the product $x_1 x_2^{-1}$ to precision~$N$.
-      \end{enumerate}
+\item \begin{algorithmic}
+      \State Let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix.
+      \For{$x^u \in B$} 
+        \State Determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$.
+        \State $x_1 \gets (-1)^{k_u+k_v} (k_v-1)! p^n$ as an exact integer %TODO? a sufficient $p$-adic precision here is N+ord_p((n-1)!)+n+\delta
+        \State $x_2 \gets (k_u - 1)! \alpha_{u,v} \pmod{p^{\tilde{N}}}$ using Theorem \ref{thm:alpha2} or 
+               Theorem \ref{thm:alphap}.
+        \State Compute $x_2^{-1} \pmod{p^{N-n}}$.
+        \State $(\Phi_0)_{u,v} \gets x_1 x_2^{-1} \pmod{p^N}$
+      \EndFor 
+      \end{algorithmic} 
+\item \Return $\Phi_0$      
 \end{compactenum}
-\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
 \begin{rem} \label{rem:mup}
 The expressions for $\mu_m$ can be computed using integer arithmetic 
 modulo~$p^{\tilde{N}}$ via 
-\begin{equation}
+\begin{equation*}
 \mu_m^{(p)} = \begin{cases}
 \frac{1}{m!} \sum_{k=0}^{\floor{m/2}} 2^{\floor{3m/4} - k} \frac{m!}{(m-2k)! k!}
     & \text{if $p = 2$, $m \neq 3, 7$} \\
 \frac{1}{m!} \sum_{k=0}^{\floor{m/p}} p^{\floor{m/p} - k} \frac{m!}{(m-pk)! k!}
     & \text{if $p$ is odd},
 \end{cases}
-\end{equation}
-<<<<<<< HEAD
+\end{equation*}
 with only one $p$-adic inversion as all summands are integers. Moreover, 
-we observe that the summands are integers of size $\BigOh(m \log m)$ bits, 
-which also allows us to avoid performing intermediate reductions 
-modulo~$p^{\tilde{N}}$.
+these summands are of size $\BigOh(m \log m)$ bits, which also allows us 
+to avoid performing intermediate reductions modulo~$p^{\tilde{N}}$.
 \end{rem}
 
 %TODO put all the complexity stuff together at the end, and max a couple
@@ -1162,14 +1154,17 @@ matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$.
 Our discussion largely follows the work of Lauder~\citep{Lauder2006}, 
 but incorporates improved convergence bounds by Kedlaya~\citep{Kedlaya2010}.
 
-Recall that $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ denotes 
-the matrix for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
-respect to the basis $\cB$, where $\sigma$ is the standard lift of the $p$th-power Frobenius 
-sending $t \mapsto t^p$, and $r$ is defined as in Definition \ref{defn:resultant}. Also recall 
-from Theorem \ref{thm:denom} that $M = G/r$, where $G \in M_{b \times b}(\QQ_q[t])$, denotes 
-the matrix for the Gauss--Manin connection $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$
-with respect to the same basis. As we saw in section [[TODO Jan]], these matrices 
-satisfy the differential equation
+Recall from [[TODO Jan]] that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for the Gauss--Manin connection 
+$\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$ with respect to the basis $\cB$. We let $r \in \ZZ_q[t]$
+denote the denominator of $M$, so that $M = G/r$ with $G \in M_{b \times b}(\QQ_q[t])$.
+Note that $r$ is a divisor of the resultant $\Delta$ defined in Definition \ref{defn:resultant}.
+Also recall that $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
+denotes the matrix for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
+respect to the same basis $\cB$, where $\sigma$ is the standard lift of the $p$th-power Frobenius 
+sending $t \mapsto t^p$. 
+
+As we saw in section [[TODO Jan]], these matrices satisfy the 
+differential equation
 
 \begin{equation} \label{eq:Phi}
 \Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
@@ -1200,11 +1195,11 @@ the equation
 r \frac{dC}{dt} + G C = 0, \; \; \; C(0)=I,
 \end{equation*}
 which is clearly equivalent to Equation \eqref{eq:01-GMDE-Homogenous}, using the recursion 
-\begin{align} \label{eq:Ci}
-C_0 &= I, \\ \label{eq:recursion}
+\begin{align}
+C_0 &= I, \notag \\ 
 C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(B)\}}}^i G_{i-j} C_j + 
-    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr).
+    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr). \label{eq:recursion}
 \end{align}
 
 However, we will carry out this computation to some finite $p$-adic working precision $\tilde{N}$. If
@@ -1286,11 +1281,9 @@ for example when $\ord_p(M)$ is positive.
 \begin{rem}
 In order to determine the power series expansion of the matrix~$\Phi$, 
 we also need to compute the matrix $\sigma(C)^{-1}$. The matrix~$C^{-1}$ 
-can be computed using matrix inversion over the ring $\mathbf{Q}_q[[t]]$.  
-An alternative approach follows from observing that $C^{-1}$ 
-satisfies Equation~\eqref{eq:01-GMDE-Dual}. In practice, solving this 
-equation for $C^{-1}$ is typically favourable compared to inverting 
-the matrix~$C$.
+could be computed using matrix inversion over the ring $\mathbf{Q}_q[[t]]$.  
+However, solving Equation~\eqref{eq:01-GMDE-Dual} for $C^{-1}$ is typically 
+more efficient in practice.
 \end{rem}
 
 We need to recall some bounds on the loss of $p$-adic precision when
@@ -1342,7 +1335,7 @@ $\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$.
 We can now finally give all the necessary precisions for computing the power series expansion for $\Phi$ at $t=0$ to
 any given precision.
 
-\begin{thm}
+\begin{thm} \label{thm:Ni}
 Let $N,K \in \NN$ and suppose that $N \geq \ord_p(\Phi_0)$ [[TODO Jan, try to get rid of this]]. Define
 \begin{eqnarray*}
 N_{\Phi_0}   		&=& N+\bigl(2\delta+(n-1)\bigr) \bigl(\ceil{\log_p K} + \ceil{\log_p \floor{K/p}}\bigr) \\
@@ -1376,6 +1369,9 @@ $\Phi_0$, $C$ and $C^{-1}$. The sufficient working precisions $\tilde{N}_C$ and 
 now follow from Theorem \ref{thm:errorprop}.
 \end{proof}
 
+Now we have all the ingredients to compute the power series expansion of $\Phi$ at $t=0$ to any 
+given $p$-adic and $t$-adic precisions, as formalised in Algorithm \ref{alg:expansion} below.
+
 \begin{algorithm}
 \caption{Compute the power series expansion of $\Phi$ at $t=0$.}
 \label{alg:expansion}
@@ -1383,16 +1379,31 @@ now follow from Theorem \ref{thm:errorprop}.
 \vspace{1mm}
 \Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying ..., $t$-adic precision $K$, $p$-adic precision~$N$.
 \Ensure  The power series expansion of $\Phi$ at $t=0$ to $t$-adic precision $K$ and $p$-adic precision $N$.
-\Procedure{FrobSeriesExpansion}{$N,K$}
-\State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
-\item Determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$
+\Procedure{FrobSeriesExpansion}{$N,K$} 
+\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
+\item Determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$ from Theorem \ref{thm:Ni}
 \item $M \gets \textsc{GMConnection}(P)$
 \item $\Phi_0 \gets \textsc{DiagFrob}(P_0,N_{\Phi_0})$
-\item Solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ and Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$,using a recursion like in Equation \eqref{eq:recursion}, computing with $p$-adic working precision $\tilde{N}_C$ and $\tilde{N}_{C^{-1}}$, respectively
-\item $\Phi \gets C \Phi_0 \sigma(C)^{-1}$
+\item Solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
+\begin{algorithmic}
+\vspace{1mm}
+\State $C_0 \gets I$
+\For{$i=0$ \textbf{to} $K-1$} 
+\State $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{\tilde{N}_C}}$
+\EndFor
+\State $C \gets \sum_{i=0}^K C_i t^i \pmod{p^{N_C}}$
+\end{algorithmic}
+\item Solve Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\floor{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
+\begin{algorithmic}
+\State $(C^{-1})^t_0 \gets I$
+\For{$i=0$ \textbf{to} $\floor{K/p}-1$}
+\State $(C^{-1})^t_{i+1} \gets  \frac{-1}{r_0 (i+1)} \biggl(\sum_j (-G_{i-j})^t C_j^t + \sum_j r_{i-j+1} (j C_j^t) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
+\EndFor 
+\State $C^{-1} \gets \sum_{i=0}^{\floor{K/p}} (C^{-1})_i t^i \pmod{p^{N_{C^{-1}}}}$
+\end{algorithmic}
+\item $\Phi \gets C \Phi_0 \sigma(C^{-1})$
 \item \textbf{return} $\Phi$
 \end{compactenum}
-\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
@@ -1400,7 +1411,7 @@ now follow from Theorem \ref{thm:errorprop}.
 
 \section{Recovering the zeta function of a fiber}
 
-\subsection{Evaluating $\Phi$ at a point}
+\subsection{Evaluation at a point}
 \label{sec:Evaluation}
 
 In the previous section we described how to compute the power series expansion at $t=0$ of
@@ -1419,9 +1430,9 @@ for $\Phi$ to such an approximation by rational functions, we need a bound on th
 of these rational functions at their poles, as a function of $N$. 
 
 The bounds that
-Lauder ~\citep[\S 8.1]{Lauder2004a} and Gerkmann~\citep[\S 6]{Gerkmann2007} used
+Lauder ~\citep[\S 8.1]{Lauder2004a} and Gerkmann~\citep[\S 6]{Gerkmann2007} used for this
 were very far from being sharp, which significantly slowed down their algorithms.
-Recently, under a small additional assumption, Kedlaya and the second 
+Recently, under some small additional assumptions, Kedlaya and the second 
 author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a much sharper bound,
 that we state here in a slightly simplified form.
 
@@ -1469,8 +1480,7 @@ than or equal to $-(\alpha_1+p \alpha_2)$ at $z$.
 Since the matrix $\Phi$ defines a Frobenius structure on the vector bundle $\Hrig^n(U/S)$ with
 connection $\nabla$, we can apply \citep[Theorem~2.1]{KedlayaTuitman2012}. We have 
 replaced $\ord_p(\Phi)$ and $ \bigl( \ord_p(\Phi)+\ord_p(\Phi^{-1}) \bigr)$ by their respective lower bounds 
-$-\delta$ and $\bigl( -2 \delta + (n-1) \bigr)$, since we might not know what they are exactly, 
-possibly at the expense of a slightly weaker bound.
+$-\delta$ and $\bigl( -2 \delta + (n-1) \bigr)$, since we might not know them exactly a priori.
 \end{proof}
 
 \begin{rem}
@@ -1621,9 +1631,9 @@ then we know it exactly.
 
 Since $\prod_{i=1}^b \alpha_i = \epsilon \mathfrak{q}^{b(n-1)/2}$, and the $\alpha_i$ are permuted
 under the map $\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$ [[TODO Jan]], we have that
-\begin{equation}
+\begin{equation*}
 \chi_{b-i}=\epsilon (-1)^{b} \mathfrak{q}^{(n-1)(b/2-i)} \chi_b. 
-\end{equation}
+\end{equation*}
 So if $\epsilon$ is known, then
 $\chi(T)$ is uniquely determined already by $\chi_0,\dotsc,\chi_{\lfloor b/2 \rfloor}$,
 and it is sufficient to compute this polynomial with $p$-adic precision $N$ satisfying
@@ -1631,29 +1641,52 @@ and it is sufficient to compute this polynomial with $p$-adic precision $N$ sati
 p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
 \]
 \end{proof}
+\begin{algorithm}
+\caption{Compute $Z(X_{\tau},T)$.}
+\label{alg:complete}
+\begin{algorithmic}
+\vspace{1mm}
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying .., $\tau \in S(\mathbb{F}_{\mathfrak{q}})$.
+\Ensure  The zeta function $Z(X_{\tau},T)$ of the fiber $X_{\tau}$ lying over $\tau$.
+\Procedure{ZetaFunction}{$P,\tau$}
+\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
+\item \begin{algorithmic}
+\If{$\epsilon$ is known} 
+  \State $N \gets \ceil{\log_p ( 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2})}$ 
+\Else
+  \State $N \gets \ceil{\log_p (2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \})}$ 
+\EndIf
+\State $\tilde{N} \gets N + \delta$
+\end{algorithmic}
+\item Compute $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ with $p$-adic precision $\tilde{N}$.
+\item Determine $m,K$ such that $r^m \Phi$ is a matrix of polynomials of degree at most $K$ to $p$-adic 
+      precision $\tilde{N}$ using Theorem \ref{thm:KedlayaTuitman}.
+\item $\Phi \gets$ \textsc{FrobSeriesExpansion($\tilde{N},K)$}
+\item $\Phi_{\tau} \gets r(\hat{\tau})^{-m} \bigl( r(t)^m \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \pmod{p^{\tilde{N}}}$
+\item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$ as an element of $\ZZ[T]$ 
+\item $Z(X_{\tau},T) \gets \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)}$
+\item \Return $Z(X_{\tau},T)$
+\end{compactenum}
+\end{algorithmic}
+\end{algorithm}
+
 \begin{rem}
 It is well known that $\epsilon = 1$ when $n$ is even, but when $n$ is odd
-$\epsilon$ is usually not known. In practice it is often still possible to avoid having to 
-use the greater of the two precisions in Theorem~\ref{thm:N0} by
-computing $\epsilon$ first.  Writing $\chi(T) = \sum_{i=0}^{b} \chi_i T^i$, we can recover 
-$\chi_0, \dotsc, \chi_{\floor{b/2}+1}$ provided that
-\begin{equation}
-p^N > 2 \max\biggl\{\binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}, 
-                   \binom{b}{\floor{b/2}+1} \mathfrak{q}^{(\floor{b/2}+1) (n-1)/2} \biggr\}.
-\end{equation}
-This allows us to determine $\epsilon$ from the two 
-coefficients $\chi_{\ceil{b/2}-1}$ and $\chi_{\floor{b/2}+1}$, if 
-these are nonzero, and we can then recover the remaining 
-coefficients using the functional equation. [[TODO Seb, so what
-is the recommended strategy?]]
-%TODO I thought a bit about this, and think the best is to first compute
-%with the precision from this remark, and only when this is not sufficient,
-%so when \chi_{\ceil{b/2}-1} turns out to be zero and both epsilons give a 
-%Weil polynomial, raise the precision according to the largest i< \ceil{b/2}-1
-%such that \chi_i is nonzero. This is perhaps a bit annoying to write down, but
-%is it at least the 'optimal strategy'? What about that trick from Kedlaya to
-%almost completely get rid of the binomial coefficients? He definitely used more
-%about Weil polynomials then just the functional equation. 
+$\epsilon$ is usually not known. In practice it is often still possible to avoid 
+having to use the greater of the two precisions in Theorem~\ref{thm:N0} by
+computing $\epsilon$ first.  Again denote $\chi(T) = \sum_{i=0}^{b} \chi_i T^i$ and 
+let $k$ be the smallest positive integer such that $\chi_{\ceil{b/2} - k} \neq 0$.
+We know that we can recover $\chi_0, \dotsc, \chi_{\floor{b/2}+k}$ provided that
+\begin{equation*}
+p^N > 2 \max_{0 \leq i \leq (\floor{b/2}+k)} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \}.
+\end{equation*}
+This allows us to determine $\epsilon$ from the two coefficients $\chi_{\ceil{b/2}-k}$ and 
+$\chi_{\floor{b/2}+k}$. We can then recover the remaining coefficients using the functional 
+equation. 
+%The best strategy for odd $n$ is to first choose $N$ corresponding to $k=1$ and compute 
+%$\chi(T)$ with precision $N$. In the (unlikely) case that $\chi_{\ceil{b/2} - 1} = 0$, we raise
+%$N$ to the value corresponding to the smallest $k$ such that $\chi_{\ceil{b/2} - k} \neq 0$
+%(which is now known) and compute $\chi(T)$ again. 
 \end{rem}
 
 \begin{comment}
@@ -1680,32 +1713,9 @@ Lauder~\citep[\S 9.3.2, Proposition~9.6]{Lauder2006}.
 \end{rem}
 \end{comment}
 
-\subsection{Algorithm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{The complete algorithm}
-\label{sec:Algorithm}
-
-\subsection{Overview of the algorithm}
-
-\begin{algorithm}
-\caption{Compute $Z(X_{\tau},T)$.}
-\label{alg:expansion}
-\begin{algorithmic}
-\vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$, $\tau \in S(\mathbb{F}_{\mathfrak{q}})$.
-\Ensure  The zeta function $Z(X_{\tau},T)$ of the fiber $X_{\tau}$ lying over $\tau$.
-\Procedure{ZetaFunction}{$P,\tau$}
-\State \begin{compactenum}[\it {Step} I.] \vspace{-1.24em}
-\item $N \gets ..$, $K \gets ..$
-\item $\Phi \gets \textsc{FrobSeriesExpansion}(N,K)$ 
-\item
-\item \textbf{return} $Z(X,T)$
-\end{compactenum}
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
+\section{Complexity and Implementation}
 
 \begin{comment}
 
@@ -1756,7 +1766,6 @@ which is an integer polynomial.  We recover this exactly by computing an
 approximation to the reverse characteristic polynomial of $\Phi_{t_1}^{(q^m)}$
 to $p$-adic precision~$N_7$.
 \end{enumerate}
-
 \end{comment}
 
 \subsection{Complexity}
