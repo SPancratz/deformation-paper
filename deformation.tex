@@ -74,9 +74,10 @@
 
 \usepackage{paralist}
 
-\setlength{\pltopsep}{0.24em}
-\setlength{\plpartopsep}{0em}
-\setlength{\plitemsep}{0.24em}
+%Why are these better?
+%\setlength{\pltopsep}{0.24em}
+%\setlength{\plpartopsep}{0em}
+%\setlength{\plitemsep}{0.24em}
 
 % This should do what we want
 %   \setdefaultenum{(i)}{(a)}{1.}{A}
@@ -402,7 +403,8 @@ Q \Omega / P^k \equiv \gamma_{1} \Omega / P^{1} + \dotsb + \gamma_n \Omega / P^n
 with $\gamma_i$ in the $L$-span of $B_i$ for $1 \leq i \leq n$ and 
 where $\equiv$ denotes equality in cohomology.
 
-\begin{algorithm}[ht]
+
+\begin{algorithm}
 \caption{Obtain coordinates in the Jacobian ideal modulo basis elements}
 \label{alg:Decompose}
 \begin{algorithmic}
@@ -413,7 +415,7 @@ where $\equiv$ denotes equality in cohomology.
          $k(d-1)-n$, and $\gamma_k$ in the $L$-span of $B_k$, such that 
          $Q = Q_0 \partial P_0 + \dotsb + Q_n \partial_n P +\gamma_k$.
 \Procedure{Decompose}{$P,Q$}
-\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
+\State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
 \item Let $b$ be the vector of length $\abs{R_k}$ such that the entry 
       corresponding to $x^i \in R_k$ is the coefficient of 
       $x^i$ in $Q$.
@@ -422,19 +424,15 @@ where $\equiv$ denotes equality in cohomology.
       as $\bigl(v^{(0)}, \dotsc, v^{(n)}\bigr)$ 
       where $v^{(j)}$ is a vector of length $\abs{C_k^{(j)}}$ 
       for $0 \leq j \leq n$.
-\item \begin{algorithmic} 
-      \For{$j=0$ \textbf{to} $n$}
-        \State $Q_j \gets \sum_{g \in C_k^{(j)}} v_g^{(j)} g$ ($v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to $g \in C_k^{(j)}$)
-      \EndFor
-      \State $\gamma_k \gets Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$
-      \end{algorithmic}
-%For $j = 0, \dotsc, n$, set $Q_j = \sum_{g \in C_k^{(j)}} v_g^{(j)} g$,
-%where $v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to the 
-%monomial $g \in C_k^{(j)}$, and set $\gamma_k = Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$.
+\item \textbf{for} $j=0$ \textbf{to} $n$ \textbf{do} 
+\item[] \hspace{1em} $Q_j \gets \sum_{g \in C_k^{(j)}} v_g^{(j)} g$ ($v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to $g \in C_k^{(j)}$)
+\item[] $\gamma_k \gets Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$
 \item \textbf{return} $Q_0, \dotsc, Q_n,\gamma_k$.
+\EndProcedure
 \end{compactenum}
 \end{algorithmic}
 \end{algorithm}
+
 
 \begin{algorithm}
 \caption{Reduce $Q \Omega / P^k$ in $\HdR^n(\mathfrak{U}_L)$}
@@ -998,24 +996,24 @@ below.
          $p$-adic precision~$N \geq 0$.
 \Ensure  Matrix $\Phi$ for action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ modulo $p^N$.
 \Procedure{DiagFrob}{$P_0,N$}
-\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
+\State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
 \item Determine $\tilde{N}$ from Corollary \ref{cor:Ntilde}, and $\mathcal{M}$,$\mathcal{R}$ from Proposition \ref{prop:MR}. 
 \item Compute the Teichm\"uller lifts $\hat{a}_0, \dotsc, \hat{a}_n$, 
       and the sequences $(d^{-r})_{r=0}^{\mathcal{R}}$, $(\mu_m)_{m=0}^{\mathcal{M}}$ 
       to $p$-adic precision~$\tilde{N}$.
-\item \begin{algorithmic}
-      \State Let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix.
-      \For{$x^u \in B$} 
-        \State Determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$.
-        \State $x_1 \gets (-1)^{k_u+k_v} (k_v-1)! p^n$ as an exact integer %TODO? a sufficient $p$-adic precision here is N+ord_p((n-1)!)+n+\delta
-        \State $x_2 \gets (k_u - 1)! \alpha_{u,v} \pmod{p^{\tilde{N}}}$ using Theorem \ref{thm:alpha2} or 
+\item Let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix.
+\item[] \textbf{for} $x^u \in B$ \textbf{do} 
+\item[] \begin{compactenum}[{\hspace{1em}} 1.]
+        \item Determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$.
+        \item $x_1 \gets (-1)^{k_u+k_v} (k_v-1)! p^n$ as an exact integer %TODO? a sufficient $p$-adic precision here is N+ord_p((n-1)!)+n+\delta
+        \item $x_2 \gets (k_u - 1)! \alpha_{u,v} \pmod{p^{\tilde{N}}}$ using Theorem \ref{thm:alpha2} or 
                Theorem \ref{thm:alphap}.
-        \State Compute $x_2^{-1} \pmod{p^{N-n}}$.
-        \State $(\Phi_0)_{u,v} \gets x_1 x_2^{-1} \pmod{p^N}$
-      \EndFor 
-      \end{algorithmic} 
-\item \Return $\Phi_0$      
+        \item Compute $x_2^{-1} \pmod{p^{N-n}}$.
+        \item $(\Phi_0)_{u,v} \gets x_1 x_2^{-1} \pmod{p^N}$
+      \end{compactenum}   
+ \item \textbf{return} $\Phi_0$      
 \end{compactenum}
+\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
@@ -1380,30 +1378,28 @@ given $p$-adic and $t$-adic precisions, as formalised in Algorithm \ref{alg:expa
 \Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying ..., $t$-adic precision $K$, $p$-adic precision~$N$.
 \Ensure  The power series expansion of $\Phi$ at $t=0$ to $t$-adic precision $K$ and $p$-adic precision $N$.
 \Procedure{FrobSeriesExpansion}{$N,K$} 
-\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
+\State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
 \item Determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$ from Theorem \ref{thm:Ni}
 \item $M \gets \textsc{GMConnection}(P)$
 \item $\Phi_0 \gets \textsc{DiagFrob}(P_0,N_{\Phi_0})$
 \item Solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
-\begin{algorithmic}
-\vspace{1mm}
-\State $C_0 \gets I$
-\For{$i=0$ \textbf{to} $K-1$} 
-\State $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{\tilde{N}_C}}$
-\EndFor
-\State $C \gets \sum_{i=0}^K C_i t^i \pmod{p^{N_C}}$
-\end{algorithmic}
+\begin{compactenum}[{\hspace{1em}} a.] 
+\item[] $C_0 \gets I$
+\item[] \textbf{for} $i=0$ \textbf{to} $K-1$ \textbf{do} 
+\item[] \hspace{1em} $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{\tilde{N}_C}}$
+\item[] $C \gets \sum_{i=0}^K C_i t^i \pmod{p^{N_C}}$
+\end{compactenum}
 \item Solve Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\floor{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
-\begin{algorithmic}
-\State $(C^{-1})^t_0 \gets I$
-\For{$i=0$ \textbf{to} $\floor{K/p}-1$}
-\State $(C^{-1})^t_{i+1} \gets  \frac{-1}{r_0 (i+1)} \biggl(\sum_j (-G_{i-j})^t C_j^t + \sum_j r_{i-j+1} (j C_j^t) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
-\EndFor 
-\State $C^{-1} \gets \sum_{i=0}^{\floor{K/p}} (C^{-1})_i t^i \pmod{p^{N_{C^{-1}}}}$
-\end{algorithmic}
+\begin{compactenum}[{\hspace{1em}} a.]
+\item[] $(C^{-1})^t_0 \gets I$
+\item[] \textbf{for} $i=0$ \textbf{to} $\floor{K/p}-1$ \textbf{do}
+\item[] \hspace{1em} $(C^{-1})^t_{i+1} \gets  \frac{-1}{r_0 (i+1)} \biggl(\sum_j (-G_{i-j})^t C_j^t + \sum_j r_{i-j+1} (j C_j^t) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
+\item[] $C^{-1} \gets \sum_{i=0}^{\floor{K/p}} (C^{-1})_i t^i \pmod{p^{N_{C^{-1}}}}$
+\end{compactenum}
 \item $\Phi \gets C \Phi_0 \sigma(C^{-1})$
 \item \textbf{return} $\Phi$
 \end{compactenum}
+\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
@@ -1649,15 +1645,12 @@ p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
 \Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying .., $\tau \in S(\mathbb{F}_{\mathfrak{q}})$.
 \Ensure  The zeta function $Z(X_{\tau},T)$ of the fiber $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
-\State \begin{compactenum}[{ } 1.] \vspace{-1.24em}
-\item \begin{algorithmic}
-\If{$\epsilon$ is known} 
-  \State $N \gets \ceil{\log_p ( 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2})}$ 
-\Else
-  \State $N \gets \ceil{\log_p (2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \})}$ 
-\EndIf
-\State $\tilde{N} \gets N + \delta$
-\end{algorithmic}
+\State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
+\item   \textbf{if} $\epsilon$ is known 
+\item[] \hspace{1em} $N \gets \ceil{\log_p ( 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2})}$ 
+\item[] \textbf{else}
+\item[] \hspace{1em} $N \gets \ceil{\log_p (2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \})}$ 
+\item[] $\tilde{N} \gets N + \delta$
 \item Compute $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ with $p$-adic precision $\tilde{N}$.
 \item Determine $m,K$ such that $r^m \Phi$ is a matrix of polynomials of degree at most $K$ to $p$-adic 
       precision $\tilde{N}$ using Theorem \ref{thm:KedlayaTuitman}.
@@ -1667,6 +1660,7 @@ p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
 \item $Z(X_{\tau},T) \gets \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)}$
 \item \Return $Z(X_{\tau},T)$
 \end{compactenum}
+\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
