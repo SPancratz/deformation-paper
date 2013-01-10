@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt]{article}
 
 \author{Sebastian Pancratz, Jan Tuitman}
-\title{Practical improvements to the deformation method for counting points on smooth projective hypersurfaces}
+\title{Improvements to the deformation method for counting points on smooth projective hypersurfaces}
 
 % Geometry and page layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -204,25 +204,104 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
+
 \section{Theoretical background}
 \label{sec:Background}
 
-\begin{thm}
-Weil conjectures
+Let $X$ denote an algebraic variety over $\FF_q$.
+
+\begin{thm} If $X$ is a smooth proper of dimension $d$, 
+then \label{thm:weildeligne}
+\[
+Z(X,T)=\frac{p_1 p_3 \ldots p_{2d-1}}{p_0 p_2 p_4 \ldots p_{2d}},
+\]
+where for all $i$:
+\begin{enumerate}
+\item $p_i = \prod_j (1-\alpha_{i,j}T) \in \ZZ[T]$,
+\item the transformation $t \rightarrow q^d/t$ maps the $\alpha_{i,j}$ bijectively to 
+      the $\alpha_{2d-i,k}$ (preserving multiplicities),
+\item $|\alpha_{i,j}| = q^{i/2}$ for all $j$, and every embedding $\overline{\QQ} \hookrightarrow \CC$. 
+\end{enumerate}
 \end{thm}
 
 \begin{proof}
 \end{proof}
 
-\begin{thm}
-Lefschetz trace formula
+\begin{defn}
+Let $\Hrig^{\bullet}(X)$ denote the rigid
+cohomology spaces of $X$. These are finite dimensional vector spaces over $\QQ_q$ 
+that are contravariantly functorial in $X$ and are equiped with an action of 
+the $p$-th power Frobenius map on $X$ that we denote by $F_p$. For the 
+construction and properties of the rigid cohomology spaces we refer to [[TODO Jan]].
+\end{defn}
+
+\begin{thm} If $X$ is a smooth proper algebraic variety over $\FF_q$ of dimension $d$, 
+then
+\[
+Z(X,T) = \prod_{i=0}^{2d} \det(1- T F_p | \Hrig^i(X))^{(-1)^{(i+1)}}
+\]
 \end{thm}
 
 \begin{proof}
 \end{proof}
 
+Let $\pi: \mathfrak{X} \rightarrow \mathfrak{S}$ be a smooth family of algebraic varieties defined over $\QQ_q$
+and $\Omega^{\bullet}_{\mathfrak{X}/\mathfrak{S}}$ its complex of relative K\"ahler differentials.
+
+\begin{defn}
+The relative algebraic de Rham cohomology sheaf $\HdR^i(\mathfrak{X}/\mathfrak{S})$ on $\mathfrak{S}$ is 
+defined as the hypercohomology sheaf $\mathbb{R}^i \pi_{*} \Omega^{\bullet}_{\mathfrak{X}/\mathfrak{S}}$. 
+\end{defn}
+
+\begin{rem}
+If $\mathfrak{X}/\mathfrak{S}$ admits a relative normal crossing compactification, then 
+$\HdR^i(\mathfrak{X}/\mathfrak{S})$ is a vector bundle.
+\end{rem}
+
+The $\HdR^i(\mathfrak{X}/\mathfrak{S})$ come equiped with an integrable connection, which is called
+the Gauss-Manin connection. Let us first recall the notion of a connection on a vector bundle.
+
+\begin{defn}
+Let $V$ be a vector bundle on $\mathfrak{S}$. A connection on $V$ is a map of vector bundles
+$\nabla: V \rightarrow V \otimes \Omega^1_{\mathfrak{S}}$
+which satisfies the Leibniz rule
+\begin{align*}
+\nabla(f s)=f\nabla(s)+s \otimes df
+\end{align*} 
+for all local sections $f$ of $\mathcal{O}_{\mathfrak{S}}$ and $s$ of $V$. 
+\end{defn}
+
+The Gauss-Manin connection on $\HdR^i(\mathfrak{X}/\mathfrak{S})$ can be defined as follows.
+
+\begin{defn}
+The De Rham complex $\Omega^{\bullet}_{\mathfrak{X}}$ can be equiped with the decreasing
+filtration
+\[
+F^i=im(\Omega^{\bullet-i}_{\mathfrak{X}} \otimes \pi^* \Omega^i_{\mathfrak{S}} \rightarrow \Omega^{\bullet}_{\mathfrak{X}}). 
+\]
+
+The spectral sequence associated to this filtration has as its first sheet
+\[
+E_1^{p,q}=\Omega^p_{\mathfrak{S}} \otimes \HdR^q(\mathfrak{X}/\mathfrak{S}).
+\]
+
+The Gauss-Manin connection $\nabla:H^i(\mathfrak{X}/\mathfrak{S}) \rightarrow H^i(\mathfrak{X}/\mathfrak{S}) \otimes 
+\Omega^1_{\mathfrak{S}}$ is now defined as the differential $d_1: E_1^{0,i} \rightarrow E_1^{1,i}$ in 
+this spectral sequence.
+\end{defn}
+
+\begin{rem}
+We can give a more explicit description of $\nabla$ when $\mathfrak{X}/\mathfrak{S}$ is affine. If we lift a 
+relative $i$-cocycle $\omega \in \Omega^i_{\mathfrak{X}/\mathfrak{S}}$ to an absolute $i$-form 
+$\omega' \in \Omega^i_{\mathfrak{X}}$ and apply the absolute differential $d$, we get an element of 
+$\Omega^1_{\mathfrak{S}} \wedge \Omega^i_{\mathfrak{X}/\mathfrak{S}}$. Projecting onto 
+$\Omega^1_{\mathfrak{S}} \otimes \HdR^i(\mathfrak{X}/\mathfrak{S})$, we obtain $\nabla(\omega)$. 
+\end{rem}
+
+
 \begin{thm}
-Frobenius structure on algebraic de Rham cohomology in liftable normal crossing case.
+Existence of Frobenius structure on relative algebraic de Rham cohomology in liftable normal crossing case and base change.
 \end{thm}
 
 \begin{proof}
@@ -283,12 +362,11 @@ See for example Griffiths~\citep[\S 4]{Griffiths1969}.
 
 The cohomology space $\HdR^{n}(\mathfrak{U}_L)$ is equipped with 
 an increasing filtration of $L$-vector spaces 
-$\{\mathcal{F}_k \HdR^{n}(\mathfrak{U}_L) \}_{k \geq 0}$ 
-for which $\mathcal{F}_k \HdR^{n}(\mathfrak{U}_L)$ consists of 
+for which $\mbox{Fil}^k \HdR^{n}(\mathfrak{U}_L)$ consists of 
 all elements that can be represented by $n$-forms $Q \Omega / P^k$ 
 with $Q \in L[x_0, x_1, \dotsc, x_n]$ homogeneous of degree $kd - (n + 1)$. 
 It follows from a theorem of Macaulay~\citep[\S 4, (4.11)]{Griffiths1969} 
-that $\mathcal{F}_n \HdR^{n}(\mathfrak{U}_L)= \HdR^{n}(\mathfrak{U}_L)$. 
+that $\mbox{Fil}^n \HdR^{n}(\mathfrak{U}_L)= \HdR^{n}(\mathfrak{U}_L)$. 
 Therefore, a basis for $\HdR^{n}(\mathfrak{U}_L)$ can in principle be 
 computed using finite dimensional linear algebra. We now define an explicit 
 basis of a simple form for $\HdR^{n}(\mathfrak{U}_L)$ for the families 
@@ -1642,7 +1720,7 @@ p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying .., $\tau \in S(\mathbb{F}_{\mathfrak{q}})$.
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying .., $\tau \in S(\mathbf{F}_{\mathfrak{q}})$.
 \Ensure  The zeta function $Z(X_{\tau},T)$ of the fiber $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
