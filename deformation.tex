@@ -151,7 +151,7 @@
 \DeclareMathOperator{\Gal}{Gal}          % Galois group
 \DeclareMathOperator{\ord}{ord}          % Order
 \DeclareMathOperator{\sgn}{sgn}          % Sign, signature
-\DeclareMathOperator{\Frob}{\mathcal{F}} % Frobenius
+\DeclareMathOperator{\Frob}{F}           % Frobenius
 \DeclareMathOperator{\Hom}{Hom}          % Space of homomorphisms
 \DeclareMathOperator{\Spec}{Spec}        % Spectrum
 
@@ -211,15 +211,15 @@
 
 Let $X$ denote an algebraic variety over $\FF_q$.
 
-\begin{thm} If $X$ is a smooth proper of dimension $d$, 
+\begin{thm} If $X$ is a smooth proper of dimension $m$, 
 then \label{thm:weildeligne}
 \[
-Z(X,T)=\frac{p_1 p_3 \ldots p_{2d-1}}{p_0 p_2 p_4 \ldots p_{2d}},
+Z(X,T)=\frac{p_1 p_3 \ldots p_{2d-1}}{p_0 p_2 p_4 \ldots p_{2m}},
 \]
 where for all $i$:
 \begin{enumerate}
 \item $p_i = \prod_j (1-\alpha_{i,j}T) \in \ZZ[T]$,
-\item the transformation $t \rightarrow q^d/t$ maps the $\alpha_{i,j}$ bijectively to 
+\item the transformation $t \rightarrow q^m/t$ maps the $\alpha_{i,j}$ bijectively to 
       the $\alpha_{2d-i,k}$ (preserving multiplicities),
 \item $|\alpha_{i,j}| = q^{i/2}$ for all $j$, and every embedding $\overline{\QQ} \hookrightarrow \CC$. 
 \end{enumerate}
@@ -229,56 +229,54 @@ where for all $i$:
 \end{proof}
 
 \begin{defn}
-Let $\Hrig^{\bullet}(X)$ denote the rigid
+Let $\Hrig^{i}(X)$ denote the rigid
 cohomology spaces of $X$. These are finite dimensional vector spaces over $\QQ_q$ 
 that are contravariantly functorial in $X$ and are equiped with an action of 
-the $p$-th power Frobenius map on $X$ that we denote by $F_p$. For the 
-construction and properties of the rigid cohomology spaces we refer to [[TODO Jan]].
+the $p$-th (and $q$-th) power Frobenius map on $X$ that we denote by $\Frob_p$ 
+(and $\Frob_q$). For the construction and properties of these spaces we refer to [[TODO Jan]].
 \end{defn}
 
-\begin{thm} If $X$ is a smooth proper algebraic variety over $\FF_q$ of dimension $d$, 
+\begin{thm} If $X$ is a smooth proper algebraic variety over $\FF_q$ of dimension $m$, 
 then
 \[
-Z(X,T) = \prod_{i=0}^{2d} \det(1- T F_p | \Hrig^i(X))^{(-1)^{(i+1)}}
+Z(X,T) = \prod_{i=0}^{2m} \det(1- T \Frob_q | \Hrig^i(X))^{(-1)^{(i+1)}}
 \]
 \end{thm}
 
 \begin{proof}
 \end{proof}
 
-Let $\pi: \mathfrak{X} \rightarrow \mathfrak{S}$ be a smooth family of algebraic varieties defined over $\QQ_q$
+Let $\mathfrak{X}/\mathfrak{S}$ be a smooth family of algebraic varieties defined over $\QQ_q$
 and $\Omega^{\bullet}_{\mathfrak{X}/\mathfrak{S}}$ its complex of relative K\"ahler differentials.
 
 \begin{defn}
-The relative algebraic de Rham cohomology sheaf $\HdR^i(\mathfrak{X}/\mathfrak{S})$ on $\mathfrak{S}$ is 
-defined as the hypercohomology sheaf $\mathbb{R}^i \pi_{*} \Omega^{\bullet}_{\mathfrak{X}/\mathfrak{S}}$. 
-\end{defn}
-
-\begin{rem}
+Let $\HdR^i(\mathfrak{X}/\mathfrak{S})$ denote the relative algebraic de Rham cohomology sheaf  
+on $\mathfrak{S}$. 
+%$\mathbb{R}^i \pi_{*} \Omega^{\bullet}_{\mathfrak{X}/\mathfrak{S}}$ 
 If $\mathfrak{X}/\mathfrak{S}$ admits a relative normal crossing compactification, then 
-$\HdR^i(\mathfrak{X}/\mathfrak{S})$ is a vector bundle.
-\end{rem}
+this is a vector bundle.
+\end{defn}
 
 The $\HdR^i(\mathfrak{X}/\mathfrak{S})$ come equiped with an integrable connection, which is called
-the Gauss-Manin connection. Let us first recall the notion of a connection on a vector bundle.
+the Gauss--Manin connection. Let us first recall the notion of a connection on a vector bundle.
 
 \begin{defn}
-Let $V$ be a vector bundle on $\mathfrak{S}$. A connection on $V$ is a map of vector bundles
-$\nabla: V \rightarrow V \otimes \Omega^1_{\mathfrak{S}}$
+Let $\mathfrak{E}$ be a vector bundle on $\mathfrak{S}$. A connection on $\mathfrak{E}$ is a map of vector bundles
+$\nabla: \mathfrak{E} \rightarrow \Omega^1_{\mathfrak{S}} \otimes \mathfrak{E}$
 which satisfies the Leibniz rule
 \begin{align*}
-\nabla(f s)=f\nabla(s)+s \otimes df
+\nabla(f e)=f\nabla(e)+df \otimes e
 \end{align*} 
-for all local sections $f$ of $\mathcal{O}_{\mathfrak{S}}$ and $s$ of $V$. 
+for all local sections $f$ of $\mathcal{O}_{\mathfrak{S}}$ and $e$ of $\mathfrak{E}$. 
 \end{defn}
 
-The Gauss-Manin connection on $\HdR^i(\mathfrak{X}/\mathfrak{S})$ can be defined as follows.
+The Gauss--Manin connection on $\HdR^i(\mathfrak{X}/\mathfrak{S})$ can be defined as follows.
 
 \begin{defn}
-The De Rham complex $\Omega^{\bullet}_{\mathfrak{X}}$ can be equiped with the decreasing
+The de Rham complex $\Omega^{\bullet}_{\mathfrak{X}}$ can be equiped with the decreasing
 filtration
 \[
-F^i=im(\Omega^{\bullet-i}_{\mathfrak{X}} \otimes \pi^* \Omega^i_{\mathfrak{S}} \rightarrow \Omega^{\bullet}_{\mathfrak{X}}). 
+F^i=\fIm(\Omega^{\bullet-i}_{\mathfrak{X}} \otimes \pi^* \Omega^i_{\mathfrak{S}} \rightarrow \Omega^{\bullet}_{\mathfrak{X}}). 
 \]
 
 The spectral sequence associated to this filtration has as its first sheet
@@ -286,9 +284,9 @@ The spectral sequence associated to this filtration has as its first sheet
 E_1^{p,q}=\Omega^p_{\mathfrak{S}} \otimes \HdR^q(\mathfrak{X}/\mathfrak{S}).
 \]
 
-The Gauss-Manin connection $\nabla:H^i(\mathfrak{X}/\mathfrak{S}) \rightarrow H^i(\mathfrak{X}/\mathfrak{S}) \otimes 
-\Omega^1_{\mathfrak{S}}$ is now defined as the differential $d_1: E_1^{0,i} \rightarrow E_1^{1,i}$ in 
-this spectral sequence.
+The Gauss--Manin connection 
+$\nabla:H^i(\mathfrak{X}/\mathfrak{S}) \rightarrow \Omega^1_{\mathfrak{S}} \otimes H^i(\mathfrak{X}/\mathfrak{S})$ is now defined as 
+the differential $d_1: E_1^{0,i} \rightarrow E_1^{1,i}$ in this spectral sequence.
 \end{defn}
 
 \begin{rem}
@@ -299,23 +297,100 @@ $\Omega^1_{\mathfrak{S}} \wedge \Omega^i_{\mathfrak{X}/\mathfrak{S}}$. Projectin
 $\Omega^1_{\mathfrak{S}} \otimes \HdR^i(\mathfrak{X}/\mathfrak{S})$, we obtain $\nabla(\omega)$. 
 \end{rem}
 
+\begin{defn}
+We write $\sigma_p$ for the standard $p$-th power Frobenius lift on $\mathbf{P}^1_{\QQ_q}$ i.e., 
+the (semilinear) map that lifts the $p$-th power Frobenius map on $\mathbf{P}^1_{\FF_q}$ and
+satisfies $\sigma_p(t)=t^p$. 
+\end{defn}
 
-\begin{thm}
-Existence of Frobenius structure on relative algebraic de Rham cohomology in liftable normal crossing case and base change.
-\end{thm}
-
-\begin{proof}
-\end{proof}
-
-\begin{thm}
-Cohomology of a projective hypersurface
-\end{thm}
-
-\begin{proof}
-\end{proof}
+Now suppose that $\mathfrak{E}$ is a vector bundle with connection on some Zariski open subset $\mathfrak{S}$ 
+of $\mathbf{P}^1_{\QQ_q}$ with complement $\mathfrak{Z}$. Let $V$ denote the rigid 
+analytic subspace of $\mathbf{P}^1_{\QQ_q}$ which is the complement of the union of 
+the open disks of radius $1$ around the points of $\mathfrak{Z}$. 
 
 \begin{defn}
-define $\delta$
+A Frobenius structure on $\mathfrak{E}$ is an isomorphism of vector bundles with connection 
+$F:\sigma_p^* \mathcal{E} \rightarrow \mathcal{E}$ defined on some strict neighbourhood of $V$. 
+\end{defn}
+
+\begin{thm} \label{thm:frobstruc}
+Let $\mathcal{S}$ be a Zariski open subset of $\mathbf{P}^1_{\ZZ_q}$ and suppose that 
+$\mathcal{X}/\mathcal{S}$ is a smooth family of algebraic varieties that admits a relative
+normal crossing compactification. Denote the generic fibers of $\mathcal{S},\mathcal{X}$ by
+$\mathfrak{S}=\mathcal{S} \otimes \QQ_q$, $\mathfrak{X}=\mathcal{X} \otimes \QQ_q$
+and the special fibers by $S=\mathcal{S} \otimes \FF_q$, $X=\mathcal{X} \otimes \FF_q$, respectively.
+For all $i$, the vector bundle $\HdR^i(\mathfrak{X}/\mathfrak{S})$ with the
+Gauss--Manin connection $\nabla$ admits a Frobenius structure $F$ with the following property. 
+For any $\tau \in S(\FF_{\mathfrak{q}})$, where $\mathfrak{q}=q^f$ for some $f \in \NN$,
+\[
+(\Hrig^i(X_{\tau}),\Frob_p) \cong (\HdR^i(\mathfrak{X}/\mathfrak{S}),F)_{\hat{\tau}}
+\] 
+as $\QQ_{\mathfrak{q}}$ vector spaces with a $\sigma_p$-semilinear endomorphism, where 
+$\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ denotes the Teichm\"uller lift of $\tau$. 
+We will therefore denote this Frobenius structure on $\HdR^i(\mathfrak{X}/\mathfrak{S})$ by $\Frob_p$ 
+as well.
+\end{thm}
+
+\begin{proof}
+\end{proof}
+
+In this paper we will only be interested in one-parameter families of smooth projective hypersurfaces. 
+So let $P \in \ZZ_q[t][x_0,\ldots,x_n]$ denote a homogeneous polynomial of degree $d$ and let 
+$\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$ be a Zariski open subset such that $P$ defines a family  
+$\mathcal{X}/\mathcal{S}$ of smooth hypersurfaces contained in $\mathbf{P}^n_{\mathcal{S}}$. Now let
+$\mathcal{U}/\mathcal{S}$ denote the complement of $\mathcal{X}/\mathcal{S}$ in $\mathbf{P}^n_{\mathcal{S}}$,
+and write $\mathfrak{X}=\mathcal{X} \otimes \QQ_q$, $\mathfrak{U}=\mathcal{U} \otimes \QQ_q$, 
+$\mathfrak{S}=\mathcal{S} \otimes \QQ_q$, and
+$X=\mathcal{X} \otimes \FF_q$, $U=\mathcal{U} \otimes \QQ_q$, $S=\mathcal{S} \otimes \FF_q$. 
+
+
+\begin{thm} For all $\tau \in S(\FF_{\mathfrak{q}})$, where $\mathfrak{q}=q^f$ for some $f \in \NN$, we have that
+\begin{equation*}
+Z(X_{\tau},T) = \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)},
+\end{equation*}
+where $\chi(T) = \det \bigl( 1 - T \mathfrak{q}^{-1} \Frob_{\mathfrak{q}} | \Hrig^n(U_{\tau}) \bigr) \in \ZZ[T]$ 
+denotes the reverse characteristic polynomial of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ 
+on $\Hrig^n(U_{\tau})$. Moreover, $\chi(T)$ has degree 
+\begin{equation*}
+b=\frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr).
+\end{equation*}
+\end{thm}
+
+\begin{proof}
+\end{proof}
+
+Let $[e_1, \ldots, e_b]$ be some basis of sections of $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and let 
+$M \in M_{b \times b}(\QQ_q(t))$ denote the matrix of the Gauss--Manin connection $\nabla$ with respect 
+to this basis i.e., 
+\[
+\nabla (e_j) = \sum_{i=1}^b M_{i,j} e_i.
+\]
+Let $r \in \ZZ_q[t]$ be the denominator of $M$ i.e., such that $M=G/r$ with $G \in M_{b \times b}(\QQ_q[t])$. 
+
+\begin{defn} We denote
+\[
+\QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag} = \{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r(t)^j} \; | 
+\; a_{i,j} \in \QQ_q, \; \exists \rho>1: \lim_{|i|+|j| \rightarrow \infty} |a_{i,j}| \rho^{(|i|+|j|)} \rightarrow 0 \}.
+\] 
+\end{defn}
+
+Let $\Phi$ denote the matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \ldots, e_b]$ i.e.,
+\[
+p^{-1} F_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
+\]
+
+\begin{thm} The matrix $\Phi$ is an element of $M_{b \times b}(\QQ_q \langle t, \frac{1}{r(t)}) \rangle^{\dag}$ 
+and satisfies the following differential equation:
+\begin{equation} \label{eq:Phi}
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma_p(M), \; \; \; \Phi(0)=\Phi_0,
+\end{equation}
+\end{thm}
+
+%TODO the following definition and theorem will depend on the basis, and should therefore probably
+%be put after the definition of our basis \cB......
+
+\begin{defn}
+Define $\delta$
 \end{defn}
 
 \begin{thm}
@@ -373,7 +448,7 @@ basis of a simple form for $\HdR^{n}(\mathfrak{U}_L)$ for the families
 that we are interested in.
 
 %TODO perhaps mention that all spaces of polynomials contain Q=0 (annoying)
-%TODO mention that F_i is the (reverse) Hodge filtration on H^{n-1}(X) with the correct indices
+%TODO mention that Fil^i is the (reverse) Hodge filtration on H^{n-1}(X) with the correct indices
 
 \begin{defn} \label{defn:MonBasis}
 For $k \in \NN$, we define the following sets of monomials: 
@@ -551,7 +626,7 @@ auxiliary result describing the cardinality of the set~$\cB$.
 \begin{prop} \label{prop:BasisSize}
 The set $\cB$ has cardinality
 \begin{equation}
-\bigl((d-1)/d\bigr) \bigl((d-1)^{n} - (-1)^{n}\bigr).
+\frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr).
 \end{equation}
 \end{prop}
 
@@ -573,7 +648,7 @@ so that
 \begin{align*}
 \abs{V-(H_0 \cup \cdots \cup H_n)}&=\abs{V}-\abs{V \cap (H_0 \cup \cdots \cup H_n)} \\
 &= d^n - (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}+d (-1)^n \bigr) \\
-&= \bigl((d-1)/d\bigr) \bigl((d-1)^{n} - (-1)^{n}\bigr),
+&= \frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr),
 \end{align*}
 and the proof is complete.
 \end{proof}
@@ -1235,15 +1310,15 @@ $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$ with respect to the basis $\cB$.
 denote the denominator of $M$, so that $M = G/r$ with $G \in M_{b \times b}(\QQ_q[t])$.
 Note that $r$ is a divisor of the resultant $\Delta$ defined in Definition \ref{defn:resultant}.
 Also recall that $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
-denotes the matrix for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
-respect to the same basis $\cB$, where $\sigma$ is the standard lift of the $p$th-power Frobenius 
+denotes the matrix for the $\sigma_p$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
+respect to the same basis $\cB$, where $\sigma_p$ is the standard lift of the $p$th-power Frobenius 
 sending $t \mapsto t^p$. 
 
 As we saw in section [[TODO Jan]], these matrices satisfy the 
 differential equation
 
 \begin{equation} \label{eq:Phi}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma_p(M), \; \; \; \Phi(0)=\Phi_0,
 \end{equation}
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action of $p^{-1} \Frob_p$ 
 on $\Hrig^n(U_0)$, again with respect to the basis $\cB$. Our goal is 
@@ -1256,7 +1331,7 @@ homogeneous system
 \end{equation}
 where $I$ denotes the identity matrix, then the matrix
 \begin{equation*}
-\Phi = C \Phi_0 \sigma(C)^{-1}
+\Phi = C \Phi_0 \sigma_p(C)^{-1}
 \end{equation*}
 satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation 
 \eqref{eq:01-GMDE-Homogenous}.
@@ -1356,7 +1431,7 @@ for example when $\ord_p(M)$ is positive.
 
 \begin{rem}
 In order to determine the power series expansion of the matrix~$\Phi$, 
-we also need to compute the matrix $\sigma(C)^{-1}$. The matrix~$C^{-1}$ 
+we also need to compute the matrix $\sigma_p(C)^{-1}$. The matrix~$C^{-1}$ 
 could be computed using matrix inversion over the ring $\mathbf{Q}_q[[t]]$.  
 However, solving Equation~\eqref{eq:01-GMDE-Dual} for $C^{-1}$ is typically 
 more efficient in practice.
@@ -1434,10 +1509,10 @@ Therefore, while solving Equation \eqref{eq:01-GMDE-Homogenous} for $C$ and Equa
 \end{thm}
 
 \begin{proof}
-Recall that $\Phi = C \Phi_0 \sigma(C)^{-1}$. The sufficient $t$-adic precisions are clear. 
-Since $\ord_p(C) \leq 0$ and $\ord_p(\sigma(C)^{-1}) \leq 0$, we have that 
+Recall that $\Phi = C \Phi_0 \sigma_p(C)^{-1}$. The sufficient $t$-adic precisions are clear. 
+Since $\ord_p(C) \leq 0$ and $\ord_p(\sigma_p(C)^{-1}) \leq 0$, we have that 
 \[
-N \geq \ord_p(C) + \ord_p(\Phi_0) + \ord_p(\sigma(C)^{-1}).
+N \geq \ord_p(C) + \ord_p(\Phi_0) + \ord_p(\sigma_p(C)^{-1}).
 \]
 So we can apply Proposition \ref{prop:matrixproductval}, using Theorem \ref{thm:valC} (for both $C$ and $C^{-1}$) 
 and the fact that $\ord_p(\Phi_0) \geq -\delta$ [[TODO Jan]], to obtain the sufficient $p$-adic precisions for the matrices 
@@ -1474,7 +1549,7 @@ given $p$-adic and $t$-adic precisions, as formalised in Algorithm \ref{alg:expa
 \item[] \hspace{1em} $(C^{-1})^t_{i+1} \gets  \frac{-1}{r_0 (i+1)} \biggl(\sum_j (-G_{i-j})^t C_j^t + \sum_j r_{i-j+1} (j C_j^t) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
 \item[] $C^{-1} \gets \sum_{i=0}^{\floor{K/p}} (C^{-1})_i t^i \pmod{p^{N_{C^{-1}}}}$
 \end{compactenum}
-\item $\Phi \gets C \Phi_0 \sigma(C^{-1})$
+\item $\Phi \gets C \Phi_0 \sigma_p(C^{-1})$
 \item \textbf{return} $\Phi$
 \end{compactenum}
 \EndProcedure
@@ -1597,7 +1672,7 @@ of degree at most $K$ that can be evaluated at $\hat{\tau}$. We then compute
 \label{sec:ZetaFunctions}
 
 Now we want to compute the zeta function of the fiber $X_{\tau}$ of
-our family $X/S$ lying over some $\tau \in S(\FF_{\mathfrak{q}})$ with $\mathfrak{q}=q^f$ 
+our family $X/S$ lying over some $\tau \in S(\FF{\mathfrak{q}})$ with $\mathfrak{q}=q^f$ 
 for some $f \in \NN$. Recall that the 
 zeta function of $X_{\tau}$ is of the form
 \begin{equation}
@@ -1616,10 +1691,10 @@ We start by computing the matrix of the action of
 $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$.
 Let us denote $a=\log_p(\mathfrak{q})$. Recall that $\Phi_{\tau}$ denotes the matrix of the action 
 of $p^{-1} \Frob_p$ on~$\Hrig^{n}(U_{\tau})$ with respect to the basis $\cB$. As this action is 
-$\sigma$-semilinear, we have that 
+$\sigma_p$-semilinear, we have that 
 \begin{equation}
 \Phi_{\tau}^{(a)} = 
-    \Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau})
+    \Phi_{\tau} \sigma_p(\Phi_{\tau}) \dotsm \sigma_p^{a-1}(\Phi_{\tau})
 \end{equation}
 is the matrix of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$. 
 
@@ -1631,7 +1706,7 @@ compute $\Phi_{\tau}$ to precision $N + (a-1) \delta$.
 
 \begin{proof}
 Since we have that $\ord_p(\Phi_{\tau}) \geq -\delta$ by [[TODO Jan]], the valuations of the matrices 
-$\Phi_{\tau}, \sigma(\Phi_{\tau}), \dotsc, \sigma^{a-1}(\Phi_{\tau})$ 
+$\Phi_{\tau}, \sigma_p(\Phi_{\tau}), \dotsc, \sigma_p^{a-1}(\Phi_{\tau})$ 
 are all at least $-\delta$. The theorem now follows from Proposition 
 \ref{prop:matrixproductval}. 
 \end{proof}
@@ -1657,8 +1732,8 @@ with $N \geq 0$ and $\delta$ defined as in [[TODO Jan]]. Then
 \begin{proof} 
 Recall from [[TODO Jan]] that there exists a matrix $W \in M_{b \times b}(\QQ_q)$
 which satisfies $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, 
-such that for $\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ we have that $\ord_p(\Phi_{\tau}') \geq 0$. 
-Defining the matrix $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma(W)^{-1}$,
+such that for $\Phi_{\tau}'=W \Phi_{\tau} \sigma_p(W)^{-1}$ we have that $\ord_p(\Phi_{\tau}') \geq 0$. 
+Defining the matrix $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma_p(W)^{-1}$,
 we find that $\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N$, and in particular
 also $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we get that
 \[
@@ -1734,7 +1809,7 @@ p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
       precision $\tilde{N}$ using Theorem \ref{thm:KedlayaTuitman}.
 \item $\Phi \gets$ \textsc{FrobSeriesExpansion($\tilde{N},K)$}
 \item $\Phi_{\tau} \gets r(\hat{\tau})^{-m} \bigl( r(t)^m \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \pmod{p^{\tilde{N}}}$
-\item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$ as an element of $\ZZ[T]$ 
+\item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma_p(\Phi_{\tau}) \ldots \sigma_p^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$ as an element of $\ZZ[T]$ 
 \item $Z(X_{\tau},T) \gets \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)}$
 \item \Return $Z(X_{\tau},T)$
 \end{compactenum}
@@ -1789,57 +1864,6 @@ Lauder~\citep[\S 9.3.2, Proposition~9.6]{Lauder2006}.
 
 \section{Complexity and Implementation}
 
-\begin{comment}
-
-We now provide an outline of the deformation method.  The list below 
-includes nearly full details of the computation, omitting only the 
-specific choices of precisions $N_1, \dotsc, N_7$
-and $K_1, K_2$. These will be provided and justified later.
-
-\begin{enumerate}
-\item[Step~$\Rmnum{1}$.]
-Compute the matrix $\Phi_0 \in M_{b \times b}(\mathbf{Q}_q)$ for the action 
-of $p^{-1} \Frob_p$ on $\Hrig^{n}(U_0)$ with respect to the standard basis 
-to $p$-adic precision~$N_1$.  
-\item[Step~$\Rmnum{2}$.]
-Compute the matrix $M \in M_{b \times b}(\mathbf{Q}_q(t))$ of the 
-Gauss--Manin connection $\nabla$ on $\HdR^{n}(\mathfrak{U}_L)$ with 
-respect to the standard basis to $p$-adic precision~$N_2$.
-\item[Step~$\Rmnum{3}$.]
-Let $C \in M_{b \times b} (\mathbf{Q}_q[[t]])$ denote the matrix of 
-local solutions of the connection~$\nabla$ around zero, i.e., 
-the matrix that satisfies the $p$-adic differential equation 
-$\bigl(\tfrac{d}{dt} + M\bigr) C = 0$ with initial condition $C(0)=I$.  
-We compute an approximation for the matrices~$C$ and 
-$C^{\sigma}(t^p)^{-1}$ modulo~$t^{K_1}$ to $p$-adic precision~$N_3$.
-\item[Step~$\Rmnum{4}$.]
-Let $\Phi(t) \in M_{b \times b}(\mathbf{Q}_p\langle t,r(t)^{-1}\rangle^{\dagger})$ 
-denote the matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
-respect to the standard basis (which is only a basis generically).  One can 
-show that this matrix satisfies $\Phi(t) = C(t) \Phi_0 C^{\sigma}(t^p)^{-1}$.
-Using this formula we compute a power series approximation of $\Phi(t)$ 
-modulo~$t^{K_1}$ to $p$-adic precision~$N_4$.
-\item[Step~$\Rmnum{5}$.]
-Let $\Phi_{t_1} \in M_{b \times b}(\mathbf{Q}_q)$ denote the matrix for 
-the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U_{t_1})$. First we compute 
-$\Psi(t) = r(t)^{K_2} \Phi(t)$ modulo~$t^{K_1}$ to $p$-adic precision~$N_5$. 
-Then we compute an approximation $r(\hat{t}_1)^{-K_1} \Psi(\hat{t}_1)$ for 
-$\Phi_{t_1}$ to $p$-adic precision~$N_5$.
-\item[Step~$\Rmnum{6}$.]
-Let $\Phi_{t_1}^{(q^m)}$ denote the matrix for the action of 
-$q^{-m} \Frob_{q^m}$ on $\Hrig^{n}(U_{t_1})$, which satisfies 
-$\Phi_{t_1}^{(q^m)} = \Phi_{t_1} \sigma(\Phi_{t_1}) \dotsm \sigma^{a-1}(\Phi_{t_1})$ 
-and has entries in $\mathbf{Q}_{q^m}$.  We compute an approximation to 
-this matrix with $p$-adic precision~$N_6$.
-%TODO change notation for q^m power Frobenius matrix, looks like power of matrix
-\item[Step~$\Rmnum{7}$.]
-Let $p(T) = \det\bigl(1 - T (q^m)^{-1} \Frob_{q^m} | \Hrig^n(U_{t_1})\bigr)$, 
-which is an integer polynomial.  We recover this exactly by computing an 
-approximation to the reverse characteristic polynomial of $\Phi_{t_1}^{(q^m)}$
-to $p$-adic precision~$N_7$.
-\end{enumerate}
-\end{comment}
-
 \subsection{Complexity}
 
 \subsection{Implementation}
@@ -1856,7 +1880,7 @@ carried out in parallel:
       the computation of every single $C_i$ the different matrix products can
       still be computed independently.
 \item The computation of the $\mathfrak{q}$th-power Frobenius 
-      $\Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau})$, can be carried 
+      $\Phi_{\tau} \sigma_p(\Phi_{\tau}) \dotsm \sigma_p^{a-1}(\Phi_{\tau})$, can be carried 
       out in parallel.  This can be achieved if, instead of computing 
       a running product from left to right, we express the matrix in a 
       product tree.  We formalise this in Algorithm~\ref{alg:ParallelProduct}, 
@@ -1868,7 +1892,7 @@ carried out in parallel:
       \begin{algorithmic}
       \vspace{1mm}
       \For{$i \gets 0$ \textbf{to} $a-1$}
-          \State $G_i \gets \sigma^{i}(F)$
+          \State $G_i \gets \sigma_p^{i}(F)$
       \EndFor
       \For{$j=k-1$ \textbf{to} $0$}
           \State $h \gets 2^{k-j}$
@@ -1881,7 +1905,7 @@ carried out in parallel:
       \end{algorithm}
 \end{itemize}
 
-[[TODO Seb, should it not be clearer that $\sigma^i$ is not computed by composing $\sigma$ with itself $i$ times? ]]
+[[TODO Seb, should it not be clearer that $\sigma_p^i$ is not computed by composing $\sigma_p$ with itself $i$ times? ]]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
