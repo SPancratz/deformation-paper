@@ -257,6 +257,7 @@ Z(X,T) = \prod_{i=0}^{2m} \det(1- T \Frob_q | \Hrig^i(X))^{(-1)^{(i+1)}}
 \end{thm}
 
 \begin{proof}
+See for example \cite[Theorem 6.3]{EtesseLeStum1993}.
 \end{proof}
 
 Let $\mathfrak{X}/\mathfrak{S}$ be a smooth family of algebraic varieties defined over $\QQ_q$.
@@ -327,7 +328,7 @@ $F:\sigma_p^* \mathcal{E} \rightarrow \mathcal{E}$ defined on some strict neighb
 \end{defn}
 
 In the rest of this section (and this paper), $\FF_{\mathfrak{q}}$ always denotes a finite extension 
-of $\FF_q$, in other words: $\mathfrak{q}=q^f$ for some $f \in \NN$.
+of $\FF_q$. 
 
 \begin{thm} \label{thm:frobstruc}
 Let $\mathcal{S}$ be a Zariski open subset of $\mathbf{P}^1_{\ZZ_q}$ and suppose that 
@@ -352,6 +353,17 @@ as well.
 This theorem is well known, and can be obtained by combining results of 
 Berthelot from various papers, most notably \cite{Berthelot1986}.   
 \end{proof}
+
+\begin{defn}
+Let $\Hrig^i(X/S)$ denote the vector bundle $\HdR^i(\mathfrak{X}/\mathfrak{S})$ with its Frobenius
+structure $\Frob_p$ from Theorem \ref{thm:frobstruc}.
+\end{defn}
+
+\begin{rem}
+One can show that $\Hrig^i(X/S)$ is again functorial in $X/S$ and so does not depend on the lift $\mathcal{X}/\mathcal{S}$. 
+Moreover, one can still define $\Hrig^i(X/S)$ when $X/S$ cannot be lifted to characteristic zero \cite{Berthelot1986}.
+However, for our purposes the above definition will be sufficient.
+\end{rem}
 
 In this paper we will only be interested in one-parameter families of smooth projective hypersurfaces. 
 So let $P \in \ZZ_q[t][x_0,\ldots,x_n]$ denote a homogeneous polynomial of degree $d$ and let 
@@ -399,15 +411,15 @@ for all $i \neq (n-1)$. Next, one shows by a computation that
 $0$ &\mbox{if $i$ odd} 
 \end{cases}, 
 \end{equation}
-so that all that remains to be determined is $\Hrig^{n-1}(X_{\tau})$. Finally, one uses the excision short exact 
-sequence
+where $(i)$ denotes the $i$-th Tate twist, for which $F_p$ gets multiplied by $p^{-i}$. So all that remains to be determined is $\Hrig^{n-1}(X_{\tau})$. 
+Finally, one uses the excision short exact sequence
 \begin{equation} \label{eqn:excision}
 \begin{CD}
 0 @>>> \Hrig^{n}(U_{\tau}) @>>> \Hrig^{n-1}(X_{\tau})(-1) @>>> \Hrig^{n+1}(\mathbf{P}^n_{\FF_{\mathfrak{q}}}) @>>> 0
 \end{CD} 
 \end{equation}
 to relate $\Hrig^{n-1}(X_{\tau})$ to $\Hrig^{n}(U_{\tau})$ and complete the proof of \eqref{eq:formulazeta}. The 
-proof of \eqref{eq:formulab} on the other hand can be found in [[TODO Jan]]. 
+proof of \eqref{eq:formulab} on the other hand can be found in [[TODO Jan, hard to find]]. 
 \end{proof}
 
 Let $[e_1, \ldots, e_b]$ be some basis of sections of $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and let 
@@ -442,13 +454,13 @@ $[e_0,\ldots,e_b]$.
 That the differential equation is satisfied is an immediate consequence of the fact that $\Frob_p$ is a
 (horizontal) map of vector bundles with connection, and that $\Phi(0)=\Phi_0$ is also clear from Theorem
 \ref{thm:frobstruc}. Now, if $M$ doesn't have any poles in a given residue disk, then $\Phi$ cannot have 
-any poles in that residue disk either, for example by Theorem \ref{thm:KedlayaTuitman} below. So the entries 
+any poles in that residue disk either, by Theorem \ref{thm:KedlayaTuitman} below. So the entries 
 of $\Phi$ are contained in $\QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag}$.
 \end{proof}
 
 The deformation method can now be sketched as follows:
 
-\begin{enumerate}
+\begin{itemize}
 \item Compute the matrix $M$ of the Gauss--Manin connection $\nabla$.
 \item Compute the matrix $\Phi_0$ of the action of $p^{-1}\Frob_p$ on $\Hrig^n(U_0)$. If the
 family is chosen such that $X_0$ is a diagonal hypersurface, then this can be done relatively
@@ -460,10 +472,61 @@ to obtain the matrix $\Phi_{\tau}$ of the action of $p^{-1}F_p$ on $\Hrig^n(U_{\
 \item Compute the matrix $\Phi_{\tau}^{(a)}$ of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ (which is also $(p\Frob_p)^a$, 
 where $a=\log_p(\mathfrak{q})$) on $\Hrig^n(U_{\tau})$, and use Theorem \ref{thm:hypersurface} to compute the zeta function $Z(X_{\tau},T)$
 of the fiber $X_{\tau}$.
-\end{enumerate}
+\end{itemize}
 
 This way one can `deform' the computation of the zeta function $Z(X_{\tau},T)$ of some complicated fiber $X_{\tau}$
 to that of some easier diagonal fiber, by solving the $p$-adic differential equation from Theorem \ref{thm:eqphi}.
+
+Note that we can only carry out these computations to finite $p$-adic precision. Therefore, we need to recall 
+some bounds on the loss of $p$-adic precision when multiplying $p$-adic numbers and matrices. 
+
+\begin{prop} \label{prop:productval}
+Let $v_1,\ldots,v_{\ell} \in \ZZ$ and $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$  
+be such that $\ord_p(x_i) \geq v_i$ for all $i$. Suppose that $N \in \ZZ$ satisfies 
+$N \geq \sum_{j=1}^{\ell} v_j$. Let $\tilde{x}_1, \dotsc, \tilde{x}_{\ell}$ denote 
+$p$-adic approximations to $x_1, \dotsc, x_{\ell}$ such that 
+\[
+\ord_p(x_i - \tilde{x}_i) \geq N - \sum_{j \neq i} v_j
+\] 
+for all $i$.  Then 
+\begin{equation*}
+\ord_p(x_1 \dotsm x_{\ell} - \tilde{x}_1 \dotsm \tilde{x}_{\ell}) \geq N.
+\end{equation*}
+\end{prop}
+
+\begin{proof}
+For all $i$,
+\begin{align*}
+\ord_p(\tilde{x}_i) &\geq \min \{ \ord_p(x_i-\tilde{x}_i), \ord_p(x_i) \} \\
+                    &\geq \min \{ N- \sum_{j \neq i} v_j, \ord_p(x_i)\} \geq v_i.
+\end{align*}
+Therefore, we also have that
+\begin{align*}
+\ord_p \bigl( (x_{i}-\tilde{x}_{i})(\tilde{x}_1 \dotsc \tilde{x}_{i-1} x_{i+1} \dotsc x_{\ell} \bigr) \geq N,
+\end{align*}
+for all $i$. The result now follows by combining these inequalities.
+\end{proof}
+
+\begin{prop} \label{prop:matrixproductval}
+Let $v_1,\ldots,v_{\ell} \in \ZZ$ and $A_1, \dotsc, A_{\ell} \in M_{b \times b}(\QQ_q)$
+be such that $\ord_p(A_i) \geq v_i$ for all $i$. Suppose that $N \in \ZZ$ satisfies 
+$N \geq \sum_{j=1}^{\ell} v_j$.
+Let $\tilde{A}_1, \dotsc, \tilde{A}_{\ell}$ denote $p$-adic approximations 
+to $A_1, \dotsc A_{\ell}$ such that
+\[
+\ord_p(A_i - \tilde{A}_i) \geq N - \sum_{j \neq i} v_j
+\]
+for all $i$.  Then 
+\begin{equation}
+\ord_p(A_1 \dotsm A_{\ell} - \tilde{A}_1 \dotsm \tilde{A}_{\ell}) \geq N.
+\end{equation}
+\end{prop}
+
+\begin{proof}
+We can follow the proof of Proposition~\ref{prop:productval}, 
+observing that for matrices $A,B \in M_{b \times b}(\QQ_q)$, we still have that
+$\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$ and $\ord_p(AB) \geq \ord_p(A)+\ord_p(B)$.
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Computing the connection matrix}
@@ -472,50 +535,51 @@ to that of some easier diagonal fiber, by solving the $p$-adic differential equa
 In this section we compute the action of the Gauss--Manin connection~$\nabla$ on 
 the algebraic de~Rham cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ of the 
 complement $\mathfrak{U}/\mathfrak{S}$ of a family of smooth hypersurfaces 
-$\mathfrak{X}/\mathfrak{S}$ contained in $\mathbf{P}^n_{\mathfrak{S}}$.
+$\mathfrak{X}/\mathfrak{S}$ contained in $\mathbf{P}^n_{\mathfrak{S}}$ over
+some Zariski open subset $\mathfrak{S} \subset \mathbf{P}^1_{\QQ_q}$.
 First we recall how to compute in $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
-following the method of Griffiths and Dwork.  As we prefer to perform linear 
-algebra operations over a field, we will mainly work with the de~Rham 
-cohomology vector space $\HdR^{n}(\mathfrak{U}_L)$ of the generic fiber 
-$\mathfrak{U}_L = \mathfrak{U}/\mathfrak{S} \times_{\mathfrak{S}} \Spec{L}$, 
-where $L=\QQ_q(t)$ denotes the function field of $\mathfrak{S}$. 
+following the method of Griffiths and Dwork.  
 
-\begin{thm}
-Let $\Omega$ denote the $n$-form $\Omega$ in $\HdR^{n}(\mathfrak{U}_L)$ 
+\begin{prop}
+Let $\Omega$ denote the $n$-form $\Omega$ on $\mathfrak{U}/\mathfrak{S}$ 
 defined by 
 \begin{equation}
 \Omega = \sum_{i=0}^n (-1)^i x_i d x_0 \wedge \dotsb \wedge \widehat{d x_i} \wedge \dotsb \wedge d x_n.
 \end{equation}
-The algebraic de~Rham cohomology space $\HdR^{n}(\mathfrak{U}_L)$ is 
-isomorphic as an $L$-vector space to the quotient of the space of closed $n$-forms 
-$Q \Omega / P^k$ with $k \in \NN$ and $Q \in L[x_0, x_1, \dotsc, x_n]$ 
+The algebraic de~Rham cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ is 
+isomorphic to the quotient of the space of closed $n$-forms 
+$Q \Omega / P^k$ with $k \in \NN$ and $Q \in H^0(\mathfrak{S},\mathcal{O}_{\mathfrak{S}})[x_0, x_1, \dotsc, x_n]$ 
 homogeneous of degree $k d - (n + 1)$, by the subspace of exact $n$-forms generated by
 \begin{equation} \label{eq:deRhamRel}
 \frac{(\partial_i Q) \Omega}{P^k} - k \frac{Q (\partial_i P) \Omega}{P^{k+1}},
 \end{equation}
-for all $0 \leq i \leq n$ and with $k \in \NN$ and $Q \in L[x_0, x_1, \dotsc, x_n]$ 
-homogeneous of degree $kd-n$, where $\partial_i$ denotes the partial derivative operator 
-with respect to~$x_i$.
-\end{thm}
+for all $0 \leq i \leq n$ and with $k \in \NN$ and $Q \in H^0(\mathfrak{S},\mathcal{O}_{\mathfrak{S}})[x_0, x_1, \dotsc, x_n]$ 
+homogeneous of degree $kd-n$, where $\partial_i$ denotes the partial derivative operator with respect to~$x_i$.
+\end{prop}
 
 \begin{proof}
 Straightforward, for more details see Griffiths~\citep[\S 4]{Griffiths1969}.
 \end{proof}
 
-The cohomology space $\HdR^{n}(\mathfrak{U}_L)$ is equipped with 
-an increasing filtration of $L$-vector spaces 
-for which $\mbox{Fil}^k \HdR^{n}(\mathfrak{U}_L)$ consists of 
+The cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ is equipped with 
+an increasing filtration for which $\mbox{Fil}^k \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ consists of 
 all elements that can be represented by $n$-forms $Q \Omega / P^k$ 
-with $Q \in L[x_0, x_1, \dotsc, x_n]$ homogeneous of degree $kd - (n + 1)$. 
+with $Q \in H^0(\mathfrak{S},\mathcal{O}_{\mathfrak{S}})[x_0, x_1, \dotsc, x_n]$ homogeneous of degree $kd - (n + 1)$. 
 It follows from a theorem of Macaulay~\citep[\S 4, (4.11)]{Griffiths1969} 
-that $\mbox{Fil}^n \HdR^{n}(\mathfrak{U}_L)= \HdR^{n}(\mathfrak{U}_L)$. 
-Therefore, a basis for $\HdR^{n}(\mathfrak{U}_L)$ can in principle be 
-computed using finite dimensional linear algebra. We now define an explicit 
+that $\mbox{Fil}^n \HdR^{n}(\mathfrak{U}/\mathfrak{S})= \HdR^{n}(\mathfrak{U}/\mathfrak{S})$. 
+Actually, the reverse filtration $\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
+corresponds to the restriction $H_k$ of the Hodge filtration on $\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ 
+to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ by \cite{Griffiths1969}.
+
+As we prefer to perform linear 
+algebra operations over a field, we will actually work with the de~Rham 
+cohomology vector space $\HdR^{n}(\mathfrak{U}_L)$ of the generic fiber 
+$\mathfrak{U}_L = \mathfrak{U}/\mathfrak{S} \times_{\mathfrak{S}} \Spec{L}$, 
+where $L=\QQ_q(t)$ denotes the function field of $\mathfrak{S}$. 
+
+We now define an explicit 
 basis of a simple form for $\HdR^{n}(\mathfrak{U}_L)$ for the families 
 that we are interested in.
-
-%TODO perhaps mention that all spaces of polynomials contain Q=0 (annoying)
-%TODO mention that Fil^i is the (reverse) Hodge filtration on H^{n-1}(X) with the correct indices
 
 \begin{defn} \label{defn:MonBasis}
 For $k \in \NN$, we define the following sets of monomials: 
@@ -671,7 +735,7 @@ where $\equiv$ denotes equality in cohomology.
 \State $k \gets k-1$
 \State $Q \gets k^{-1} \sum_{i=0}^n \partial_i Q_i$
 \EndWhile
-\While{$Q \not \in B_k$}
+\While{$Q \not \in L$-span of $B_k$}
 \State $Q_0, \dotsc, Q_n, \gamma_k \gets \Call{Decompose}{Q}$
 \State $k \gets k-1$
 \State $Q \gets k^{-1} \sum_{i=0}^n \partial_i Q_i$
@@ -784,18 +848,18 @@ formalised in Algorithm~\ref{alg:Connection} below.
 We define the resultant $R \in \ZZ_q[t]$ of the polynomial $P$ with respect to the
 basis $\cB$ by
 \[
-R = \prod_{k=\lfloor n/d \rfloor+1}^{n+1}  \det(\Delta_k),
+R = \prod_{k=\ceil{(n+1)/d}}^{n+1}  \det(\Delta_k),
 \]
 with the matrices $\Delta_k$ defined as in the proof of Theorem~\ref{thm:Isomorphism}.
 \end{defn}
 
-\begin{thm} \label{thm:denom}
+\begin{prop} \label{thm:denom}
 The matrix $M$ of $\nabla$ with respect to $\cB$ is of the form
 $H/R$, with $H \in M_{b \times b}(\QQ_q[t])$.
-\end{thm}
+\end{prop}
 
 \begin{proof}
-The only time in Algorithm \ref{alg:Connection} that nonconstant denominators are introduced is when the subroutine {\sc{Reduce}} calls its subroutine {\sc{Decompose}} and a linear system $\Delta_k v = b$ is solved. Since this happens only for $k=\lfloor n/d \rfloor+1, \dotsc, n+1$ and at most once for each such $k$, the result is clear.
+The only time in Algorithm \ref{alg:Connection} that nonconstant denominators are introduced is when the subroutine {\sc{Reduce}} calls its subroutine {\sc{Decompose}} and a linear system $\Delta_k v = b$ is solved. Since this happens only for $k=\ceil{(n+1)/d}, \dotsc, n+1$ and at most once for each such $k$, the result is clear.
 \end{proof}
 
 \begin{rem} \mbox{ }
@@ -809,8 +873,7 @@ defined by a polynomial $P \in \ZZ_q[t][x_0,\ldots,x_n]$, there exists
 a Frobenius structure $F_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and we let 
 $\Phi \in M_{b \times b}(\QQ_q \langle t, \frac{1}{r} \rangle^{\dag})$ denote the 
 matrix of the action of $p^{-1}\Frob_p$, where $r$ is the denominator of the connection 
-matrix $M$. Recall that $\FF_{\mathfrak{q}}$ denotes a finite extension of $\FF_q$, in
-other words: $\mathfrak{q}=q^f$ for some $f \in \NN$.
+matrix $M$. Recall that $\FF_{\mathfrak{q}}$ denotes a finite extension of $\FF_q$. 
 
 We need a priori lower bounds on the $p$-adic valuations of the matrices $\Phi$ and 
 $\Phi^{-1}$ to bound the loss of $p$-adic precision in our computations. We will now
@@ -821,10 +884,10 @@ Let $\overline{R} \in \FF_q[t]$ denote the reduction modulo $p$ of the resultant
 $\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying $\overline{R}(\tau) \neq 0$, there exists a 
 matrix $W_{\tau} \in M_{b \times b}(\QQ_{\mathfrak{q}})$ such that 
 \begin{align*}
-\ord_p(W_{\tau}) &\geq -\sum_{i=1}^{n-1} \floor{\log_p(i)}, \\
-\ord_p(W_{\tau}^{-1}) &\geq -\ord_p((n-1)!), \\
-\ord_p(W_{\tau} \Phi_{\tau} \sigma_p(W_{\tau}^{-1})) &\geq 0, \\
-\ord_p(W_{\tau} \Phi_{\tau}^{-1} \sigma_p(W_{\tau}^{-1})) &\geq -(n-1).
+\ord_p(W_{\tau}) \geq -\sum_{i=1}^{n-1} \floor{\log_p(i)}, \; \; \; 
+\ord_p(W_{\tau}^{-1}) \geq -\ord_p((n-1)!), \\
+\ord_p(W_{\tau} \Phi_{\tau} \sigma_p(W_{\tau}^{-1})) \geq 0, \; \; \; 
+\ord_p(W_{\tau} \Phi_{\tau}^{-1} \sigma_p(W_{\tau}^{-1})) \geq -(n-1).
 \end{align*}
 \end{thm}
 
@@ -889,7 +952,7 @@ Define the nonnegative integer
 \]
 \end{defn}
 
-\begin{cor} We have that
+\begin{cor} \label{cor:delta} We have that
 \begin{align*}
 \ord_p(\Phi) &\geq -\delta, \\
 \ord_p(\Phi^{-1}) &\geq -\delta-(n-1).
@@ -908,11 +971,7 @@ and also
 \ord_p(\Phi^{-1}_{\tau}) &\geq \ord_p(W^{-1}_{\tau}) + \ord_p(W_{\tau} \Phi^{-1}_{\tau} \sigma_p(W_{\tau}^{-1})) + \ord_p(\sigma(W_{\tau})) \\
 &\geq -\delta - (n-1).
 \end{align*}
-Since this holds for an infinite number of $\tau$ (for varying $\mathfrak{q}$), it implies that 
-\begin{align*}
-\ord_p(\Phi) &\geq -\delta, \\
-\ord_p(\Phi^{-1}) &\geq -\delta-(n-1).
-\end{align*}
+Since these inequalities hold for an infinite number of $\tau$ (when $\mathfrak{q}$ varies), we obtain the required bounds.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1253,7 +1312,7 @@ where $\delta$ is defined as in Definition \ref{defn:delta}.
 \end{prop}
 
 \begin{proof}
-Recall from section [[TODO Jan]] that the valuations 
+Recall from Corollary \ref{cor:delta} that the valuations 
 of the entries of the matrix~$\Phi$ are bounded from below by $-\delta$. 
 Thus, by Theorem~\ref{thm:01-03-diagfrob}, 
 \begin{equation*}
@@ -1322,22 +1381,22 @@ below.
 \vspace{1mm}
 \Require $P_0=a_0 x_0^d + \dotsb + a_n x_n^d$ 
          with $a_0,\dotsc,a_n \in \ZZ_p^{\times}$, 
-         $p$-adic precision~$N \geq 0$.
-\Ensure  Matrix $\Phi$ for action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ modulo $p^N$.
+         $p$-adic precision $N \geq 0$
+\Ensure  matrix $\Phi$ for action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ modulo $p^N$
 \Procedure{DiagFrob}{$P_0,N$}
 \State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
-\item Determine $\tilde{N}$ from Corollary \ref{cor:Ntilde}, and $\mathcal{M}$,$\mathcal{R}$ from Proposition \ref{prop:MR}. 
-\item Compute the Teichm\"uller lifts $\hat{a}_0, \dotsc, \hat{a}_n$, 
+\item determine $\tilde{N}$ from Corollary \ref{cor:Ntilde}, and $\mathcal{M}$,$\mathcal{R}$ from Proposition \ref{prop:MR} 
+\item compute the Teichm\"uller lifts $\hat{a}_0, \dotsc, \hat{a}_n$, 
       and the sequences $(d^{-r})_{r=0}^{\mathcal{R}}$, $(\mu_m)_{m=0}^{\mathcal{M}}$ 
-      to $p$-adic precision~$\tilde{N}$.
-\item Let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix.
+      to $p$-adic precision~$\tilde{N}$
+\item let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix
 \item[] \textbf{for} $x^u \in B$ \textbf{do} 
 \item[] \begin{compactenum}[{\hspace{1em}} 1.]
-        \item Determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$.
-        \item $x_1 \gets (-1)^{k_u+k_v} (k_v-1)! p^n$ as an exact integer %TODO? a sufficient $p$-adic precision here is N+ord_p((n-1)!)+n+\delta
+        \item determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$
+        \item $x_1 \gets (-1)^{k_u+k_v} (k_v-1)! p^n$ as an exact integer
         \item $x_2 \gets (k_u - 1)! \alpha_{u,v} \pmod{p^{\tilde{N}}}$ using Theorem \ref{thm:alpha2} or 
-               Theorem \ref{thm:alphap}.
-        \item Compute $x_2^{-1} \pmod{p^{N-n}}$.
+               Theorem \ref{thm:alphap}
+        \item compute $x_2^{-1} \pmod{p^{N-n}}$
         \item $(\Phi_0)_{u,v} \gets x_1 x_2^{-1} \pmod{p^N}$
       \end{compactenum}   
  \item \textbf{return} $\Phi_0$      
@@ -1357,9 +1416,10 @@ modulo~$p^{\tilde{N}}$ via
     & \text{if $p$ is odd},
 \end{cases}
 \end{equation*}
-with only one $p$-adic inversion as all summands are integers. Moreover, 
-these summands are of size $\BigOh(m \log m)$ bits, which also allows us 
-to avoid performing intermediate reductions modulo~$p^{\tilde{N}}$.
+with only one $p$-adic inversion as all summands are integers. 
+%Moreover, these summands are of size $\BigOh(m \log m)$ bits, which also allows us 
+%to avoid performing intermediate reductions modulo~$p^{\tilde{N}}$.
+%TODO doesn't make sense to me that O(m log m) would imply no reductions, effective constant?
 \end{rem}
 
 %TODO put all the complexity stuff together at the end, and max a couple
@@ -1475,23 +1535,22 @@ of~$\ZZ_p$.
 \label{sec:DifferentialSystem}
 
 In this section we explain how to solve the $p$-adic differential 
-equation describing the horizontal sections of the Gauss--Manin 
+equation for the horizontal sections of the Gauss--Manin 
 connection $\nabla$, in order to obtain a local expansion of the 
 matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$.  
 Our discussion largely follows the work of Lauder~\citep{Lauder2006}, 
 but incorporates improved convergence bounds by Kedlaya~\citep{Kedlaya2010}.
 
-Recall from Section \ref{sec:Connection} that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for the Gauss--Manin connection 
-$\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$ with respect to the basis $\cB$. We let $r \in \ZZ_q[t]$
-denote the denominator of $M$, so that $M = G/r$ with $G \in M_{b \times b}(\QQ_q[t])$.
-Note that $r$ is a divisor of the resultant $R$ defined in Definition \ref{defn:resultant}.
-Also recall that $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
+Recall from Section \ref{sec:Connection} that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for 
+the Gauss--Manin connection $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$ with respect to the 
+basis $\cB$. We let $r \in \ZZ_q[t]$ denote the denominator of $M$, so that $M = G/r$ with 
+$G \in M_{b \times b}(\QQ_q[t])$. Note that $r$ is a divisor of the resultant $R$ defined in 
+Definition \ref{defn:resultant}. Also recall that $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
 denotes the matrix for the $\sigma_p$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
 respect to the same basis $\cB$, where $\sigma_p$ is the standard lift of the $p$th-power Frobenius 
 sending $t \mapsto t^p$. 
 
-As we saw in section \ref{sec:Background}, these matrices satisfy the 
-differential equation
+As we saw in section \ref{sec:Background}, these matrices satisfy the differential equation
 
 \begin{equation} \label{eq:Phi}
 \Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma_p(M), \; \; \; \Phi(0)=\Phi_0,
@@ -1514,7 +1573,7 @@ satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation
 
 Let us write $G = \sum_{i=0}^{\deg(G)} G_i t^i$ and $r= \sum_{i=0}^{\deg(r)} r_i t^i$,
 with $G_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. By our assumption 
-\ref{assump:r0}, we may suppose that $r_0 \neq 0 \pmod{p}$, so in particular $r_0 \neq 0$.
+[[TODO Jan]], we may suppose that $r_0 \neq 0 \pmod{p}$, so in particular $r_0 \neq 0$.
 
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ at $t=0$ for 
 the equation
@@ -1529,17 +1588,17 @@ C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr). \label{eq:recursion}
 \end{align}
 
-However, we will carry out this computation to some finite $p$-adic working precision $\tilde{N}$. If
+However, we will only carry out this computation to some finite $p$-adic working precision $\tilde{N}$. If
 we want $C$ to be correct to $p$-adic precision $N$, then $\tilde{N}$ has to be somewhat greater than $N$, 
 because of error propagation. A bound for $\tilde{N}$, in terms of $N$ and the desired $t$-adic precision, 
 was given by Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be improved significantly by including 
-more recent bounds on the valuation of $C_0, C_1, \dotsc$ by Kedlaya~\citep{Kedlaya2010}, as we will now show.  
+more recent bounds on the convergence of $C$ by Kedlaya~\citep{Kedlaya2010}, as we will now show. We let
+ $\delta$ be defined as in Definition \ref{defn:delta}. 
 
 \begin{thm} \label{thm:valC}
-For all $i \geq 1$, the $p$-adic valuation of the matrix~$C_i$ 
-satisfies 
+For all $i \geq 1$, we have that
 \begin{equation*}
-\ord_p(C_i) \geq - \bigl(2 \delta + (n - 1)\bigr) \ceil{\log_p i}.
+\ord_p(C_i) \geq - \bigl(2 \delta + (n - 1)\bigr) \ceil{\log_p i},
 \end{equation*}
 \end{thm}
 
@@ -1548,16 +1607,12 @@ It follows from Theorem~{18.3.3} in Kedlaya~\citep{Kedlaya2010} that
 \begin{equation*}
 \ord_p(C_i) \geq \bigl( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \bigr) \ceil{\log_p i}.
 \end{equation*}
-However, by [[TODO Jan]], we know that $\ord_p(\Phi) \geq -\delta$ and 
-$\ord_p(p^{n-1}\Phi^{-1}) \geq -\delta$, so
-\begin{equation*}
-\ord_p(\Phi) + \ord_p(\Phi^{-1}) \geq - 2 \delta - (n-1),
-\end{equation*}
-and the result now follows.
+From Corollary \ref{cor:delta}, we know that $\ord_p(\Phi) \geq -\delta$ and 
+$\ord_p(\Phi^{-1}) \geq -\delta-(n-1)$.
 \end{proof}
 
-Now let $D_0, D_1, \dotsc$ denote an approximation to $C_0, C_1, \dotsc$ 
-defined by the recursion
+Now let $D=\sum_{i \geq 0} D_i t^i$ denote an approximation to $C$ 
+defined by a recursion
 \begin{align*}
 D_0 &= I \\
 D_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
@@ -1565,11 +1620,11 @@ D_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j D_j) \biggr) + 
     p^{\tilde{N}} E_{i+1},
 \end{align*}
-where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices i.e., the matrices $D_0, D_1, \dotsc$
+where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices i.e., such that the matrices $D_i$
 are computed with working precision $\tilde{N}$.
 
 \begin{thm} \label{thm:errorprop}
-For all $i \geq 1$, 
+For all $i \geq 1$, we have that
 \begin{equation*}
 \ord_p(C_i - D_i) \geq 
     \tilde{N} - \Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p i}.
@@ -1592,7 +1647,6 @@ the dual differential equation
 \Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0, \; \; \; C^{-1}(0)=I,
 \end{equation}
 that carries a Frobenius structure given by the matrix $\bigl(\Phi^{-1}\bigr)^t$. 
-The result now follows.
 \end{proof}
 
 \begin{rem}
@@ -1602,7 +1656,7 @@ Kedlaya~\citep[Remark~18.3.4]{Kedlaya2010} also includes the bound
             + \bigl( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \bigr) \floor{\log_p i},
 \end{equation*}
 which can sometimes be used to improve the bounds from the above theorems slightly, 
-for example when $\ord_p(M)$ is positive.
+for example when $\ord_p(M)$ is nonnegative.
 \end{rem}
 
 \begin{rem}
@@ -1613,57 +1667,11 @@ However, solving Equation~\eqref{eq:01-GMDE-Dual} for $C^{-1}$ is typically
 more efficient in practice.
 \end{rem}
 
-We need to recall some bounds on the loss of $p$-adic precision when
-multiplying $p$-adic numbers and matrices. [[TODO perhaps move the 
-following propositions somewhere else]]
-
-\begin{prop} \label{prop:productval}
-Let $N \in \mathbf{Z}$ and $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$  
-be such that $N \geq \sum_{j=1}^{\ell} \ord_p(x_j)$, and let 
-$\tilde{x}_1, \dotsc, \tilde{x}_{\ell}$ denote $p$-adic approximations to 
-$x_1, \dotsc, x_{\ell}$ satisfying $\ord_p(x_i - \tilde{x}_i) \geq N - \sum_{j \neq i} v_j$ 
-for all $i$.  Then 
-\begin{equation*}
-\ord_p(x_1 \dotsm x_{\ell} - \tilde{x}_1 \dotsm \tilde{x}_{\ell}) \geq N.
-\end{equation*}
-[[TODO Seb]] I weakened the conditions, check!
-\end{prop}
-
-\begin{proof}
-Note that, for all $i$,
-\begin{align*}
-\ord_p(\tilde{x}_i) &\geq \min \{ \ord_p(x_i-\tilde{x}_i), \ord_p(x_i) \} \\
-                    &\geq \min \{ N- \sum_{j \neq i} \ord_p(x_j), \ord_p(x_i)\} = \ord_p(x_i).
-\end{align*}
-Therefore, we also have
-\begin{align*}
-\ord_p \bigl( (x_{i}-\tilde{x}_{i})(\tilde{x}_1 \dotsc \tilde{x}_{i-1} x_{i+1} \dotsc x_{\ell} \bigr) \geq N,
-\end{align*}
-for all $i$. The result now follows by combining these inequalities.
-\end{proof}
-
-\begin{prop} \label{prop:matrixproductval}
-Let $N \in \mathbf{Z}$ and $A_1, \dotsc, A_{\ell} \in M_{b \times b}(\QQ_q)$
-be such that $N \geq \sum_{j=1}^{\ell} v_j$, and let
-$\tilde{A}_1, \dotsc, \tilde{A}_{\ell}$ denote $p$-adic approximations 
-to $A_1, \dotsc A_{\ell}$ satisfying $\ord_p(A_i - \tilde{A}_i) \geq N - \sum_{j \neq i} v_j$ 
-for all $i$.  Then 
-\begin{equation}
-\ord_p(A_1 \dotsm A_{\ell} - \tilde{A}_1 \dotsm \tilde{A}_{\ell}) \geq N.
-\end{equation}
-\end{prop}
-
-\begin{proof}
-We can follow the proof of Proposition~\ref{prop:productval}, 
-observing that for matrices $A$, $B$ we have 
-$\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$.
-\end{proof}
-
 We can now finally give all the necessary precisions for computing the power series expansion for $\Phi$ at $t=0$ to
 any given precision.
 
 \begin{thm} \label{thm:Ni}
-Let $N,K \in \NN$ and suppose that $N \geq \ord_p(\Phi_0)$ [[TODO Jan, try to get rid of this]]. Define
+Let $N,K \in \NN$ and define:
 \begin{eqnarray*}
 N_{\Phi_0}   		&=& N+\bigl(2\delta+(n-1)\bigr) \bigl(\ceil{\log_p K} + \ceil{\log_p \floor{K/p}}\bigr) \\
 N_{C}				&=& N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p \floor{K/p}} + \delta \\
@@ -1686,13 +1694,9 @@ Therefore, while solving Equation \eqref{eq:01-GMDE-Homogenous} for $C$ and Equa
 
 \begin{proof}
 Recall that $\Phi = C \Phi_0 \sigma_p(C)^{-1}$. The sufficient $t$-adic precisions are clear. 
-Since $\ord_p(C) \leq 0$ and $\ord_p(\sigma_p(C)^{-1}) \leq 0$, we have that 
-\[
-N \geq \ord_p(C) + \ord_p(\Phi_0) + \ord_p(\sigma_p(C)^{-1}).
-\]
-So we can apply Proposition \ref{prop:matrixproductval}, using Theorem \ref{thm:valC} (for both $C$ and $C^{-1}$) 
-and the fact that $\ord_p(\Phi_0) \geq -\delta$ [[TODO Jan]], to obtain the sufficient $p$-adic precisions for the matrices 
-$\Phi_0$, $C$ and $C^{-1}$. The sufficient working precisions $\tilde{N}_C$ and $\tilde{N}_{C^{-1}}$
+We can apply Proposition \ref{prop:matrixproductval}, using Theorem \ref{thm:valC} (for both $C$ and $C^{-1}$) 
+and the fact that $\ord_p(\Phi_0) \geq -\delta$ from Corollary \ref{cor:delta}, to obtain the sufficient $p$-adic 
+precisions for the matrices $\Phi_0$, $C$ and $C^{-1}$. The sufficient working precisions $\tilde{N}_C$ and $\tilde{N}_{C^{-1}}$
 now follow from Theorem \ref{thm:errorprop}.
 \end{proof}
 
@@ -1704,21 +1708,21 @@ given $p$-adic and $t$-adic precisions, as formalised in Algorithm \ref{alg:expa
 \label{alg:expansion}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying ..., $t$-adic precision $K$, $p$-adic precision~$N$.
-\Ensure  The power series expansion of $\Phi$ at $t=0$ to $t$-adic precision $K$ and $p$-adic precision $N$.
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying ..., $t$-adic precision $K$, $p$-adic precision~$N$
+\Ensure  the power series expansion of $\Phi$ at $t=0$ to $t$-adic precision $K$ and $p$-adic precision $N$
 \Procedure{FrobSeriesExpansion}{$N,K$} 
 \State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
-\item Determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$ from Theorem \ref{thm:Ni}
+\item determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$ from Theorem \ref{thm:Ni}
 \item $M \gets \textsc{GMConnection}(P)$
 \item $\Phi_0 \gets \textsc{DiagFrob}(P_0,N_{\Phi_0})$
-\item Solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
+\item solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
 \begin{compactenum}[{\hspace{1em}} a.] 
 \item[] $C_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $K-1$ \textbf{do} 
 \item[] \hspace{1em} $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{\tilde{N}_C}}$
 \item[] $C \gets \sum_{i=0}^K C_i t^i \pmod{p^{N_C}}$
 \end{compactenum}
-\item Solve Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\floor{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
+\item solve Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\floor{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
 \begin{compactenum}[{\hspace{1em}} a.]
 \item[] $(C^{-1})^t_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $\floor{K/p}-1$ \textbf{do}
@@ -1734,14 +1738,14 @@ given $p$-adic and $t$-adic precisions, as formalised in Algorithm \ref{alg:expa
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Recovering the zeta function of a fiber}
+\section{The zeta function of a fiber}
 
 \subsection{Evaluation at a point}
 \label{sec:Evaluation}
 
 In the previous section we described how to compute the power series expansion at $t=0$ of
 the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$. We now want to
-evaluate $\Phi$ at the Teichm\"uller lift $\hat{\tau}$ of some $\tau \neq 0 \in S(\overline{\FF}_q)$,
+evaluate $\Phi$ at the Teichm\"uller lift $\hat{\tau}$ of some $\tau \neq 0 \in S(\FF_{\mathfrak{q}})$,
 but the power series expansion of $\Phi$ at $t=0$ usually only converges on the open 
 unit disc $|t|<1$, and so cannot be evaluated at $\hat{\tau}$. 
 
@@ -1766,9 +1770,9 @@ Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in $\mathbf{P}^{1}_{\
 and let $z$ be an unramified geometric point of $\mathfrak{Z}$ such that $\mathfrak{Z}$ does not 
 contain any other points with the same reduction modulo~$p$.  Suppose that $[v_1,\dotsc,v_b]$ is 
 a basis for $\Hrig^n(U/S)$ with respect to which the matrix $M$ for the connection~$\nabla$ 
-has at most a simple pole at~$z$. Moreover, assume that the exponents $\{ \lambda_1, \dotsc, \lambda_{b} \}$ 
+has at most a simple pole at~$z$. Let $\{ \lambda_1, \dotsc, \lambda_{b} \}$ denote the exponents 
 of $M$ at $z$, which are defined as the eigenvalues of $(t - z) M \vert_{t=z}$, and known to be rational 
-numbers, have nonnegative $p$-adic valuations. Let $\Phi$ denote the matrix of the action of $p^{-1} \Frob_p$ 
+numbers. Let $\Phi$ denote the matrix of the action of $p^{-1} \Frob_p$ 
 on $\Hrig^{n}(U/S)$, with respect to the basis $[v_1,\dotsc,v_b]$, and let $\delta$ be defined as in Definition
 \ref{defn:delta}. 
 For $i \in \NN$, put
@@ -1779,7 +1783,7 @@ f(i)=\max \{ \bigl( -2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil,
 and define 
 \begin{align*}
 c = \begin{cases}
-0 & \mbox{if $\ord_p(M) \geq 0$} \\
+0 & \mbox{if $\ord_p(M) \geq 0$}, \\
 \min\{0, i + f(i): i \in \NN\} & \mbox{if $\ord_p(M) < 0$}.
 \end{cases}
 \end{align*}
@@ -1810,26 +1814,17 @@ $-\delta$ and $\bigl( -2 \delta + (n-1) \bigr)$, since we might not know them ex
 \end{proof}
 
 \begin{rem}
-In practice the various constants $\bigl( -2 \delta + (n-1) \bigr), c, \alpha_1, -\delta$ are always very close
-to zero, so that $g(N)$ is about $N$, and the lower bound for the order of $\Phi$ modulo $p^N$ at $z$ is roughly $-pN$.
+In practice the various constants $\bigl( -2 \delta + (n-1) \bigr), c, \alpha_1, -\delta$ are always very small
+in absolute value, so that $g(N)$ is about $N$, and the lower bound for the order of $\Phi$ modulo $p^N$ at $z$ is roughly $-pN$.
 %This is what one should remember from this theorem.
 \end{rem}
 
 \begin{rem}
-The assumptions in the theorem are a lot less restrictive than one might think
-at first.
-
 That $M$ has a simple pole at $z$ is not a serious restriction, since
 one can always change the basis $[v_1,\dotsc,v_b]$ such that this condition is
 satisfied, because the Gauss--Manin connection is known to be regular singular. 
 Applying the theorem to this new basis and transforming back to the old one, one
 obtains more or less the same bound as before \citep[Corollary~2.6]{KedlayaTuitman2012}.
-
-That the exponents are $p$-adically integral turns out to be an unnecessary 
-condition [[TODO Jan, this seems to contradict one of Seb's examples, check]], since it is 
-implied already by the existence of a Frobenius structure [[TODO Jan]].
-At least one of the authors of \cite{KedlayaTuitman2012} did not realize this
-at the time it was written.
 
 The only real restriction is therefore that $\mathfrak{Z}$ does not contain any points
 with the same reduction modulo $p$ as $z$. However, this condition is almost always
@@ -1841,208 +1836,219 @@ Now if we want to compute the matrix $\Phi_{\tau}$ of the action of $p^{-1} \Fro
 $\Hrig^{n}(U_{\tau})$ to $p$-adic precision $N$, then we can use Theorem \ref{thm:KedlayaTuitman} 
 to find $m,K \in \NN$ such that $r(t)^m \Phi(t)$ is congruent modulo $p^N$ to a matrix of polynomials 
 of degree at most $K$ that can be evaluated at $\hat{\tau}$. We then compute
-\begin{equation}
+\begin{equation*}
 \Phi_{\tau} = r(\hat{\tau})^{-m} \bigl( r(t)^m \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
-\end{equation}
+\end{equation*}
 
 \subsection{Computing the zeta function}
 \label{sec:ZetaFunctions}
 
 Now we want to compute the zeta function of the fiber $X_{\tau}$ of
-our family $X/S$ lying over some $\tau \in S(\FF{\mathfrak{q}})$ with $\mathfrak{q}=q^f$ 
-for some $f \in \NN$. Recall that the 
-zeta function of $X_{\tau}$ is of the form
-\begin{equation}
+our family $X/S$ lying over some $\tau \in S(\FF_{\mathfrak{q}})$, 
+where $\FF_{\mathfrak{q}}$ denotes a finite extension of $\FF_q$.  
+Recall from Theorem \ref{thm:hypersurface} 
+that the zeta function of $X_{\tau}$ is of the form
+\begin{equation*}
 Z(X_{\tau},T) = \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)},
-\end{equation}
+\end{equation*}
 where $\chi(T) = \det \bigl( 1 - T \mathfrak{q}^{-1} \Frob_{\mathfrak{q}} | \Hrig^n(U_{\tau}) \bigr) \in \ZZ[T]$ 
 denotes the reverse characteristic polynomial of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ 
 on $\Hrig^n(U_{\tau})$.
 
-So to compute the zeta function of $X_{\tau}$ we first need to determine the matrix of the action of 
-$\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$ from that of $p^{-1} \Frob_{p}$,
-and then compute its reverse characteristic polynomial. All of this has to be
-carried out to high enough $p$-adic precision in order to recover the exact zeta function.
+%So to compute the zeta function of $X_{\tau}$, we first need to determine the matrix of the action of 
+%$\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$ from that of $p^{-1} \Frob_{p}$,
+%and then compute its reverse characteristic polynomial. All of this has to be
+%carried out to high enough $p$-adic precision in order to recover the exact zeta function.
 
-We start by computing the matrix of the action of 
-$\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$.
+We start by computing the matrix of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$.
 Let us denote $a=\log_p(\mathfrak{q})$. Recall that $\Phi_{\tau}$ denotes the matrix of the action 
 of $p^{-1} \Frob_p$ on~$\Hrig^{n}(U_{\tau})$ with respect to the basis $\cB$. As this action is 
 $\sigma_p$-semilinear, we have that 
-\begin{equation}
+\begin{equation*}
 \Phi_{\tau}^{(a)} = 
     \Phi_{\tau} \sigma_p(\Phi_{\tau}) \dotsm \sigma_p^{a-1}(\Phi_{\tau})
-\end{equation}
+\end{equation*}
 is the matrix of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$. 
 
-\begin{comment}
-\begin{thm}
-In order to determine $\Phi_{\tau}^{(a)}$ to $p$-adic precision~$N \geq 0$, it suffices to 
-compute $\Phi_{\tau}$ to precision $N + (a-1) \delta$.
-\end{thm}
+We now analyse the loss of $p$-adic precision when computing the reverse characteristic polynomial 
+$\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det( 1 - T \Phi_{\tau}^{(a)})$.  
 
-\begin{proof}
-Since we have that $\ord_p(\Phi_{\tau}) \geq -\delta$ by [[TODO Jan]], the valuations of the matrices 
-$\Phi_{\tau}, \sigma_p(\Phi_{\tau}), \dotsc, \sigma_p^{a-1}(\Phi_{\tau})$ 
-are all at least $-\delta$. The theorem now follows from Proposition 
-\ref{prop:matrixproductval}. 
-\end{proof}
-\end{comment}
-
-We now address the loss of $p$-adic precision when computing the reverse
-characteristic polynomial $\det( 1 - T \Phi_{\tau}^{(a)})$
-staring from the matrix $\Phi_{\tau}$.  
-
-\begin{thm}
+\begin{thm} \label{thm:preccharpoly}
 Suppose that $\tilde{\Phi}_{\tau}$ is an approximation to 
-$\Phi_{\tau}$ with 
+$\Phi_{\tau}$ satisfying
+$\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N$,
+with $\delta$ defined as in Definition \ref{defn:delta} and $N \geq \delta$. Let us denote
 \[
-\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N + \delta,
+\tilde{\chi}(T)=1+\sum_{i=1}^b \tilde{\chi}_i T^i = \det( 1 - T \tilde{\Phi}_{\tau}^{(a)}).
 \]
-with $N \geq 0$ and $\delta$ defined as in Definition \ref{defn:delta}. Then
-\begin{equation}
-\ord_p \Bigl( \det\bigl(1 - T \Phi_{\tau}^{(a)}\bigr) 
-            - \det\bigl(1 - T \tilde{\Phi}_{\tau}^{(a)}\bigr) \Bigr) \geq N.
-\end{equation}
+Then for all $1 \leq i \leq b$, we have that 
+\[
+\ord_p (\chi_i - \tilde{\chi}_i) \geq N-\delta.
+\]
 \end{thm}
 
 \begin{proof} 
-Recall from [[TODO Jan]] that there exists a matrix $W \in M_{b \times b}(\QQ_q)$
-which satisfies $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, 
-such that for $\Phi_{\tau}'=W \Phi_{\tau} \sigma_p(W)^{-1}$ we have that $\ord_p(\Phi_{\tau}') \geq 0$. 
+Recall from Theorem \ref{thm:deltabound} that there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_q)$
+satisfying $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, such that for $\Phi_{\tau}'=W \Phi_{\tau} \sigma_p(W)^{-1}$ 
+we have that $\ord_p(\Phi_{\tau}') \geq 0$. 
+
 Defining the matrix $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma_p(W)^{-1}$,
-we find that $\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N$, and in particular
-also $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we get that
+we find that $\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N-\delta$, and in particular
+$\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we obtain
 \[
 \ord_p \Bigl( \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr) 
-            - \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr) \Bigr) \geq N.
+            - \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr) \Bigr) \geq N-\delta.
 \] 
 Note that $(\Phi'_{\tau})^{(a)}= W \Phi_{\tau}^{(a)} W^{-1}$
 and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
-$\det\bigl(1 - T (\Phi_{\tau})^{(a)}\bigr)=\det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr)$
-and 
-$\det\bigl(1 - T (\tilde{\Phi}_{\tau})^{(a)}\bigr)=\det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr)$.
+\begin{align*}
+\chi(T)&=\det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr), \; \; \; 
+\tilde{\chi}(T)=\det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
+\end{align*}
 This finishes the proof.
 \end{proof}
-Now we ask to what $p$-adic precision~$N$ we need to compute
-$\det\bigl(1 - T \Phi_{\tau}^{(a)} \bigr)$ in order to recover 
-$\chi(T)$.
+
+When $p \geq n$, one can improve Theorem \ref{thm:preccharpoly} by taking into account the Hodge
+filtration $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ from Section \ref{sec:Connection}.
+
+\begin{thm} \label{thm:pgeqn}
+We continue to use the notation of Theorem \ref{thm:preccharpoly}. Suppose that $p \geq n$. 
+Order the elements of $\cB = \cup_{k=1}^n \cB_k$ by decreasing $k$, and let $k(i)$ denote
+the value of $k$ of the $i$-th element. Define $\Gamma: \NN _0\rightarrow \NN_0$ as
+\[
+\Gamma(i) = \sum_{j=1}^{i-1} (n-k(j)).
+\]
+Now suppose that $\tilde{\Phi}_{\tau}$ is an approximation to $\Phi_{\tau}$ satisfying
+$\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N$, and that $N \geq \Gamma(n)$. Then for all 
+$1 \leq i \leq b$, we have that 
+\[
+\ord_p(\chi_i-\tilde{\chi}_i) \geq N + \Gamma(i-1).
+\]
+\end{thm}
+ 
+\begin{proof} 
+Note that in this case $\delta=0$, so that $\ord_p(\Phi_{\tau}) \geq 0$. However, by a theorem of 
+Mazur \cite{Mazur1972}, the map $p^{-1} \Frob_p$ sends $(H_k)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ 
+into $p^k \Lambda_{\tau,crys}$, where $\Lambda_{\tau,crys}$ is defined as in the proof of Theorem \ref{thm:deltabound}. 
+Since $\cB_k \subset \mbox{Fil}^{k} \HdR^{n}(\mathfrak{U}/\mathfrak{S}) = H_{n-k}$, the map $p^{-1} \Frob_p$ sends
+$\cB_k$ into $p^{n-k} \Lambda_{\tau,crys}$. So if the $i$-th vector in our basis $\cB$ is an element of $\cB_k$, 
+then the $i$-th column of $\Phi_{\tau}$ will be divisible by $p^{n-k}$. Note that the $i$-th column of $\Phi_{\tau}^{(a)}$
+will then be divisible by $p^{n-k}$ as well. The coefficients $\chi_i$ and $\tilde{\chi}_i$ are (alternating) sums of
+products of $i$ elements from different columns of $\Phi_{\tau}^{(a)}$ and $\tilde{\Phi}_{\tau}^{(a)}$, respectively.
+Therefore, the required bound follows from Theorem \ref{prop:productval}. 
+\end{proof}
+
+Now we ask to what $p$-adic precision~$N$ we need to compute $\chi_i$ in order to recover $\chi(T)$ exactly.
 
 \begin{thm} \label{thm:N0}
-In order to recover $\chi(T)$, it suffices to compute 
-$\det\bigl(1 - T \Phi_{\tau}^{(a)} \bigr)$ to $p$-adic precision
-$N$ satisfying
-\begin{equation}
-p^N > 2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \}.
-\end{equation}
-Moreover, if  the sign $\epsilon = \pm 1$ is known for which $\det(\Phi^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, then this can be improved to
-\begin{equation}
-p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
-\end{equation}
+In order to recover $\chi(T)$ exactly, it suffices to compute 
+$\chi_i$ to $p$-adic precision 
+\begin{equation*}
+N_i = \floor{\log_p \bigl( 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2} \bigr)}+1.
+\end{equation*}
 \end{thm}
 
 \begin{proof}
-Recall from 
-%Theorem \ref{thm:weildeligne} 
-% [[TODO Jan]] small problem, U instead of X, easy to fix
-that
+By Theorem \ref{thm:weildeligne} and the short exact sequence \eqref{eqn:excision}, we have that
 \[
 \chi(T)=\prod_{i=1}^b (1-\alpha_i T),
 \]
 where the $\alpha_i$ are algebraic integers of absolute value $\mathfrak{q}^{(n-1)/2}$ that are
 permuted under the map $\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$. If we denote
-$\chi(T) = \sum_{i=0}^{b} \chi_i T^i$, then this implies that $|\chi_i| \leq \binom{b}{i} \mathfrak{q}^{i (n-1)/2}$.
-Therefore, if we compute $\chi(t)$ with $p$-adic precision $N$ satisfying
+$s_j = \sum_{i=1}^{b} \alpha_i^j$, then clearly
 \[
-p^N > 2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \},
+|s_j| \leq b \mathfrak{q}^{j (n-1)/2}.
+\]
+for all $1 \leq j \leq b$. Moreover, if we denote $\chi(T) = 1+\sum_{i=1}^{b} \chi_i T^i$, 
+then by the Newton-Girard identies, we have that
+\begin{equation} \label{eq:recursion}
+s_j+j \chi_j = - \sum_{i=1}^{j-1} s_{j-i} \chi_i.
+\end{equation}
+This means that if we are given $\chi_1,\ldots,\chi_{j-1}$, then we can limit $\chi_j$ to an explicit 
+disk in the complex plane of radius $\bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2}$. Therefore, 
+if we know each $\chi_i$ to $p$-adic precision $N_i$ satisfying
+\[
+p^{N_i} > 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2},
 \] 
-then we know it exactly.
+then we can determine $\chi(T)$ exactly using the recursion \eqref{eq:recursion}.
+\end{proof}
 
-Since $\prod_{i=1}^b \alpha_i = \epsilon \mathfrak{q}^{b(n-1)/2}$, and the $\alpha_i$ are permuted
-under the map $\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$, we have that
+\begin{thm} \label{thm:precPhitau}
+Let $N_i$ be defined as in Theorem \ref{thm:N0}. To compute $\chi(T)$ exactly, it is sufficient to 
+compute $\Phi_{\tau}$ with $p$-adic precision
+\[
+N = \max_{1 \leq i \leq b} \{ N_i \} +\delta.
+\]
+If moreover $p \geq n$, then this can be improved to
+\[
+N = \max_{1 \leq i \leq b} \{ N_i -\Gamma(i-1) \}.
+\]
+\end{thm}
+
+\begin{proof}
+This follows easily by combining Theorem \ref{thm:N0} with Theorem \ref{thm:preccharpoly} and 
+Theorem \ref{thm:pgeqn}, respectively.
+\end{proof}
+
+\begin{rem}
+If  the sign $\epsilon = \pm 1$ is known for which $\det(\Phi^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, 
+then this can be improved further. Since $\prod_{i=1}^b \alpha_i = \epsilon \mathfrak{q}^{b(n-1)/2}$, and 
+the $\alpha_i$ are permuted under the map $\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$, we have that
 \begin{equation*}
 \chi_{b-i}=\epsilon (-1)^{b} \mathfrak{q}^{(n-1)(b/2-i)} \chi_b. 
 \end{equation*}
-So if $\epsilon$ is known, then
-$\chi(T)$ is uniquely determined already by $\chi_0,\dotsc,\chi_{\lfloor b/2 \rfloor}$,
-and it is sufficient to compute this polynomial with $p$-adic precision $N$ satisfying
-\[
-p^N > 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2}.
-\]
-\end{proof}
+So $\chi(T)$ is uniquely determined already by $\chi_1,\dotsc,\chi_{\lfloor b/2 \rfloor}$,
+and it is sufficient to take the maxima in Theorem \ref{thm:precPhitau} running only over
+$1 \leq i \leq \floor{b/2}$.
+
+It is well known that $\epsilon = 1$ when $n$ is even, but when $n$ is odd
+$\epsilon$ is usually not known. In practice it is then often still possible 
+to use a smaller precision by computing $\epsilon$ first. Let $k$ be the smallest 
+positive integer such that $\chi_{\ceil{b/2} - k} \neq 0$. 
+To recover $\chi_0, \dotsc, \chi_{\floor{b/2}+k}$, it is sufficient to take the maxima 
+in Theorem \ref{thm:precPhitau} running only over $1 \leq i \leq \floor{b/2}+k$. 
+This allows us to determine $\epsilon$ from the two coefficients $\chi_{\ceil{b/2}-k}$ and 
+$\chi_{\floor{b/2}+k}$. 
+\end{rem}
+
+%\begin{rem}
+%If $n \geq 3$, or $\mathfrak{q} \geq 4$, or $k \geq 7$, then
+%\[
+%\max_{1 \leq i \leq k} \{ \bigl( \frac{b}{i} \bigr) \mathfrak{q}^{i (n-1) / 2} \} = 
+%\bigl( \frac{b}{k} \bigr) \mathfrak{q}^{k (n-1) / 2}.
+%\]
+%\end{rem}
+
+We now formalise the complete algorithm for computing $Z(X_{\tau},T)$ in Algorithm \ref{alg:complete}
+below.
+
 \begin{algorithm}
 \caption{Compute $Z(X_{\tau},T)$.}
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying .., $\tau \in S(\mathbf{F}_{\mathfrak{q}})$.
-\Ensure  The zeta function $Z(X_{\tau},T)$ of the fiber $X_{\tau}$ lying over $\tau$.
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying .., $\tau \in S(\mathbf{F}_{\mathfrak{q}})$
+\Ensure  the zeta function $Z(X_{\tau},T)$ of the fiber $X_{\tau}$ lying over $\tau$
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
-\item   \textbf{if} $\epsilon$ is known 
-\item[] \hspace{1em} $N \gets \ceil{\log_p ( 2 \binom{b}{\floor{b/2}} \mathfrak{q}^{\floor{b/2} (n-1) / 2})}$ 
-\item[] \textbf{else}
-\item[] \hspace{1em} $N \gets \ceil{\log_p (2 \max_{0 \leq i \leq b} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \})}$ 
-\item[] $\tilde{N} \gets N + \delta$
-\item Compute $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ with $p$-adic precision $\tilde{N}$.
-\item Determine $m,K$ such that $r^m \Phi$ is a matrix of polynomials of degree at most $K$ to $p$-adic 
+\item determine $N$ from Theorem \ref{thm:precPhitau}
+\item $\tilde{N} \gets N + \delta$
+\item compute $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ with $p$-adic precision $\tilde{N}$
+\item determine $m,K$ such that $r^m \Phi$ is a matrix of polynomials of degree at most $K$ to $p$-adic 
       precision $\tilde{N}$ using Theorem \ref{thm:KedlayaTuitman}.
 \item $\Phi \gets$ \textsc{FrobSeriesExpansion($\tilde{N},K)$}
 \item $\Phi_{\tau} \gets r(\hat{\tau})^{-m} \bigl( r(t)^m \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \pmod{p^{\tilde{N}}}$
 \item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma_p(\Phi_{\tau}) \ldots \sigma_p^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$ as an element of $\ZZ[T]$ 
-\item $Z(X_{\tau},T) \gets \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)}$
+\item $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$
 \item \Return $Z(X_{\tau},T)$
 \end{compactenum}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-\begin{rem}
-It is well known that $\epsilon = 1$ when $n$ is even, but when $n$ is odd
-$\epsilon$ is usually not known. In practice it is often still possible to avoid 
-having to use the greater of the two precisions in Theorem~\ref{thm:N0} by
-computing $\epsilon$ first.  Again denote $\chi(T) = \sum_{i=0}^{b} \chi_i T^i$ and 
-let $k$ be the smallest positive integer such that $\chi_{\ceil{b/2} - k} \neq 0$.
-We know that we can recover $\chi_0, \dotsc, \chi_{\floor{b/2}+k}$ provided that
-\begin{equation*}
-p^N > 2 \max_{0 \leq i \leq (\floor{b/2}+k)} \{ \binom{b}{i} \mathfrak{q}^{i (n-1) / 2} \}.
-\end{equation*}
-This allows us to determine $\epsilon$ from the two coefficients $\chi_{\ceil{b/2}-k}$ and 
-$\chi_{\floor{b/2}+k}$. We can then recover the remaining coefficients using the functional 
-equation. 
-%The best strategy for odd $n$ is to first choose $N$ corresponding to $k=1$ and compute 
-%$\chi(T)$ with precision $N$. In the (unlikely) case that $\chi_{\ceil{b/2} - 1} = 0$, we raise
-%$N$ to the value corresponding to the smallest $k$ such that $\chi_{\ceil{b/2} - k} \neq 0$
-%(which is now known) and compute $\chi(T)$ again. 
-\end{rem}
-
-\begin{comment}
-[[TODO It does not make sense to state this only for surfaces, either state it
-more generally (possibly sketchy), or take out completely]]
-\begin{rem} \label{rem:N0Surfaces}
-In the case of smooth projective surfaces, when $p > 2$ and subject to 
-certain technical conditions, we can often exploit the growing divisibility 
-of the coefficients of $p(T)$ ensured by the Hodge polygon.  For such a surface 
-of degree~$d$, we know that the Hodge numbers $h_{0,2}$, $h_{1,1}$ and $h_{2,0}$ 
-satisfy $h_{0,2} = h_{2,0} = \binom{d-1}{3}$ and $2 h_{0,2} + h_{1,1} = b$. 
-It is now easier to determine the integer coefficients of the 
-polynomial~$q^{h_{0,2}} p(T/q)$ as the roots of the polynomial $p(T/q)$ lie 
-on the unit circle.  This allows us to take 
-\begin{align*}
-N_0 & = a h_{0,2} + \floor{\log_p \biggl( 2 \binom{b}{\floor{b/2}}\biggr)} + 1,\\
-N_1 & = N_0 + a,
-\end{align*}
-where $N_0$ here refers to the required precision for $q^{h_{0,2}} p(T/q)$ 
-and $N_1$ as before refers to the precision required for the matrix 
-representing $q^{-1} \Frob_q$ on $\Hrig^{n}(U_{t_1})$.
-For further details, we refer the reader to 
-Lauder~\citep[\S 9.3.2, Proposition~9.6]{Lauder2006}.
-\end{rem}
-\end{comment}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Complexity and Implementation}
+\section{Complexity and implementation}
 
 \subsection{Complexity}
 
@@ -2052,7 +2058,7 @@ Lauder~\citep[\S 9.3.2, Proposition~9.6]{Lauder2006}.
 
 Most of the steps in the algorithm can be
 carried out in parallel:
-\begin{enumerate}
+\begin{itemize}
 \item In Algorithm \ref{alg:Connection}, the images of the different 
       basis vectors under $\nabla$ can be computed independently.
 \item In Algorithm \ref{alg:Diabfrob}, the elements of the sequence 
@@ -2061,20 +2067,20 @@ carried out in parallel:
       as every $C_{i}$ depends on (some of) the $C_{j}$ with $j < i$. However, in
       the computation of every single $C_i$ the different matrix products can
       still be computed independently.
-\item The computation of the $\mathfrak{q}$th-power Frobenius 
-      $\Phi_{\tau} \sigma_p(\Phi_{\tau}) \dotsm \sigma_p^{a-1}(\Phi_{\tau})$, can be carried 
-      out in parallel.  This can be achieved if, instead of computing 
-      a running product from left to right, we express the matrix in a 
-      product tree.  We formalise this in Algorithm~\ref{alg:ParallelProduct}, 
+\item The computation of 
+      $\Phi_{\tau}^{(a)}=\Phi_{\tau} \sigma_p(\Phi_{\tau}) \dotsm \sigma_p^{a-1}(\Phi_{\tau})$ 
+      can be carried out in parallel.  Instead of computing 
+      a running product from left to right, one can use a 
+      product tree.  We formalise this in Algorithm~\ref{alg:ParallelProduct} below, 
       assuming for simplicity that $a = 2^k$.  In this notation, the execution 
       of the loops indexed by~$i$ can be parallelised.
       \begin{algorithm}
-      \caption{Parallel computation of $q^{-1} \Frob_{q} | \Hrig^{n}(U_{\tau})$}
+      \caption{Parallel computation of $\Phi_{\tau}^{(a)}$}
       \label{alg:ParallelProduct}
       \begin{algorithmic}
       \vspace{1mm}
       \For{$i \gets 0$ \textbf{to} $a-1$}
-          \State $G_i \gets \sigma_p^{i}(F)$
+          \State $G_i \gets \sigma_p^{i}(\Phi_{\tau})$
       \EndFor
       \For{$j=k-1$ \textbf{to} $0$}
           \State $h \gets 2^{k-j}$
@@ -2085,14 +2091,20 @@ carried out in parallel:
       \Return $G_0$
       \end{algorithmic}
       \end{algorithm}
-\end{enumerate}
+\end{itemize}
 
-[[TODO Seb, should it not be clearer that $\sigma_p^i$ is not computed by composing $\sigma_p$ with itself $i$ times? ]]
+\subsubsection{Magma}
 
+\subsubsection{Flint}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Examples}
 \label{sec:Examples}
+
+\subsection{Quintic curve}
+\subsection{Generic quintic curve}
+\subsection{Quartic surface}
+\subsection{Generic quartic surface}
 
 \phantomsection
 
