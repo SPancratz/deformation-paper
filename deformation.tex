@@ -1834,11 +1834,14 @@ to hold experimentally.
 
 Now if we want to compute the matrix $\Phi_{\tau}$ of the action of $p^{-1} \Frob_p$ on 
 $\Hrig^{n}(U_{\tau})$ to $p$-adic precision $N$, then we can use Theorem \ref{thm:KedlayaTuitman} 
-to find $m,K \in \NN$ such that $r(t)^m \Phi(t)$ is congruent modulo $p^N$ to a matrix of polynomials 
-of degree at most $K$ that can be evaluated at $\hat{\tau}$. We then compute
+to find $K \in \NN$, and a polynomial $D \in \ZZ_q[t]$, the zeros of which are zeros of $r$, such that 
+$D(t) \Phi(t)$ is congruent modulo $p^N$ to a matrix of polynomials of degree at most $K$. Note that
+$D$ is a denominator for the rational function $\Phi(t) \pmod{p^N}$. We then compute
 \begin{equation*}
-\Phi_{\tau} = r(\hat{\tau})^{-m} \bigl( r(t)^m \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
+\Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
 \end{equation*}
+Since $Q(\hat{\tau}) \in \ZZ_q^{\times}$ by Assumption [[TODO]], and $\ord_p(\Phi(t))) \geq -\delta$
+by Corollary \ref{cor:delta}, it is sufficient to compute $\Phi(t)$ with $p$-adic precision $N+\delta$.
 
 \subsection{Computing the zeta function}
 \label{sec:ZetaFunctions}
@@ -2034,11 +2037,12 @@ below.
 \item determine $N$ from Theorem \ref{thm:precPhitau}
 \item $\tilde{N} \gets N + \delta$
 \item compute $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ with $p$-adic precision $\tilde{N}$
-\item determine $m,K$ such that $r^m \Phi$ is a matrix of polynomials of degree at most $K$ to $p$-adic 
-      precision $\tilde{N}$ using Theorem \ref{thm:KedlayaTuitman}.
+\item determine $K \in \NN$ and $D \in \ZZ_q[t]$ such that $D(t) \Phi(t)$ is a matrix of polynomials 
+      of degree at most $K$ to $p$-adic precision $\tilde{N}$, using Theorem \ref{thm:KedlayaTuitman}
 \item $\Phi \gets$ \textsc{FrobSeriesExpansion($\tilde{N},K)$}
-\item $\Phi_{\tau} \gets r(\hat{\tau})^{-m} \bigl( r(t)^m \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \pmod{p^{\tilde{N}}}$
-\item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma_p(\Phi_{\tau}) \ldots \sigma_p^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$ as an element of $\ZZ[T]$ 
+\item $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \pmod{p^{N}}$ with working precision $p^{\tilde{N}}$
+\item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma_p(\Phi_{\tau}) \ldots \sigma_p^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$
+\item round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion} 
 \item $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$
 \item \Return $Z(X_{\tau},T)$
 \end{compactenum}
