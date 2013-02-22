@@ -1927,7 +1927,7 @@ below.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying Assumption \ref{assump:diag}, $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\overline{R}(\tau) \neq 0$
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption \ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\overline{R}(\tau) \neq 0$
 \Ensure  the zeta function $Z(X_{\tau},T)$ of the fiber $X_{\tau}$ lying over $\tau$
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
@@ -1953,7 +1953,8 @@ below.
 
 \subsection{Complexity}
 
-In this section we determine the complexity of Algorithm \ref{alg:complete}. 
+In this section we determine the complexity of Algorithm \ref{alg:complete}. Recall that $a = \log_p(\mathfrak{q})$,
+and let $d_t$ denote the degree of $P$ in the variable $t$.
 
 % A good measure for the input size is $a \log(p) d^n d_t$. 
 % We write $q=p^{a_1}$ and $\mathfrak{q}=q^{a_2}$, so that $a=a_1 a_2$.
@@ -1982,9 +1983,14 @@ N           = \tilde{\mathcal{O}}(a d^n).
 \end{eqnarray*}
 Hence $\tilde{N}$ from Algorithm \ref{alg:complete} 
 is $\tilde{O}(ad^n)$ as well. Now in Theorem \ref{thm:KedlayaTuitman}, if 
-we assume that $\alpha_1 = \tilde{\mathcal{O}}(pN)$, [[TODO, see if we can justify this, or
-replace with bound from Alan/Gerkmann]] then $\deg(D), K$ are both 
-$\tilde{\mathcal{O}}(p\tilde{N}) = \tilde{\mathcal{O}}(pad^n)$. The remaining $p$-adic precisions 
+we assume that $\alpha_1$ is $\tilde{\mathcal{O}}(pN)$, then $\deg(D), K$ are 
+both $\tilde{\mathcal{O}}(p\tilde{N}) = \tilde{\mathcal{O}}(pad^n)$.
+
+[[TODO, it's not just $\alpha_1$, also the change of basis matrices to a regular basis, see if we 
+can justify this, otherwise replace with bound from Lauder/Gerkmann in which the complexities in $d$ 
+will become a bit worse]]
+
+The remaining $p$-adic precisions 
 in the algorithm are all $\tilde{\mathcal{O}}(a\log(p)d^n)$ by Theorem \ref{thm:Ni} and Corollary 
 \ref{cor:Ntilde}.
 \end{proof} 
@@ -2145,18 +2151,44 @@ Finally, we consider the computation of $\chi(T)$.
 \begin{prop}
 The computation of $\chi(T)$ from $\Phi_{\tau}$ takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^3 \log^3(p) d^{3n}), \\
+\mbox{time: }  &\tilde{\mathcal{O}}(a^3 \log^3(p) d^{n(\omega+1)}), \\
 \mbox{space: } &\tilde{\mathcal{O}}(a^2 \log^2(p) d^{3n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
+To compute $\Phi_{\tau}^{(a)}$ using fast exponentiation for semilinear maps, we need to apply (powers of) $\sigma_p$ to $\mathcal{O}(b^2 \log(a))$
+elements of $\QQ_{\mathfrak{q}}$ and then multiply $\mathcal{O}(\log(a))$ matrices of size $b=\mathcal{O}(d^n)$. This
+can be done in time $\tilde{\mathcal{O}}(a^3 \log(p)^3 d^{n(\omega+1)})$. The reverse characteristic polynomial $\chi(T)$ of 
+$\Phi_{\tau}^{(a)}$ can be computed modulo the required precision in time 
+$\tilde{\mathcal{O}}(b^{\omega} (a \log(p))(a \log(p) d^n))= \tilde{\mathcal{O}}(a^2 \log^2(p) d^{n(\omega+1)})$. Rounding
+this polynomial to $\ZZ[T]$ can be ignored.
 
+We need to store $\mathcal{O}(\log(a))$ matrices of size $b$ with entries in $\QQ_{\mathfrak{q}}$. This can be done in
+space $\tilde{\mathcal{O}}(b^2 (a \log(p))(a \log(p) d^n))= \tilde{\mathcal{O}}(a^2 \log^2(p) d^{3n})$.
 \end{proof}
 
+\begin{thm}
+The computation of $Z(X_{\tau},T)$ using Algorithm \ref{alg:complete} takes
+\begin{align*}
+\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{4n} + a^2 p \log(q) d^{n(w+3)} e^n d_t+ a \log(q) (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
+\mbox{space: } &\tilde{\mathcal{O}}(a^2 p \log(q) d^{4n}+a \log(q) d^{4n} e^{3n} d_t).
+\end{align*}
+\end{thm}
+
+\begin{proof}
+This follows by adding all complexities from the previous propositions and leaving out terms that are dominated by other terms.
+\end{proof}
+
+\begin{rem}
+When $\mathfrak{q}=q$ and $d_t=1$ as in [[TODO]], the bounds for the time and space complexity simplify to
+\begin{align*}
+\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{n( \omega+3 )} e^n + a^2 ( \max \{ d^{n( \omega+2 )} e^{n(\omega+1 )}, d^{5n}e^{3n} \} )), \\
+\mbox{space: } &\tilde{\mathcal{O}}(a^3 p d^{4n}+a^2 d^{4n} e^{3n}).
+\end{align*}
+\end{rem}
+
 \begin{comment}
-%TODO put all the complexity stuff together at the end, and max a couple
-%of pages total
 \begin{thm} \label{thm:DiagfrobComplexity1}
 The time complexity of Algorithm~\ref{alg:Diagfrob} is given by 
 \begin{equation*}
