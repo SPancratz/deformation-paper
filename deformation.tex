@@ -1953,8 +1953,8 @@ below.
 
 \subsection{Complexity}
 
-In this section we determine the complexity of Algorithm \ref{alg:complete}. Recall that $a = \log_p(\mathfrak{q})$,
-and let $d_t$ denote the degree of $P$ in the variable $t$.
+In this section we determine the complexity of Algorithm \ref{alg:complete}. We recall that $a = \log_p(\mathfrak{q})$,
+and we will denote $a' = \log_p(q)$. Note that $a'$ divides $a$. Let $d_t$ denote the degree of $P$ in the variable $t$.
 
 % A good measure for the input size is $a \log(p) d^n d_t$. 
 % We write $q=p^{a_1}$ and $\mathfrak{q}=q^{a_2}$, so that $a=a_1 a_2$.
@@ -2019,30 +2019,30 @@ We start by analyzing the computation of the connection matrix $M$.
 \begin{prop}
 The computation of the connection matrix $M$ using Algorithm \ref{alg:Connection} takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a \log(p) \log(q) (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a \log(p) \log(q) d^{4n}e^{3n} d_t).
+\mbox{time: }  &\tilde{\mathcal{O}}(a a' \log^2(p) (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
+\mbox{space: } &\tilde{\mathcal{O}}(a a' \log^2(p) d^{4n}e^{3n} d_t).
 \end{align*}
 \end{prop}
 
 \begin{proof}
 We first need to construct and invert the matrices $\Delta_k$. For each of these matrices this takes time
 \[
-\tilde{\mathcal{O}}((de)^{n \omega} \log(q) (a \log(p) d^n) (de)^n d_t),
+\tilde{\mathcal{O}}((de)^{n \omega} (a' \log(p)) (a \log(p) d^n) (de)^n d_t),
 \] 
 and there are $\mathcal{O}(n)$ of them, so this can be done in time 
-$\tilde{\mathcal{O}}(a \log(p) \log(q) d^{n(\omega+2)} e^{n(\omega+1)} d_t)$.
+$\tilde{\mathcal{O}}(a a' \log^2(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t)$.
 Then for each of the monomials in our basis, we  multiply with $-k P_t$ for some 
 $1 \leq k \leq n$, and reduce back to the basis by repeatedly using 
 Algorithm \ref{alg:Decompose}. For each of these monomials this takes time 
 \[
-\tilde{\mathcal{O}}((de)^{2n} \log(q) (a \log(p) d^n) (de)^n d_t)=\tilde{\mathcal{O}}(a \log(p) \log(q)d^{4n}e^{3n} d_t),
+\tilde{\mathcal{O}}((de)^{2n} (a' \log(p)) (a \log(p) d^n) (de)^n d_t)=\tilde{\mathcal{O}}(a a' \log^2(p) d^{4n}e^{3n} d_t),
 \]
 and there are $b=\mathcal{O}(d^n)$ of them, so this will take
-time $\tilde{\mathcal{O}}(a \log(p) \log(q)d^{5n}e^{3n}d_t)$. 
+time $\tilde{\mathcal{O}}(a a' \log^2(p) d^{5n}e^{3n}d_t)$. 
 
 During this computation we have to store $\mathcal{O}(n)$ matrices (and vectors) of size 
 \[
-\tilde{\mathcal{O}}((de)^{2n} \log(q) (a \log(p) d^n) (de)^n d_t),
+\tilde{\mathcal{O}}((de)^{2n} (a' \log(p)) (a \log(p) d^n) (de)^n d_t),
 \] 
 which finishes the proof.
 \end{proof}
@@ -2080,31 +2080,31 @@ We now consider the computation of the power series expansion of the matrix $\Ph
 Assume that the matrices $M, \Phi_0$ have been computed already. The computation of the power series expansion
 of the matrix $\Phi$ using Algorithm \ref{alg:expansion} takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^2 p \log(q) d^{n(\omega+3)}e^n d_t), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 p \log(q) d^{4n}).
+\mbox{time: }  &\tilde{\mathcal{O}}(a^2 a' p d^{n(\omega+3)}e^n d_t), \\
+\mbox{space: } &\tilde{\mathcal{O}}(a^2 a' p d^{4n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
 The computation of the matrix $C$ takes time
 \[
-\tilde{\mathcal{O}}(K \max\{\deg(G),\deg(r)\} b^{\omega} \log(q) (a \log(p) d^n)) = 
-\tilde{\mathcal{O}}(a^2 p \log(q) d^{n(\omega+3)}e^n d_t).
+\tilde{\mathcal{O}}(K \max\{\deg(G),\deg(r)\} b^{\omega} (a'\log(p)) (a \log(p) d^n)) = 
+\tilde{\mathcal{O}}(a^2 a' p d^{n(\omega+3)}e^n d_t).
 \] 
 Applying $\sigma_p$ to an element of $\QQ_q$ to the required precision
-takes time $\tilde{\mathcal{O}}(\log^2(q)(a\log(p)d^n))$. Therefore, $\sigma_p(G)$ and $\sigma_p(r)$ 
+takes time $\tilde{\mathcal{O}}((a' \log(p))^2(a\log(p)d^n))$. Therefore, $\sigma_p(G)$ and $\sigma_p(r)$ 
 can be computed in time 
 \[
-\tilde{\mathcal{O}}(b^2 (de)^n d_t \log^2(q) (a\log(p)d^n))=\tilde{\mathcal{O}}(a \log(p) \log(q)^2 d^{4n} e^n ).
+\tilde{\mathcal{O}}(b^2 (de)^n d_t (a' \log(p))^2 (a\log(p)d^n))=\tilde{\mathcal{O}}(a a'^2 \log^3(p) d^{4n} e^n ).
 \] 
-Now the computation of the matrix $\sigma(C)^{-1}$ takes time $\tilde{\mathcal{O}}(a^2 \log(q) d^{n(\omega+3)}e^n d_t)$. 
+Now the computation of the matrix $\sigma(C)^{-1}$ takes time $\tilde{\mathcal{O}}(a^2 a' \log^2(p) d^{n(\omega+3)}e^n d_t)$. 
 Finally, the matrix product $C \Phi_0 \sigma_p(C)^{-1}$ can be computed in time 
 \[
-\tilde{\mathcal{O}}(b^{\omega} K \log(q) (a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 p \log(q) d^{n(\omega+2)}).
+\tilde{\mathcal{O}}(b^{\omega} K \log(q) (a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 a' p d^{n(\omega+2)}).
 \]
 The required space is dominated by the space needed to store the matrix $C$, which is
 \[
-\tilde{\mathcal{O}}(b^2 K \log(q) (a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 p \log(q) d^{4n}).
+\tilde{\mathcal{O}}(b^2 K \log(q) (a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 a' p d^{4n}).
 \]
 \end{proof}
 
@@ -2114,7 +2114,7 @@ We now move on to the computation of the matrix $\Phi_{\tau}$.
 The computation of the matrix $\Phi_{\tau}$ from the matrix $\Phi$ and $\tau \in S(\FF_{\mathfrak{q}})$ takes
 \begin{align*}
 \mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{4n}), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 p \log(q) d^{4n}).
+\mbox{space: } &\tilde{\mathcal{O}}(a^2 a' p d^{4n}).
 \end{align*}
 \end{prop}
 
@@ -2137,13 +2137,13 @@ computation takes time $\tilde{\mathcal{O}}(a^3 p d^{4n})$.
 
 The matrix $\Phi_{\tau}$ can be stored in space
 \[
-\tilde{\mathcal{O}}(b^2 (a \log(p))(a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 \log(p) \log(q) d^{3n}),
+\tilde{\mathcal{O}}(b^2 (a \log(p))(a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 \log^2(p)  d^{3n}),
 \]
 and $D(t) \Phi(t) \bmod{t^{K}}$ needs space
  \[
-\tilde{\mathcal{O}}(b^2 K \log(q) (a \log(p) d^n))= \tilde{\mathcal{O}}(a^2 p \log(q) d^{4n}),
+\tilde{\mathcal{O}}(b^2 K (a' \log(p)) (a \log(p) d^n))= \tilde{\mathcal{O}}(a^2 a' p d^{4n}),
 \]
-so that the total space required is $\tilde{\mathcal{O}}(a^2 p \log(q) d^{4n})$.
+so that the total space required is $\tilde{\mathcal{O}}(a^2 a' p d^{4n})$.
 \end{proof}
 
 Finally, we consider the computation of $\chi(T)$.
@@ -2171,8 +2171,8 @@ space $\tilde{\mathcal{O}}(b^2 (a \log(p))(a \log(p) d^n))= \tilde{\mathcal{O}}(
 \begin{thm}
 The computation of $Z(X_{\tau},T)$ using Algorithm \ref{alg:complete} takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{4n} + a^2 p \log(q) d^{n(w+3)} e^n d_t+ a \log(q) (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 p \log(q) d^{4n}+a \log(q) d^{4n} e^{3n} d_t).
+\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{4n} + a^2 a' p d^{n(w+3)} e^n d_t+ a a' (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
+\mbox{space: } &\tilde{\mathcal{O}}(a^2 a' p d^{4n}+a a' d^{4n} e^{3n} d_t).
 \end{align*}
 \end{thm}
 
@@ -2181,7 +2181,7 @@ This follows by adding all complexities from the previous propositions and leavi
 \end{proof}
 
 \begin{rem}
-When $\mathfrak{q}=q$ and $d_t=1$ as in [[TODO]], the bounds for the time and space complexity simplify to
+When $\mathfrak{q}=q$ and $d_t=1$, the bounds for the time and space complexity simplify to
 \begin{align*}
 \mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{n( \omega+3 )} e^n + a^2 ( \max \{ d^{n( \omega+2 )} e^{n(\omega+1 )}, d^{5n}e^{3n} \} )), \\
 \mbox{space: } &\tilde{\mathcal{O}}(a^3 p d^{4n}+a^2 d^{4n} e^{3n}).
