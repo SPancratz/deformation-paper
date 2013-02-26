@@ -1211,10 +1211,10 @@ for all~$i$.  Then $\alpha_{u,v}$ is a $2$-adic integer and can be expressed as
 \begin{equation*}
 \alpha_{u,v} = (-2)^{k_u} \prod_{i=0}^n a_i^{(2 (u_i + 1) - (v_i + 1))/d} \biggl( \sum_{m,r} a_i^{r} \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{-\floor{(m+1)/4}+\nu_m} \mu_m \biggr), 
 \end{equation*}
-where the summation indices $m, r \geq 0$ in the $i$-th factor of the product 
-satisfy
+where the sum in the $i$-th factor of the product is over all $m, r \geq 0$  
+that satisfy
 \[
-2(u_i+1)-(v_i+1)=d(m-pr).
+p(u_i+1)-(v_i+1)=d(m-pr).
 \]
 \end{thm}
 
@@ -1302,8 +1302,8 @@ $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$. Then
     a_i^{(p (u_i + 1) - (v_i + 1))/d} \biggl( \sum_{m,r} a_i^{(p-1)r}
     \Bigl(\frac{u_i+1}{d}\Bigr)_r \mu_m \biggr)
 \end{equation*}
-where the summation indices $m, r \geq 0$ in the $i$-th factor of the product 
-satisfy
+where the sum in the $i$-th factor of the product is over all $m, r \geq 0$  
+that satisfy
 \[
 p(u_i+1)-(v_i+1)=d(m-pr).
 \]
@@ -1318,7 +1318,7 @@ and Lemma~\ref{lem:mup}.
 \subsection{Estimates}
 
 If we want to use Theorem \ref{thm:01-03-diagfrob} to compute the matrix 
-$\Phi$ to $p$-adic precision $N$, then we have to compute the elements
+$\Phi_0$ to $p$-adic precision $N$, then we have to compute the elements
 $(k_u-1)!\alpha_{u,v}$ to a somewhat higher precision $\tilde{N}$ than just
 $N-n$, because 
 of the loss of precision in computing their inverses. Note that if a $p$-adic 
@@ -1410,7 +1410,7 @@ below.
 \Require $P_0=a_0 x_0^d + \dotsb + a_n x_n^d$ 
          with $a_0,\dotsc,a_n \in \ZZ_p^{\times}$, 
          $p$-adic precision $N \geq 0$
-\Ensure  matrix $\Phi$ for action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ modulo $p^N$
+\Ensure  matrix $\Phi_0$ for action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ modulo $p^N$
 \Procedure{DiagFrob}{$P_0,N$}
 \State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
 \item determine $\tilde{N}$ from Corollary \ref{cor:Ntilde}, and $\mathcal{M}$,$\mathcal{R}$ from Proposition \ref{prop:MR} 
