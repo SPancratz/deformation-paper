@@ -366,15 +366,15 @@ However, for our purposes the above definition will be sufficient.
 \end{rem}
 
 In this paper we will only be interested in one-parameter families of smooth projective hypersurfaces. 
-So let $P \in \ZZ_q[t][x_0,\ldots,x_n]$ denote a homogeneous polynomial of degree $d$ and let 
+So we let $P \in \ZZ_q[t][x_0,\ldots,x_n]$ denote a homogeneous polynomial of degree $d$ and let 
 $\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$ be a Zariski open subset such that $P$ defines a family  
-$\mathcal{X}/\mathcal{S}$ of smooth hypersurfaces contained in $\mathbf{P}^n_{\mathcal{S}}$. Moreover, let
+$\mathcal{X}/\mathcal{S}$ of smooth hypersurfaces contained in $\mathbf{P}^n_{\mathcal{S}}$. Moreover, we let
 $\mathcal{U}/\mathcal{S}$ denote the complement of $\mathcal{X}/\mathcal{S}$ in $\mathbf{P}^n_{\mathcal{S}}$,
 and write 
 $\mathfrak{X}=\mathcal{X} \otimes \QQ_q, \mathfrak{U}=\mathcal{U} \otimes \QQ_q, \mathfrak{S}=\mathcal{S} \otimes \QQ_q,$
 for the generic fibers, and
 $X=\mathcal{X} \otimes \FF_q, U=\mathcal{U} \otimes \QQ_q, S=\mathcal{S} \otimes \FF_q,$
-for the special fibers of $\mathcal{X},\mathcal{U}$ and $\mathcal{S}$, respectively.
+for the special fibers of $\mathcal{X},\mathcal{U}$, $\mathcal{S}$, respectively.
 
 \begin{thm} \label{thm:hypersurface} For all $\tau \in S(\FF_{\mathfrak{q}})$, we have that
 \begin{equation} \label{eq:formulazeta}
@@ -395,17 +395,17 @@ proof later on, we will give a brief sketch here. First, by Theorem \ref{thm:Lef
 \[
 Z(X_{\tau},T) = \prod_{i=0}^{2(n-1)} \det(1- T \Frob_{\mathfrak{q}} | \Hrig^i(X_{\tau}))^{(-1)^{(i+1)}}.
 \]
-Then, by the Lefschetz hyperplane theorem and Poincar\'e duality, we get that $\Hrig^i(X_{\tau}) \cong \Hrig^i(\mathbf{P}^n_{\FF_{\mathfrak{q}}})$ 
+Then, by the Lefschetz hyperplane theorem and Poincar\'e duality, we see that $\Hrig^i(X_{\tau}) \cong \Hrig^i(\mathbf{P}^n_{\FF_{\mathfrak{q}}})$ 
 for all $i \neq (n-1)$. Next, one shows by a computation that
 \begin{equation} \label{eqn:projcoho}
 \Hrig^i(\mathbf{P}^n_{\FF_{\mathfrak{q}}}) 
 \cong 
 \begin{cases}
-\QQ_{\mathfrak{q}}(i) &\mbox{if $i$ even} \\
-$0$ &\mbox{if $i$ odd} 
-\end{cases}, 
+\QQ_{\mathfrak{q}}(i) &\mbox{if $i$ even,} \\
+$0$ &\mbox{if $i$ odd,} 
+\end{cases} 
 \end{equation}
-where $(i)$ denotes the $i$-th Tate twist, for which $F_p$ gets multiplied by $p^{-i}$. So all that remains to be determined is $\Hrig^{n-1}(X_{\tau})$. 
+where $(i)$ denotes the $i$-th Tate twist, for which $F_p$ is multiplied by $p^{-i}$. So all that remains to be determined is $\Hrig^{n-1}(X_{\tau})$. 
 Then one uses the excision short exact sequence
 \begin{equation} \label{eqn:excision}
 \begin{CD}
@@ -416,7 +416,7 @@ to relate $\Hrig^{n-1}(X_{\tau})$ to $\Hrig^{n}(U_{\tau})$ and complete the proo
 the proof of formula \eqref{eq:formulab}, we have not found an exact reference in the literature. However, it is
 a straightforward consequence of \cite[Corollaire 2.4 (i)]{sga7} that
 \[
-\sum_{n=1}^{\infty} b(n,d) x^{n-1} = \frac{(d-1)}{(1+x)(1-(d-1)x)} = \frac{1}{xd} \bigl( \frac{d-1}{1-(d-1)x} - \frac{d-1}{1+x} \bigr)
+\sum_{n=1}^{\infty} b(n,d) x^{n-1} = \frac{(d-1)}{(1+x)(1-(d-1)x)} = \frac{1}{xd} \Bigl( \frac{d-1}{1-(d-1)x} - \frac{d-1}{1+x} \Bigr)
 \] 
 as formal power series, from which \eqref{eq:formulab} can be read off easily. 
 \end{proof}
