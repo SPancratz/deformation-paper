@@ -698,9 +698,10 @@ where $\equiv$ denotes equality in cohomology.
 \caption{Obtain coordinates in the Jacobian ideal modulo basis elements}
 \label{alg:Decompose}
 \begin{algorithmic}
-\Require  $P$ in $\QQ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
+\Require $P$ in $\QQ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
          defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
-         hypersurfaces that contains a diagonal fibre, $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
+         hypersurfaces that contains a diagonal fibre, 
+         $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
 \Ensure  $Q_0, \dotsc, Q_n \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
          $k(d-1)-n$, and $\gamma_k$ in the $L$-span of $B_k$, such that 
          $Q = Q_0 \partial P_0 + \dotsb + Q_n \partial_n P +\gamma_k$.
@@ -710,14 +711,13 @@ where $\equiv$ denotes equality in cohomology.
       corresponding to $x^i \in R_k$ is the coefficient of 
       $x^i$ in $Q$.
 \item Solve for the unique vector $v$ of length $\abs{C_k}$ satisfying 
-      $\Delta_k v = w$.  Note that we can write $v$ 
-      as $\bigl(v^{(0)}, \dotsc, v^{(n)}\bigr)$ 
-      where $v^{(j)}$ is a vector of length $\abs{C_k^{(j)}}$ 
-      for $0 \leq j \leq n$.
-\item \textbf{for} $j=0$ \textbf{to} $n$ \textbf{do} 
-\item[] \hspace{1em} $Q_j \gets \sum_{g \in C_k^{(j)}} v_g^{(j)} g$ ($v_g^{(j)}$ is the entry in $v^{(j)}$ corresponding to $g \in C_k^{(j)}$)
-\item[] $\gamma_k \gets Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$
-\item \textbf{return} $Q_0, \dotsc, Q_n,\gamma_k$.
+      $\Delta_k v = w$.  We can write $v$ 
+      as $\bigl(v^{(0)}, \dotsc, v^{(n)}\bigr)$, where $v^{(j)}$ is 
+      a vector of length $\abs{C_k^{(j)}}$ for $0 \leq j \leq n$,
+      and let $v_g^{(j)}$ be the entry in $v^{(j)}$ corresponding 
+      to $g \in C_k^{(j)}$.
+\item For $0 \leq j \leq n$ set $Q_j \gets \sum_{g \in C_k^{(j)}} v_g^{(j)} g$, 
+      and let $\gamma_k \gets Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$.
 \EndProcedure
 \end{compactenum}
 \end{algorithmic}
