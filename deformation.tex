@@ -216,7 +216,7 @@ varieties over finite fields.
 \begin{thm}[Weil conjectures] If $X/\FF_q$ is a smooth projective of dimension $m$, 
 then \label{thm:weildeligne}
 \[
-Z(X,T)=\frac{p_1 p_3 \ldots p_{2d-1}}{p_0 p_2 p_4 \ldots p_{2m}},
+Z(X,T)=\frac{p_1 p_3 \ldots p_{2m-1}}{p_0 p_2 p_4 \ldots p_{2m}},
 \]
 where for all $i$:
 \begin{enumerate}
@@ -308,8 +308,8 @@ $\Omega^1_{\mathfrak{S}} \wedge \Omega^i_{\mathfrak{X}/\mathfrak{S}}$. Projectin
 $\Omega^1_{\mathfrak{S}} \otimes \HdR^i(\mathfrak{X}/\mathfrak{S})$, we obtain $\nabla(\omega)$. 
 \end{rem}
 
-\begin{defn}
-We write $\sigma$ for the standard $p$-th power Frobenius lift on $\mathbf{P}^1_{\QQ_q}$ i.e., 
+\begin{defn} \label{defn:sigma}
+We write $\sigma$ for the standard $p$-th power Frobenius lift on $\mathbf{P}^1_{\QQ_q}$, i.e. 
 the (semilinear) map that lifts the $p$-th power Frobenius map on $\mathbf{P}^1_{\FF_q}$ and
 satisfies $\sigma(t)=t^p$. 
 \end{defn}
@@ -424,7 +424,7 @@ to this basis, i.e.\
 \[
 \nabla (e_j) = \sum_{i=1}^b M_{i,j} e_i.
 \]
-Let $r \in \ZZ_q[t]$ be the denominator of $M$, i.e.\ such that we can write $M=G/r$ with $G \in M_{b \times b}(\QQ_q[t])$, 
+Let $r \in \ZZ_q[t]$ be a denominator for $M$, i.e. such that we can write $M=G/r$ with $G \in M_{b \times b}(\QQ_q[t])$, 
 and let $\Phi$ denote the matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \ldots, e_b]$, i.e.\
 \[
 p^{-1} F_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
@@ -471,10 +471,10 @@ easily by using a formula of Dwork.
 \item Solve the differential equation from Theorem \ref{thm:eqphi} for $\Phi$.
 \item Substitute the Teichm\"uller lift $\hat{\tau}$ of an element $\tau \in S(\FF_{\mathfrak{q}})$
 into $\Phi$,
-to obtain the matrix $\Phi_{\tau}$ of the action of $p^{-1}F_p$ on $\Hrig^n(U_{\tau})$.
-\item Compute the matrix $\Phi_{\tau}^{(a)}$ of the action of 
+to obtain the matrix $\Phi_{\tau}$ of the action of $p^{-1}F_p$ on $\Hrig^n(U_{\tau})$. 
+Compute the matrix $\Phi_{\tau}^{(a)}$ of the action of 
 $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$, which is also equal 
-to $(p^{-1}\Frob_p)^a$, on~$\Hrig^n(U_{\tau})$, and use 
+to $(p^{-1}\Frob_p)^a$, on~$\Hrig^n(U_{\tau})$. Use 
 Theorem~\ref{thm:hypersurface} to compute the zeta function $Z(X_{\tau},T)$ 
 of the fiber $X_{\tau}$.
 \end{enumerate}
@@ -1180,7 +1180,7 @@ as required.
 
 \subsubsection{The case $p = 2$}
 
-\begin{defn}
+\begin{defn} \label{defn:mu2}
 For $p = 2$ we define a sequence $\bigl(\mu_m^{(2)}\bigr)$ by 
 \begin{equation*}
 \mu_m^{(2)} = 
@@ -1225,8 +1225,8 @@ p(u_i+1)-(v_i+1)=d(m-pr).
 
 \begin{proof}
 The expression for $\alpha_{u,v}$ is an immediate consequence 
-of Theorem~\ref{thm:alpha}, Lemma~\ref{lem:mu2}, and
-Proposition~\ref{prop:mpr}. It remains to prove that 
+of Theorem~\ref{thm:alpha}, Proposition~\ref{prop:mpr}, and 
+Definition~\ref{defn:mu2}. It remains to prove that 
 $\alpha_{u,v}$ is a $2$-adic integer.  Following Lemma~\ref{lem:mu2}, 
 it suffices to show that the valuation of the factor 
 \begin{equation} \label{eq:fr}
@@ -1268,7 +1268,7 @@ so this computation can be carried out without precision loss.
 
 \subsubsection{The case $p > 2$}
 
-\begin{defn}
+\begin{defn} \label{defn:mup}
 Let $p >2$ be an odd prime and define a sequence 
 $\bigl(\mu_m^{(p)}\bigr)$ by 
 \begin{equation*}
@@ -1316,8 +1316,8 @@ In particular, we have that $\alpha_{u, v}$ is a $p$-adic integer.
 \end{thm}
 
 \begin{proof}
-This follows from Theorem~\ref{thm:alpha}, Proposition~\ref{prop:mpr} 
-and Lemma~\ref{lem:mup}.
+This is an immediate consequence of Theorem~\ref{thm:alpha}, Proposition~\ref{prop:mpr},
+Definition \ref{defn:mup} and Lemma~\ref{lem:mup}.
 \end{proof}
 
 \subsection{Estimates}
@@ -1362,7 +1362,7 @@ $(k_u-1)!\alpha_{u,v}$ with $p$-adic precision
 
 Up to this point, the sums over $m,r$ in our expressions 
 for $\alpha_{u,v}$ have been infinite sums.  We now present 
-a convergence result, that will allow us to derive a finite 
+a convergence result that will allow us to derive a finite 
 expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. We
 start with an elementary lemma.
 
@@ -1394,6 +1394,8 @@ equivalently $r \leq \mathcal{R}$, where
 \end{prop}
 
 \begin{proof}
+TODO Small complication here, Lauder doesn't have factor $\pi^{k_v-k_u}$. 
+Bound can be weakened a little bit, but I don't think this necessary.
 \end{proof}
 
 Finally, we describe how to compute an approximation to the matrix~$\Phi_0$ 
@@ -1468,12 +1470,13 @@ but incorporates improved convergence bounds by Kedlaya~\citep{Kedlaya2010}.
 
 Recall from Section \ref{sec:Connection} that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for 
 the Gauss--Manin connection $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$ with respect to the 
-basis $\cB$. We let $r \in \ZZ_q[t]$ denote the denominator of $M$, so that $M = G/r$ with 
-$G \in M_{b \times b}(\QQ_q[t])$. Note that $r$ is a divisor of the resultant $R$ defined in 
-Definition \ref{defn:resultant}. Also recall that $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
+basis $\cB$. We let $r \in \ZZ_q[t]$ denote a denominator for $M$, such that $M = G/r$, with 
+$G \in M_{b \times b}(\QQ_q[t])$, and $r$ divides the resultant $R$ defined in 
+Definition \ref{defn:resultant}. By Assumption \ref{assump:diag}, we then have that 
+$r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. Also recall that 
+$\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
 denotes the matrix for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
-respect to the same basis $\cB$, where $\sigma$ is the standard lift of the $p$th-power Frobenius 
-sending $t \mapsto t^p$. 
+respect to the same basis $\cB$, where $\sigma$ is defined as in Definition \ref{defn:sigma}. 
 
 As we saw in section \ref{sec:Background}, these matrices satisfy the differential equation
 
@@ -1497,8 +1500,8 @@ satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation
 \eqref{eq:01-GMDE-Homogenous}.
 
 Let us write $G = \sum_{i=0}^{\deg(G)} G_i t^i$ and $r= \sum_{i=0}^{\deg(r)} r_i t^i$,
-with $G_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. By Assumption 
-\ref{assump:diag}, we may suppose that $r_0 \neq 0 \pmod{p}$, so in particular $r_0 \neq 0$.
+with $G_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. Note that
+$r_0 \neq 0 \pmod{p}$.
 
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ at $t=0$ for 
 the equation
