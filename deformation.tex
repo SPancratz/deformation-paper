@@ -402,7 +402,7 @@ for all $i \neq (n-1)$. Next, one shows by a computation that
 $0$ &\mbox{if $i$ odd,} 
 \end{cases} 
 \end{equation}
-where $(i)$ denotes the $i$-th Tate twist, for which $F_p$ is multiplied by $p^{-i}$. So all that remains to be determined is $\Hrig^{n-1}(X_{\tau})$. 
+where $(i)$ denotes the $i$-th Tate twist, for which $\Frob_p$ is multiplied by $p^{-i}$. So all that remains to be determined is $\Hrig^{n-1}(X_{\tau})$. 
 Then one uses the excision short exact sequence
 \begin{equation} \label{eqn:excision}
 \begin{CD}
@@ -427,7 +427,7 @@ to this basis, i.e.\
 Let $r \in \ZZ_q[t]$ be a denominator for $M$, i.e. such that we can write $M=G/r$ with $G \in M_{b \times b}(\QQ_q[t])$, 
 and let $\Phi$ denote the matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \ldots, e_b]$, i.e.\
 \[
-p^{-1} F_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
+p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 \]
 
 \begin{defn} We denote
@@ -471,7 +471,7 @@ easily by using a formula of Dwork.
 \item Solve the differential equation from Theorem \ref{thm:eqphi} for $\Phi$.
 \item Substitute the Teichm\"uller lift $\hat{\tau}$ of an element $\tau \in S(\FF_{\mathfrak{q}})$
 into $\Phi$,
-to obtain the matrix $\Phi_{\tau}$ of the action of $p^{-1}F_p$ on $\Hrig^n(U_{\tau})$. 
+to obtain the matrix $\Phi_{\tau}$ of the action of $p^{-1}\Frob_p$ on $\Hrig^n(U_{\tau})$. 
 Compute the matrix $\Phi_{\tau}^{(a)}$ of the action of 
 $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$, which is also equal 
 to $(p^{-1}\Frob_p)^a$, on~$\Hrig^n(U_{\tau})$. Use 
@@ -891,7 +891,7 @@ In the rest of this section we will freely use the definitions and notation from
 We let all of our matrices be defined with respect to the basis $\cB$. We have seen that for a
 family of smooth projective hypersurfaces $\mathcal{X}/\mathcal{S}$ over $\ZZ_q$, 
 defined by a polynomial $P \in \ZZ_q[t][x_0,\ldots,x_n]$, there exists 
-a Frobenius structure $F_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and we let 
+a Frobenius structure $\Frob_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and we let 
 $\Phi \in M_{b \times b}(\QQ_q \langle t, \frac{1}{r} \rangle^{\dag})$ denote the 
 matrix of the action of $p^{-1}\Frob_p$, where $r$ is the denominator of the connection 
 matrix $M$. Recall that $\FF_{\mathfrak{q}}$ denotes a finite field extension of $\FF_q$. 
