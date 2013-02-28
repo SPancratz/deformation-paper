@@ -1475,7 +1475,7 @@ that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for the Gauss--Manin co
 $\HdR^n(\mathfrak{U}/\mathfrak{S})$. We write $M = G/r$, with $G \in M_{b \times b}(\QQ_q[t])$,
 and $r \in \ZZ_q[t]$ of smallest possible degree and not divisible by $p$. Note that $r$ divides the 
 resultant $R$ defined in Definition \ref{defn:resultant}. By Assumption \ref{assump:diag}, we then have 
-that $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. Also recall that 
+that $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. ecall that 
 $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ denotes the matrix 
 for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$, where $\sigma$ is defined as 
 in Definition \ref{defn:sigma}. 
@@ -1604,11 +1604,11 @@ any given precision.
 \begin{thm} \label{thm:Ni}
 Let $N,K \in \NN$ and define:
 \begin{eqnarray*}
-N_{\Phi_0}   		&=& N+\bigl(2\delta+(n-1)\bigr) \bigl(\ceil{\log_p K} + \ceil{\log_p \floor{K/p}}\bigr),\\
-N_{C}				&=& N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p \floor{K/p}} + \delta, \\
+N_{\Phi_0}   		&=& N+\bigl(2\delta+(n-1)\bigr) \bigl(\ceil{\log_p K} + \ceil{\log_p \ceil{K/p}}\bigr),\\
+N_{C}				&=& N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p \ceil{K/p}} + \delta, \\
 N_{C^{-1}}			&=& N+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p K} + \delta, \\
 \tilde{N}_C			&=& N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p K}, \\
-\tilde{N}_{C^{-1}}	&=& N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p \floor{K/p}}.
+\tilde{N}_{C^{-1}}	&=& N+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p \ceil{K/p}}.
 \end{eqnarray*}
 
 In order to compute the power series expansion 
@@ -1617,7 +1617,7 @@ of the matrix $\Phi$ at $t=0$ with $t$-adic precision $K$ and $p$-adic precision
 it is sufficient to compute
 the matrix $\Phi_0$ to $p$-adic precision $N_{\Phi_0}$,
 the matrix $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$, and
-the matrix $C^{-1}$ to $t$-adic precision $\floor{K/p}$ and $p$-adic precision 
+the matrix $C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic precision 
 $N_{C^{-1}}$.
 
 Therefore, while solving Equation \eqref{eq:01-GMDE-Homogenous} for $C$ and Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$, 
@@ -1658,9 +1658,9 @@ given $p$-adic and $t$-adic precisions, as formalised in Algorithm \ref{alg:expa
 \item solve Equation \eqref{eq:01-GMDE-Dual} for $\sigma(C)^{-1}$ (see Remark \ref{rem:sigmatrick}) to $t$-adic precision $K$ and $p$-adic precision $N_{C^{-1}}$:
 \begin{compactenum}[a.]
 \item[] $\tilde{C}_0 \gets I$
-\item[] \textbf{for} $i=0$ \textbf{to} $\floor{K/p}-1$ \textbf{do}
+\item[] \textbf{for} $i=0$ \textbf{to} $\ceil{K/p}-1$ \textbf{do}
 \item[] \hspace{0.6em} $\tilde{C}_{i+1} \gets  \frac{-1}{\sigma(r_0)(i+1)} \biggl(\sum_j \sigma(-G_{i-j}^t) \tilde{C}_j + \sum_j \sigma(r_{i-j+1}) (j \tilde{C}_j) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
-\item[] $\sigma(C^{-1}) \gets \sum_{i=0}^{\floor{K/p}} \tilde{C}_i t^{pi} \pmod{p^{N_{C^{-1}}}}$
+\item[] $\sigma(C^{-1}) \gets \sum_{i=0}^{\ceil{K/p}} \tilde{C}_i t^{pi} \pmod{p^{N_{C^{-1}}}}$
 \end{compactenum}
 \item $\Phi \gets C \Phi_0 \sigma(C^{-1})$
 \item \textbf{return} $\Phi$
