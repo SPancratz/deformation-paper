@@ -1475,7 +1475,7 @@ that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for the Gauss--Manin co
 $\HdR^n(\mathfrak{U}/\mathfrak{S})$. We write $M = G/r$, with $G \in M_{b \times b}(\QQ_q[t])$,
 and $r \in \ZZ_q[t]$ of smallest possible degree and not divisible by $p$. Note that $r$ divides the 
 resultant $R$ defined in Definition \ref{defn:resultant}. By Assumption \ref{assump:diag}, we then have 
-that $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. ecall that 
+that $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. Recall that 
 $\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ denotes the matrix 
 for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$, where $\sigma$ is defined as 
 in Definition \ref{defn:sigma}. 
@@ -1495,16 +1495,13 @@ homogeneous system
 \Bigl(\frac{d}{dt} + M\Bigr) C = 0, \; \; \; C(0)=I,
 \end{equation}
 where $I$ denotes the identity matrix, then the matrix
-\begin{equation*}
-\Phi = C \Phi_0 \sigma(C)^{-1}
-\end{equation*}
+$\Phi = C \Phi_0 \sigma(C)^{-1}$
 satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation 
 \eqref{eq:01-GMDE-Homogenous}.
 
 Let us write $G = \sum_{i=0}^{\deg(G)} G_i t^i$ and $r= \sum_{i=0}^{\deg(r)} r_i t^i$,
 with $G_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. Note that
 $r_0 \neq 0 \pmod{p}$.
-
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ at $t=0$ for 
 the equation
 \begin{equation*}
@@ -1541,7 +1538,7 @@ but from Corollary \ref{cor:delta}, we know that $\ord_p(\Phi) \geq -\delta$ and
 $\ord_p(\Phi^{-1}) \geq -\delta-(n-1)$.
 \end{proof}
 
-Now let $D=\sum_{i \geq 0} D_i t^i$ denote an approximation to $C$ 
+Let $D=\sum_{i \geq 0} D_i t^i$ denote an approximation to $C$ 
 defined by a recursion
 \begin{align*}
 D_0 &= I \\
@@ -1915,13 +1912,11 @@ then we can determine $\chi(T)$ exactly using the recursion \eqref{eq:recursion}
 \begin{thm} \label{thm:precPhitau}
 Let $N_i$ be defined as in Theorem \ref{thm:N0}. To compute $\chi(T)$ exactly, it is sufficient to 
 compute $\Phi_{\tau}$ with $p$-adic precision
-\[
-N = \max_{1 \leq i \leq b} \{ N_i \} +\delta.
-\]
-If moreover $p \geq n$, then this can be improved to
-\[
-N = \max_{1 \leq i \leq b} \{ N_i -\Gamma(i-1) \}.
-\]
+\begin{align*}
+N &= \max_{1 \leq i \leq b} \{ N_i \} +\delta.
+\intertext{If moreover $p \geq n$, then this can be improved to}
+N &= \max_{1 \leq i \leq b} \{ N_i -\Gamma(i-1) \}.
+\end{align*}
 \end{thm}
 
 \begin{proof}
