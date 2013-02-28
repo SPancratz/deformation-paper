@@ -1470,15 +1470,15 @@ matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$.
 Our discussion largely follows the work of Lauder~\citep{Lauder2006}, 
 but incorporates improved convergence bounds by Kedlaya~\citep{Kedlaya2010}.
 
-Recall from Section \ref{sec:Connection} that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for 
-the Gauss--Manin connection $\nabla$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$ with respect to the 
-basis $\cB$. We let $r \in \ZZ_q[t]$ denote a denominator for $M$, such that $M = G/r$, with 
-$G \in M_{b \times b}(\QQ_q[t])$, and $r$ divides the resultant $R$ defined in 
-Definition \ref{defn:resultant}. By Assumption \ref{assump:diag}, we then have that 
-$r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. Also recall that 
-$\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
-denotes the matrix for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ with 
-respect to the same basis $\cB$, where $\sigma$ is defined as in Definition \ref{defn:sigma}. 
+All our matrices will be defined with respect to the basis $\cB$. Recall from Section~\ref{sec:Connection} 
+that $M \in M_{b \times b}(\QQ_q(t))$ denotes the matrix for the Gauss--Manin connection $\nabla$ on 
+$\HdR^n(\mathfrak{U}/\mathfrak{S})$. We write $M = G/r$, with $G \in M_{b \times b}(\QQ_q[t])$,
+and $r \in \ZZ_q[t]$ of smallest possible degree and not divisible by $p$. Note that $r$ divides the 
+resultant $R$ defined in Definition \ref{defn:resultant}. By Assumption \ref{assump:diag}, we then have 
+that $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. Also recall that 
+$\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ denotes the matrix 
+for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$, where $\sigma$ is defined as 
+in Definition \ref{defn:sigma}. 
 
 As we saw in section \ref{sec:Background}, these matrices satisfy the differential equation
 
@@ -1486,7 +1486,7 @@ As we saw in section \ref{sec:Background}, these matrices satisfy the differenti
 \Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
 \end{equation}
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action of $p^{-1} \Frob_p$ 
-on $\Hrig^n(U_0)$, again with respect to the basis $\cB$. Our goal is 
+on $\Hrig^n(U_0)$. Our goal is 
 the computation of a power series expansion of~$\Phi$ at $t=0$.
 
 We first observe that if $C \in M_{b \times b}(\QQ_q[[t]])$ denotes the unique solution to the 
