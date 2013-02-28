@@ -1255,15 +1255,18 @@ lower bound in~\eqref{eq:alpha2.1} is nonnegative.
 We observe that in Theorem \ref{thm:alpha2} the exponent 
 $-\floor{(m+1)/4}+\nu_m$ is nonpositive for each value $m \geq 0$, 
 so at first sight it seems that the computation of the $f_r$ from
-\eqref{eq:fr} will suffer from precision loss. However, the $f_r$
-can be computed recursively using:
+\eqref{eq:fr} will suffer from precision loss. 
+However, we recall that $m = m(0) + 2r$, $m(0) \in \{0,1\}$, and noting that 
+$d$ is odd let $g_r = d^r f_r$ and $z = u_i + 1$ to temporarily simplify 
+our notation.  We now see that the sequence satisfies 
 \begin{align*}
-f_0 &=1, \; \; \; f_1=\frac{u_i+1}{d} \\
-f_r & = f_{r-2} \frac{(u + (r - 2)d)(u + (r - 1)d)}{2d^2} ,
+g_0 & = 1, \\
+g_1 & = z, \\
+g_5 & = 2^{-2-m(0)} \bigl( z (z + d) (z + 2d) (z + 3d) (z + 4d) \bigr) \\
+g_r & = g_{r-2} \frac{(z + (r - 2)d)(z + (r - 1)d)}{2}
 \end{align*}
-(Strictly speaking this formula only holds for $r \neq 5$, but one can write down a similar formula for $r=5$).
-Since $d$ is odd when $p=2$, the numerator is always even and the denominator is odd,
-so this computation can be carried out without precision loss.
+for all remaining $r \geq 0$.  Since the numerator is an even integer, 
+it follows that this computation can be carried out without precision loss.
 \end{rem}
 
 \subsubsection{The case $p > 2$}
