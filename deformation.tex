@@ -1629,7 +1629,7 @@ working precisions $\tilde{N}_C$ and $\tilde{N}_{C^{-1}}$, respectively.
 
 \begin{proof}
 Recall that $\Phi = C \Phi_0 \sigma(C)^{-1}$. The sufficient $t$-adic precisions are clear. 
-We can apply Proposition~\ref{prop:matrixproductval}, using Theorem~\ref{thm:valC} (for both $C$ and $C^{-1}$) 
+We can apply Proposition~\ref{prop:matrixproductval}, using Theorem~\ref{thm:valC} for both $C$ and $C^{-1}$ 
 and the fact that $\ord_p(\Phi_0) \geq -\delta$ from Corollary~\ref{cor:delta}, to obtain the sufficient $p$-adic 
 precisions for the matrices $\Phi_0$, $C$ and $C^{-1}$. The sufficient working precisions $\tilde{N}_C$ and $\tilde{N}_{C^{-1}}$
 now follow from Theorem~\ref{thm:errorprop}.
@@ -1687,10 +1687,10 @@ unit disc $|t|<1$, and so cannot be evaluated at $\hat{\tau}$.
 
 However, since $\Phi$ is a matrix of overconvergent functions, i.e.\ 
 \[
-\Phi \in M_{b \times b}(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag}),
+\Phi \in M_{b \times b}\Bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag}\Bigr),
 \]
 it can be approximated to any given $p$-adic precision $N$ by a matrix of rational 
-functions, that can be evaluated at $\hat{\tau}$. To convert the power series expansion
+functions, which can then be evaluated at $\hat{\tau}$. To convert the power series expansion
 for $\Phi$ to such an approximation by rational functions, we need a bound on the pole order
 of these rational functions at their poles, as a function of $N$. 
 
@@ -1715,8 +1715,9 @@ $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$, with respect to the basis
 $[v_1,\dotsc,v_b]$, and let $\delta$ be defined as in 
 Definition~\ref{defn:delta}. For $i \in \NN$, put
 \begin{align*}
-f(i)=\max \{ \bigl( -2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil, 
-(b-1) \ord_p(M) + \bigl( -2 \delta + (n-1) \bigr) \lfloor \log_p(i) \rfloor \},
+f(i) = \max \Bigl\{ \bigl( -2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil, 
+(b-1) \ord_p(M) + \bigl( -2 \delta + (n-1) \bigr) \lfloor \log_p(i) \rfloor 
+\Bigr\},
 \end{align*}
 and define 
 \begin{align*}
@@ -1748,18 +1749,18 @@ than or equal to $-(\alpha_1+p \alpha_2)$ at $z$.
 Since the matrix $\Phi$ defines a Frobenius structure on the vector bundle $\Hrig^n(U/S)$ with
 connection $\nabla$, we can apply~\citep[Theorem~2.1]{KedlayaTuitman2012}. We have 
 replaced $\ord_p(\Phi)$ and $ \bigl( \ord_p(\Phi)+\ord_p(\Phi^{-1}) \bigr)$ by their respective lower bounds 
-$-\delta$ and $\bigl( -2 \delta + (n-1) \bigr)$, since we might not know them exactly a priori.
+$-\delta$ and $-2 \delta + (n-1)$, since we might not know them exactly a priori.
 [[TODO explain why condition on exponents can be removed ]]
 \end{proof}
 
 \begin{rem}
-In practice the various constants $\bigl( -2 \delta + (n-1) \bigr), c, \alpha_1, -\delta$ are always very small
-in absolute value, so that $g(N)$ is about $N$, and the lower bound for the order of $\Phi$ modulo $p^N$ at $z$ is roughly $-pN$.
+In practice the various constants $-2 \delta + (n-1), c, \alpha_1, -\delta$ are always very small
+in absolute value, so that $g(N)$ is about $N$, and the lower bound for the order of~$\Phi$ modulo $p^N$ at $z$ is roughly $-pN$.
 %This is what one should remember from this theorem.
 \end{rem}
 
 \begin{rem}
-That $M$ has a simple pole at $z$ is not a serious restriction, since
+The condition that $M$ has a simple pole at $z$ is not a serious restriction, since
 one can always change the basis $[v_1,\dotsc,v_b]$ such that this condition is
 satisfied, because the Gauss--Manin connection is known to be regular singular. 
 Applying the theorem to this new basis and transforming back to the old one, one
@@ -1779,7 +1780,7 @@ $D$ is a denominator for the rational function $\Phi(t) \pmod{p^N}$. We then com
 \begin{equation*}
 \Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
 \end{equation*}
-Since $Q(\hat{\tau}) \in \ZZ_q^{\times}$ (because $\overline{R}(\tau) \neq 0$), and $\ord_p(\Phi(t))) \geq -\delta$
+Since $Q(\hat{\tau}) \in \ZZ_q^{\times}$ because $\overline{R}(\tau) \neq 0$, and $\ord_p(\Phi(t)) \geq -\delta$
 by Corollary~\ref{cor:delta}, it is sufficient to compute $\hat{\tau}$ with $p$-adic precision $N+\delta$.
 
 \subsection{Computing the zeta function}
@@ -1808,7 +1809,7 @@ $\sigma$-semilinear, we have that
 is the matrix of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$. 
 
 We now analyse the loss of $p$-adic precision when computing the reverse characteristic polynomial 
-$\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det( 1 - T \Phi_{\tau}^{(a)})$.  
+$\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det\bigl( 1 - T \Phi_{\tau}^{(a)}\bigr)$.
 
 \begin{thm} \label{thm:preccharpoly}
 Suppose that $\tilde{\Phi}_{\tau}$ is an approximation to 
@@ -1816,7 +1817,8 @@ $\Phi_{\tau}$ satisfying
 $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N$,
 with $\delta$ defined as in Definition~\ref{defn:delta} and $N \geq \delta$. Let us denote
 \[
-\tilde{\chi}(T)=1+\sum_{i=1}^b \tilde{\chi}_i T^i = \det( 1 - T \tilde{\Phi}_{\tau}^{(a)}).
+\tilde{\chi}(T) = 1 + \sum_{i=1}^b \tilde{\chi}_i T^i 
+                = \det\bigl( 1 - T \tilde{\Phi}_{\tau}^{(a)}\bigr).
 \]
 Then for all $1 \leq i \leq b$, we have that 
 \[
@@ -1827,7 +1829,7 @@ Then for all $1 \leq i \leq b$, we have that
 \begin{proof} 
 Recall from Theorem~\ref{thm:deltabound} that there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_q)$
 satisfying $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, such that for $\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ 
-we have that $\ord_p(\Phi_{\tau}') \geq 0$. 
+we have that \mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
 
 Defining the matrix $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma(W)^{-1}$,
 we find that $\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N-\delta$, and in particular
@@ -1839,10 +1841,10 @@ $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we obtain
 Note that $(\Phi'_{\tau})^{(a)}= W \Phi_{\tau}^{(a)} W^{-1}$
 and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
 \begin{align*}
-\chi(T)&=\det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr), \; \; \; 
-\tilde{\chi}(T)=\det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
+\chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr), \; \; \; 
+\tilde{\chi}(T) = \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
 \end{align*}
-This finishes the proof.
+This completes the proof.
 \end{proof}
 
 %\begin{rem}
@@ -1856,7 +1858,7 @@ filtration $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ from Secti
 
 \begin{thm} \label{thm:pgeqn}
 We continue to use the notation of Theorem~\ref{thm:preccharpoly}. Suppose that $p \geq n$. 
-Order the elements of $\cB = \cup_{k=1}^n \cB_k$ by decreasing $k$, and let $k(i)$ denote
+Order the elements of $\cB = \bigcup_{k=1}^n \cB_k$ by decreasing $k$, and let $k(i)$ denote
 the value of $k$ of the $i$-th element. Define $\Gamma: \NN _0\rightarrow \NN_0$ as
 \[
 \Gamma(i) = \sum_{j=1}^{i-1} (n-k(j)).
@@ -1876,12 +1878,13 @@ into $p^k \Lambda_{\tau,crys}$, where $\Lambda_{\tau,crys}$ is defined as in the
 Since $\cB_k \subset \mbox{Fil}^{k} \HdR^{n}(\mathfrak{U}/\mathfrak{S}) = H_{n-k}$, the map $p^{-1} \Frob_p$ sends
 $\cB_k$ into $p^{n-k} \Lambda_{\tau,crys}$. So if the $i$-th vector in our basis $\cB$ is an element of $\cB_k$, 
 then the $i$-th column of $\Phi_{\tau}$ will be divisible by $p^{n-k}$. Note that the $i$-th column of $\Phi_{\tau}^{(a)}$
-will then be divisible by $p^{n-k}$ as well. The coefficients $\chi_i$ and $\tilde{\chi}_i$ are (alternating) sums of
+will then be divisible by $p^{n-k}$ as well. The coefficients $\chi_i$ and $\tilde{\chi}_i$ are alternating sums of
 products of $i$ elements from different columns of $\Phi_{\tau}^{(a)}$ and $\tilde{\Phi}_{\tau}^{(a)}$, respectively.
 Therefore, the required bound follows from Theorem~\ref{prop:productval}. 
 \end{proof}
 
-Now we ask to what $p$-adic precision~$N$ we need to compute $\chi_i$ in order to recover $\chi(T)$ exactly.
+Now we ask to what $p$-adic precision~$N$ we need to compute $\chi_i$ 
+in order to recover the integer polynomial~$\chi(T)$ exactly.
 
 \begin{thm} \label{thm:N0}
 In order to recover $\chi(T)$ exactly, it suffices to compute 
@@ -1903,12 +1906,12 @@ $s_j = \sum_{i=1}^{b} \alpha_i^j$, then clearly
 |s_j| \leq b \mathfrak{q}^{j (n-1)/2}.
 \]
 for all $1 \leq j \leq b$. Moreover, if we denote $\chi(T) = 1+\sum_{i=1}^{b} \chi_i T^i$, 
-then by the Newton-Girard identies, we have that
+then by the Newton--Girard identies, we have that
 \begin{equation} \label{eq:recursion}
 s_j+j \chi_j = - \sum_{i=1}^{j-1} s_{j-i} \chi_i.
 \end{equation}
 This means that if we are given $\chi_1,\ldots,\chi_{j-1}$, then we can limit $\chi_j$ to an explicit 
-disk in the complex plane of radius $\bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2}$. Therefore, 
+disk in the complex plane of radius $(b/i) \mathfrak{q}^{i (n-1) / 2}$. Therefore, 
 if we know each $\chi_i$ to $p$-adic precision $N_i$ satisfying
 \[
 p^{N_i} > 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2},
