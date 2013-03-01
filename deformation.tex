@@ -1250,6 +1250,7 @@ cases $m = 0, \dotsc, 11$, we explicitly verify that the
 lower bound in~\eqref{eq:alpha2.1} is nonnegative.
 \end{proof}
 
+\begin{comment}
 \begin{rem}
 We observe that in Theorem \ref{thm:alpha2} the exponent 
 $-\floor{(m+1)/4}+\nu_m$ is nonpositive for each value $m \geq 0$, 
@@ -1267,6 +1268,7 @@ g_r & = g_{r-2} \frac{(z + (r - 2)d)(z + (r - 1)d)}{2}
 for all remaining $r \geq 0$.  Since the numerator is an even integer, 
 it follows that this computation can be carried out without precision loss.
 \end{rem}
+\end{comment}
 
 \subsubsection{The case $p > 2$}
 
@@ -1329,7 +1331,7 @@ $\Phi_0$ to $p$-adic precision $N$, then we have to compute the elements
 $(k_u-1)!\alpha_{u,v}$ to a somewhat higher precision $\tilde{N}$ than just
 $N-n$, because 
 of the loss of precision in computing their inverses. Note that if a $p$-adic 
-number $x$ is known with (absolute) precision $k$, then its inverse is in general 
+number $x$ is known to (absolute) precision $k$, then its inverse is in general 
 only known with precision $k-2\ord_p(x)$. Therefore, we need an upper bound
 on the $p$-adic valuation of the elements $(k_u-1)!\alpha_{u,v}$.
 
@@ -1355,8 +1357,8 @@ hence $k_v \leq n$, the result follows.
 \end{proof}
 
 \begin{cor} \label{cor:Ntilde}
-To compute the matrix $\Phi_0$ with $p$-adic precision $N$, it is sufficient to compute the elements 
-$(k_u-1)!\alpha_{u,v}$ with $p$-adic precision
+To compute the matrix $\Phi_0$ to $p$-adic precision $N$, it is sufficient to compute the elements 
+$(k_u-1)!\alpha_{u,v}$ to $p$-adic precision
 \begin{equation*}
 \tilde{N}=N-n+2(\ord_p\bigl((n-1)!\bigr)+n+\delta).
 \end{equation*}
@@ -1365,27 +1367,10 @@ $(k_u-1)!\alpha_{u,v}$ with $p$-adic precision
 Up to this point, the sums over $m,r$ in our expressions 
 for $\alpha_{u,v}$ have been infinite sums.  We now present 
 a convergence result that will allow us to derive a finite 
-expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. We
-start with an elementary lemma.
-
-\begin{lem} \label{lem:log}
-Given integers $b,c \geq 2$ and defining $x = c + \log_b c + 1$ 
-we have that, for all real numbers $y \geq x$, 
-\begin{equation*}
-y - \log_b y \geq c.
-\end{equation*}
-\end{lem}
-
-\begin{proof}
-We first note that the function $y \mapsto y - \log_b y$ is increasing 
-for $y \geq 2$ because it has derivative $1 - \log_b(e)/y > 0$.  Thus, it 
-suffices to verify the result for $x$.  Indeed, as $c \geq 2$ we have 
-that $\log_b c + 1 \leq c$, hence $c + \log_b c + 1 \leq b^{\log_b c + 1}$,
-which upon taking logarithms and rearranging yields the result.
-\end{proof}
+expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. 
 
 \begin{prop} \label{prop:MR}
-In order to compute $(k_u-1)!\alpha_{u,v} \bmod p^{\tilde{N}}$, it 
+In order to compute $(k_u-1)!\alpha_{u,v}$ to $p$-adic precision $\tilde{N}$, it 
 suffices to restrict the inner sum in Theorem \ref{thm:alpha2} or 
 Theorem \ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or 
 equivalently $r \leq \mathcal{R}$, where 
@@ -1396,8 +1381,7 @@ equivalently $r \leq \mathcal{R}$, where
 \end{prop}
 
 \begin{proof}
-TODO Small complication here, Lauder doesn't have factor $\pi^{k_v-k_u}$. 
-Bound can be weakened a little bit, but I don't think this necessary.
+It follows from Theorem [[TODO]] that it is sufficient to compute
 \end{proof}
 
 Finally, we describe how to compute an approximation to the matrix~$\Phi_0$ 
@@ -1901,7 +1885,7 @@ then by the Newton-Girard identies, we have that
 s_j+j \chi_j = - \sum_{i=1}^{j-1} s_{j-i} \chi_i.
 \end{equation}
 This means that if we are given $\chi_1,\ldots,\chi_{j-1}$, then we can limit $\chi_j$ to an explicit 
-disk in the complex plane of radius $\bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2}$. Therefore, 
+disk in the complex plane of radius $\bigl( b/j \bigr) \mathfrak{q}^{j (n-1) / 2}$. Therefore, 
 if we know each $\chi_i$ to $p$-adic precision $N_i$ satisfying
 \[
 p^{N_i} > 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2},
