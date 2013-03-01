@@ -1515,12 +1515,14 @@ C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr). \label{eq:recursiondifeq}
 \end{align}
 
-However, we will only carry out this computation to some finite $p$-adic working precision $\tilde{N}$. If
-we want $C$ to be correct to $p$-adic precision $N$, then $\tilde{N}$ has to be somewhat greater than $N$, 
-because of error propagation. A bound for $\tilde{N}$, in terms of $N$ and the desired $t$-adic precision, 
-was given by Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be improved significantly by including 
-more recent bounds on the convergence of $C$ by Kedlaya~\citep{Kedlaya2010}, as we will now show. We let
- $\delta$ be defined as in Definition \ref{defn:delta}. 
+However, we will only carry out this computation to some finite $p$-adic 
+working precision $\tilde{N}$. If we want $C$ to be correct to $p$-adic 
+precision~$N$, then $\tilde{N}$ has to be somewhat greater than $N$ because 
+of error propagation. A bound for $\tilde{N}$, in terms of $N$ and the 
+desired $t$-adic precision, was given by Lauder~\citep[Theorem~5.1]{Lauder2006}, 
+but his result can be improved significantly by including more recent bounds 
+on the convergence of $C$ by Kedlaya~\citep{Kedlaya2010}, as we will now show. 
+We let $\delta$ be defined as in Definition~\ref{defn:delta}. 
 
 \begin{thm} \label{thm:valC}
 For all $i \geq 1$, we have that
