@@ -1046,7 +1046,7 @@ and $r \geq 0$, we define the rising factorials $(w)_r = \prod_{j=0}^{r-1} (w + 
 and for $m \geq 0$, we let $\lambda_m$ denote the coefficient of $z^m$ in the power series expansion 
 of $\exp \bigl( \pi (z - z^p) \bigr)$. It is well known, see for example~\cite{Dwork1962}, that
 \begin{equation} \label{eqn:dworkbound}
-\ord_p(\lambda_m) \geq \bigl( \frac{p-1}{p^2} \bigr) m. 
+\ord_p(\lambda_m) \geq \frac{p-1}{p^2} m. 
 \end{equation}
 
 \begin{defn} We define \label{defn:alpha}
@@ -1374,31 +1374,36 @@ a convergence result that will allow us to derive a finite
 expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. 
 
 \begin{prop} \label{prop:MR}
-In order to compute $(k_u-1)!\alpha_{u,v}$ to $p$-adic precision $\tilde{N}$, it 
-suffices to restrict the sums in Theorem \ref{thm:alpha2} or Theorem \ref{thm:alphap} 
-to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or equivalently $r \leq \mathcal{R}$, 
-where 
-\begin{eqnarray*}
-\mathcal{M} &=& \floor{\frac{p^2}{p-1}(\tilde{N}+\log_p(\tilde{N}+4)+5)}, \\
-\mathcal{R} &=& \floor{\mathcal{M}/p}.
-\end{eqnarray*}
+In order to compute $(k_u-1)!\alpha_{u,v}$ to $p$-adic precision~$\tilde{N}$, 
+it suffices to restrict the sums in Theorem~\ref{thm:alpha2} or 
+Theorem~\ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, 
+or equivalently $r \leq \mathcal{R}$, where 
+\begin{align*}
+\mathcal{M} &= \ceil{\frac{p^2}{p-1}(\tilde{N}+\log_p(\tilde{N}+3)+4)} - 1, \\
+\mathcal{R} &= \floor{\mathcal{M}/p}.
+\end{align*}
 \end{prop}
 
 \begin{proof}
-We know from the proofs of Theorem \ref{thm:alpha2} and Theorem \ref{thm:alphap} that the terms in the 
-sums over $m,r$ are $p$-adically integral. Moreover, the valuations of the terms
-with $r>0$ satisfy
+We know from the proofs of Theorem~\ref{thm:alpha2} and 
+Theorem~\ref{thm:alphap} that the terms in the sums over $m,r$ are 
+$p$-adically integral. Moreover, the valuations of the terms with 
+$r > 0$ satisfy
 \begin{align*}
-\ord_p \biggl( \Bigl( \frac{u_i+1}{d} \Bigr)_r \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!} \biggr) \biggr) &\geq
-\frac{r}{p-1}-\floor{\log_p(r)+1} + \frac{p-1}{p^2} m + \floor{m/p}-\frac{m}{p-1} \\
-&\geq \Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 2,
+\ord_p \biggl( \Bigl( \frac{u_i+1}{d} \Bigr)_r 
+               \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!} \biggr) 
+&\geq \frac{r}{p-1} - \floor{\log_p(r)+1} 
+      + \frac{p-1}{p^2} m + \floorBig{\frac{m}{p}} - \frac{m}{p-1} \\
+&\geq \Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 1,
 \end{align*}
-by the bound \eqref{eqn:dworkbound}, Lemma \ref{lem:lambdam}, Proposition \ref{prop:mpr}, and Proposition \ref{prop:rfac}. 
-Therefore, it is sufficient to restrict the sums in Theorem \ref{thm:alpha2} or Theorem \ref{thm:alphap} to $m,r \geq 0$ for which 
+by the bound~\eqref{eqn:dworkbound}, Lemma~\ref{lem:lambdam}, 
+Proposition~\ref{prop:mpr}, and Proposition~\ref{prop:rfac}. 
+Therefore, it is sufficient to restrict the sums in Theorem~\ref{thm:alpha2} 
+or Theorem~\ref{thm:alphap} to $m,r \geq 0$ for which 
 \begin{equation*}
-\Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 2 < \tilde{N}.
+\frac{p-1}{p^2} m - \log_p(m) - 1 < \tilde{N}.
 \end{equation*}
-Note that this includes all terms with $r=0$. 
+Note that this includes all terms with $r = 0$.
 \end{proof}
 
 Finally, we describe how to compute an approximation to the matrix~$\Phi_0$ 
