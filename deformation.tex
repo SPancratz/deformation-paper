@@ -1371,7 +1371,26 @@ $(k_u-1)!\alpha_{u,v}$ to $p$-adic precision
 Up to this point, the sums over $m,r$ in our expressions 
 for $\alpha_{u,v}$ have been infinite sums.  We now present 
 a convergence result that will allow us to derive a finite 
-expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. 
+expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$.
+We start with an elementary lemma.
+
+\begin{lem} \label{lem:log}
+Given integers $\alpha,\beta \geq 2$ and defining $x = \beta + \log_{\alpha} \beta + 1$, 
+we have that for all real numbers $y \geq x$, 
+\begin{equation*}
+y - \log_b y \geq \beta.
+\end{equation*}
+\end{lem}
+
+\begin{proof}
+We first note that the function $y \mapsto y - \log_{\alpha} y$ is increasing 
+for $y \geq 2$ because it has derivative $1 - \log_{\alpha}(e)/y > 0$.  Thus, it 
+suffices to verify the result for $x$.  Indeed, as $\beta \geq 2$ we have 
+that $\log_{\alpha} \beta + 1 \leq \beta$, hence 
+$\beta + \log_{\alpha} \beta + 1 \leq 2 \beta \leq \alpha \beta$,
+which upon taking logarithms and rearranging yields the result.
+\end{proof}
+
 
 \begin{prop} \label{prop:MR}
 In order to compute $(k_u-1)!\alpha_{u,v}$ to $p$-adic precision~$\tilde{N}$, 
