@@ -165,7 +165,8 @@
 \providecommand{\cC}{\mathcal{C}} % Column index set
 \providecommand{\cM}{\mathcal{M}} % Complexity of multiplication
 
-\providecommand{\BigOh}{\mathcal{O}} % Big-oh notation
+\providecommand{\BigOh}{\mathcal{O}}           % Big-oh notation
+\providecommand{\SoftOh}{\tilde{\mathcal{O}}} % Soft-oh notation
 
 % Theorems etc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1992,96 +1993,104 @@ below.
 
 \subsection{Complexity}
 
-In this section we determine the complexity of Algorithm~\ref{alg:complete}. We recall that $a = \log_p(\mathfrak{q})$,
-and we will denote $a' = \log_p(q)$. Note that $a'$ divides $a$. Let $d_t$ denote the degree of $P$ in the variable $t$.
-
-% A good measure for the input size is $a \log(p) d^n d_t$. 
-% We write $q=p^{a_1}$ and $\mathfrak{q}=q^{a_2}$, so that $a=a_1 a_2$.
-
+In this section we determine the complexity of Algorithm~\ref{alg:complete}.  
 We use soft $\mathcal{O}$ notation that ignores logarithmic factors, i.e.\ 
-$f=\tilde{\mathcal{O}}(g)$ means that $f=\mathcal{O}(g \log^k(g))$ for some $k \in \NN$.
+$\SoftOh(f)$ denotes the class of functions that lie in $\BigOh(g \log^k(g))$ 
+for some $k \in \NN$.
 
-Recall that two $k$-bit numbers or polynomials can be multiplied in time $\tilde{\mathcal{O}}(k)$.
-Let $\omega$ denote an exponent for matrix multiplication, so that two $\ell \times \ell$
-matrices can be multiplied in $\tilde{\mathcal{O}}(\ell^{\omega})$ (field) operations. It
-is known that one can take $\omega=2.3727$. An $\ell \times \ell$ matrix can also be inverted in 
-$\tilde{\mathcal{O}}(\ell^{\omega})$ field operations.
+We recall that two $k$-bit integers can be multiplied in $\SoftOh(k)$ 
+bit operations.  Moreover, two polynomials of degree~$k$ can be multiplied 
+in $\SoftOh(k)$ ring operations.  We let $\omega$ denote an exponent for 
+matrix multiplication, so that two $k \times k$ matrices can be multiplied 
+in $\SoftOh(k^{\omega})$ ring operations.  It is known that one can take 
+$\omega = 2.3727$, and that an invertible $k \times k$ matrix can be inverted 
+in $\SoftOh(k^{\omega})$ ring operations.
 
-We start by estimating the various precisions that we need. 
+We begin by estimating the various precisions that we require.  We recall 
+that $a = \log_p(\mathfrak{q})$, denote $a' = \log_p(q)$ and note that 
+$a'$ divides $a$.  We also let $d_t$ denote the degree of $P$ in the 
+variable~$t$.
 
 \begin{prop}
-All $p$-adic precisions that we use are $\tilde{\mathcal{O}}(a\log(p)d^n)$.
+All $p$-adic precisions that we use lie in $\BigOh(a\log(p)d^n)$.
 \end{prop}
 
 \begin{proof}
-Note that $b=\mathcal{O}(d^n)$
-and $\delta=\mathcal{O}(n)$. In Theorem~\ref{thm:precPhitau}, we have that
+Note that $b \in \BigOh(d^n)$ and $\delta \in \BigOh(n)$.  
+In Theorem~\ref{thm:precPhitau}, we have that
 \begin{eqnarray*}
-\max\{N_i\} = \mathcal{O}\bigl(a nb \log(b) \bigr)=\tilde{\mathcal{O}}\bigl(a d^n \bigr), \; \; \;
-N           = \tilde{\mathcal{O}}(a d^n).
+\max\{N_i\} \in \BigOh\bigl(a nb \log(b) \bigr) 
+            \subset \SoftOh\bigl(a d^n \bigr), \; \; \;
+N           \in \SoftOh(a d^n).
 \end{eqnarray*}
-Hence $\tilde{N}$ from Algorithm~\ref{alg:complete} 
-is $\tilde{O}(ad^n)$ as well. Now in Theorem~\ref{thm:KedlayaTuitman}, if 
-we assume that $\alpha_1$ is $\tilde{\mathcal{O}}(pN)$, then $\deg(D), K$ are 
-both $\tilde{\mathcal{O}}(p\tilde{N}) = \tilde{\mathcal{O}}(pad^n)$.
+Hence $\tilde{N}$ from Algorithm~\ref{alg:complete} is $\SoftOh(ad^n)$ 
+as well. Now in Theorem~\ref{thm:KedlayaTuitman}, if we assume that 
+$\alpha_1$ is $\SoftOh(pN)$, then $\deg(D), K$ are both 
+$\SoftOh(p\tilde{N}) \subset \SoftOh(p a d^n)$.
 
-[[TODO, it's not just $\alpha_1$, also the change of basis matrices to a regular basis, see if we 
-can justify this, otherwise replace with bound from Lauder/Gerkmann in which the complexities in $d$ 
-will become a bit worse]]
+[[TODO: It's not just $\alpha_1$, also the change of basis matrices to 
+a regular basis, see if we can justify this, otherwise replace with bound 
+from Lauder/Gerkmann in which the complexities in $d$ will become a bit 
+worse.]]
 
 The remaining $p$-adic precisions in the algorithm are all 
-$\tilde{\mathcal{O}}(a\log(p)d^n)$ by Theorem~\ref{thm:Ni} and 
-Corollary~\ref{cor:Ntilde}.
-\end{proof} 
+$\SoftOh(a\log(p)d^n)$ by Theorem~\ref{thm:Ni} and Corollary~\ref{cor:Ntilde}.
+\end{proof}
 
 Now we estimate the degrees of the numerator and denominator of the
-connection matrix $M$. 
+connection matrix~$M$.
 
 \begin{prop}
 The degrees of $H,R$ from Proposition~\ref{thm:denom}, and
 $G,r$ from Section~\ref{sec:DifferentialSystem} are all
-$O(n(de)^n d_t)=\tilde{\mathcal{O}}((de)^n d_t)$.
+$\BigOh(n(de)^n d_t) \subset \SoftOh((de)^n d_t)$.
 \end{prop}
 
 \begin{proof}
-Note that $\Delta_k$ in Definition~\ref{defn:resultant} is a square matrix of degree $d_t$, 
-with
+Note that $\Delta_k$ in Definition~\ref{defn:resultant} is a square matrix 
+of degree~$d_t$, with
 \[
 {kd-1 \choose n} \leq \bigl( \frac{e(kd-1)}{n} \bigr)^n < (de)^n
 \]
-columns, where $e$ denotes the base for the natural logarithm. The result follows easily
-from this. Note that the degrees of the numerators and denominators of all intermediate 
-results in Algorithm~\ref{alg:Connection} are also $\tilde{\mathcal{O}}((de)^n d_t)$.
+columns, where $e$ denotes the base for the natural logarithm. The result 
+follows easily from this. Note that the degrees of the numerators and 
+denominators of all intermediate results in Algorithm~\ref{alg:Connection} 
+are also $\SoftOh((de)^n d_t)$.
 \end{proof}
 
-We start by analyzing the computation of the connection matrix $M$.
+We start by analysing the computation of the connection matrix~$M$.
 \begin{prop}
-The computation of the connection matrix $M$ using Algorithm~\ref{alg:Connection} takes
+The computation of the connection matrix~$M$ using 
+Algorithm~\ref{alg:Connection} takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a a' \log^2(p) (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a a' \log^2(p) d^{4n}e^{3n} d_t).
+\mbox{time: }  &\SoftOh(a a' \log^2(p) (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
+\mbox{space: } &\SoftOh(a a' \log^2(p) d^{4n}e^{3n} d_t).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-We first need to construct and invert the matrices $\Delta_k$. For each of these matrices this takes time
+We first need to construct and invert the matrices~$\Delta_k$. 
+For each of these matrices, this takes time
 \[
-\tilde{\mathcal{O}}((de)^{n \omega} (a' \log(p)) (a \log(p) d^n) (de)^n d_t),
+\SoftOh((de)^{n \omega} (a' \log(p)) (a \log(p) d^n) (de)^n d_t),
 \] 
-and there are $\mathcal{O}(n)$ of them, so this can be done in time 
-$\tilde{\mathcal{O}}(a a' \log^2(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t)$.
-Then for each of the monomials in our basis, we  multiply with $-k P_t$ for some 
-$1 \leq k \leq n$, and reduce back to the basis by repeatedly using 
-Algorithm~\ref{alg:Decompose}. For each of these monomials this takes time 
+and there are $\BigOh(n)$ of them, so this can be done in time 
+$\SoftOh(a a' \log^2(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t)$.
+Then for each of the monomials in our basis, we  multiply with $-k P_t$ 
+for some $1 \leq k \leq n$, and reduce back to the basis by repeatedly 
+using Algorithm~\ref{alg:Decompose}. For each of these monomials this 
+takes time 
 \[
-\tilde{\mathcal{O}}((de)^{2n} (a' \log(p)) (a \log(p) d^n) (de)^n d_t)=\tilde{\mathcal{O}}(a a' \log^2(p) d^{4n}e^{3n} d_t),
+\SoftOh((de)^{2n} (a' \log(p)) (a \log(p) d^n) (de)^n d_t) = 
+\SoftOh(a a' \log^2(p) d^{4n}e^{3n} d_t),
 \]
-and there are $b=\mathcal{O}(d^n)$ of them, so this will take
-time $\tilde{\mathcal{O}}(a a' \log^2(p) d^{5n}e^{3n}d_t)$. 
+and there are $b \in \BigOh(d^n)$ of them, so this will take
+time $\SoftOh(a a' \log^2(p) d^{5n}e^{3n} d_t)$.
 
-During this computation we have to store $\mathcal{O}(n)$ matrices (and vectors) of size 
+During this computation we have to store $\BigOh(n)$ matrices 
+and vectors of size 
 \[
-\tilde{\mathcal{O}}((de)^{2n} (a' \log(p)) (a \log(p) d^n) (de)^n d_t),
+\SoftOh((de)^{2n} (a' \log(p)) (a \log(p) d^n) (de)^n d_t),
 \] 
 which finishes the proof.
 \end{proof}
@@ -2090,140 +2099,158 @@ Next we consider the computation of the matrix $\Phi_0$.
 \begin{prop}
 The computation of the matrix $\Phi_0$ with Algorithm~\ref{alg:Diagfrob} takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{3n}), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 \log^3(p) d^{2n}).
+\mbox{time: }  &\SoftOh(a^3 p d^{3n}), \\
+\mbox{space: } &\SoftOh(a^2 \log^3(p) d^{2n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-Denote by $\tilde{N}=\tilde{\mathcal{O}}(a \log(p) d^n)$ the $p$-adic precision in Algorithm~\ref{alg:Diagfrob}. 
-In Proposition~\ref{prop:MR}, we find that
-$\mathcal{M}$ is $\tilde{\mathcal{O}}(p \tilde{N})$ and $\mathcal{R}$ is $\tilde{\mathcal{O}}(\tilde{N})$. 
-So the sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ can be computed in time $\tilde{\mathcal{O}}(\tilde{N}^2 \log(p))$. 
-Note that we do not need all elements of the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$, but only
-$\mathcal{O} ( \min \{ 1,(n/p) \} \mathcal{M} ) = \tilde{ \mathcal{O} }(\tilde{N})$ of them. 
-Each $\mu_m$ is a sum of $\tilde{ \mathcal{O} }(\tilde{N})$ terms each of which can be computed
-from the previous one using $\mathcal{O}(p)$ operations in $\ZZ/p^{\tilde{N}}\ZZ$. Therefore the required
-$\mu_m$ can be computed in time $\tilde{\mathcal{O}}(\tilde{N}^3 p)$. Similarly, the computation of $\alpha_{u,v}$ for all of 
-the $b=\mathcal{O}(d^n)$ basis vectors can be done in time $\tilde{\mathcal{O}}(d^n \tilde{N}^2 \log(p))$. So 
-the whole computation takes time $\tilde{\mathcal{O}}(\tilde{N}^3p)=\tilde{\mathcal{O}}(a^3 p d^{3n})$.
+Denote by $\tilde{N} = \SoftOh(a \log(p) d^n)$ the $p$-adic precision in 
+Algorithm~\ref{alg:Diagfrob}.  In Proposition~\ref{prop:MR}, we find that 
+$\mathcal{M}$ is $\SoftOh(p \tilde{N})$ and $\mathcal{R}$ is 
+$\SoftOh(\tilde{N})$.  So the sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ can 
+be computed in time $\SoftOh(\tilde{N}^2 \log(p))$.  Note that we do not 
+need all elements of the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$, but only 
+$\BigOh( \min \{ 1,(n/p) \} \mathcal{M} ) = \SoftOh(\tilde{N})$ of them. 
+Each $\mu_m$ is a sum of $\SoftOh(\tilde{N})$ terms each of which can be 
+computed from the previous one using $\BigOh(p)$ operations in 
+$\ZZ/p^{\tilde{N}}\ZZ$.  Therefore, the required $\mu_m$ can be computed 
+in time $\SoftOh(\tilde{N}^3 p)$.  Similarly, the computation of 
+$\alpha_{u,v}$ for all of the $b \in \BigOh(d^n)$ basis vectors can be done 
+in time $\SoftOh(d^n \tilde{N}^2 \log(p))$.  Hence the whole computation 
+takes time $\SoftOh(\tilde{N}^3p) = \SoftOh(a^3 p d^{3n})$.
 
-The sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ and the $\tilde{\mathcal{O}}(\tilde{N})$ elements that we need
-from the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$ can be stored in space 
-$\tilde{\mathcal{O}}(\tilde{N}^2 \log(p)) = \tilde{\mathcal{O}}(a^2 \log^3(p) d^{2n})$.
+The sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ and the $\SoftOh(\tilde{N})$ 
+elements that we need from the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$ 
+can be stored in space $\SoftOh(\tilde{N}^2 \log(p)) = \SoftOh(a^2 \log^3(p) d^{2n})$.
 \end{proof}
 
-We now consider the computation of the power series expansion of the matrix $\Phi$.
+We now consider the computation of the power series expansion of the 
+matrix~$\Phi$.
 
 \begin{prop}
-Assume that the matrices $M, \Phi_0$ have been computed already. The computation of the power series expansion
-of the matrix $\Phi$ using Algorithm~\ref{alg:expansion} takes
+Assume that the matrices $M, \Phi_0$ have been computed already. 
+The computation of the power series expansion of the matrix~$\Phi$ 
+using Algorithm~\ref{alg:expansion} takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^2 a' p d^{n(\omega+3)}e^n d_t), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 a' p d^{4n}).
+\mbox{time: }  &\SoftOh(a^2 a' p d^{n(\omega+3)}e^n d_t), \\
+\mbox{space: } &\SoftOh(a^2 a' p d^{4n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-The computation of the matrix $C$ takes time
+The computation of the matrix~$C$ takes time
 \[
-\tilde{\mathcal{O}}(K \max\{\deg(G),\deg(r)\} b^{\omega} (a'\log(p)) (a \log(p) d^n)) = 
-\tilde{\mathcal{O}}(a^2 a' p d^{n(\omega+3)}e^n d_t).
+\SoftOh\bigl(K \max\{\deg(G),\deg(r)\} b^{\omega} (a'\log(p)) (a \log(p) d^n)\bigr) = 
+\SoftOh(a^2 a' p d^{n(\omega+3)}e^n d_t).
 \] 
 Applying $\sigma$ to an element of $\QQ_q$ to the required precision
-takes time $\tilde{\mathcal{O}}((a' \log(p))^2(a\log(p)d^n))$. Therefore, $\sigma(G)$ and $\sigma(r)$ 
-can be computed in time 
+takes time $\SoftOh\bigl((a' \log(p))^2(a\log(p)d^n)\bigr)$. Therefore, 
+$\sigma(G)$ and $\sigma(r)$ can be computed in time 
 \[
-\tilde{\mathcal{O}}(b^2 (de)^n d_t (a' \log(p))^2 (a\log(p)d^n))=\tilde{\mathcal{O}}(a a'^2 \log^3(p) d^{4n} e^n ).
+\SoftOh\bigl(b^2 (de)^n d_t (a' \log(p))^2 (a\log(p)d^n)\bigr) = 
+\SoftOh(a a'^2 \log^3(p) d^{4n} e^n ).
 \] 
-Now the computation of the matrix $\sigma(C)^{-1}$ takes time $\tilde{\mathcal{O}}(a^2 a' \log^2(p) d^{n(\omega+3)}e^n d_t)$. 
-Finally, the matrix product $C \Phi_0 \sigma(C)^{-1}$ can be computed in time 
+Now the computation of the matrix~$\sigma(C)^{-1}$ takes time 
+$\SoftOh(a^2 a' \log^2(p) d^{n(\omega+3)}e^n d_t)$. Finally, 
+the matrix product $C \Phi_0 \sigma(C)^{-1}$ can be computed in time 
 \[
-\tilde{\mathcal{O}}(b^{\omega} K \log(q) (a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 a' p d^{n(\omega+2)}).
+\SoftOh\bigl(b^{\omega} K \log(q) (a \log(p) d^n)\bigr) = \SoftOh(a^2 a' p d^{n(\omega+2)}).
 \]
-The required space is dominated by the space needed to store the matrix $C$, which is
+The required space is dominated by the space needed to store the 
+matrix~$C$, which is
 \[
-\tilde{\mathcal{O}}(b^2 K \log(q) (a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 a' p d^{4n}).
+\SoftOh(b^2 K \log(q) (a \log(p) d^n)) = \SoftOh(a^2 a' p d^{4n}). \qedhere
 \]
 \end{proof}
 
-We now move on to the computation of the matrix $\Phi_{\tau}$.
+We now move on to the computation of the matrix~$\Phi_{\tau}$.
 
 \begin{prop}
-The computation of the matrix $\Phi_{\tau}$ from the matrix $\Phi$ and $\tau \in S(\FF_{\mathfrak{q}})$ takes
+The computation of the matrix~$\Phi_{\tau}$ from the matrix~$\Phi$ 
+and $\tau \in S(\FF_{\mathfrak{q}})$ takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{4n}), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 a' p d^{4n}).
+\mbox{time: }  &\SoftOh(a^3 p d^{4n}), \\
+\mbox{space: } &\SoftOh(a^2 a' p d^{4n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-The Teichm\"uller lift $\hat{\tau}$ can be computed in $a \log(p)$ operations
-in $\QQ_{\mathfrak{q}}$, taking time 
-$\tilde{\mathcal{O}}((a \log(p))(a \log(p)) (a \log(p) d^n))=\tilde{\mathcal{O}}(a^3 \log^3(p) d^n)$ 
-and space $\tilde{\mathcal{O}}((a \log(p)) (a \log(p) d^n))$, which is also $\tilde{\mathcal{O}}(a^2 \log^2(p) d^n)$. 
-%TODO? This can be done faster with fast modular composition, but doesn't change overall runtime of this step
+The Teichm\"uller lift $\hat{\tau}$ can be computed in $a \log(p)$ 
+operations in $\QQ_{\mathfrak{q}}$, taking time 
+$\SoftOh((a \log(p))(a \log(p)) (a \log(p) d^n)) = \SoftOh(a^3 \log^3(p) d^n)$ 
+and space $\SoftOh((a \log(p)) (a \log(p) d^n))$, which is also 
+$\SoftOh(a^2 \log^2(p) d^n)$. 
+% TODO? This can be done faster with fast modular composition, 
+% but doesn't change overall runtime of this step
 
 To compute $\Phi_{\tau}$, we first need to compute 
 $D(t) \Phi(t) \bmod{t^{K}}$. This can be done in time 
-$\tilde{\mathcal{O}}(b^2 K \log(q) (a \log(p) d^n))=\tilde{\mathcal{O}}(a^2 p \log(q) d^{4n})$.
-Then we have to substitute $\hat{\tau}$ into this matrix of polynomials, which takes time
+$\SoftOh(b^2 K \log(q) (a \log(p) d^n)) = \SoftOh(a^2 p \log(q) d^{4n})$.
+Then we have to substitute $\hat{\tau}$ into this matrix of polynomials, 
+which takes time
 \[
-\tilde{\mathcal{O}}(b^2 K (a \log(p)) (a \log p d^n))=\tilde{\mathcal{O}}(a^3 p d^{4n}).
+\SoftOh(b^2 K (a \log(p)) (a \log p d^n)) = \SoftOh(a^3 p d^{4n}).
 \]
-Computing $D(\hat{\tau})^{-1}$, and multiplying with it, can be ignored. So the 
-computation takes time $\tilde{\mathcal{O}}(a^3 p d^{4n})$.
+Computing $D(\hat{\tau})^{-1}$, and multiplying with it, can be ignored. 
+Hence the computation takes time $\SoftOh(a^3 p d^{4n})$.
 
 The matrix $\Phi_{\tau}$ can be stored in space
 \[
-\tilde{\mathcal{O}}(b^2 (a \log(p))(a \log(p) d^n)) = \tilde{\mathcal{O}}(a^2 \log^2(p)  d^{3n}),
+\SoftOh(b^2 (a \log(p))(a \log(p) d^n)) = \SoftOh(a^2 \log^2(p) d^{3n}),
 \]
 and $D(t) \Phi(t) \bmod{t^{K}}$ needs space
  \[
-\tilde{\mathcal{O}}(b^2 K (a' \log(p)) (a \log(p) d^n))= \tilde{\mathcal{O}}(a^2 a' p d^{4n}),
+\SoftOh(b^2 K (a' \log(p)) (a \log(p) d^n)) = \SoftOh(a^2 a' p d^{4n}),
 \]
-so that the total space required is $\tilde{\mathcal{O}}(a^2 a' p d^{4n})$.
+so that the total space required is $\SoftOh(a^2 a' p d^{4n})$.
 \end{proof}
 
-Finally, we consider the computation of $\chi(T)$.
+Finally, we consider the computation of the polynomial $\chi(T)$.
 
 \begin{prop}
 The computation of $\chi(T)$ from $\Phi_{\tau}$ takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^3 \log^3(p) d^{n(\omega+1)}), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 \log^2(p) d^{3n}).
+\mbox{time: }  & \SoftOh(a^3 \log^3(p) d^{n(\omega+1)}), \\
+\mbox{space: } & \SoftOh(a^2 \log^2(p) d^{3n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-To compute $\Phi_{\tau}^{(a)}$ using fast exponentiation for semilinear maps, we need to apply (powers of) $\sigma$ to $\mathcal{O}(b^2 \log(a))$
-elements of $\QQ_{\mathfrak{q}}$ and then multiply $\mathcal{O}(\log(a))$ matrices of size $b=\mathcal{O}(d^n)$. This
-can be done in time $\tilde{\mathcal{O}}(a^3 \log(p)^3 d^{n(\omega+1)})$. The reverse characteristic polynomial $\chi(T)$ of 
-$\Phi_{\tau}^{(a)}$ can be computed modulo the required precision in time 
-$\tilde{\mathcal{O}}(b^{\omega} (a \log(p))(a \log(p) d^n))= \tilde{\mathcal{O}}(a^2 \log^2(p) d^{n(\omega+1)})$. Rounding
-this polynomial to $\ZZ[T]$ can be ignored.
+To compute $\Phi_{\tau}^{(a)}$ using fast exponentiation for 
+semilinear maps, we need to apply powers of $\sigma$ to $BigOh(b^2 \log(a))$
+elements of $\QQ_{\mathfrak{q}}$ and then multiply $\BigOh(\log(a))$ matrices 
+of size $b \in \BigOh(d^n)$. This can be done in time 
+$\SoftOh(a^3 \log(p)^3 d^{n(\omega+1)})$. The reverse characteristic 
+polynomial~$\chi(T)$ of $\Phi_{\tau}^{(a)}$ can be computed modulo the 
+required precision in time 
+$\SoftOh(b^{\omega} (a \log(p))(a \log(p) d^n)) = \SoftOh(a^2 \log^2(p) d^{n(\omega+1)})$. 
+Rounding this polynomial to $\ZZ[T]$ can be ignored.
 
-We need to store $\mathcal{O}(\log(a))$ matrices of size $b$ with entries in $\QQ_{\mathfrak{q}}$. This can be done in
-space $\tilde{\mathcal{O}}(b^2 (a \log(p))(a \log(p) d^n))= \tilde{\mathcal{O}}(a^2 \log^2(p) d^{3n})$.
+We need to store $\BigOh(\log(a))$ matrices of size~$b$ with entries 
+in~$\QQ_{\mathfrak{q}}$. This can be done in space 
+$\SoftOh(b^2 (a \log(p))(a \log(p) d^n)) = \SoftOh(a^2 \log^2(p) d^{3n})$.
 \end{proof}
 
 \begin{thm}
 The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} takes
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{4n} + a^2 a' p d^{n(w+3)} e^n d_t+ a a' (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^2 a' p d^{4n}+a a' d^{4n} e^{3n} d_t).
+\mbox{time: }  &\SoftOh(a^3 p d^{4n} + a^2 a' p d^{n(w+3)} e^n d_t+ a a' (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
+\mbox{space: } &\SoftOh(a^2 a' p d^{4n}+a a' d^{4n} e^{3n} d_t).
 \end{align*}
 \end{thm}
 
 \begin{proof}
-This follows by adding all complexities from the previous propositions and leaving out terms that are dominated by other terms.
+This follows by adding all complexities from the previous propositions and 
+leaving out terms that are dominated by other terms.
 \end{proof}
 
 \begin{rem}
-When $\mathfrak{q}=q$ and $d_t=1$, the bounds for the time and space complexity simplify to
+When $\mathfrak{q}=q$ and $d_t=1$, the bounds for the time and space 
+complexity simplify to
 \begin{align*}
-\mbox{time: }  &\tilde{\mathcal{O}}(a^3 p d^{n( \omega+3 )} e^n + a^2 ( \max \{ d^{n( \omega+2 )} e^{n(\omega+1 )}, d^{5n}e^{3n} \} )), \\
-\mbox{space: } &\tilde{\mathcal{O}}(a^3 p d^{4n}+a^2 d^{4n} e^{3n}).
+\mbox{time: }  & \SoftOh(a^3 p d^{n( \omega+3 )} e^n + a^2 ( \max \{ d^{n( \omega+2 )} e^{n(\omega+1 )}, d^{5n}e^{3n} \} )), \\
+\mbox{space: } &\SoftOh(a^3 p d^{4n}+a^2 d^{4n} e^{3n}).
 \end{align*}
 \end{rem}
 
@@ -2284,15 +2311,15 @@ of~$\ZZ_p$.
 
 \subsubsection{Parallelisation}
 
-Most of the steps in the algorithm can be
+Many of the steps in the algorithm can be
 carried out in parallel:
 \begin{itemize}
 \item In Algorithm~\ref{alg:Connection}, the images of the different 
       basis vectors under $\nabla$ can be computed independently.
 \item In Algorithm~\ref{alg:Diagfrob}, the elements of the sequence 
       $(\mu_m)_{m=0}^{\mathcal{M}}$ can be computed independently.
-\item At first sight Algorithm~\ref{alg:expansion} cannot be parallelised so easily 
-      as every $C_{i}$ depends on (some of) the $C_{j}$ with $j < i$. However, in
+\item At first sight Algorithm~\ref{alg:expansion} cannot be parallelised easily 
+      as every $C_{i}$ depends on some $C_{j}$ with $j < i$. However, in
       the computation of every single $C_i$ the different matrix products can
       still be computed independently.
 \item The computation of 
@@ -2308,15 +2335,15 @@ carried out in parallel:
       \begin{algorithmic}
       \vspace{1mm}
       \For{$i \gets 0$ \textbf{to} $a-1$}
-          \State $G_i \gets \sigma^{i}(\Phi_{\tau})$
+          \State $M_i \gets \sigma^{i}(\Phi_{\tau})$
       \EndFor
       \For{$j=k-1$ \textbf{to} $0$}
           \State $h \gets 2^{k-j}$
           \For{$i \gets 0$ \textbf{to} $2^j-1$}
-          \State $G_{2^j-1 + ih} \gets G_{2^j-1 + i h} G_{2^j-1 + ih + h/2}$
+          \State $M_{2^j-1 + ih} \gets M_{2^j-1 + i h} M_{2^j-1 + ih + h/2}$
           \EndFor
       \EndFor
-      \Return $G_0$
+      \Return $M_0$
       \end{algorithmic}
       \end{algorithm}
 \end{itemize}
@@ -2340,3 +2367,4 @@ carried out in parallel:
 \bibliography{deformation}
 
 \end{document}
+
