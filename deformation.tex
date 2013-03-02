@@ -449,7 +449,7 @@ Note that this can be achieved by applying a translation.
 \begin{thm} \label{thm:eqphi} The matrix $\Phi$ is an element of $M_{b \times b}(\QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag})$ 
 and satisfies the following differential equation:
 \begin{equation*}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \;\;\; \Phi(0)=\Phi_0,
 \end{equation*}
 where $\Phi_0$ is the matrix of $p^{-1}\Frob_p$ on $\Hrig^n(U_0)$ with respect to the basis
 $[e_0,\ldots,e_b]$.
@@ -627,7 +627,7 @@ denote the linear map that sends the elements of $B_k$ to zero and the
 elements of $R_k$ to themselves. %safer formulation, projection not unique
 Then the map 
 \begin{equation}
-\phi_k \colon U_k \to W_k, \; \; \;
+\phi_k \colon U_k \to W_k, \;\;\;
 (Q_0, \dotsc, Q_n) \mapsto \pi \bigl( Q_0 \partial_0 P + \dotsb + Q_n \partial_n P \bigr)
 \end{equation}
 is an isomorphism of $L$-vector spaces.
@@ -1395,7 +1395,7 @@ Theorem~\ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, o
 equivalently $r \leq \mathcal{R}$, where 
 \begin{equation*}
 \mathcal{M} = \floor{ p^2 \biggl( \frac{\tilde{N}}{p-1}
-            + \log_p\Bigl(\frac{\tilde{N}}{p-1} + 2 \Bigr) + 3 \biggr)}, \; \; \; \mathcal{R}=\floor{\mathcal{M}/p}.
+            + \log_p\Bigl(\frac{\tilde{N}}{p-1} + 2 \Bigr) + 3 \biggr)}, \;\;\; \mathcal{R}=\floor{\mathcal{M}/p}.
 \end{equation*}
 \end{prop}
 
@@ -1487,7 +1487,7 @@ in Definition~\ref{defn:sigma}.
 As we saw in Section~\ref{sec:Background}, these matrices satisfy the differential equation
 
 \begin{equation} \label{eq:Phi}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \; \; \; \Phi(0)=\Phi_0,
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \;\;\; \Phi(0)=\Phi_0,
 \end{equation}
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action of $p^{-1} \Frob_p$ 
 on $\Hrig^n(U_0)$. Our goal is 
@@ -1496,7 +1496,7 @@ the computation of a power series expansion of~$\Phi$ at $t=0$.
 We first observe that if $C \in M_{b \times b}(\QQ_q[[t]])$ denotes the unique solution to the 
 homogeneous system
 \begin{equation} \label{eq:01-GMDE-Homogenous}
-\Bigl(\frac{d}{dt} + M\Bigr) C = 0, \; \; \; C(0)=I,
+\Bigl(\frac{d}{dt} + M\Bigr) C = 0, \;\;\; C(0)=I,
 \end{equation}
 where $I$ denotes the identity matrix, then the matrix
 $\Phi = C \Phi_0 \sigma(C)^{-1}$
@@ -1509,7 +1509,7 @@ $r_0 \neq 0 \pmod{p}$.
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ at $t=0$ for 
 the equation
 \begin{equation*}
-r \frac{dC}{dt} + G C = 0, \; \; \; C(0)=I,
+r \frac{dC}{dt} + G C = 0, \;\;\; C(0)=I,
 \end{equation*}
 which is clearly equivalent to Equation \eqref{eq:01-GMDE-Homogenous}, using the recursion 
 \begin{align}
@@ -1577,7 +1577,7 @@ We use the bound from Theorem~\ref{thm:valC} and observe that it
 also applies to the inverse matrix~$C^{-1}$, as this matrix satisfies 
 the dual differential equation 
 \begin{equation} \label{eq:01-GMDE-Dual}
-\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0, \; \; \; C^{-1}(0)=I,
+\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0, \;\;\; C^{-1}(0)=I,
 \end{equation}
 that carries a Frobenius structure given by the matrix $\bigl(\Phi^{-1}\bigr)^t$. 
 \end{proof}
@@ -1842,7 +1842,7 @@ $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we obtain
 Note that $(\Phi'_{\tau})^{(a)}= W \Phi_{\tau}^{(a)} W^{-1}$
 and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
 \begin{align*}
-\chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr), \; \; \; 
+\chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr), \;\;\; 
 \tilde{\chi}(T) = \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
 \end{align*}
 This completes the proof.
@@ -2020,11 +2020,12 @@ Note that $b \in \BigOh(d^n)$ and $\delta \in \BigOh(n)$.
 In Theorem~\ref{thm:precPhitau}, we have that
 \begin{eqnarray*}
 \max\{N_i\} \in \BigOh\bigl(a n b + \log(b) \bigr) 
-            \subset \SoftOh\bigl(a d^n \bigr), \; \; \;
+            \subset \SoftOh\bigl(a d^n \bigr), \;\;\;
 N           \in \SoftOh(a d^n).
 \end{eqnarray*}
-Hence $\tilde{N}$ from Algorithm~\ref{alg:complete} is $\SoftOh(ad^n)$ 
-as well. Now in Theorem~\ref{thm:KedlayaTuitman}, if we assume that 
+Hence, the precisions $\tilde{N}$ and $\bar{N}$ set in 
+Algorithm~\ref{alg:complete} are $\SoftOh(ad^n)$, too. 
+Now in Theorem~\ref{thm:KedlayaTuitman}, if we assume that 
 $\alpha_1$ is $\SoftOh(pN)$, then $\deg(D), K$ are both 
 $\SoftOh(p\tilde{N}) \subset \SoftOh(p a d^n)$.
 
