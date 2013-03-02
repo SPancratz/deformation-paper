@@ -1163,7 +1163,7 @@ and from this it follows that
 \end{proof}
 
 \begin{prop} \label{prop:rfac}
-For all integers $u, d \geq 1$ and $r \geq 0$ with $p \nmid d$, 
+For all integers $u, d, r \geq 1$ with $p \nmid d$, 
 \begin{equation*}
 \ord_p\Bigl(\frac{u}{d}\Bigr)_r \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}.
 \end{equation*}
@@ -1238,12 +1238,12 @@ in each summand is nonnegative. Since
 \[
 \ord_{2} \Bigl(\frac{u_i+1}{d}\Bigr)_r \geq \ord_{2}(r!) = \ord_{2}(\floor{m/2}!),
 \] 
-we get that 
+we find that 
 \begin{equation} \label{eq:alpha2.1}
 \ord_{2}(f_r)
 \geq \ord_{2} \Bigl(\floor{\frac{m}{2}}!\Bigr) - \floor{\frac{m+1}{4}} + \nu_m.
 \end{equation}
-Applying Proposition~\ref{prop:rfac}, we see that the right-hand side 
+Applying Proposition~\ref{prop:rfac}, we see that for $m \geq 2$ the right-hand side 
 is bounded below by 
 \begin{equation*}
 \floor{\frac{m}{2}} - \floor{\frac{m+1}{4}} - \floor{\log_2(m)},
@@ -1373,28 +1373,31 @@ a convergence result that will allow us to derive a finite
 expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. 
 
 \begin{prop} \label{prop:MR}
-<<<<<<< HEAD
 In order to compute $(k_u-1)!\alpha_{u,v}$ to $p$-adic precision $\tilde{N}$, it 
-suffices to restrict the inner sum in Theorem \ref{thm:alpha2} or 
-Theorem \ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or 
-||||||| merged common ancestors
-In order to compute $(k_u-1)!\alpha_{u,v} \bmod p^{\tilde{N}}$, it 
-suffices to restrict the inner sum in Theorem \ref{thm:alpha2} or 
-Theorem \ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or 
-=======
-In order to compute $(k_u-1)!\alpha_{u,v} \bmod p^{\tilde{N}}$, it 
-suffices to restrict the inner sum in Theorem~\ref{thm:alpha2} or 
-Theorem~\ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or 
->>>>>>> 6c5cdb3f71426a6201b81ce170a6ac0eeb9f464e
-equivalently $r \leq \mathcal{R}$, where 
-\begin{equation*}
-\mathcal{M} = \floor{ p^2 \biggl( \frac{\tilde{N}}{p-1}
-            + \log_p\Bigl(\frac{\tilde{N}}{p-1} + 2 \Bigr) + 3 \biggr)}, \; \; \; \mathcal{R}=\floor{\mathcal{M}/p}.
-\end{equation*}
+suffices to restrict the sums in Theorem \ref{thm:alpha2} or Theorem \ref{thm:alphap} 
+to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or equivalently $r \leq \mathcal{R}$, 
+where 
+\begin{eqnarray*}
+\mathcal{M} &=& \floor{\frac{p^2}{p-1}(\tilde{N}+\log_p(\tilde{N}+4)+5)}, \\
+\mathcal{R} &=& \floor{\mathcal{M}/p}.
+\end{eqnarray*}
 \end{prop}
 
 \begin{proof}
-It follows from Theorem [[TODO]] that it is sufficient to compute
+We know from the proofs of Theorem \ref{thm:alpha2} and Theorem \ref{thm:alphap} that the terms in the 
+sums over $m,r$ are $p$-adically integral. Moreover, the valuations of the terms
+with $r>0$ satisfy
+\begin{align*}
+\ord_p \biggl( \Bigl( \frac{u_i+1}{d} \Bigr)_r \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!} \biggr) \biggr) &\geq
+\frac{r}{p-1}-\floor{\log_p(r)+1} + \frac{p-1}{p^2} m + \floor{m/p}-\frac{m}{p-1} \\
+&\geq \Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 2,
+\end{align*}
+by the bound \eqref{eqn:dworkbound}, Lemma \ref{lem:lambdam}, Proposition \ref{prop:mpr}, and Proposition \ref{prop:rfac}. 
+Therefore, it is sufficient to restrict the sums in Theorem \ref{thm:alpha2} or Theorem \ref{thm:alphap} to $m,r \geq 0$ for which 
+\begin{equation*}
+\Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 2 < \tilde{N}.
+\end{equation*}
+Note that this includes all terms with $r=0$. 
 \end{proof}
 
 Finally, we describe how to compute an approximation to the matrix~$\Phi_0$ 
