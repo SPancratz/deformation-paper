@@ -165,7 +165,7 @@
 \providecommand{\cC}{\mathcal{C}} % Column index set
 \providecommand{\cM}{\mathcal{M}} % Complexity of multiplication
 
-\providecommand{\BigOh}{\mathcal{O}}           % Big-oh notation
+\providecommand{\BigOh}{\mathcal{O}}          % Big-oh notation
 \providecommand{\SoftOh}{\tilde{\mathcal{O}}} % Soft-oh notation
 
 % Theorems etc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1164,7 +1164,7 @@ and from this it follows that
 \end{proof}
 
 \begin{prop} \label{prop:rfac}
-For all integers $u, d \geq 1$ and $r \geq 0$ with $p \nmid d$, 
+For all integers $u, d, r \geq 1$ with $p \nmid d$, 
 \begin{equation*}
 \ord_p\Bigl(\frac{u}{d}\Bigr)_r \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}.
 \end{equation*}
@@ -1239,12 +1239,12 @@ in each summand is nonnegative. Since
 \[
 \ord_{2} \Bigl(\frac{u_i+1}{d}\Bigr)_r \geq \ord_{2}(r!) = \ord_{2}(\floor{m/2}!),
 \] 
-we get that 
+we find that 
 \begin{equation} \label{eq:alpha2.1}
 \ord_{2}(f_r)
 \geq \ord_{2} \Bigl(\floor{\frac{m}{2}}!\Bigr) - \floor{\frac{m+1}{4}} + \nu_m.
 \end{equation}
-Applying Proposition~\ref{prop:rfac}, we see that the right-hand side 
+Applying Proposition~\ref{prop:rfac}, we see that for $m \geq 2$ the right-hand side 
 is bounded below by 
 \begin{equation*}
 \floor{\frac{m}{2}} - \floor{\frac{m+1}{4}} - \floor{\log_2(m)},
@@ -1254,6 +1254,7 @@ cases $m = 0, \dotsc, 11$, we explicitly verify that the
 lower bound in~\eqref{eq:alpha2.1} is nonnegative.
 \end{proof}
 
+\begin{comment}
 \begin{rem}
 We observe that in Theorem~\ref{thm:alpha2} the exponent 
 $-\floor{(m+1)/4}+\nu_m$ is nonpositive for each value $m \geq 0$, 
@@ -1271,6 +1272,7 @@ g_r & = g_{r-2} \frac{(z + (r - 2)d)(z + (r - 1)d)}{2}
 for all remaining $r \geq 0$.  Since the numerator is an even integer, 
 it follows that this computation can be carried out without precision loss.
 \end{rem}
+\end{comment}
 
 \subsubsection{The case $p > 2$}
 
@@ -1333,7 +1335,7 @@ $\Phi_0$ to $p$-adic precision $N$, then we have to compute the elements
 $(k_u-1)!\alpha_{u,v}$ to a somewhat higher precision $\tilde{N}$ than just
 $N-n$, because 
 of the loss of precision in computing their inverses. Note that if a $p$-adic 
-number $x$ is known with (absolute) precision $k$, then its inverse is in general 
+number $x$ is known to (absolute) precision $k$, then its inverse is in general 
 only known with precision $k-2\ord_p(x)$. Therefore, we need an upper bound
 on the $p$-adic valuation of the elements $(k_u-1)!\alpha_{u,v}$.
 
@@ -1359,8 +1361,8 @@ hence $k_v \leq n$, the result follows.
 \end{proof}
 
 \begin{cor} \label{cor:Ntilde}
-To compute the matrix $\Phi_0$ with $p$-adic precision $N$, it is sufficient to compute the elements 
-$(k_u-1)!\alpha_{u,v}$ with $p$-adic precision
+To compute the matrix $\Phi_0$ to $p$-adic precision $N$, it is sufficient to compute the elements 
+$(k_u-1)!\alpha_{u,v}$ to $p$-adic precision
 \begin{equation*}
 \tilde{N}=N-n+2(\ord_p\bigl((n-1)!\bigr)+n+\delta).
 \end{equation*}
@@ -1369,39 +1371,34 @@ $(k_u-1)!\alpha_{u,v}$ with $p$-adic precision
 Up to this point, the sums over $m,r$ in our expressions 
 for $\alpha_{u,v}$ have been infinite sums.  We now present 
 a convergence result that will allow us to derive a finite 
-expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. We
-start with an elementary lemma.
-
-\begin{lem} \label{lem:log}
-Given integers $b,c \geq 2$ and defining $x = c + \log_b c + 1$ 
-we have that, for all real numbers $y \geq x$, 
-\begin{equation*}
-y - \log_b y \geq c.
-\end{equation*}
-\end{lem}
-
-\begin{proof}
-We first note that the function $y \mapsto y - \log_b y$ is increasing 
-for $y \geq 2$ because it has derivative $1 - \log_b(e)/y > 0$.  Thus, it 
-suffices to verify the result for $x$.  Indeed, as $c \geq 2$ we have 
-that $\log_b c + 1 \leq c$, hence $c + \log_b c + 1 \leq b^{\log_b c + 1}$,
-which upon taking logarithms and rearranging yields the result.
-\end{proof}
+expression for $(k_u-1)!\alpha_{u,v}$ modulo $p^{\tilde{N}}$. 
 
 \begin{prop} \label{prop:MR}
-In order to compute $(k_u-1)!\alpha_{u,v} \bmod p^{\tilde{N}}$, it 
-suffices to restrict the inner sum in Theorem~\ref{thm:alpha2} or 
-Theorem~\ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or 
-equivalently $r \leq \mathcal{R}$, where 
-\begin{equation*}
-\mathcal{M} = \floor{ p^2 \biggl( \frac{\tilde{N}}{p-1}
-            + \log_p\Bigl(\frac{\tilde{N}}{p-1} + 2 \Bigr) + 3 \biggr)}, \;\;\; \mathcal{R}=\floor{\mathcal{M}/p}.
-\end{equation*}
+In order to compute $(k_u-1)!\alpha_{u,v}$ to $p$-adic precision $\tilde{N}$, it 
+suffices to restrict the sums in Theorem \ref{thm:alpha2} or Theorem \ref{thm:alphap} 
+to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, or equivalently $r \leq \mathcal{R}$, 
+where 
+\begin{eqnarray*}
+\mathcal{M} &=& \floor{\frac{p^2}{p-1}(\tilde{N}+\log_p(\tilde{N}+4)+5)}, \\
+\mathcal{R} &=& \floor{\mathcal{M}/p}.
+\end{eqnarray*}
 \end{prop}
 
 \begin{proof}
-TODO Small complication here, Lauder doesn't have factor $\pi^{k_v-k_u}$. 
-Bound can be weakened a little bit, but I don't think this necessary.
+We know from the proofs of Theorem \ref{thm:alpha2} and Theorem \ref{thm:alphap} that the terms in the 
+sums over $m,r$ are $p$-adically integral. Moreover, the valuations of the terms
+with $r>0$ satisfy
+\begin{align*}
+\ord_p \biggl( \Bigl( \frac{u_i+1}{d} \Bigr)_r \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!} \biggr) \biggr) &\geq
+\frac{r}{p-1}-\floor{\log_p(r)+1} + \frac{p-1}{p^2} m + \floor{m/p}-\frac{m}{p-1} \\
+&\geq \Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 2,
+\end{align*}
+by the bound \eqref{eqn:dworkbound}, Lemma \ref{lem:lambdam}, Proposition \ref{prop:mpr}, and Proposition \ref{prop:rfac}. 
+Therefore, it is sufficient to restrict the sums in Theorem \ref{thm:alpha2} or Theorem \ref{thm:alphap} to $m,r \geq 0$ for which 
+\begin{equation*}
+\Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 2 < \tilde{N}.
+\end{equation*}
+Note that this includes all terms with $r=0$. 
 \end{proof}
 
 Finally, we describe how to compute an approximation to the matrix~$\Phi_0$ 
@@ -1912,7 +1909,7 @@ then by the Newton--Girard identies, we have that
 s_j+j \chi_j = - \sum_{i=1}^{j-1} s_{j-i} \chi_i.
 \end{equation}
 This means that if we are given $\chi_1,\ldots,\chi_{j-1}$, then we can limit $\chi_j$ to an explicit 
-disk in the complex plane of radius $(b/i) \mathfrak{q}^{i (n-1) / 2}$. Therefore, 
+ disk in the complex plane of radius $(b/j) \mathfrak{q}^{j (n-1) / 2}$. Therefore, 
 if we know each $\chi_i$ to $p$-adic precision $N_i$ satisfying
 \[
 p^{N_i} > 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2},
