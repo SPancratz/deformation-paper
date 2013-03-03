@@ -719,8 +719,9 @@ where $\equiv$ denotes equality in cohomology.
       a vector of length $\abs{C_k^{(j)}}$ for $0 \leq j \leq n$,
       and let $v_g^{(j)}$ be the entry in $v^{(j)}$ corresponding 
       to $g \in C_k^{(j)}$.
-\item For $0 \leq j \leq n$ set $Q_j \gets \sum_{g \in C_k^{(j)}} v_g^{(j)} g$, 
-      and let $\gamma_k \gets Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$.
+\item For $0 \leq j \leq n$, compute $Q_j \gets \sum_{g \in C_k^{(j)}} v_g^{(j)} g$.
+\item Set $\gamma_k \gets Q-(Q_0 \partial P_0 + \dotsb + Q_n \partial_n P)$.
+\item \textbf{return} $Q_0, \dotsc, Q_n,\gamma_k$      
 \EndProcedure
 \end{compactenum}
 \end{algorithmic}
