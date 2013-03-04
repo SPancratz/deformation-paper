@@ -544,8 +544,8 @@ In this section we compute the action of the Gauss--Manin connection~$\nabla$ on
 the algebraic de~Rham cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ of the 
 generic fiber $\mathfrak{U}/\mathfrak{S}=\mathcal{U}/\mathcal{S} \otimes \QQ_q$ of 
 the complement $\mathcal{U}/\mathcal{S}$ of a family of smooth hypersurfaces 
-$\mathcal{X}/\mathcal{S}$, contained in $\mathbf{P}^n_{\mathcal{S}}$ over
-some Zariski open subset $\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$, defined
+$\mathcal{X}/\mathcal{S}$ contained in $\mathbf{P}^n_{\mathcal{S}}$ over
+some Zariski open subset $\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$. Let $\mathcal{X}/\mathcal{S}$ be defined
 by a homogeneous polynomial $P \in \ZZ_q[t][x_0,\ldots,x_n]$ of degree $d$.
 First we recall how to compute in $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
 following the method of Griffiths and Dwork.  
@@ -835,9 +835,9 @@ where $\gamma_i$ is an element in the $L$-span of~$B_i$ for $1 \leq i \leq n$.
 For the matrix of $\nabla$ to be correct to $p$-adic precision $N$, we have to 
 carry out this computation to a somewhat higher precision $\tilde{N}$, because of 
 precision loss in Algorithm~\ref{alg:PoleRed}. 
-
 For all $k \in \NN$, we have that $\ord_p(\Delta_k) \geq 0$ and $\ord_p(\det(\Delta_k))=0$. 
-The last equality can be checked at the diagonal fiber. Therefore, there is no precision loss 
+The equality can be checked at the diagonal fiber as in the proof of 
+Theorem \ref{thm:Isomorphism}. Therefore, there is no precision loss 
 in Algorithm~\ref{alg:Decompose}, and the only precision loss in Algorithm~\ref{alg:PoleRed} 
 comes from dividing by $k-1$ for $k=2,\ldots,n+1$. Hence it is sufficient to take 
 $\tilde{N}=N + \ord_p(n!)$.
@@ -1454,22 +1454,22 @@ below.
 \vspace{1mm}
 \Require $P_0=a_0 x_0^d + \dotsb + a_n x_n^d$ 
          with $a_0,\dotsc,a_n \in \ZZ_p^{\times}$, 
-         $p$-adic precision $N \geq 0$
-\Ensure  matrix $\Phi_0$ for action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ modulo $p^N$
+         $p$-adic precision $N \geq 0$.
+\Ensure  The matrix $\Phi_0$ for the action of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ with respect to basis $\cB$ to $p$-adic precision $N$.
 \Procedure{DiagFrob}{$P_0,N$}
 \State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
-\item determine $\tilde{N}$ from Corollary~\ref{cor:Ntilde}, and $\mathcal{M}$,$\mathcal{R}$ from Proposition~\ref{prop:MR} 
-\item compute the sequences $(d^{-r})_{r=0}^{\mathcal{R}}$, $(\mu_{m})_{m=0}^{\mathcal{M}}$ 
-      to $p$-adic precision~$\tilde{N}$
-\item let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix
+\item Determine $\tilde{N}$ from Corollary~\ref{cor:Ntilde}, and $\mathcal{M}$,$\mathcal{R}$ from Proposition~\ref{prop:MR}. 
+\item Compute the sequences $(d^{-r})_{r=0}^{\mathcal{R}}$, and $(\mu_{m})_{m=0}^{\mathcal{M}}$ 
+      to $p$-adic precision~$\tilde{N}$.
+\item Let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix.
 \item[] \textbf{for} $x^u \in B$ \textbf{do} 
 \item[] \begin{compactenum}[{\hspace{1em}} 1.]
-        \item determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$
-        \item $x_1 \gets (-1)^{k_u+k_v} (k_v-1)! p^n$ as an exact integer
-        \item $x_2 \gets (k_u - 1)! \alpha_{u,v} \pmod{p^{\tilde{N}}}$ using Theorem~\ref{thm:alpha2} or 
-               Theorem~\ref{thm:alphap}
-        \item compute $x_2^{-1} \pmod{p^{N-n}}$
-        \item $(\Phi_0)_{u,v} \gets x_1 x_2^{-1} \pmod{p^N}$
+        \item Determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$.
+        \item Compute $x_1 \gets (-1)^{k_u+k_v} (k_v-1)! p^n$ as an exact integer.
+        \item Compute $x_2 \gets (k_u - 1)! \alpha_{u,v}$ to $p$-adic precision $\tilde{N}$ using Theorem~\ref{thm:alpha2} or 
+              Theorem~\ref{thm:alphap}.
+        \item Compute $x_2^{-1}$ to $p$-adic precision $N-n$.
+        \item Compute $(\Phi_0)_{u,v} \gets x_1 x_2^{-1}$ to $p$-adic precision $N$.
       \end{compactenum}   
  \item \textbf{return} $\Phi_0$      
 \end{compactenum}
@@ -1685,17 +1685,17 @@ given $p$-adic and $t$-adic precisions, as formalised in Algorithm~\ref{alg:expa
 \Ensure  the power series expansion of $\Phi$ at $t=0$ to $t$-adic precision $K$ and $p$-adic precision $N$
 \Procedure{FrobSeriesExpansion}{$N,K$} 
 \State \begin{compactenum}[{\hspace{6pt}} 1.] \vspace{-1.24em}
-\item determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$ from Theorem~\ref{thm:Ni}
-\item $M \gets \textsc{GMConnection}(P)$
+\item Determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$ from Theorem~\ref{thm:Ni}.
+\item $M \gets \textsc{GMConnection}(P,?)$
 \item $\Phi_0 \gets \textsc{DiagFrob}(P_0,N_{\Phi_0})$
-\item solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
+\item Solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
 \begin{compactenum}[a.] 
 \item[] $C_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $K-1$ \textbf{do} 
 \item[] \hspace{0.6em} $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{\tilde{N}_C}}$
 \item[] $C \gets \sum_{i=0}^K C_i t^i \pmod{p^{N_C}}$
 \end{compactenum}
-\item solve Equation \eqref{eq:01-GMDE-Dual} for $\sigma(C)^{-1}$ (see Remark~\ref{rem:sigmatrick}) to $t$-adic precision $K$ and $p$-adic precision $N_{C^{-1}}$:
+\item Solve Equation \eqref{eq:01-GMDE-Dual} for $\sigma(C)^{-1}$ (see Remark~\ref{rem:sigmatrick}) to $t$-adic precision $K$ and $p$-adic precision $N_{C^{-1}}$:
 \begin{compactenum}[a.]
 \item[] $\tilde{C}_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $\ceil{K/p}-1$ \textbf{do}
