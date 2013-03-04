@@ -1743,12 +1743,12 @@ that we state here in a slightly simplified form.
 Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in 
 $\mathbf{P}^{1}_{\mathbf{Q}_q}$, and let $z$ be an unramified geometric point 
 of $\mathfrak{Z}$ such that $\mathfrak{Z}$ does not contain any other points 
-with the same reduction modulo~$p$.  Suppose that $[v_1,\dotsc,v_b]$ is 
-a basis for $\Hrig^n(U/S)$ with respect to which the matrix $M$ for the 
-connection~$\nabla$ has at most a simple pole at~$z$. Let 
-$\{ \lambda_1, \dotsc, \lambda_{b} \}$ denote the exponents of $M$ at $z$, 
+with the same reduction modulo~$p$. Moreover, let $[v_1,\dotsc,v_b]$ be a basis for 
+$\Hrig^n(U/S)$ with respect to which the matrix $M$ for the connection~$\nabla$ 
+has at most a simple pole at~$z$. Suppose that the exponents 
+$\{ \lambda_1, \dotsc, \lambda_{b} \}$ of $M$ at $z$, 
 which are defined as the eigenvalues of $(t - z) M \vert_{t=z}$, and known to 
-be rational numbers. Let $\Phi$ denote the matrix of the action of 
+be rational numbers, are contained in $\ZZ_p \cap \QQ$. Let $\Phi$ denote the matrix of the action of 
 $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$, with respect to the basis 
 $[v_1,\dotsc,v_b]$, and let $\delta$ be defined as in 
 Definition~\ref{defn:delta}. For $i \in \NN$, put
@@ -1779,7 +1779,7 @@ and define
          \end{array}
          \right. 
 \end{align*}
-Then $\Phi$ is congruent modulo $p^{N}$ to a matrix of rational functions of order greater 
+Then the matrix $\Phi$ is congruent modulo $p^{N}$ to a matrix of rational functions of order greater 
 than or equal to $-(\alpha_1+p \alpha_2)$ at $z$. 
 \end{thm}
 
@@ -1788,38 +1788,54 @@ Since the matrix $\Phi$ defines a Frobenius structure on the vector bundle $\Hri
 connection $\nabla$, we can apply~\citep[Theorem~2.1]{KedlayaTuitman2012}. We have 
 replaced $\ord_p(\Phi)$ and $ \bigl( \ord_p(\Phi)+\ord_p(\Phi^{-1}) \bigr)$ by their respective lower bounds 
 $-\delta$ and $-2 \delta + (n-1)$, since we might not know them exactly a priori.
-[[TODO explain why condition on exponents can be removed ]]
 \end{proof}
 
 \begin{rem}
-In practice the various constants $-2 \delta + (n-1), c, \alpha_1, -\delta$ are always very small
-in absolute value, so that $g(N)$ is about $N$, and the lower bound for the order of~$\Phi$ modulo $p^N$ at $z$ is roughly $-pN$.
-%This is what one should remember from this theorem.
+In practice, the various constants $-2 \delta + (n-1), c, \alpha_1, -\delta$ are always very small
+in absolute value, so that $g(N)$ is about $N$, and the lower bound for the order of~$\Phi$ 
+modulo $p^N$ at $z$ is roughly $-pN$.
 \end{rem}
 
 \begin{rem}
-The condition that $M$ has a simple pole at $z$ is not a serious restriction, since
-one can always change the basis $[v_1,\dotsc,v_b]$ such that this condition is
-satisfied, because the Gauss--Manin connection is known to be regular singular. 
-Applying the theorem to this new basis and transforming back to the old one, one
-obtains more or less the same bound as before~\citep[Corollary~2.6]{KedlayaTuitman2012}.
-
-The only real restriction is therefore that $\mathfrak{Z}$ does not contain any points
-with the same reduction modulo $p$ as $z$. However, this condition is almost always
-satisfied, and even when it is not, Theorem~\ref{thm:KedlayaTuitman} still seems
-to hold experimentally.
+The condition that $M$ has a simple pole at $z$ is not a serious restriction. One can always 
+find a basis $[w_1, \ldots, w_b]$ for which the condition is satisfied, because the Gauss--Manin 
+connection is known to be regular singular. Let $W \in M_{b \times b}(\QQ_q(t))$ denote the 
+change of basis matrix such that $w_j = \sum_{i=1}^b W_{ij} v_j$ for all $1 \leq j \leq b$. Then, 
+by \citep[Corollary 2.6]{KedlayaTuitman2012}, the matrix $\Phi$ from
+Theorem~\ref{thm:KedlayaTuitman} is congruent modulo 
+\[
+p^{N+\ord_p(W)+\ord_p(W^{-1})}
+\] 
+to a matrix of rational functions of order greater than 
+or equal to 
+\[
+-(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1}).
+\] 
 \end{rem}
+
+%\begin{rem}
+%The only real restriction is therefore that $\mathfrak{Z}$ does not contain any points
+%with the same reduction modulo $p$ as $z$. However, this condition is almost always
+%satisfied, and even when it is not, Theorem~\ref{thm:KedlayaTuitman} still seems
+%to hold experimentally.
+%\end{rem}
 
 Now if we want to compute the matrix $\Phi_{\tau}$ of the action of $p^{-1} \Frob_p$ on 
 $\Hrig^{n}(U_{\tau})$ to $p$-adic precision $N$, then we can use Theorem~\ref{thm:KedlayaTuitman} 
-to find $K \in \NN$, and a polynomial $D \in \ZZ_q[t]$ not divisible by $p$, the zeros of which are zeros of $r$, such that 
-$D(t) \Phi(t)$ is congruent modulo $p^N$ to a matrix of polynomials of degree at most $K$. Note that
-$D$ is a denominator for the rational function $\Phi(t) \pmod{p^N}$. We then compute
+to find $K \in \NN$, and a polynomial $D \in \ZZ_q[t]$ that divides some power of $r$, such that 
+$D(t) \Phi(t)$ is congruent modulo $p^N$ to a matrix of polynomials of degree at most $K$. 
+%Note that $D$ is a denominator for the rational function $\Phi(t) \pmod{p^N}$. 
+We then compute
 \begin{equation*}
 \Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
 \end{equation*}
-Since $Q(\hat{\tau}) \in \ZZ_q^{\times}$ because $\overline{R}(\tau) \neq 0$, and $\ord_p(\Phi(t)) \geq -\delta$
-by Corollary~\ref{cor:delta}, it is sufficient to compute $\hat{\tau}$ with $p$-adic precision $N+\delta$.
+
+\begin{rem}
+Note that $D(\hat{\tau}) \in \ZZ_q^{\times}$ because $\overline{R}(\tau) \neq 0$, and $\ord_p(\Phi(t)) \geq -\delta$
+by Corollary~\ref{cor:delta}. Therefore, it is sufficient to compute $\hat{\tau}$ to $p$-adic precision $N+\delta$, by
+Proposition \ref{prop:matrixproductval}. Similarly, because $\ord_p(\hat{\tau})$ is $p$-adically integral, it is
+sufficient to compute $\Phi(t)$ to $p$-adic precision $N$.
+\end{rem}
 
 \subsection{Computing the zeta function}
 \label{sec:ZetaFunctions}
