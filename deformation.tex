@@ -542,9 +542,11 @@ $\ord_p(A + B) \geq \min \{\ord_p(A), \ord_p(B)\}$ and $\ord_p(AB) \geq \ord_p(A
 
 In this section we compute the action of the Gauss--Manin connection~$\nabla$ on 
 the algebraic de~Rham cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ of the 
-complement $\mathfrak{U}/\mathfrak{S}$ of a family of smooth hypersurfaces 
-$\mathfrak{X}/\mathfrak{S}$ contained in $\mathbf{P}^n_{\mathfrak{S}}$ over
-some Zariski open subset $\mathfrak{S} \subset \mathbf{P}^1_{\QQ_q}$.
+generic fiber $\mathfrak{U}/\mathfrak{S}=\mathcal{U}/\mathcal{S} \otimes \QQ_q$ of 
+the complement $\mathcal{U}/\mathcal{S}$ of a family of smooth hypersurfaces 
+$\mathcal{X}/\mathcal{S}$, contained in $\mathbf{P}^n_{\mathcal{S}}$ over
+some Zariski open subset $\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$, defined
+by a homogeneous polynomial $P \in \ZZ_q[t][x_0,\ldots,x_n]$ of degree $d$.
 First we recall how to compute in $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
 following the method of Griffiths and Dwork.  
 
@@ -601,8 +603,8 @@ We also write $\cB_k = \{Q \Omega / P^k : Q \in B_k\}$ and denote
 $B = B_1 \cup \dotsb \cup B_n$ and $\cB = \cB_1 \cup \dotsb \cup \cB_n$.
 \end{defn}
 
-We will show below that if the family $\mathfrak{X}/{\mathfrak{S}}$ contains 
-a diagonal fibre then the set $\cB$ forms a basis for $\HdR^n(\mathfrak{U}_L)$.
+We will show below that if the family $\mathcal{X}/{\mathcal{S}}$ contains 
+a diagonal fibre, then the set $\cB$ forms a basis for $\HdR^n(\mathfrak{U}_L)$.
 
 \begin{defn} \label{defn:IndexSets}
 For $k \in \NN$, we let $C_k^{(0)}$ be the set of monomials of total 
@@ -616,8 +618,8 @@ in~$C_k^{(j)}$.
 \end{defn}
 
 \begin{thm} \label{thm:Isomorphism}
-Suppose that the family $\mathfrak{X}/\mathfrak{S}$ of smooth projective
-hypersurfaces given by the polynomial~$P$ in $\QQ_q[t][x_0, \dotsc, x_n]$ contains 
+Suppose that the family $\mathcal{X}/\mathcal{S}$ of smooth projective
+hypersurfaces given by the polynomial~$P$ in $\ZZ_q[t][x_0, \dotsc, x_n]$ contains 
 a diagonal fibre.  For $k \in \NN$ and $0 \leq j \leq n$, let $U_k^{(j)}$ be 
 the $L$-vector space of polynomials with basis $C_k^{(j)}$, and let $U_k$ 
 denote the cartesian product $U_k = U_k^{(0)} \times \dotsb \times U_k^{(n)}$. 
@@ -659,13 +661,13 @@ $g$ divides $f$ and $0$ otherwise. It is immediate that $\Delta_k$ is the
 matrix representing $\phi_k$ with respect to the bases $C_k$ and $R_k$ of 
 $U_k$ and $W_k$, respectively.
 
-The assumption that the family~$\mathfrak{X}/\mathfrak{S}$ contains a diagonal 
-hypersurface means that for some~$t_0$ the fibre $\mathfrak{X}_{t_0}$ is 
-defined by a polynomial of the form 
+The assumption that the family~$\mathcal{X}/\mathcal{S}$ contains a diagonal 
+hypersurface means that for some~$t_0 \in \mathcal{S}(\ZZ_q)$, 
+the fibre $\mathfrak{X}_{t_0}$ is defined by a polynomial of the form 
 \begin{equation*}
 P_{t_0}(x_0, \dotsc, x_n) = a_0 x_0^d + \dotsb + a_n x_n^d
 \end{equation*}
-with $a_0, \dotsc, a_n \in \QQ_q^{\times}$.
+with $a_0, \dotsc, a_n \in \ZZ_q^{\times}$.
 
 We can now show that the determinant of $\Delta_k$ is nonzero in~$L$.  Since 
 specialisation to the diagonal fibre, that is, evaluation of the matrix at 
@@ -701,8 +703,8 @@ where $\equiv$ denotes equality in cohomology.
 \caption{Obtain coordinates in the Jacobian ideal modulo basis elements}
 \label{alg:Decompose}
 \begin{algorithmic}
-\Require $P$ in $\QQ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
-         defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
+\Require $P$ in $\ZZ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
+         defining a family $\mathcal{X}/\mathcal{S}$ of smooth projective 
          hypersurfaces that contains a diagonal fibre, 
          $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$.
 \Ensure  $Q_0, \dotsc, Q_n \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
@@ -733,8 +735,8 @@ where $\equiv$ denotes equality in cohomology.
 \label{alg:PoleRed}
 \begin{algorithmic}
 \vspace{1mm}
-\Require  $P$ in $\QQ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
-         defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
+\Require $P$ in $\ZZ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
+         defining a family $\mathcal{X}/\mathcal{S}$ of smooth projective 
          hypersurfaces that contains a diagonal fibre, $Q \in L[x_0, \dotsc, x_n]$ 
          homogeneous of degree $kd - (n+1)$.
 \Ensure  $\gamma_i$ in the $L$-span of $B_i$ for $1 \leq i \leq n$, with  
@@ -795,7 +797,7 @@ and the proof is complete.
 \end{proof}
 
 \begin{thm} \label{thm:Basis}
-Suppose that the family of smooth projective hypersurfaces $\mathfrak{X}/\mathfrak{S}$ 
+Suppose that the family of smooth projective hypersurfaces $\mathcal{X}/\mathcal{S}$ 
 contains a diagonal fibre.  Then the set~$\cB$ from Definition~\ref{defn:MonBasis} 
 is a basis for the $L$-vector space $\HdR^n(\mathfrak{U}_L)$.
 \end{thm}
@@ -847,7 +849,7 @@ This is formalised in Algorithm~\ref{alg:Connection} below.
 \caption{Compute the Gauss--Manin connection matrix}
 \label{alg:Connection}
 \begin{algorithmic}
-\Require $P$ in $\QQ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
+\Require $P$ in $\ZZ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
          defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
          hypersurfaces that contains a diagonal fibre, $p$-adic precision $N$.
 \Ensure  The matrix~$M$ of $\nabla$ with respect to $\cB$ to $p$-adic precision $N$.
@@ -907,10 +909,8 @@ systems, as a consequence of Theorem~\ref{thm:Isomorphism}.
 \end{rem}
 
 In the rest of this section we will freely use the definitions and notation from Section~\ref{sec:Background}. 
-We let all of our matrices be defined with respect to the basis $\cB$. We have seen that for a
-family of smooth projective hypersurfaces $\mathcal{X}/\mathcal{S}$ over $\ZZ_q$, 
-defined by a polynomial $P \in \ZZ_q[t][x_0,\ldots,x_n]$, there exists 
-a Frobenius structure $\Frob_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and we let 
+We let all of our matrices be defined with respect to the basis $\cB$. We have seen that 
+there exists a Frobenius structure $\Frob_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$. Let 
 $\Phi \in M_{b \times b}(\QQ_q \langle t, \frac{1}{r} \rangle^{\dag})$ denote the 
 matrix of the action of $p^{-1}\Frob_p$, where $r$ is the denominator of the connection 
 matrix $M$. Recall that $\FF_{\mathfrak{q}}$ denotes a finite field extension of $\FF_q$. 
