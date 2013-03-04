@@ -827,8 +827,21 @@ Algorithm~\ref{alg:PoleRed} in order to write
 dt \otimes \frac{- k x^i P_t \Omega}{P^{k+1}} \equiv 
 dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega
 \end{equation}
-where $\gamma_i$ is an element in the $L$-span of~$B_i$ for $1 \leq i \leq n$. This is
-formalised in Algorithm~\ref{alg:Connection} below.
+where $\gamma_i$ is an element in the $L$-span of~$B_i$ for $1 \leq i \leq n$. 
+
+\begin{rem}
+For the matrix of $\nabla$ to be correct to $p$-adic precision $N$, we have to 
+carry out this computation to a somewhat higher precision $\tilde{N}$, because of 
+precision loss in Algorithm~\ref{alg:PoleRed}. 
+
+For all $k \in \NN$, we have that $\ord_p(\Delta_k) \geq 0$ and $\ord_p(\det(\Delta_k))=0$. 
+The last equality can be checked at the diagonal fiber. Therefore, there is no precision loss 
+in Algorithm~\ref{alg:Decompose}, and the only precision loss in Algorithm~\ref{alg:PoleRed} 
+comes from dividing by $k-1$ for $k=2,\ldots,n+1$. Hence it is sufficient to take 
+$\tilde{N}=N + \ord_p(n!)$.
+\end{rem}
+
+This is formalised in Algorithm~\ref{alg:Connection} below.
 
 \begin{algorithm}
 \caption{Compute the Gauss--Manin connection matrix}
@@ -836,12 +849,14 @@ formalised in Algorithm~\ref{alg:Connection} below.
 \begin{algorithmic}
 \Require $P$ in $\QQ_q[t][x_0, \dotsc, x_n]$ homogeneous of degree~$d$, 
          defining a family $\mathfrak{X}/\mathfrak{S}$ of smooth projective 
-         hypersurfaces that contains a diagonal fibre.
-\Ensure  The matrix~$M$ of $\nabla$ with respect to $\cB$.
-\Procedure{GMConnection}{$P$}
+         hypersurfaces that contains a diagonal fibre, $p$-adic precision $N$.
+\Ensure  The matrix~$M$ of $\nabla$ with respect to $\cB$ to $p$-adic precision $N$.
+\Procedure{GMConnection}{$P,N$}
+\State $\tilde{N} \gets N + \ord_p(n!)$
+\State \textit{Execute the following steps with $p$-adic working precision $\tilde{N}$}:
 \For{$g \in B$} 
 \State $k \gets  (\deg(g)+(n+1))/d$
-\State $Q \gets  - k g P_t$
+\State $Q \gets  - k g P_t$ 
 \State $\gamma_{1}, \dotsc, \gamma_n \gets$
       {\sc Reduce($P,Q$)} 
 \For{$f \in B$}
