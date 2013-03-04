@@ -2013,23 +2013,25 @@ below.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\overline{R}(\tau) \neq 0$
-\Ensure  the zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\overline{R}(\tau) \neq 0$.
+\Ensure  The zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
-\item determine $N$ from Theorem~\ref{thm:precPhitau}
+\item Determine $N$ from Theorem~\ref{thm:precPhitau}.
 \item \textbf{if} $p \geq n$ \textbf{then} 
 \item[] \hspace{1em} $\tilde{N} \gets N$, $\bar{N} \gets N$ 
 \item[] \textbf{else}
 \item[] \hspace{1em} $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-2) \delta$
-\item determine $K \in \NN$, and $D \in \ZZ_q[t]$ not divisible by $p$, such that $D(t) \Phi(t)$ is a matrix 
-      of polynomials of degree at most $K$ to $p$-adic precision $N$, using Theorem~\ref{thm:KedlayaTuitman}
-\item set $\Phi \gets$ \textsc{FrobSeriesExpansion($N,K)$}
-\item $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}}) \pmod{p^{\tilde{N}}}$.
-\item $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \pmod{p^{N}}$, using $p$-adic working precision $\tilde{N}$
-\item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$, using $p$-adic working precision $\bar{N}$
-\item round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion} 
-\item $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$
+\item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D(t) \Phi(t)$ is a matrix 
+      of polynomials of degree at most $K$ to $p$-adic precision $N$, using Theorem~\ref{thm:KedlayaTuitman}.
+\item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N,K)$}.
+\item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $\tilde{N}$.
+\item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
+      to $p$-adic precision $N$, using $p$-adic working precision $\tilde{N}$.
+\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N$, 
+      using $p$-adic working precision $\bar{N}$.
+\item Round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion}. 
+\item Set $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$.
 \item \Return $Z(X_{\tau},T)$
 \end{compactenum}
 \EndProcedure
