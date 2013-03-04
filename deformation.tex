@@ -525,10 +525,11 @@ precision. Therefore, we need to recall some bounds on the loss of $p$-adic
 precision when multiplying $p$-adic numbers and matrices. 
 
 \begin{prop} \label{prop:productval}
-Let $v_1,\ldots,v_{\ell} \in \ZZ$ and $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$ 
-be such that $\ord_p(x_i) \geq v_i$ for all $i$. Suppose that $N \in \ZZ$ satisfies 
-$N \geq \sum_{j=1}^{\ell} v_j$. Let $\tilde{x}_1, \dotsc, \tilde{x}_{\ell}$ denote 
-$p$-adic approximations to $x_1, \dotsc, x_{\ell}$ such that 
+Let $v_1,\ldots,v_{\ell} \in \ZZ$ and $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$,  
+$\ell \geq 2$, be such that $\ord_p(x_i) \geq v_i$ for all $i$. Suppose that 
+$N \in \ZZ$ satisfies $N \geq \sum_{j=1}^{\ell} v_j$. Let 
+$\tilde{x}_1, \dotsc, \tilde{x}_{\ell}$ denote $p$-adic approximations to 
+$x_1, \dotsc, x_{\ell}$ such that 
 \[
 \ord_p(x_i - \tilde{x}_i) \geq N - \sum_{j \neq i} v_j
 \] 
@@ -547,15 +548,16 @@ For all $i$,
 Therefore, we also have that
 \begin{equation*}
 \ord_p \bigl( (x_{i}-\tilde{x}_{i})
-    (\tilde{x}_1 \dotsc \tilde{x}_{i-1} x_{i+1} \dotsc x_{\ell} \bigr) \geq N,
+    (\tilde{x}_1 \dotsm \tilde{x}_{i-1} x_{i+1} \dotsm x_{\ell} \bigr) \geq N,
 \end{equation*}
 for all $i$. The result now follows by combining these inequalities.
 \end{proof}
 
 \begin{prop} \label{prop:matrixproductval}
-Let $v_1,\ldots,v_{\ell} \in \ZZ$ and $A_1, \dotsc, A_{\ell} \in M_{b \times b}(\QQ_q)$
-be such that $\ord_p(A_i) \geq v_i$ for all $i$. Suppose that $N \in \ZZ$ satisfies 
-$N \geq \sum_{j=1}^{\ell} v_j$.
+Let $v_1,\ldots,v_{\ell} \in \ZZ$ and 
+$A_1, \dotsc, A_{\ell} \in M_{b \times b}(\QQ_q)$, $\ell \geq 2$, be 
+such that $\ord_p(A_i) \geq v_i$ for all $i$. Suppose that $N \in \ZZ$ 
+satisfies $N \geq \sum_{j=1}^{\ell} v_j$. 
 Let $\tilde{A}_1, \dotsc, \tilde{A}_{\ell}$ denote $p$-adic approximations 
 to $A_1, \dotsc A_{\ell}$ such that
 \[
