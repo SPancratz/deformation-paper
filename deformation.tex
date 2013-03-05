@@ -2154,17 +2154,14 @@ in Algorithm~\ref{alg:complete} below.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
 \item Determine $N$ from Theorem~\ref{thm:precPhitau}.
-\item \textbf{if} $p \geq n$ \textbf{then} 
-\item[] \hspace{1em} $\tilde{N} \gets N$, $\bar{N} \gets N$ 
-\item[] \textbf{else}
-\item[] \hspace{1em} $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-3) \delta$
+\item Set $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-3) \delta$, $N' \gets N-\delta$.
 \item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D(t) \Phi(t)$ is a matrix 
       of polynomials of degree at most $K$ to $p$-adic precision $N$, using Theorem~\ref{thm:KedlayaTuitman}.
 \item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N,K)$}.
 \item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $\tilde{N}$.
 \item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
       to $p$-adic precision $N$, using $p$-adic working precision $\tilde{N}$.
-\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N-\delta$, 
+\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N'$, 
       using $p$-adic working precision $\bar{N}$.
 \item Round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion}. 
 \item Set $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$.
