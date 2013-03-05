@@ -2206,7 +2206,7 @@ $a' = \log_p q$, noting that $a'$ divides $a$, and also let $d_t$ denote
 the degree of $P$ in the variable~$t$.
 
 \begin{prop}
-All $p$-adic precisions that we use lie in $\BigOh(a\log(p)d^n)$.
+All $p$-adic precisions that we use lie in $\SoftOh(a d^n)$.
 \end{prop}
 
 \begin{proof}
@@ -2220,7 +2220,7 @@ N           \in \SoftOh(a d^n).
 Hence, the precisions $\tilde{N}$ and $\bar{N}$ set in 
 Algorithm~\ref{alg:complete} are $\SoftOh(ad^n)$, too. 
 Now in Theorem~\ref{thm:KedlayaTuitman}, if we assume that 
-$\alpha_1$ is $\SoftOh(pN)$, then $\deg(D), K$ are both 
+$\alpha_1$ is $\SoftOh(pN)$, then $\deg(D)$, $K$ are both 
 $\SoftOh(p\tilde{N}) \subset \SoftOh(p a d^n)$.
 
 [[TODO: It's not just $\alpha_1$, also the change of basis matrices to 
@@ -2228,8 +2228,10 @@ a regular basis, see if we can justify this, otherwise replace with bound
 from Lauder/Gerkmann in which the complexities in $d$ will become a bit 
 worse.]]
 
-The remaining $p$-adic precisions in the algorithm are all 
-$\SoftOh(a\log(p)d^n)$ by Theorem~\ref{thm:Ni} and Corollary~\ref{cor:Ntilde}.
+Finally, the remaining $p$-adic precisions in the algorithm 
+are also all $\SoftOh(a d^n)$ by Corollary~\ref{cor:Ntilde} and 
+Theorem~\ref{thm:Ni}, noting that the logarithms that appear 
+in the theorem are to base~$p$.
 \end{proof}
 
 Now we estimate the degrees of the numerator and denominator of the
