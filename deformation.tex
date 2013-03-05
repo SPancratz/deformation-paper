@@ -1910,8 +1910,10 @@ loss of precision in the computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$
 is at most $(b-1) \delta$, by Proposition \ref{prop:productval} and 
 Corollary \ref{cor:delta}. Therefore, it is sufficient to 
 compute $\chi(T)$ from $\Phi_{\tau}$ with $p$-adic working precision 
-$N+(a+b-2)\delta$. Note that $\Phi_{\tau}$ still only has to be computed to 
-precision $N+\delta$.
+\[
+N+((a-1)+(b-1))\delta=\tilde{N}+(a+b-3)\delta.
+\] 
+However, note that $\Phi_{\tau}$ still only has to be computed to precision $\tilde{N}$.
 \end{rem}
 
 When $p \geq n$, one can improve Theorem~\ref{thm:preccharpoly} by taking into account the Hodge
@@ -2033,7 +2035,7 @@ below.
 \item \textbf{if} $p \geq n$ \textbf{then} 
 \item[] \hspace{1em} $\tilde{N} \gets N$, $\bar{N} \gets N$ 
 \item[] \textbf{else}
-\item[] \hspace{1em} $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-2) \delta$
+\item[] \hspace{1em} $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-3) \delta$
 \item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D(t) \Phi(t)$ is a matrix 
       of polynomials of degree at most $K$ to $p$-adic precision $N$, using Theorem~\ref{thm:KedlayaTuitman}.
 \item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N,K)$}.
