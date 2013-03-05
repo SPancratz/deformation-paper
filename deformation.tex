@@ -2187,10 +2187,11 @@ in Algorithm~\ref{alg:complete} below.
 
 \subsection{Complexity}
 
-In this section we determine the complexity of Algorithm~\ref{alg:complete}.  
-We use soft $\mathcal{O}$ notation that ignores logarithmic factors, i.e.\ 
-$\SoftOh(f)$ denotes the class of functions that lie in $\BigOh(g \log^k(g))$ 
-for some $k \in \NN$.
+In this section we determine the complexity of Algorithm~\ref{alg:complete}, 
+considering as input variables $n$, $d$, $\log p$, and 
+$a = \log_p \mathfrak{q}$.  We use soft $\mathcal{O}$ notation that ignores 
+logarithmic factors, i.e.\ $\SoftOh(f)$ denotes the class of functions 
+that lie in $\BigOh(f \log^k(f))$ for some $k \in \NN$.
 
 We recall that two $k$-bit integers can be multiplied in $\SoftOh(k)$ 
 bit operations.  Moreover, two polynomials of degree~$k$ can be multiplied 
@@ -2200,10 +2201,9 @@ in $\SoftOh(k^{\omega})$ ring operations.  It is known that one can take
 $\omega = 2.3727$, and that an invertible $k \times k$ matrix can be inverted 
 in $\SoftOh(k^{\omega})$ ring operations.
 
-We begin by estimating the various precisions that we require.  We recall 
-that $a = \log_p(\mathfrak{q})$, denote $a' = \log_p(q)$ and note that 
-$a'$ divides $a$.  We also let $d_t$ denote the degree of $P$ in the 
-variable~$t$.
+We begin by estimating the various precisions that we require.  We denote 
+$a' = \log_p q$, noting that $a'$ divides $a$, and also let $d_t$ denote 
+the degree of $P$ in the variable~$t$.
 
 \begin{prop}
 All $p$-adic precisions that we use lie in $\BigOh(a\log(p)d^n)$.
