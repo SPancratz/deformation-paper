@@ -443,7 +443,7 @@ formula~\eqref{eq:formulab}, we have not found an exact reference
 in the literature. However, it is a straightforward consequence 
 of~\cite[Corollaire 2.4 (i)]{sga7} that 
 \[
-\sum_{n=1}^{\infty} b(n,d) x^{n-1} = \frac{(d-1)}{(1+x)(1-(d-1)x)} = \frac{1}{xd} \Bigl( \frac{d-1}{1-(d-1)x} - \frac{d-1}{1+x} \Bigr)
+\sum_{n=1}^{\infty} b(d,n) x^{n-1} = \frac{(d-1)}{(1+x)(1-(d-1)x)} = \frac{1}{xd} \Bigl( \frac{d-1}{1-(d-1)x} - \frac{d-1}{1+x} \Bigr)
 \] 
 as formal power series, from which \eqref{eq:formulab} can be read off easily.
 \end{proof}
@@ -1587,21 +1587,22 @@ In this section we explain how to solve the $p$-adic differential
 equation for the horizontal sections of the Gauss--Manin 
 connection $\nabla$, in order to obtain a local expansion of the 
 matrix for the action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$.  
-Our discussion largely follows the work of Lauder~\citep{Lauder2006}, 
+Our discussion largely follows work of Lauder~\citep{Lauder2006}, 
 but incorporates improved convergence bounds by Kedlaya~\citep{Kedlaya2010}.
 
-All our matrices will be defined with respect to the basis $\cB$. Recall 
-from Section~\ref{sec:Connection} that $M \in M_{b \times b}(\QQ_q(t))$ 
-denotes the matrix for the Gauss--Manin connection $\nabla$ on 
+All our matrices will be defined with respect to the basis $\cB$. Recall from 
+Section~\ref{sec:Connection} that $M \in M_{b \times b}(\QQ_q(t))$ denotes 
+the matrix for the Gauss--Manin connection $\nabla$ on 
 $\HdR^n(\mathfrak{U}/\mathfrak{S})$. We write $M = G/r$, with 
-$G \in M_{b \times b}(\QQ_q[t])$, and $r \in \ZZ_q[t]$ of smallest possible 
-degree and not divisible by $p$. Note that $r$ divides the resultant~$R$ 
-defined in Definition~\ref{defn:resultant}. By Assumption~\ref{assump:diag}, 
-we then have that $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. 
-Recall that 
-$\Phi \in M_{b \times b} \bigl(\QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
+$G \in M_{b \times b}(\QQ_q[t])$, and $r \in \ZZ_q[t]$ a divisor of the 
+resultant $R$ defined in Definition~\ref{defn:resultant}. Note that the 
+degree of $r$ might be smaller than the degree of $R$, which will speed up 
+our computations. By Assumption~\ref{assump:diag}, we have that 
+$r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. Recall that 
+$\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
 denotes the matrix for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ 
-on $\Hrig^{n}(U/S)$, where $\sigma$ is defined as in Definition~\ref{defn:sigma}. 
+on $\Hrig^{n}(U/S)$, where $\sigma$ is defined as 
+in Definition~\ref{defn:sigma}. 
 
 As we saw in Section~\ref{sec:Background}, these matrices satisfy 
 the differential equation
@@ -1896,14 +1897,10 @@ Let $W \in M_{b \times b}(\QQ_q(t))$ denote the change of basis matrix such
 that $w_j = \sum_{i=1}^b W_{ij} v_j$ for all $1 \leq j \leq b$. Then, 
 by \citep[Corollary 2.6]{KedlayaTuitman2012}, the matrix $\Phi$ from
 Theorem~\ref{thm:KedlayaTuitman} is congruent modulo 
-\[
-p^{N+\ord_p(W)+\ord_p(W^{-1})}
-\] 
+$p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix of rational functions of order greater than 
 or equal to 
-\[
--(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1}).
-\] 
+$-(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1}).$ 
 \end{rem}
 
 %\begin{rem}
@@ -1987,8 +1984,8 @@ Then for all $1 \leq i \leq b$, we have that
 Recall from Theorem~\ref{thm:deltabound} that there exists a matrix 
 $W_{\tau} \in M_{b \times b}(\QQ_q)$ satisfying 
 $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, such that for 
-$\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ we have that 
-\mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
+$\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ 
+we have that \mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
 
 Defining the matrix 
 $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma(W)^{-1}$, we find that 
@@ -2007,27 +2004,40 @@ and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
 This completes the proof.
 \end{proof}
 
-%\begin{rem}
-%So to know $\chi(T)$ to $p$-adic precision $N$, it is sufficient to know $\Phi_{\tau}$ to $p$-adic
-%precision $\tilde{N}=N+\delta$. However, we cannot compute $\chi(T)$ as in Theorem~\ref{thm:preccharpoly},
-%since we do not know the matrix $W$ explicitly. there can be loss of $p$-adic precision
-%\end{rem}
+\begin{rem}
+So if we know $\Phi_{\tau}$ to $p$-adic precision $N$, then
+$\chi(T)$ is determined to precision $N-\delta$.
+However, we cannot compute $\chi(T)$ as in the proof of 
+Theorem~\ref{thm:preccharpoly}, since we do not know the matrix 
+$W$ explicitly. When computing with respect to our basis $\cB$,
+there will be loss of precision. The loss of $p$-adic precision 
+in computing $\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most 
+$(a-1)\delta$, and the loss of 
+precision in the computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$ 
+is at most $(b-1) \delta$, by Proposition \ref{prop:productval} and 
+Corollary \ref{cor:delta}. Therefore, for $\chi(T)$ to be correct
+to $p$-adic precision $N-\delta$, it is sufficient to compute 
+$\chi(T)$ from $\Phi_{\tau}$ using $p$-adic working precision 
+\[
+(N-\delta)+((a-1)+(b-1))\delta=N+(a+b-3)\delta.
+\] 
+\end{rem}
 
 When $p \geq n$, one can improve Theorem~\ref{thm:preccharpoly} by taking into 
 account the Hodge filtration $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
 from Section~\ref{sec:Connection}.
 
 \begin{thm} \label{thm:pgeqn}
-We continue to use the notation of Theorem~\ref{thm:preccharpoly}. Suppose 
-that $p \geq n$. Order the elements of $\cB = \bigcup_{k=1}^n \cB_k$ by 
-decreasing $k$, and let $k(i)$ denote the value of $k$ of the $i$-th element. 
-Define $\Gamma: \NN _0\rightarrow \NN_0$ as
+We continue to use the notation of Theorem~\ref{thm:preccharpoly}. Suppose that $p \geq n$. 
+Order the elements of $\cB = \bigcup_{k=1}^n \cB_k$ by decreasing $k$, and let $k(i)$ 
+denote the value of $k$ of the $i$-th element, for $1 \leq i \leq b$ . Define 
+$\Gamma: \{0,1, \ldots, b\} \rightarrow \NN_0$ as
 \[
-\Gamma(i) = \sum_{j=1}^{i-1} (n-k(j)).
+\Gamma(i) = \sum_{j=1}^{i} (n-k(j)).
 \]
 Now suppose that $\tilde{\Phi}_{\tau}$ is an approximation to $\Phi_{\tau}$ 
 satisfying $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N$, and that 
-$N \geq \Gamma(n)$. Then for all $1 \leq i \leq b$, we have that 
+$N \geq \Gamma(b)$. Then for all $1 \leq i \leq b$, we have that 
 \[
 \ord_p(\chi_i-\tilde{\chi}_i) \geq N + \Gamma(i-1).
 \]
@@ -2139,23 +2149,25 @@ in Algorithm~\ref{alg:complete} below.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\overline{R}(\tau) \neq 0$
-\Ensure  the zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\overline{R}(\tau) \neq 0$.
+\Ensure  The zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
-\item determine $N$ from Theorem~\ref{thm:precPhitau}
+\item Determine $N$ from Theorem~\ref{thm:precPhitau}.
 \item \textbf{if} $p \geq n$ \textbf{then} 
 \item[] \hspace{1em} $\tilde{N} \gets N$, $\bar{N} \gets N$ 
 \item[] \textbf{else}
-\item[] \hspace{1em} $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-2) \delta$
-\item determine $K \in \NN$, and $D \in \ZZ_q[t]$ not divisible by $p$, such that $D(t) \Phi(t)$ is a matrix 
-      of polynomials of degree at most $K$ to $p$-adic precision $N$, using Theorem~\ref{thm:KedlayaTuitman}
-\item set $\Phi \gets$ \textsc{FrobSeriesExpansion($N,K)$}
-\item $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}}) \pmod{p^{\tilde{N}}}$.
-\item $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \pmod{p^{N}}$, using $p$-adic working precision $\tilde{N}$
-\item $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr) \pmod{p^{N}}$, using $p$-adic working precision $\bar{N}$
-\item round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion} 
-\item $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$
+\item[] \hspace{1em} $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-3) \delta$
+\item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D(t) \Phi(t)$ is a matrix 
+      of polynomials of degree at most $K$ to $p$-adic precision $N$, using Theorem~\ref{thm:KedlayaTuitman}.
+\item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N,K)$}.
+\item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $\tilde{N}$.
+\item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
+      to $p$-adic precision $N$, using $p$-adic working precision $\tilde{N}$.
+\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N-\delta$, 
+      using $p$-adic working precision $\bar{N}$.
+\item Round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion}. 
+\item Set $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$.
 \item \Return $Z(X_{\tau},T)$
 \end{compactenum}
 \EndProcedure
