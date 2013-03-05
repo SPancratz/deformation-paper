@@ -1877,8 +1877,10 @@ Then for all $1 \leq i \leq b$, we have that
 \end{thm}
 
 \begin{proof} 
-Recall from Theorem~\ref{thm:deltabound} that there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_q)$
-satisfying $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, such that for $\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ 
+Recall from Theorem~\ref{thm:deltabound} that there exists a matrix 
+$W_{\tau} \in M_{b \times b}(\QQ_q)$ satisfying 
+$\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, such that for 
+$\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ 
 we have that \mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
 
 Defining the matrix $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma(W)^{-1}$,
@@ -1897,11 +1899,20 @@ and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
 This completes the proof.
 \end{proof}
 
-%\begin{rem}
-%So to know $\chi(T)$ to $p$-adic precision $N$, it is sufficient to know $\Phi_{\tau}$ to $p$-adic
-%precision $\tilde{N}=N+\delta$. However, we cannot compute $\chi(T)$ as in Theorem~\ref{thm:preccharpoly},
-%since we do not know the matrix $W$ explicitly. there can be loss of $p$-adic precision
-%\end{rem}
+\begin{rem}
+So to determine $\chi(T)$ to $p$-adic precision $N$, it is 
+sufficient to know $\Phi_{\tau}$ to $p$-adic precision $\tilde{N}=N+\delta$. 
+However, we cannot compute $\chi(T)$ as in the proof of Theorem~\ref{thm:preccharpoly},
+since we do not know the matrix $W$ explicitly. When computing with respect 
+to our basis $\cB$, the loss of $p$-adic precision in computing 
+$\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most $(a-1)\delta$ , and the 
+loss of precision in the computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$ 
+is at most $(b-1) \delta$, by Proposition \ref{prop:productval} and 
+Corollary \ref{cor:delta}. Therefore, it is sufficient to 
+compute $\chi(T)$ from $\Phi_{\tau}$ with $p$-adic working precision 
+$N+(a+b-2)\delta$. Note that $\Phi_{\tau}$ still only has to be computed to 
+precision $N+\delta$.
+\end{rem}
 
 When $p \geq n$, one can improve Theorem~\ref{thm:preccharpoly} by taking into account the Hodge
 filtration $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ from Section~\ref{sec:Connection}.
