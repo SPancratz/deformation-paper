@@ -1900,20 +1900,22 @@ This completes the proof.
 \end{proof}
 
 \begin{rem}
-So to determine $\chi(T)$ to $p$-adic precision $N$, it is 
-sufficient to know $\Phi_{\tau}$ to $p$-adic precision $\tilde{N}=N+\delta$. 
-However, we cannot compute $\chi(T)$ as in the proof of Theorem~\ref{thm:preccharpoly},
-since we do not know the matrix $W$ explicitly. When computing with respect 
-to our basis $\cB$, the loss of $p$-adic precision in computing 
-$\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most $(a-1)\delta$ , and the 
-loss of precision in the computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$ 
+So if we know $\Phi_{\tau}$ to $p$-adic precision $N$, then
+$\chi(T)$ is determined to precision $N-\delta$.
+However, we cannot compute $\chi(T)$ as in the proof of 
+Theorem~\ref{thm:preccharpoly}, since we do not know the matrix 
+$W$ explicitly. When computing with respect to our basis $\cB$,
+there will be loss of precision. The loss of $p$-adic precision 
+in computing $\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most 
+$(a-1)\delta$, and the loss of 
+precision in the computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$ 
 is at most $(b-1) \delta$, by Proposition \ref{prop:productval} and 
-Corollary \ref{cor:delta}. Therefore, it is sufficient to 
-compute $\chi(T)$ from $\Phi_{\tau}$ with $p$-adic working precision 
+Corollary \ref{cor:delta}. Therefore, for $\chi(T)$ to be correct
+to $p$-adic precision $N-\delta$, it is sufficient to compute 
+$\chi(T)$ from $\Phi_{\tau}$ using $p$-adic working precision 
 \[
-N+((a-1)+(b-1))\delta=\tilde{N}+(a+b-3)\delta.
+(N-\delta)+((a-1)+(b-1))\delta=N+(a+b-3)\delta.
 \] 
-However, note that $\Phi_{\tau}$ still only has to be computed to precision $\tilde{N}$.
 \end{rem}
 
 When $p \geq n$, one can improve Theorem~\ref{thm:preccharpoly} by taking into account the Hodge
@@ -2042,7 +2044,7 @@ below.
 \item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $\tilde{N}$.
 \item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
       to $p$-adic precision $N$, using $p$-adic working precision $\tilde{N}$.
-\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N$, 
+\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N-\delta$, 
       using $p$-adic working precision $\bar{N}$.
 \item Round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion}. 
 \item Set $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$.
