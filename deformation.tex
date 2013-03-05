@@ -1181,7 +1181,7 @@ However, to simplify notation, we will keep the index $m$.
 At first sight it appears that this computation genuinely has to 
 take place in the extension field~$\QQ_p(\pi)$.  This is, however, 
 not the case as we will show now.  The terms $\alpha_{u,v}$ 
-will turn out to be elements of~$\ZZ_p$. We provide expressions 
+will turn out to be elements of~$\ZZ_p$, and we provide expressions 
 for them that are more suitable for computations.
 
 First, it is straightforward to obtain a more explicit description 
@@ -1204,7 +1204,9 @@ $x^u, x^v \in B$ and
 $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$. 
 Then 
 \begin{equation*}
-\alpha_{u,v}=(-p)^{k_u} \prod_{i=0}^n a_i^{(p (u_i + 1) - (v_i + 1))/d} \biggl( \sum_{m,r} a_i^{(p-1)r}\Bigl( \frac{u_i+1}{d} \Bigr)_r \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!}  \biggr) \biggr),
+\alpha_{u,v} = (-p)^{k_u} \prod_{i=0}^n a_i^{(p (u_i + 1) - (v_i + 1))/d} 
+    \biggl( \sum_{m,r} a_i^{(p-1)r} \Bigl( \frac{u_i+1}{d} \Bigr)_r 
+        \sum_{k=0}^{\floor{m/p}} \frac{p^{r-k}}{(m-pk)!k!} \biggr),
 \end{equation*}
 where the sum in the $i$-th factor of the product is over all $m, r \geq 0$  
 that satisfy
@@ -1217,10 +1219,15 @@ p(u_i+1)-(v_i+1)=d(m-pr).
 We start from Definition~\ref{defn:alpha} and use Lemma~\ref{lem:lambdam} to 
 find that $\alpha_{u,v}$ is equal to 
 \begin{gather*}
-\pi^{k_v-k_u} \prod_{i=0}^n \biggl( \sum_{m,r} (-1)^{\floor{m/(p-1)}} \pi^{m \bmod{(p-1)}} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{\floor{m/(p-1)}-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \pi^{-r} a_i^{m-r} \biggr).
+\pi^{k_v-k_u} \prod_{i=0}^n 
+    \biggl( \sum_{m,r} (-1)^{\floor{m/(p-1)}} \pi^{m \bmod{(p-1)}} 
+    \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \pi^{-r} a_i^{m-r} 
+    \sum_{k=0}^{\floor{m/p}} \frac{p^{\floor{m/(p-1)}-k}}{(m-pk)!k!} \biggr).
 \intertext{Now we write $m = \floor{m/(p-1)} (p-1) + \bigl(m \bmod{(p-1)}\bigr)$, 
 and simplify using $\pi^{p-1} = -p$, to obtain}
-\alpha_{u,v}=\pi^{k_v-k_u} \prod_{i=0}^n \biggl( \sum_{m,r} \pi^{m - r} \biggl( \sum_{k=0}^{\floor{m/p}} \frac{p^{-k}}{(m-pk)!k!} \biggr) \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r a_i^{m-r} \biggr).
+\alpha_{u,v} = \pi^{k_v-k_u} \prod_{i=0}^n \biggl( \sum_{m,r} \pi^{m - r} 
+    \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r a_i^{m-r} 
+    \sum_{k=0}^{\floor{m/p}} \frac{p^{-k}}{(m-pk)!k!} \biggr).
 \end{gather*}
 After substituting $m-r = (p-1)r + \bigl(p(u_i+1) - (v_i+1)\bigr)/d$, we obtain 
 the required formula.
@@ -1290,12 +1297,12 @@ $\mu_m$ as $4/3$ and $232/315$.  Now suppose that $m \neq 3, 7$.
 From Lemma~\ref{lem:lambdam} we obtain 
 \begin{equation*}
 \ord_2 \bigl(\mu_m\bigr) 
-    = \floor{3m/4} - m + \ord_2(\lambda_m).
+    = \floorBig{\frac{3m}{4}} - m + \ord_2(\lambda_m).
 \end{equation*}
 Using the bound \eqref{eqn:dworkbound}, we find that 
 \begin{equation*}
 \ord_2 \bigl(\mu_m\bigr) 
-    \geq \floor{3m/4} - m + \ceil{\frac{m}{4}} = 0. \qedhere
+    \geq \floorBig{\frac{3m}{4}} - m + \ceil{\frac{m}{4}} = 0. \qedhere
 \end{equation*}
 \end{proof}
 
