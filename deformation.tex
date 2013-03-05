@@ -2297,29 +2297,35 @@ Next we consider the computation of the matrix $\Phi_0$.
 The computation of the matrix $\Phi_0$ with Algorithm~\ref{alg:Diagfrob} takes
 \begin{align*}
 \mbox{time: }  &\SoftOh(a^3 p d^{3n}), \\
-\mbox{space: } &\SoftOh(a^2 \log^3(p) d^{2n}).
+\mbox{space: } &\SoftOh(a^2 \log(p) d^{2n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-Denote by $\tilde{N} = \SoftOh(a \log(p) d^n)$ the $p$-adic precision in 
-Algorithm~\ref{alg:Diagfrob}.  In Proposition~\ref{prop:MR}, we find that 
-$\mathcal{M}$ is $\SoftOh(p \tilde{N})$ and $\mathcal{R}$ is 
-$\SoftOh(\tilde{N})$.  So the sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ can 
-be computed in time $\SoftOh(\tilde{N}^2 \log(p))$.  Note that we do not 
+Let $\tilde{N}_{\Phi_0} \in \SoftOh(a d^n)$ denote the $p$-adic 
+precision in Algorithm~\ref{alg:Diagfrob}.  We first consider the 
+sequences $(d^{-r})_{r=0}^{\mathcal{R}}$ and $(\mu_m)_{m=0}^{\mathcal{M}}$. 
+In Proposition~\ref{prop:MR}, we find that 
+$\mathcal{M} \in \SoftOh(p \tilde{N}_{\Phi_0})$ and 
+$\mathcal{R} \in \SoftOh(\tilde{N}_{\Phi_0})$.  Thus, the sequence 
+$(d^{-r})_{r=0}^{\mathcal{R}}$ can be computed in time 
+$\SoftOh(\tilde{N}_{\Phi_0}^2 \log(p))$.  Note that we do not 
 need all elements of the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$, but only 
-$\BigOh( \min \{ 1,(n/p) \} \mathcal{M} ) = \SoftOh(\tilde{N})$ of them. 
-Each $\mu_m$ is a sum of $\SoftOh(\tilde{N})$ terms each of which can be 
-computed from the previous one using $\BigOh(p)$ operations in 
-$\ZZ/p^{\tilde{N}}\ZZ$.  Therefore, the required $\mu_m$ can be computed 
-in time $\SoftOh(\tilde{N}^3 p)$.  Similarly, the computation of 
-$\alpha_{u,v}$ for all of the $b \in \BigOh(d^n)$ basis vectors can be done 
-in time $\SoftOh(d^n \tilde{N}^2 \log(p))$.  Hence the whole computation 
-takes time $\SoftOh(\tilde{N}^3p) = \SoftOh(a^3 p d^{3n})$.
+$\BigOh( \min \{ 1,(n/p) \} \mathcal{M} ) = \SoftOh(\tilde{N}_{\Phi_0})$ of 
+them.  Every $\mu_m$ is a sum of $\SoftOh(\tilde{N}_{\Phi_0})$ terms, each of 
+which can be computed from the previous one with $\BigOh(p)$ operations in 
+$\ZZ/p^{\tilde{N}_{\Phi_0}}\ZZ$.  Therefore, the required subsequence can be computed 
+in time $\SoftOh(\tilde{N}_{\Phi_0}^3 p)$.
 
-The sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ and the $\SoftOh(\tilde{N})$ 
-elements that we need from the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$ 
-can be stored in space $\SoftOh(\tilde{N}^2 \log(p)) = \SoftOh(a^2 \log^3(p) d^{2n})$.
+Similarly, the computation of $\alpha_{u,v}$ for all of the 
+$b \in \BigOh(d^n)$ basis vectors can be done in time 
+$\SoftOh(d^n \tilde{N}_{\Phi_0}^2 \log(p))$.  Hence the whole computation 
+takes time $\SoftOh(\tilde{N}_{\Phi_0}^3p) = \SoftOh(a^3 p d^{3n})$.
+
+The sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ and the 
+$\SoftOh(\tilde{N}_{\Phi_0})$ elements that we need from the sequence 
+$(\mu_{m})_{m=0}^{\mathcal{M}}$ can be stored in space 
+$\SoftOh(\tilde{N}_{\Phi_0}^2 \log(p)) = \SoftOh(a^2 \log(p) d^{2n})$.
 \end{proof}
 
 We now consider the computation of the power series expansion of the 
