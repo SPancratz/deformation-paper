@@ -2289,9 +2289,10 @@ and vectors of size
 which finishes the proof.
 \end{proof}
 
-Next we consider the computation of the matrix $\Phi_0$. 
+Next we consider the computation of the matrix $\Phi_0$.
+
 \begin{prop}
-The computation of the matrix $\Phi_0$ with Algorithm~\ref{alg:Diagfrob} takes
+The computation of the matrix~$\Phi_0$ with Algorithm~\ref{alg:Diagfrob} takes
 \begin{align*}
 \mbox{time: }  &\SoftOh(a^3 p d^{3n}), \\
 \mbox{space: } &\SoftOh(a^2 \log(p) d^{2n}).
@@ -2329,9 +2330,9 @@ We now consider the computation of the power series expansion of the
 matrix~$\Phi$.
 
 \begin{prop}
-Assume that the matrices $M, \Phi_0$ have been computed already. 
-The computation of the power series expansion of the matrix~$\Phi$ 
-using Algorithm~\ref{alg:expansion} takes
+Assume that the matrices $M = G/r$, $\Phi_0$ have been computed already
+in Algorithm~\ref{alg:expansion}.  The subsequent computation of the 
+power series expansion of the matrix~$\Phi$ then takes
 \begin{align*}
 \mbox{time: }  &\SoftOh(a^2 a' p d^{n(\omega+3)}e^n d_t), \\
 \mbox{space: } &\SoftOh(a^2 a' p d^{4n}).
@@ -2341,26 +2342,26 @@ using Algorithm~\ref{alg:expansion} takes
 \begin{proof}
 The computation of the matrix~$C$ takes time
 \[
-\SoftOh\bigl(K \max\{\deg(G),\deg(r)\} b^{\omega} (a'\log(p)) (a \log(p) d^n)\bigr) = 
+\SoftOh\bigl(K \max\{\deg(G),\deg(r)\} b^{\omega} (a'\log(p)) (a d^n)\bigr) = 
 \SoftOh(a^2 a' p d^{n(\omega+3)}e^n d_t).
 \] 
 Applying $\sigma$ to an element of $\QQ_q$ to the required precision
-takes time $\SoftOh\bigl((a' \log(p))^2(a\log(p)d^n)\bigr)$. Therefore, 
+takes time $\SoftOh\bigl((a' \log(p))^2(a d^n)\bigr)$. Therefore, 
 $\sigma(G)$ and $\sigma(r)$ can be computed in time 
 \[
-\SoftOh\bigl(b^2 (de)^n d_t (a' \log(p))^2 (a\log(p)d^n)\bigr) = 
-\SoftOh(a a'^2 \log^3(p) d^{4n} e^n ).
+\SoftOh\bigl(b^2 (de)^n d_t (a' \log(p))^2 (a d^n)\bigr) = 
+\SoftOh(a a'^2 \log^2(p) d^{4n} e^n ).
 \] 
 Now the computation of the matrix~$\sigma(C)^{-1}$ takes time 
 $\SoftOh(a^2 a' \log^2(p) d^{n(\omega+3)}e^n d_t)$. Finally, 
 the matrix product $C \Phi_0 \sigma(C)^{-1}$ can be computed in time 
 \[
-\SoftOh\bigl(b^{\omega} K \log(q) (a \log(p) d^n)\bigr) = \SoftOh(a^2 a' p d^{n(\omega+2)}).
+\SoftOh\bigl(b^{\omega} K \log(q) (a d^n)\bigr) = \SoftOh(a^2 a' p d^{n(\omega+2)}).
 \]
 The required space is dominated by the space needed to store the 
 matrix~$C$, which is
 \[
-\SoftOh(b^2 K \log(q) (a \log(p) d^n)) = \SoftOh(a^2 a' p d^{4n}). \qedhere
+\SoftOh(b^2 K \log(q) (a d^n)) = \SoftOh(a^2 a' p d^{4n}). \qedhere
 \]
 \end{proof}
 
@@ -2377,31 +2378,32 @@ and $\tau \in S(\FF_{\mathfrak{q}})$ takes
 
 \begin{proof}
 The Teichm\"uller lift $\hat{\tau}$ can be computed in $a \log(p)$ 
-operations in $\QQ_{\mathfrak{q}}$, taking time 
-$\SoftOh((a \log(p))(a \log(p)) (a \log(p) d^n)) = \SoftOh(a^3 \log^3(p) d^n)$ 
-and space $\SoftOh((a \log(p)) (a \log(p) d^n))$, which is also 
-$\SoftOh(a^2 \log^2(p) d^n)$. 
+ring operations in $\QQ_{\mathfrak{q}}$, taking time 
+$\SoftOh((a \log(p))(a \log(p)) (a d^n)) = \SoftOh(a^3 \log^2(p) d^n)$ 
+and space $\SoftOh((a \log(p)) (a d^n))$, which is also 
+$\SoftOh(a^2 \log(p) d^n)$. 
 % TODO? This can be done faster with fast modular composition, 
 % but doesn't change overall runtime of this step
 
 To compute $\Phi_{\tau}$, we first need to compute 
 $D(t) \Phi(t) \bmod{t^{K}}$. This can be done in time 
-$\SoftOh(b^2 K \log(q) (a \log(p) d^n)) = \SoftOh(a^2 p \log(q) d^{4n})$.
+$\SoftOh(b^2 K \log(q) (a d^n)) = \SoftOh(a^2 p \log(q) d^{4n})$.
 Then we have to substitute $\hat{\tau}$ into this matrix of polynomials, 
 which takes time
 \[
-\SoftOh(b^2 K (a \log(p)) (a \log p d^n)) = \SoftOh(a^3 p d^{4n}).
+\SoftOh(b^2 K (a \log(p)) (a d^n)) = \SoftOh(a^3 p d^{4n}).
 \]
-Computing $D(\hat{\tau})^{-1}$, and multiplying with it, can be ignored. 
-Hence the computation takes time $\SoftOh(a^3 p d^{4n})$.
+Computing $D(\hat{\tau})^{-1} \in \QQ_{\mathfrak{q}}$ and performing 
+the scalar multiplication can be ignored.  Hence the computation 
+takes time $\SoftOh(a^3 p d^{4n})$.
 
 The matrix $\Phi_{\tau}$ can be stored in space
 \[
-\SoftOh(b^2 (a \log(p))(a \log(p) d^n)) = \SoftOh(a^2 \log^2(p) d^{3n}),
+\SoftOh(b^2 (a \log(p))(a d^n)) = \SoftOh(a^2 \log(p) d^{3n}),
 \]
 and $D(t) \Phi(t) \bmod{t^{K}}$ needs space
  \[
-\SoftOh(b^2 K (a' \log(p)) (a \log(p) d^n)) = \SoftOh(a^2 a' p d^{4n}),
+\SoftOh(b^2 K (a' \log(p)) (a d^n)) = \SoftOh(a^2 a' p d^{4n}),
 \]
 so that the total space required is $\SoftOh(a^2 a' p d^{4n})$.
 \end{proof}
@@ -2418,7 +2420,7 @@ The computation of $\chi(T)$ from $\Phi_{\tau}$ takes
 
 \begin{proof}
 To compute $\Phi_{\tau}^{(a)}$ using fast exponentiation for 
-semilinear maps, we need to apply powers of $\sigma$ to $BigOh(b^2 \log(a))$
+semilinear maps, we need to apply powers of $\sigma$ to $\BigOh(b^2 \log(a))$
 elements of $\QQ_{\mathfrak{q}}$ and then multiply $\BigOh(\log(a))$ matrices 
 of size $b \in \BigOh(d^n)$. This can be done in time 
 $\SoftOh(a^3 \log(p)^3 d^{n(\omega+1)})$. The reverse characteristic 
