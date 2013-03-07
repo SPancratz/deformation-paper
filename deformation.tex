@@ -655,14 +655,36 @@ We will show below that if the family $\mathcal{X}/{\mathcal{S}}$ contains
 a diagonal fibre, then the set $\cB$ forms a basis for $\HdR^n(\mathfrak{U}_L)$.
 
 \begin{defn} \label{defn:IndexSets}
-For $k \in \NN$, we let $C_k^{(0)}$ be the set of monomials of total 
-degree \\ 
-$(k-1)d - n$ and then inductively, for $j = 1, \dotsc, n$, define 
+For $k \in \NN$, let $C_k^{(0)}$ be the set of monomials of total 
+degree $(k-1)d - n$ and then inductively, for $1 \leq j \leq n$, define 
 $C_k^{(j)}$ to be the set of monomials in $C_k^{(j-1)}$ except for those 
 divisible by $x_{j-1}^{d-1}$.  Moreover, we define the multi-set $C_k$ as 
 the disjoint union of $C_k^{(0)}, \dotsc, C_k^{(n)}$.  We shall write an 
 element of this multi-set as $(j, g)$, when referring to a monomial~$g$ 
 in~$C_k^{(j)}$.
+\end{defn}
+
+\begin{lem} \label{lem:bijection}
+For all $k \in \NN$, the multi-sets $R_k$ and $C_k$ 
+have the same cardinality.
+\end{lem}
+
+\begin{proof}
+We construct a bijection $R_k \to C_k$, representing the 
+monomials by their exponent tuples.  Let $i = (i_0, \dotsc, i_n)$ be an
+element of $R_k$.  If $i_0 \geq d-1$, we define the image as
+$(i_0-d-1, i_1, \dotsc, i_n) \in C_k^{(0)}$.  More generally, if 
+$i_0 < d-1, \dotsc, i_{j-1} < d-1$ and $i_j \geq d-1$, we define the image as 
+$(i_0, \dotsc, i_{j-1}, i_j-(d-1), i_{j+1}, \dotsc, i_n) \in C_k^{(j)}$.  
+It is easy to verify that this map is indeed a bijection.
+\end{proof}
+
+\begin{defn} \label{defn:Deltak}
+We define a square matrix $\Delta_k$ with 
+row and column index sets $R_k$ and $C_k$ as follows.  
+Given $f \in R_k$ and $(j,g) \in C_k$, we set the corresponding entry in 
+$\Delta_k$ to be the coefficient of the monomial $f/g$ in $\partial_j P$ if 
+$g$ divides $f$ and $0$ otherwise.
 \end{defn}
 
 \begin{thm} \label{thm:Isomorphism}
@@ -684,47 +706,30 @@ is an isomorphism of $L$-vector spaces.
 \end{thm}
 
 \begin{proof}
-We first show that, for all $k \in \NN$, the multi-sets $R_k$ and $C_k$ 
-have the same cardinality.
-
-We construct a bijection $R_k \to C_k$, representing the 
-monomials by their exponent tuples.  Let $i = (i_0, \dotsc, i_n)$ be an
-element of $R_k$.  If $i_0 \geq d-1$, we define the image as
-$(i_0-d-1, i_1, \dotsc, i_n) \in C_k^{(0)}$.  More generally, if 
-$i_0 < d-1, \dotsc, i_{j-1} < d-1$ and $i_j \geq d-1$, we define the image as 
-$(i_0, \dotsc, i_{j-1}, i_j-(d-1), i_{j+1}, \dotsc, i_n) \in C_k^{(j)}$.  
-It is easy to verify that this map is indeed a bijection.
-
+Recall that $R_k$ and $C_k$ have the same cardinality by Lemma \ref{lem:bijection}.
 If $R_k$ and $C_k$ are empty, then $U_k$ and $W_k$ are the zero vector spaces, 
 and the theorem holds trivially. So suppose that $R_k$ and $C_k$ are nonempty, 
-that is to say, $k \geq n/d + 1$.
-
-In order to establish that the map $\phi_k \colon U_k \to W_k$ is an 
-isomorphism of $L$-vector spaces, we look at its matrix with respect to 
-the given bases.   We define the auxiliary matrix $\Delta_k$ with 
-row and column index sets $R_k$ and $C_k$, respectively, as follows.  
-Given $f \in R_k$ and $(j,g) \in C_k$, we set the corresponding entry in 
-$\Delta_k$ to be the coefficient of the monomial $f/g$ in $\partial_j P$ if 
-$g$ divides $f$ and $0$ otherwise. It is immediate that $\Delta_k$ is the 
-matrix representing $\phi_k$ with respect to the bases $C_k$ and $R_k$ of 
-$U_k$ and $W_k$, respectively.
+that is to say, $k \geq n/d + 1$. It is immediate that $\Delta_k$ is the matrix 
+representing $\phi_k$ with respect to the bases $C_k$ and $R_k$ of $U_k$ and $W_k$, 
+respectively.
 
 The assumption that the family~$\mathcal{X}/\mathcal{S}$ contains a diagonal 
 hypersurface means that for some~$t_0 \in \mathcal{S}(\ZZ_q)$, 
-the fibre $\mathfrak{X}_{t_0}$ is defined by a polynomial of the form 
+the fibre $\mathcal{X}_{t_0}$ is defined by a polynomial of the form 
 \begin{equation*}
 P_{t_0}(x_0, \dotsc, x_n) = a_0 x_0^d + \dotsb + a_n x_n^d
 \end{equation*}
 with $a_0, \dotsc, a_n \in \ZZ_q^{\times}$.
 
-We can now show that the determinant of $\Delta_k$ is nonzero in~$L$.  Since 
-specialisation to the diagonal fibre, that is, evaluation of the matrix at 
+We now show that the determinant of $\Delta_k$ is nonzero in~$L$.  Since 
+evaluation of the matrix at 
 $t = t_0$, commutes with computing the determinant, it suffices to show that 
 the determinant of $(\Delta_k) \big |_{t=t_0}$ is nonzero.  Since, for 
 $0 \leq j \leq n$, we have $\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, 
 there is precisely one nonzero entry in each column and each row of $\Delta_k$.  
 Namely, in column $(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is the 
-nonzero entry $d a_j$, concluding the proof.
+nonzero entry $d a_j$. Note that this also implies that 
+$(\Delta_k) \big |_{t=t_0} \in \ZZ_{q}^{\times}$.
 \end{proof}
 
 We can use Theorem~\ref{thm:Isomorphism} to give a routine {\sc Decompose}, 
@@ -883,9 +888,9 @@ where $\gamma_i$ is an element in the $L$-span of~$B_i$ for $1 \leq i \leq n$.
 For the matrix of $\nabla$ to be correct to $p$-adic precision $N$, we have to 
 carry out this computation to a somewhat higher precision $\tilde{N}$, because of 
 precision loss in Algorithm~\ref{alg:PoleRed}. 
-For all $k \in \NN$, we have that $\ord_p(\Delta_k) \geq 0$ and $\ord_p(\det(\Delta_k))=0$. 
-The equality can be checked at the diagonal fiber as in the proof of 
-Theorem \ref{thm:Isomorphism}. Therefore, there is no precision loss 
+For all $k \in \NN$, by definition we have that $\ord_p(\Delta_k) \geq 0$, and from the proof
+of Theorem \ref{thm:Isomorphism} we know that $\ord_p(\det(\Delta_k))=0$. 
+Therefore, there is no precision loss 
 in Algorithm~\ref{alg:Decompose}, and the only precision loss in Algorithm~\ref{alg:PoleRed} 
 comes from dividing by $k-1$ for $k=2,\ldots,n+1$. Hence it is sufficient to take 
 $\tilde{N}=N + \ord_p(n!)$.
@@ -925,8 +930,7 @@ respect to the basis $\cB$ by
 \[
 R = \prod_{k=\ceil{(n+1)/d}}^{n+1}  \det(\Delta_k),
 \]
-with the matrices $\Delta_k$ defined as in the proof of 
-Theorem~\ref{thm:Isomorphism}. We let $\overline{R} \in \FF_q[t]$ be the 
+We let $\overline{R} \in \FF_q[t]$ be the 
 reduction modulo~$p$ of the polynomial~$R$.
 \end{defn}
 
