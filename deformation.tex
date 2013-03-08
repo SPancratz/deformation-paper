@@ -2273,30 +2273,32 @@ Algorithm~\ref{alg:Connection} takes
 \end{prop}
 
 \begin{proof}
-We first need to construct and invert the matrices~$\Delta_k$. 
-For each of these matrices, this takes time
+We first need to construct and invert the matrices~$\Delta_k$.  This 
+is dominated by the inversion, which requires $\BigOh((de)^{n \omega}$ 
+operations in the ring $\QQ_q[t, R(t)^{-1}]$ to precision~$\SoftOh(a d^n)$. 
+As there are $\BigOh(n)$ of these matrices, this takes time 
 \[
-\SoftOh((de)^{n \omega} (a' \log(p)) (a d^n) (de)^n d_t),
-\] 
-and there are $\BigOh(n)$ of them, so this can be done in time 
-$\SoftOh(a a' \log(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t)$.
-Then for each of the monomials in our basis, we  multiply with $-k P_t$ 
-for some $1 \leq k \leq n$, and reduce back to the basis by repeatedly 
-using Algorithm~\ref{alg:Decompose}. For each of these monomials this 
-takes time 
+\SoftOh((de)^{n \omega} (a' \log(p)) (a d^n) (de)^n d_t) = 
+    \SoftOh(a a' \log(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t)
+\]
+Then we multiply each of the monomials in our basis with $-k P_t$ 
+for some $1 \leq k \leq n$ and reduce the product to the basis by 
+repeatedly using Algorithm~\ref{alg:Decompose}.  For each of these 
+monomials this takes time 
 \[
 \SoftOh((de)^{2n} (a' \log(p)) (a d^n) (de)^n d_t) = 
-\SoftOh(a a' \log(p) d^{4n}e^{3n} d_t),
+    \SoftOh(a a' \log(p) d^{4n}e^{3n} d_t),
 \]
-and there are $b \in \BigOh(d^n)$ of them, so this will take
-time $\SoftOh(a a' \log(p) d^{5n}e^{3n} d_t)$.
+because of the quadratic compexity of the matrix-vector product.  
+There are $b \in \BigOh(d^n)$ monomials in our basis and hence this 
+takes time $\SoftOh(a a' \log(p) d^{5n}e^{3n} d_t)$.
 
 During this computation we have to store $\BigOh(n)$ matrices 
 and vectors of size 
 \[
 \SoftOh((de)^{2n} (a' \log(p)) (a d^n) (de)^n d_t),
 \] 
-which finishes the proof.
+which completes the proof.
 \end{proof}
 
 Next we consider the computation of the matrix $\Phi_0$.
