@@ -2370,29 +2370,43 @@ power series expansion of the matrix~$\Phi$ then takes
 \end{prop}
 
 \begin{proof}
-The computation of the matrix~$C$ takes time
-\[
-\SoftOh\bigl(K \max\{\deg(G),\deg(r)\} b^{\omega} (a'\log(p)) (a d^n)\bigr) = 
-\SoftOh(a^2 a' p d^{n(\omega+3)}e^n d_t).
-\] 
-Applying $\sigma$ to an element of $\QQ_q$ to the required precision
-takes time $\SoftOh\bigl((a' \log(p))^2(a d^n)\bigr)$. Therefore, 
-$\sigma(G)$ and $\sigma(r)$ can be computed in time 
-\[
-\SoftOh\bigl(b^2 (de)^n d_t (a' \log(p))^2 (a d^n)\bigr) = 
-\SoftOh(a a'^2 \log^2(p) d^{4n} e^n ).
-\] 
-Now the computation of the matrix~$\sigma(C)^{-1}$ takes time 
-$\SoftOh(a^2 a' \log^2(p) d^{n(\omega+3)}e^n d_t)$. Finally, 
-the matrix product $C \Phi_0 \sigma(C)^{-1}$ can be computed in time 
-\[
-\SoftOh\bigl(b^{\omega} K \log(q) (a d^n)\bigr) = \SoftOh(a^2 a' p d^{n(\omega+2)}).
-\]
-The required space is dominated by the space needed to store the 
-matrix~$C$, which is
-\[
+The computation of the power series expansion of~$\Phi$ comprises 
+three steps, namely the computation of the matrices $C$, $\sigma(C)^{-1}$ 
+and the matrix product $C \Phi_0 \sigma(C)^{-1}$.
+
+We compute the matrix $C = \sum_i C_i t^i$ as a sequence of $K$~matrices 
+according to Equation~\eqref{eq:recursiondifeq}.  As each step is dominated 
+by the $\deg(B) \in \SoftOh((de)^n d_t)$ matrix products, the matrix~$C$ 
+can be computed in time 
+\begin{equation*}
+\SoftOh\bigl(K (de)^n d_t b^{\omega} (a' \log p) (a d^n)\bigr) 
+    \subset \SoftOh\bigl(d^{n(\omega + 3)} e^n d_t a' a^2 p\bigr).
+\end{equation*}
+We now consider the complexity of computing the matrix $\sigma(C)^{-1}$, 
+assuming that we compute the matrix~$C^{-1}$, then apply the map $\sigma$ 
+to each of its entries, and finally apply the map $t \mapsto t^p$.  The 
+first step takes time 
+\begin{equation*}
+\SoftOh\bigl( \tfrac{K}{p} (de)^n d_t b^{\omega} (a' \log p) (ad^n) \bigr)
+    \subset \SoftOh\bigl( d^{n(\omega+3)} a^2 a' d_t e^n \log p \bigr), 
+\end{equation*}
+the second step takes 
+\begin{equation*}
+\SoftOh\bigl( \tfrac{K}{p} b^2 \bigl( a d^n d^{2n} (\log^2(p) a' + a' a d^n \log p) \bigl) \bigr)
+\subset \SoftOh\bigl( a a' d^{3n} \log(p) (\log p + a d^n) \bigr), 
+\end{equation*}
+and in light of the computation of the matrix~$C$ before, we can ignore 
+the application of the map $t \mapsto t^p$.  Finally, the matrix product 
+$C \Phi_0 \sigma(C)^{-1}$ can be computed in time 
+\begin{equation*}
+\SoftOh\bigl( b^{\omega} K a' (a d^n) \log p \bigr) 
+    \subset \SoftOh\bigl( a^2 a' p d^{n(\omega + 2)} \bigr).
+\end{equation*}
+
+The space requirement is dominated by the matrix~$C$, which is
+\begin{equation*}
 \SoftOh(b^2 K \log(q) (a d^n)) = \SoftOh(a^2 a' p d^{4n}). \qedhere
-\]
+\end{equation*}
 \end{proof}
 
 We now move on to the computation of the matrix~$\Phi_{\tau}$.
