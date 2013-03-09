@@ -2195,18 +2195,26 @@ in Algorithm~\ref{alg:complete} below.
 \subsection{Complexity}
 
 In this section we determine the complexity of Algorithm~\ref{alg:complete}, 
-considering as input variables $n$, $d$, $\log p$, and 
-$a = \log_p \mathfrak{q}$.  We use the $\SoftOh(-)$ notation that ignores 
-logarithmic factors, i.e.\ $\SoftOh(f)$ denotes the class of functions 
+considering as input variables $n$, $d$, $p$, and $a = \log_p \mathfrak{q}$. 
+We use the $\SoftOh(-)$ notation that ignores logarithmic factors, 
+i.e.\ $\SoftOh(f)$ denotes the class of functions 
 that lie in $\BigOh(f \log^k(f))$ for some $k \in \NN$.
 
-We recall that two $k$-bit integers can be multiplied in $\SoftOh(k)$ 
-bit operations.  Moreover, two polynomials of degree~$k$ can be multiplied 
-in $\SoftOh(k)$ ring operations.  We let $\omega$ denote an exponent for 
-matrix multiplication, so that two $k \times k$ matrices can be multiplied 
-in $\SoftOh(k^{\omega})$ ring operations.  It is known that one can take 
-$\omega = 2.3727$, and that an invertible $k \times k$ matrix can be inverted 
-in $\SoftOh(k^{\omega})$ ring operations.
+Let us first revisit some results concerning the complexity of the, 
+sometimes basic, constituent operations.  We recall that two $k$-bit 
+integers can be multiplied in $\SoftOh(k)$ bit operations, and that 
+two degree-$k$ polynomials can be multiplied in $\SoftOh(k)$ ring 
+operations.  We let $\omega$ denote the least exponent for matrix 
+multiplication, so that two $k \times k$ matrices can be multiplied 
+in $\SoftOh(k^{\omega})$ ring operations.  It is known that 
+$\omega \leq 2.3727$ and, moreover, that the inversion of an invertible 
+$k \times k$ matrix has the same complexity.  We now turn to two 
+specific $p$-adic operatsons.  Firstly, images of elements of 
+$\QQ_{\mathfrak{q}}$ under powers of the $p$-th power operator~$\sigma^k$, 
+for $0 < k < a$, can be computed to precision~$N$ in time 
+$\SoftOh(a \log^2 p + a N \log p)$.  Secondly, the Teichm\"uller lift 
+of an element of $\ZZ_{\mathfrak{q}} \bmod p$ can be computed to 
+precision~$N$ in time $\SoftOh(a N \log^2 p)$.
 
 We begin by estimating the various precisions that we require.  We denote 
 $a' = \log_p q$, noting that $a'$ divides $a$, and also let $d_t$ denote 
