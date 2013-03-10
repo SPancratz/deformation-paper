@@ -2494,8 +2494,8 @@ $\SoftOh(b^2 a \log(p) (a d^n)) = \SoftOh(a^2 \log(p) d^{3n})$.
 \begin{thm}
 The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} takes
 \begin{align*}
-\mbox{time: }  &\SoftOh(a^3 p d^{4n} + a^2 a' p d^{n(w+3)} e^n d_t+ a a' (\max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \}) d_t), \\
-\mbox{space: } &\SoftOh(a^2 a' p d^{4n}+a a' d^{4n} e^{3n} d_t).
+\mbox{time: }  &\SoftOh\Bigl( a a' \log(p) d_t \bigl(d^{n(\omega+2)} e^{n(\omega+1)} + d^{5n} e^{n}\bigr) + a^3 p d^{3n} + a^2 a' p d^{n(\omega+3)} e^n d_t \Bigr), \\
+\mbox{space: } &\SoftOh\bigl( a a' \log(p) d^{4n} e^{3n} d_t + a^2 a' p d^{4n} \bigr).
 \end{align*}
 \end{thm}
 
@@ -2508,8 +2508,8 @@ leaving out terms that are dominated by other terms.
 When $\mathfrak{q}=q$ and $d_t=1$, the bounds for the time and space 
 complexity simplify to
 \begin{align*}
-\mbox{time: }  & \SoftOh(a^3 p d^{n( \omega+3 )} e^n + a^2 ( \max \{ d^{n( \omega+2 )} e^{n(\omega+1 )}, d^{5n}e^{3n} \} )), \\
-\mbox{space: } &\SoftOh(a^3 p d^{4n}+a^2 d^{4n} e^{3n}).
+\mbox{time: }  &\SoftOh\Bigl( a^2 \log(p) d_t \bigl(d^{n(\omega+2)} e^{n(\omega+1)} + d^{5n} e^{n}\bigr) + a^3 p d^{n(\omega+3)} e^n d_t \Bigr), \\
+\mbox{space: } &\SoftOh\bigl( a^2 \log(p) d^{4n} e^{3n} d_t + a^3 p d^{4n} \bigr).
 \end{align*}
 \end{rem}
 
