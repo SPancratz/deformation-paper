@@ -2459,25 +2459,36 @@ Finally, we consider the computation of the polynomial $\chi(T)$.
 \begin{prop}
 The computation of $\chi(T)$ from $\Phi_{\tau}$ takes
 \begin{align*}
-\mbox{time: }  & \SoftOh(a^3 \log^3(p) d^{n(\omega+1)}), \\
-\mbox{space: } & \SoftOh(a^2 \log^2(p) d^{3n}).
+\mbox{time: }  & \SoftOh(a d^{2n} \log^2(p) + a^2 d^{n(\omega+1)} \log p), \\
+\mbox{space: } & \SoftOh(a^2 \log(p) d^{3n}).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-To compute $\Phi_{\tau}^{(a)}$ using fast exponentiation for 
-semilinear maps, we need to apply powers of $\sigma$ to $\BigOh(b^2 \log(a))$
+In order to compute $\Phi_{\tau}^{(a)}$ using fast exponentiation for 
+semilinear maps, we need to apply powers of $\sigma$ to $\BigOh(b^2 \log(a))$ 
 elements of $\QQ_{\mathfrak{q}}$ and then multiply $\BigOh(\log(a))$ matrices 
 of size $b \in \BigOh(d^n)$. This can be done in time 
-$\SoftOh(a^3 \log(p)^3 d^{n(\omega+1)})$. The reverse characteristic 
-polynomial~$\chi(T)$ of $\Phi_{\tau}^{(a)}$ can be computed modulo the 
-required precision in time 
-$\SoftOh(b^{\omega} (a \log(p))(a \log(p) d^n)) = \SoftOh(a^2 \log^2(p) d^{n(\omega+1)})$. 
+\begin{gather*}
+\SoftOh\Bigl( b^2 \log a \bigl( a \log^2(p) + a (a d^n) \log p \bigr) 
+    + \log(a) b^{\omega} a (a d^n) \log p \Bigr), \\
+\intertext{which is also}
+\SoftOh\bigl( a d^{2n} \log^2(p) + a^2 d^{n(\omega+1)} \log p \bigr).
+\end{gather*}
+Next, we compute the reverse characteristic polynomial of matrix 
+$\Phi_{\tau}^{(a)} \in M_{b \times b}(\QQ_{\mathfrak{q}})$, which 
+using an algorithm of Keller-Gehrig~\citep{KellerGehrig1985} can 
+be accomplished in~$\BigOh(b^{\omega} \log b)$ field operations. 
+This amounts to a time complexity of 
+\begin{equation*}
+\SoftOh\bigl(b^{\omega} a (a d^n) \log p\bigr)
+    \subset \SoftOh\bigl( d^{n(\omega+1)} a^2 \log p\bigr).
+\end{equation*}
 Rounding this polynomial to $\ZZ[T]$ can be ignored.
 
 We need to store $\BigOh(\log(a))$ matrices of size~$b$ with entries 
-in~$\QQ_{\mathfrak{q}}$. This can be done in space 
-$\SoftOh(b^2 (a \log(p))(a \log(p) d^n)) = \SoftOh(a^2 \log^2(p) d^{3n})$.
+in~$\QQ_{\mathfrak{q}}$.  This requires space 
+$\SoftOh(b^2 a \log(p) (a d^n)) = \SoftOh(a^2 \log(p) d^{3n})$.
 \end{proof}
 
 \begin{thm}
