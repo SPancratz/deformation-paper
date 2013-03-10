@@ -2383,7 +2383,8 @@ can be computed in time
     \subset \SoftOh\bigl(d^{n(\omega + 3)} e^n d_t a' a^2 p\bigr).
 \end{equation*}
 We now consider the complexity of computing the matrix $\sigma(C)^{-1}$, 
-assuming that we compute the matrix~$C^{-1}$, then apply the map $\sigma$ 
+assuming that we compute the matrix~$C^{-1}$ as the solution to 
+Equation~\eqref{eq:01-GMDE-Dual}, then apply the map $\sigma$ 
 to each of its entries, and finally apply the map $t \mapsto t^p$.  The 
 first step takes time 
 \begin{equation*}
@@ -2415,41 +2416,42 @@ We now move on to the computation of the matrix~$\Phi_{\tau}$.
 The computation of the matrix~$\Phi_{\tau}$ from the matrix~$\Phi$ 
 and $\tau \in S(\FF_{\mathfrak{q}})$ takes
 \begin{align*}
-\mbox{time: }  &\SoftOh(a^3 p d^{4n}), \\
-\mbox{space: } &\SoftOh(a^2 a' p d^{4n}).
+\mbox{time: }  &\SoftOh\bigl(a^2 a' p d^{n(\omega+2)}\bigr), \\ 
+\mbox{space: } &\SoftOh\bigl(a^2 a' p d^{4n}\bigr).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-The Teichm\"uller lift $\hat{\tau}$ can be computed in $a \log(p)$ 
-ring operations in $\QQ_{\mathfrak{q}}$, taking time 
-$\SoftOh((a \log(p))(a \log(p)) (a d^n)) = \SoftOh(a^3 \log^2(p) d^n)$ 
-and space $\SoftOh((a \log(p)) (a d^n))$, which is also 
-$\SoftOh(a^2 \log(p) d^n)$. 
-% TODO? This can be done faster with fast modular composition, 
-% but doesn't change overall runtime of this step
+We first recall that the Teichm\"uller lift $\hat{\tau}$ 
+can be computed to precision $\SoftOh(a d^n)$ in time 
+$\SoftOh(a^2 d^n \log^2 p)$.  Next, we observe that the 
+matrix product $D(t) \Phi(t) \bmod t^K$ over~$\QQ_q[t]$ 
+requires time 
+\begin{equation*}
+\SoftOh\bigl( b^{\omega} K a' (a d^n) \log p \bigr) 
+    \subset \SoftOh\bigl( a^2 a' p d^{n(\omega+2)} \bigr).
+\end{equation*}
+Finally, we consider the substitution of $\tau \in \ZZ_{\mathfrak{q}}$ 
+into the $b^2$ polynomials.  Each of these can be thought 
+of as a modular composition of polynomials over $\ZZ_{q}$ 
+where the modulus is the defining polynomial for the extension 
+$\QQ_{\mathfrak{q}} / \QQ_{q}$ of degree $a/a'$, however, care 
+has to be taken to include the additional reduction of the 
+polynomials of degree less than~$K$ modulo the defining polynomial, 
+too, so that polynomials involved in the composition have degree 
+less than~$a/a'$.  Thus, the substitutions require time 
+\begin{equation*}
+\SoftOh\Bigl( b^{\omega} \bigl(K a' \log(p) (a d^n) + \tfrac{a}{a'} \log(p) a' (a d^n) \bigr)
+    \subset \SoftOh(a^2 a' p d^{4n}).
+\end{equation*}
+Clearly, evaluating and inverting $D(\hat{\tau})$ and performing the 
+scalar multiplication can be ignored, and the result now follows.
 
-To compute $\Phi_{\tau}$, we first need to compute 
-$D(t) \Phi(t) \bmod{t^{K}}$. This can be done in time 
-$\SoftOh(b^2 K \log(q) (a d^n)) = \SoftOh(a^2 p \log(q) d^{4n})$.
-Then we have to substitute $\hat{\tau}$ into this matrix of polynomials, 
-which takes time
-\[
-\SoftOh(b^2 K (a \log(p)) (a d^n)) = \SoftOh(a^3 p d^{4n}).
-\]
-Computing $D(\hat{\tau})^{-1} \in \QQ_{\mathfrak{q}}$ and performing 
-the scalar multiplication can be ignored.  Hence the computation 
-takes time $\SoftOh(a^3 p d^{4n})$.
-
-The matrix $\Phi_{\tau}$ can be stored in space
-\[
-\SoftOh(b^2 (a \log(p))(a d^n)) = \SoftOh(a^2 \log(p) d^{3n}),
-\]
-and $D(t) \Phi(t) \bmod{t^{K}}$ needs space
- \[
-\SoftOh(b^2 K (a' \log(p)) (a d^n)) = \SoftOh(a^2 a' p d^{4n}),
-\]
-so that the total space required is $\SoftOh(a^2 a' p d^{4n})$.
+The space requirement is dominated by the matrix $D(t) \Phi(t) \mod t^K$, 
+which has size 
+\begin{equation*}
+\SoftOh(b^2 K a' \log(p) (a d^n)) \subset \SoftOh(a^2 a' p d^{4n}).
+\end{equation*}
 \end{proof}
 
 Finally, we consider the computation of the polynomial $\chi(T)$.
