@@ -2416,7 +2416,7 @@ We now move on to the computation of the matrix~$\Phi_{\tau}$.
 The computation of the matrix~$\Phi_{\tau}$ from the matrix~$\Phi$ 
 and $\tau \in S(\FF_{\mathfrak{q}})$ takes
 \begin{align*}
-\mbox{time: }  &\SoftOh\bigl(a^2 a' p d^{n(\omega+2)}\bigr), \\ 
+\mbox{time: }  &\SoftOh\bigl(a^2 a' p d^{4n}\bigr), \\ 
 \mbox{space: } &\SoftOh\bigl(a^2 a' p d^{4n}\bigr).
 \end{align*}
 \end{prop}
@@ -2425,11 +2425,11 @@ and $\tau \in S(\FF_{\mathfrak{q}})$ takes
 We first recall that the Teichm\"uller lift $\hat{\tau}$ 
 can be computed to precision $\SoftOh(a d^n)$ in time 
 $\SoftOh(a^2 d^n \log^2 p)$.  Next, we observe that the 
-matrix product $D(t) \Phi(t) \bmod t^K$ over~$\QQ_q[t]$ 
+scalar-matrix product $D(t) \Phi(t) \bmod t^K$ over~$\QQ_q[t]$ 
 requires time 
 \begin{equation*}
-\SoftOh\bigl( b^{\omega} K a' (a d^n) \log p \bigr) 
-    \subset \SoftOh\bigl( a^2 a' p d^{n(\omega+2)} \bigr).
+\SoftOh\bigl( b^2 K a' (a d^n) \log p \bigr) 
+    \subset \SoftOh\bigl( a^2 a' p d^{4n} \bigr).
 \end{equation*}
 Finally, we consider the substitution of $\tau \in \ZZ_{\mathfrak{q}}$ 
 into the $b^2$ polynomials.  Each of these can be thought 
@@ -2450,7 +2450,8 @@ scalar multiplication can be ignored, and the result now follows.
 The space requirement is dominated by the matrix $D(t) \Phi(t) \mod t^K$, 
 which has size 
 \begin{equation*}
-\SoftOh(b^2 K a' \log(p) (a d^n)) \subset \SoftOh(a^2 a' p d^{4n}).
+\SoftOh(b^2 K a' \log(p) (a d^n)) \subset \SoftOh(a^2 a' p d^{4n}). 
+\qedhere
 \end{equation*}
 \end{proof}
 
