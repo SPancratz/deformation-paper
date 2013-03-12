@@ -1964,7 +1964,7 @@ We then compute
 \Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
 \end{equation*}
 
-\begin{rem}
+\begin{rem} \label{rem:prectau}
 Note that $D(\hat{\tau}) \in \ZZ_q^{\times}$ because $\overline{R}(\tau) \neq 0$, 
 and $\ord_p(\Phi(t)) \geq -\delta$ by Corollary~\ref{cor:delta}. Therefore, it 
 is sufficient to compute $\hat{\tau}$ to $p$-adic precision $N+\delta$, by
@@ -2046,7 +2046,7 @@ and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
 This completes the proof.
 \end{proof}
 
-\begin{rem}
+\begin{rem} \label{rem:workprecchi}
 So if we know $\Phi_{\tau}$ to $p$-adic precision $N$, then
 $\chi(T)$ is determined to precision $N-\delta$.
 However, we cannot compute $\chi(T)$ as in the proof of 
@@ -2262,16 +2262,17 @@ Hence, the precisions $\tilde{N}$ and $\bar{N}$ set in
 Algorithm~\ref{alg:complete} are $\SoftOh(ad^n)$, too. 
 Now in Theorem~\ref{thm:KedlayaTuitman}, if we assume that 
 $\alpha_1$ is $\SoftOh(pN)$, then $\deg(D)$, $K$ are both 
-$\SoftOh(p\tilde{N}) \subset \SoftOh(p a d^n)$.
+$\SoftOh(p\tilde{N}) \subset \SoftOh(p a d^n)$ [[TODO Jan, wrong]].
 
-[[TODO: It's not just $\alpha_1$, also the change of basis matrices to 
-a regular basis, see if we can justify this, otherwise replace with bound 
-from Lauder/Gerkmann in which the complexities in $d$ will become a bit 
-worse.]]
+%[[TODO: It's not just $\alpha_1$, also the change of basis matrices to 
+%a regular basis, see if we can justify this, otherwise replace with bound 
+%from Lauder/Gerkmann in which the complexities in $d$ will become a bit 
+%worse.]]
 
 Finally, the remaining $p$-adic precisions in the algorithm 
 are also all $\SoftOh(a d^n)$ by Remark~\ref{rem:precgm}, 
-Corollary~\ref{cor:Ntilde} and Theorem~\ref{thm:Ni}, noting 
+Corollary~\ref{cor:Ntilde}, Theorem~\ref{thm:Ni}, Remark~\ref{rem:prectau}
+and Remark~\ref{rem:workprecchi}, noting 
 that the logarithms that appear in the theorem are to base~$p$.
 \end{proof}
 
