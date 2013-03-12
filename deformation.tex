@@ -884,7 +884,7 @@ dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \
 \end{equation}
 where $\gamma_i$ is an element in the $L$-span of~$B_i$ for $1 \leq i \leq n$. 
 
-\begin{rem}
+\begin{rem} \label{rem:precgm}
 For the matrix of $\nabla$ to be correct to $p$-adic precision $N$, we have to 
 carry out this computation to a somewhat higher precision $\tilde{N}$, because of 
 precision loss in Algorithm~\ref{alg:PoleRed}. 
@@ -2206,15 +2206,16 @@ integers can be multiplied in $\SoftOh(k)$ bit operations, and that
 two degree-$k$ polynomials can be multiplied in $\SoftOh(k)$ ring 
 operations.  We let $\omega$ denote the least exponent for matrix 
 multiplication, so that two $k \times k$ matrices can be multiplied 
-in $\SoftOh(k^{\omega})$ ring operations.  It is known that 
-$\omega \leq 2.3727$ and, moreover, that the inversion of an invertible 
-$k \times k$ matrix has the same complexity.  We now turn to two 
-specific $p$-adic operatsons.  Firstly, images of elements of 
-$\QQ_{\mathfrak{q}}$ under powers of the $p$-th power operator~$\sigma^k$, 
-for $0 < k < a$, can be computed to precision~$N$ in time 
-$\SoftOh(a \log^2 p + a N \log p)$.  Secondly, the Teichm\"uller lift 
-of an element of $\ZZ_{\mathfrak{q}} \bmod p$ can be computed to 
-precision~$N$ in time $\SoftOh(a N \log^2 p)$.
+in $\SoftOh(k^{\omega})$ ring operations. An invertible 
+$k \times k$ matrix can then be inverted in $\SoftOh(k^{\omega})$ 
+ring operations as well. Moreover, it is known that $2 \leq \omega \leq 2.3727$. 
+
+We now turn to two specific $p$-adic operations.  First, images of elements of 
+$\QQ_{\mathfrak{q}}$ under~$\sigma^k$, for $0 < k < a$, can be computed to 
+$p$-adic precision~$N$ in time $\SoftOh(a \log^2 p + a N \log p)$. 
+Second, the Teichm\"uller lift of an element of $\FF_{\mathfrak{q}}$ can be 
+computed to precision~$N$ in time $\SoftOh(a N \log^2 p)$. For both of these
+statements we refer to \cite{Hubrechts2010}.
 
 We begin by estimating the various precisions that we require.  We denote 
 $a' = \log_p q$, noting that $a'$ divides $a$, and also let $d_t$ denote 
@@ -2244,9 +2245,9 @@ from Lauder/Gerkmann in which the complexities in $d$ will become a bit
 worse.]]
 
 Finally, the remaining $p$-adic precisions in the algorithm 
-are also all $\SoftOh(a d^n)$ by Corollary~\ref{cor:Ntilde} and 
-Theorem~\ref{thm:Ni}, noting that the logarithms that appear 
-in the theorem are to base~$p$.
+are also all $\SoftOh(a d^n)$ by Remark~\ref{rem:precgm}, 
+Corollary~\ref{cor:Ntilde} and Theorem~\ref{thm:Ni}, noting 
+that the logarithms that appear in the theorem are to base~$p$.
 \end{proof}
 
 Now we estimate the degrees of the numerator and denominator of the
