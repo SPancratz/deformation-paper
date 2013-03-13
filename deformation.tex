@@ -1647,7 +1647,7 @@ using the recursion
 \begin{align}
 C_0 &= I, \notag \\ 
 C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
-    \sum_{j=\max{\{0,i-\deg(B)\}}}^i G_{i-j} C_j + 
+    \sum_{j=\max{\{0,i-\deg(G)\}}}^i G_{i-j} C_j + 
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr). \label{eq:recursiondifeq}
 \end{align}
 
@@ -1839,7 +1839,7 @@ Gerkmann~\citep[\S 6]{Gerkmann2007} used for this were very far from
 being sharp, which significantly slowed down their algorithms.
 Recently, under some small additional assumptions, Kedlaya and the second 
 author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a much sharper bound,
-that we state here in a slightly simplified form.
+that we state here in a simplified form.
 
 \begin{thm} \label{thm:KedlayaTuitman}
 Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in 
@@ -1865,12 +1865,12 @@ c = \begin{cases}
 \end{align*}
 For $N \in \NN$, put
 \begin{align*}
-g(N) &= \max \{i \in \NN \; | \; i + f(i) - \delta + c  < N \},
+g(N) &= \max \{i \in \NN : i + f(i) - \delta + c  < N \},
 \end{align*}
 and define
 \begin{align*}
-\alpha_1 &= \lfloor -p \min_i \{ \lambda_i \} + \max_{i} \{\lambda_i\} \rfloor, \\ 
-\alpha_2 &=  \left \{ 
+\alpha_1    &= \lfloor -p \min_i \{ \lambda_i \} + \max_{i} \{\lambda_i\} \rfloor, \\ 
+\alpha_2(N) &=  \left \{ 
          \begin{array}{cl}
          0  & \mbox{if $M$ does not have a pole at $z$},  \\
          0  & \mbox{if $z \in \{0,\infty \}$}, \\
@@ -1879,7 +1879,7 @@ and define
          \right. 
 \end{align*}
 Then the matrix $\Phi$ is congruent modulo $p^{N}$ to a matrix of rational 
-functions of order greater than or equal to $-(\alpha_1+p \alpha_2)$ at the 
+functions of order greater than or equal to $-(\alpha_1+p \alpha_2(N))$ at the 
 point $z$. 
 \end{thm}
 
@@ -1911,9 +1911,9 @@ $\Phi$ (as always defined with respect to the basis $\cB$) is congruent modulo
 $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix of rational functions of order greater than or equal to 
 \[
--(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1})
+-(\alpha_1+p \alpha_2(N))+\ord_z(W)+p\ord_z(W^{-1})
 \]
-at the point $z$. Here, $\alpha_1, \alpha_2$ are defined as in 
+at the point $z$. Here, $\alpha_1, \alpha_2(N)$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 $\delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr)$ everywhere.
 \end{rem}
@@ -1929,22 +1929,22 @@ $\mathbf{P}^{1}_{\mathbf{Q}_q}$, and let $z$ be an unramified geometric point
 of $\mathfrak{Z}$. Define the matrices $\Delta_k$ over $\QQ_q(t)$ as in 
 Definition~\ref{defn:Deltak}, and put
 \begin{eqnarray*}
-\mu &=& \sum_{k=2}^n \ord_z(\Delta_k^{-1}), \\
+\mu &=& \sum_{k=\ceil{(n+1)/d}}^n \ord_z(\Delta_k^{-1}), \\
 \nu &=& \ord_z(\Delta_{n+1}^{-1}).
 \end{eqnarray*}
-Let $i \in \NN$ be maximal such that
+For $N \in \NN$, define 
 \begin{align*}
-i+(n-1)+\ord_p ((n-1)!)-n \floor{\log_p(p(n+i)-1)} < N,
+h(N) = \max \{ i \in \NN : i+(n-1)+\ord_p ((n-1)!)-n \floor{\log_p(p(n+i)-1)} < N \},
 \end{align*}
-and define
+and put
 \[
-\beta = \begin{cases}
-\mu +(p(n+i)-n) \nu & \mbox{if $z \neq \infty$}, \\
-\mu +(p(n+i)-n) \nu + pi \deg_t(P) & \mbox{if $z = \infty$}.
+\beta(N) = \begin{cases}
+\mu +(p(n+h(N))-n) \nu & \mbox{if $z \neq \infty$}, \\
+\mu +(p(n+h(N))-n) \nu + pi \deg_t(P) & \mbox{if $z = \infty$}.
 \end{cases}
 \]
 Then $\Phi$ is congruent modulo $p^N$  to a matrix of rational functions of 
-order greater than or equal to $\beta$ at the point $z$.
+order greater than or equal to $\beta(N)$ at the point $z$.
 \end{thm}
 
 \begin{proof} \mbox{ }
@@ -2215,12 +2215,14 @@ in Algorithm~\ref{alg:complete} below.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Complexity and implementation}
+\section{Complexity}
 
-\subsection{Complexity}
+In this section we determine the complexity of Algorithm~\ref{alg:complete}.
+We denote $a' = \log_p q$, noting that $a'$ divides $a$, 
+and let $d_t$ denote the degree of $P$ in the variable~$t$. 
+% does this add anything?
+% We consider the input variables $n$, $d$, $p$, $a$, $a'$ and $d_t$. 
 
-In this section we determine the complexity of Algorithm~\ref{alg:complete}, 
-considering as input variables $n$, $d$, $p$, and $a = \log_p \mathfrak{q}$. 
 We use the $\SoftOh(-)$ notation that ignores logarithmic factors, 
 i.e.\ $\SoftOh(f)$ denotes the class of functions 
 that lie in $\BigOh(f \log^k(f))$ for some $k \in \NN$.
@@ -2231,8 +2233,8 @@ integers can be multiplied in $\SoftOh(k)$ bit operations, and that
 two degree-$k$ polynomials can be multiplied in $\SoftOh(k)$ ring 
 operations.  We let $\omega$ denote the least exponent for matrix 
 multiplication, so that two $k \times k$ matrices can be multiplied 
-in $\SoftOh(k^{\omega})$ ring operations. An invertible 
-$k \times k$ matrix can then be inverted in $\SoftOh(k^{\omega})$ 
+in $\BigOh(k^{\omega})$ ring operations. An invertible 
+$k \times k$ matrix can then be inverted in $\BigOh(k^{\omega})$ 
 ring operations as well. Moreover, it is known that $2 \leq \omega \leq 2.3727$. 
 
 We now turn to two specific $p$-adic operations.  First, images of elements of 
@@ -2242,41 +2244,7 @@ Second, the Teichm\"uller lift of an element of $\FF_{\mathfrak{q}}$ can be
 computed to precision~$N$ in time $\SoftOh(a N \log^2 p)$. For both of these
 statements we refer to \cite{Hubrechts2010}.
 
-We begin by estimating the various precisions that we require.  We denote 
-$a' = \log_p q$, noting that $a'$ divides $a$, and also let $d_t$ denote 
-the degree of $P$ in the variable~$t$.
-
-\begin{prop}
-All $p$-adic precisions that we use lie in $\SoftOh(a d^n)$.
-\end{prop}
-
-\begin{proof}
-Note that $b \in \BigOh(d^n)$ and $\delta \in \BigOh(n)$.  
-In Theorem~\ref{thm:precPhitau}, we have that
-\begin{eqnarray*}
-\max\{N_i\} \in \BigOh\bigl(a n b + \log(b) \bigr) 
-            \subset \SoftOh\bigl(a d^n \bigr), \;\;\;
-N           \in \SoftOh(a d^n).
-\end{eqnarray*}
-Hence, the precisions $\tilde{N}$ and $\bar{N}$ set in 
-Algorithm~\ref{alg:complete} are $\SoftOh(ad^n)$, too. 
-Now in Theorem~\ref{thm:KedlayaTuitman}, if we assume that 
-$\alpha_1$ is $\SoftOh(pN)$, then $\deg(D)$, $K$ are both 
-$\SoftOh(p\tilde{N}) \subset \SoftOh(p a d^n)$ [[TODO Jan, wrong]].
-
-%[[TODO: It's not just $\alpha_1$, also the change of basis matrices to 
-%a regular basis, see if we can justify this, otherwise replace with bound 
-%from Lauder/Gerkmann in which the complexities in $d$ will become a bit 
-%worse.]]
-
-Finally, the remaining $p$-adic precisions in the algorithm 
-are also all $\SoftOh(a d^n)$ by Remark~\ref{rem:precgm}, 
-Corollary~\ref{cor:Ntilde}, Theorem~\ref{thm:Ni}, Remark~\ref{rem:prectau}
-and Remark~\ref{rem:workprecchi}, noting 
-that the logarithms that appear in the theorem are to base~$p$.
-\end{proof}
-
-Now we estimate the degrees of the numerator and denominator of the
+We start by estimating the degrees of the numerator and denominator of the
 connection matrix~$M$.
 
 \begin{prop}
@@ -2297,7 +2265,37 @@ denominators of all intermediate results in Algorithm~\ref{alg:Connection}
 are also $\SoftOh((de)^n d_t)$.
 \end{proof}
 
-We start by analysing the computation of the connection matrix~$M$.
+Next we estimate the $p$-adic precisions that we require.
+
+\begin{prop}
+All $p$-adic precisions that we use lie in $\SoftOh(a d^n \log(d_t))$.
+\end{prop}
+
+\begin{proof}
+Note that $b \in \BigOh(d^n)$ and $\delta \in \BigOh(n)$.  
+In Theorem~\ref{thm:precPhitau}, we have that
+\begin{eqnarray*}
+\max\{N_i\} \in \BigOh\bigl(a n b + \log(b) \bigr) 
+            \subset \SoftOh\bigl(a d^n \bigr), \;\;\;
+N           \in \SoftOh(a d^n).
+\end{eqnarray*}
+Hence, the precisions $\tilde{N}$ and $\bar{N}$ set in 
+Algorithm~\ref{alg:complete} are $\SoftOh(ad^n)$ as well.
+It follows from Theorem \ref{thm:Gerkmann} that 
+one can take 
+\[
+\deg(D), K \in \SoftOh(p (ad^n) \deg(R)) \subset  \SoftOh(apd^n (de)^n d_t).
+\] 
+All $p$-adic precisions in
+Theorem~\ref{thm:Ni} are then $\SoftOh(ad^n \log(d_t))$,
+noting that the logarithms that appear in there are 
+to base~$p$.
+Finally, the remaining $p$-adic precisions in the algorithm 
+are also all $\SoftOh(a d^n \log(d_t))$ by Remark~\ref{rem:precgm} 
+and Corollary~\ref{cor:Ntilde}.
+\end{proof}
+
+We now analyse the computation of the connection matrix~$M$.
 \begin{prop}
 The computation of the connection matrix~$M$ using 
 Algorithm~\ref{alg:Connection} takes
@@ -2309,11 +2307,12 @@ Algorithm~\ref{alg:Connection} takes
 
 \begin{proof}
 We first need to construct and invert the matrices~$\Delta_k$.  This 
-is dominated by the inversion, which requires $\BigOh((de)^{n \omega}$ 
-operations in the ring $\QQ_q[t, R(t)^{-1}]$ to precision~$\SoftOh(a d^n)$. 
-As there are $\BigOh(n)$ of these matrices, this takes time 
+is dominated by the inversion, which requires $\BigOh((de)^{n \omega})$ 
+operations in the ring $\QQ_q[t]$ to $p$-adic 
+precision~$\SoftOh(a d^n \log(d_t))$. As there are $\BigOh(n)$ of 
+these matrices, this takes time 
 \[
-\SoftOh((de)^{n \omega} (a' \log(p)) (a d^n) (de)^n d_t) = 
+\SoftOh((de)^{n \omega} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)) = 
     \SoftOh(a a' \log(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t)
 \]
 Then we multiply each of the monomials in our basis with $-k P_t$ 
@@ -2321,7 +2320,7 @@ for some $1 \leq k \leq n$ and reduce the product to the basis by
 repeatedly using Algorithm~\ref{alg:Decompose}.  For each of these 
 monomials this takes time 
 \[
-\SoftOh((de)^{2n} (a' \log(p)) (a d^n) (de)^n d_t) = 
+\SoftOh((de)^{2n} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)) = 
     \SoftOh(a a' \log(p) d^{4n}e^{3n} d_t),
 \]
 because of the quadratic compexity of the matrix-vector product.  
@@ -2331,23 +2330,23 @@ takes time $\SoftOh(a a' \log(p) d^{5n}e^{3n} d_t)$.
 During this computation we have to store $\BigOh(n)$ matrices 
 and vectors of size 
 \[
-\SoftOh((de)^{2n} (a' \log(p)) (a d^n) (de)^n d_t),
+\SoftOh((de)^{2n} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)),
 \] 
 which completes the proof.
 \end{proof}
 
 Next we consider the computation of the matrix $\Phi_0$.
 
-\begin{prop}
+\begin{prop} \label{prop:complexityPhi0}
 The computation of the matrix~$\Phi_0$ with Algorithm~\ref{alg:Diagfrob} takes
 \begin{align*}
-\mbox{time: }  &\SoftOh(a^3 p d^{3n}), \\
-\mbox{space: } &\SoftOh(a^2 \log(p) d^{2n}).
+\mbox{time: }  &\SoftOh(a^3 p d^{3n} \log^3(d_t)), \\
+\mbox{space: } &\SoftOh(a^2 \log(p) d^{2n} \log^2(d_t)).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-Let $\tilde{N}_{\Phi_0} \in \SoftOh(a d^n)$ denote the $p$-adic 
+Let $\tilde{N}_{\Phi_0} \in \SoftOh(a d^n \log(d_t))$ denote the $p$-adic working
 precision in Algorithm~\ref{alg:Diagfrob}.  We first consider the 
 sequences $(d^{-r})_{r=0}^{\mathcal{R}}$ and $(\mu_m)_{m=0}^{\mathcal{M}}$. 
 In Proposition~\ref{prop:MR}, we find that 
@@ -2365,34 +2364,42 @@ in time $\SoftOh(\tilde{N}_{\Phi_0}^3 p)$.
 Similarly, the computation of $\alpha_{u,v}$ for all of the 
 $b \in \BigOh(d^n)$ basis vectors can be done in time 
 $\SoftOh(d^n \tilde{N}_{\Phi_0}^2 \log(p))$.  Hence the whole computation 
-takes time $\SoftOh(\tilde{N}_{\Phi_0}^3p) = \SoftOh(a^3 p d^{3n})$.
-
+takes time 
+\[
+\SoftOh(\tilde{N}_{\Phi_0}^3p) \subset \SoftOh(a^3 p d^{3n} \log^3(d_t)).
+\]
 The sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ and the 
 $\SoftOh(\tilde{N}_{\Phi_0})$ elements that we need from the sequence 
 $(\mu_{m})_{m=0}^{\mathcal{M}}$ can be stored in space 
-$\SoftOh(\tilde{N}_{\Phi_0}^2 \log(p)) = \SoftOh(a^2 \log(p) d^{2n})$.
+$\SoftOh(\tilde{N}_{\Phi_0}^2 \log(p)) = \SoftOh(a^2 \log(p) d^{2n} \log^2(d_t))$.
 \end{proof}
 
-\begin{rem} \ 
-[[TODO:  Point out that this approach is novel and for this part of the 
-computation reduces the dependence on $p$ from $p^2$ to $p$ when compared 
-with Lauder/ Gerkmann.  And that this is a trade-off in that the dependence 
-on the precision turns quasi-cubic instead of quasi-quadratic because of 
-this.  Finally, say this does not matter in the context of the deformation 
-method and hence this is a straight improvement, reducing the dependence on 
-the prime $p$.]]
+\begin{rem}
+Note that the time complexity in Proposition \ref{prop:complexityPhi0} 
+is quasilinear in $p$, while in the work of Lauder \cite{Lauder2004a} 
+it was quasiquadratic. The main reason for this is that Lauder computed 
+in $\QQ_p(\pi)$, where a single multiplication already takes time 
+quasilinear in $p$. It will turn out that this improvement also lowers
+the overall time complexity of Algorithm \ref{alg:complete} from
+being quasiquadratic to quasilinear in $p$. 
+
+We should mention that there is also a small downside to our approach:  
+the time complexity in Proposition \ref{prop:complexityPhi0} is quasicubic 
+in $a$, while by using fast exponentials over $\QQ_p(\pi)[[z]]$, this can 
+be lowered to being quasiquadratic in $a$. [[TODO, perhaps give and prove 
+both complexity estimates, for completeness]]
 \end{rem}
 
 We now consider the computation of the power series expansion of the 
 matrix~$\Phi$.
 
 \begin{prop}
-Assume that the matrices $M = G/r$, $\Phi_0$ have been computed already
-in Algorithm~\ref{alg:expansion}.  The subsequent computation of the 
-power series expansion of the matrix~$\Phi$ then takes
+Assume that the matrices $M = G/r$ and $\Phi_0$ have been computed already.
+The subsequent computation of the power series expansion of the matrix~$\Phi$ 
+in Algorithm~\ref{alg:expansion} then takes
 \begin{align*}
-\mbox{time: }  &\SoftOh(a^2 a' p d^{n(\omega+3)}e^n d_t), \\
-\mbox{space: } &\SoftOh(a^2 a' p d^{4n}).
+\mbox{time: }  &\SoftOh(a^2 a' p d^{n(\omega+4)}e^{2n} d_t^2), \\
+\mbox{space: } &\SoftOh(a^2 a' p d^{5n} e^n d_t).
 \end{align*}
 \end{prop}
 
@@ -2401,39 +2408,35 @@ The computation of the power series expansion of~$\Phi$ comprises
 three steps, namely the computation of the matrices $C$, $\sigma(C)^{-1}$ 
 and the matrix product $C \Phi_0 \sigma(C)^{-1}$.
 
-We compute the matrix $C = \sum_i C_i t^i$ as a sequence of $K$~matrices 
-according to Equation~\eqref{eq:recursiondifeq}.  As each step is dominated 
-by the $\deg(B) \in \SoftOh((de)^n d_t)$ matrix products, the matrix~$C$ 
-can be computed in time 
+As each of the $K$ steps in the computation of $C$ is dominated by the 
+computation of $\SoftOh((de)^n d_t)$ matrix products, the matrix~$C$ can be 
+computed in time 
 \begin{equation*}
-\SoftOh\bigl(K (de)^n d_t b^{\omega} (a' \log p) (a d^n)\bigr) 
-    \subset \SoftOh\bigl(d^{n(\omega + 3)} e^n d_t a' a^2 p\bigr).
+\SoftOh\bigl(K ((de)^n d_t) b^{\omega} (a' \log p) (a d^n \log(d_t))\bigr) 
+    \subset \SoftOh\bigl(a^2 a' p d^{n(\omega + 4)} e^{2n} d_t^2 \bigr).
 \end{equation*}
-We now consider the complexity of computing the matrix $\sigma(C)^{-1}$, 
-assuming that we compute the matrix~$C^{-1}$ as the solution to 
-Equation~\eqref{eq:01-GMDE-Dual}, then apply the map $\sigma$ 
-to each of its entries, and finally apply the map $t \mapsto t^p$.  The 
-first step takes time 
+Similarly, the matrix $C^{-1}$ can be computed in time 
 \begin{equation*}
-\SoftOh\bigl( \tfrac{K}{p} (de)^n d_t b^{\omega} (a' \log p) (ad^n) \bigr)
-    \subset \SoftOh\bigl( d^{n(\omega+3)} a^2 a' d_t e^n \log p \bigr), 
+\SoftOh\bigl( (K/p) ((de)^n d_t) b^{\omega} (a' \log p) (ad^n \log(d_t)) \bigr)
+    \subset \SoftOh\bigl( a^2 a' \log(p) d^{n(\omega+4)} e^{2n} d_t^2 \bigr). 
 \end{equation*}
-the second step takes 
+Applying $\sigma$ to the matrix $C^{-1}$ now takes time 
 \begin{equation*}
-\SoftOh\bigl( \tfrac{K}{p} b^2 \bigl( a d^n d^{2n} (\log^2(p) a' + a' a d^n \log p) \bigl) \bigr)
-\subset \SoftOh\bigl( a a' d^{3n} \log(p) (\log p + a d^n) \bigr), 
+\SoftOh\bigl( (K/p) b^2 \bigl(a' \log^2(p) + a' (a d^n \log(d_t)) \log(p) \bigl) \bigr)
+\subset \SoftOh\bigl( a^2 a' \log^2(p) d^{5n} e^n d_t \bigr), 
 \end{equation*}
-and in light of the computation of the matrix~$C$ before, we can ignore 
-the application of the map $t \mapsto t^p$.  Finally, the matrix product 
+Finally, the matrix product 
 $C \Phi_0 \sigma(C)^{-1}$ can be computed in time 
 \begin{equation*}
-\SoftOh\bigl( b^{\omega} K a' (a d^n) \log p \bigr) 
-    \subset \SoftOh\bigl( a^2 a' p d^{n(\omega + 2)} \bigr).
+\SoftOh\bigl( b^{\omega} K (a' \log(p)) (a d^n \log(d_t)) \bigr) 
+    \subset \SoftOh\bigl( a^2 a' p d^{n(\omega + 3)} e^n d_t \bigr).
 \end{equation*}
+The time complexity is therefore dominated by the computation of 
+the matrix $C$.
 
-The space requirement is dominated by the matrix~$C$, which is
+The space requirement is dominated by that of the matrix~$C$, which has size
 \begin{equation*}
-\SoftOh(b^2 K \log(p) (a d^n)) = \SoftOh(a^2 a' p d^{4n}). \qedhere
+\SoftOh(b^2 K (a' \log(p)) (a d^n \log(d_t))) = \SoftOh(a^2 a' p d^{5n} e^n d_t). \qedhere
 \end{equation*}
 \end{proof}
 
@@ -2594,6 +2597,8 @@ of~$\ZZ_p$.
 \end{proof}
 \end{comment}
 
+\begin{comment}
+
 \subsection{Implementation}
 
 \subsubsection{Parallelisation}
@@ -2638,6 +2643,8 @@ carried out in parallel:
 \subsubsection{Magma}
 
 \subsubsection{Flint}
+
+\end{comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Examples}
