@@ -2539,8 +2539,13 @@ leaving out terms that are dominated by other terms or powers of
 logarithms of other terms.
 \end{proof}
 
-\begin{rem}
-
+\begin{rem} In \cite{Lauder2004a} Lauder takes $d_t=1$ and gives the following bounds 
+for the complexity of his deformation algorithm
+\begin{align*}
+\mbox{time: }  &\SoftOh\bigl(a^3 p^2 (d^{n(\omega+5)} e^{3n} + d^{6n} e^{5n}) \bigr), \\ 
+\mbox{space: } &\SoftOh\bigl(a^3 p^2 d^{6n} e^{4n} \bigr).
+\end{align*}
+So our complexity bounds are an improvement of his.
 \end{rem}
 
 \begin{comment}
