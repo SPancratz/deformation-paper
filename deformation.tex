@@ -2298,7 +2298,7 @@ and Corollary~\ref{cor:Ntilde}.
 We now analyse the computation of the connection matrix~$M$.
 \begin{prop}
 The computation of the connection matrix~$M$ using 
-Algorithm~\ref{alg:Connection} takes
+Algorithm~\ref{alg:Connection} requires
 \begin{align*}
 \mbox{time: }  &\SoftOh(a a' \log(p) (d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n}e^{3n} ) d_t), \\
 \mbox{space: } &\SoftOh(a a' \log(p) d^{4n}e^{3n} d_t).
@@ -2338,7 +2338,7 @@ which completes the proof.
 Next we consider the computation of the matrix $\Phi_0$.
 
 \begin{prop} \label{prop:complexityPhi0}
-The computation of the matrix~$\Phi_0$ with Algorithm~\ref{alg:Diagfrob} takes
+The computation of the matrix~$\Phi_0$ with Algorithm~\ref{alg:Diagfrob} requires
 \begin{align*}
 \mbox{time: }  &\SoftOh(a^3 p d^{3n} \log^3(d_t)), \\
 \mbox{space: } &\SoftOh(a^2 \log(p) d^{2n} \log^2(d_t)).
@@ -2396,7 +2396,7 @@ matrix~$\Phi$.
 \begin{prop}
 Assume that the matrices $M = G/r$ and $\Phi_0$ have been computed already.
 The subsequent computation of the power series expansion of the matrix~$\Phi$ 
-in Algorithm~\ref{alg:expansion} then takes
+in Algorithm~\ref{alg:expansion} then requires
 \begin{align*}
 \mbox{time: }  &\SoftOh(a^2 a' p d^{n(\omega+4)}e^{2n} d_t^2), \\
 \mbox{space: } &\SoftOh(a^2 a' p d^{5n} e^n d_t).
@@ -2443,7 +2443,7 @@ We now move on to the computation of the matrix~$\Phi_{\tau}$.
 
 \begin{prop}
 The computation of the matrix~$\Phi_{\tau}$ from the matrix~$\Phi$ 
-and $\tau \in S(\FF_{\mathfrak{q}})$ takes
+and $\tau \in S(\FF_{\mathfrak{q}})$ requires
 \begin{align*}
 \mbox{time: }  &\SoftOh\bigl(a^2 a' p d^{5n} e^n d_t \bigr), \\ 
 \mbox{space: } &\SoftOh\bigl(a^2 a' p d^{5n} e^n d_t \bigr).
@@ -2488,7 +2488,7 @@ which has size
 Finally, we consider the computation of the polynomial $\chi(T)$.
 
 \begin{prop}
-The computation of $\chi(T)$ from $\Phi_{\tau}$ takes
+The computation of $\chi(T)$ from $\Phi_{\tau}$ requires
 \begin{align*}
 \mbox{time: }  & \SoftOh(a^2  \log^2(p) d^{n(\omega+1)}), \\
 \mbox{space: } & \SoftOh(a^2 \log(p) d^{3n}).
@@ -2522,7 +2522,7 @@ $\SoftOh(b^2 (a \log(p)) (a d^n)) = \SoftOh(a^2 \log(p) d^{3n})$.
 \end{proof}
 
 \begin{thm}
-The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} takes
+The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
 \begin{align*}
 \mbox{time: }  &\SoftOh\Bigl( 
                 a^3 p d^{3n} + 
@@ -2539,8 +2539,8 @@ leaving out terms that are dominated by other terms or powers of
 logarithms of other terms.
 \end{proof}
 
-\begin{rem} In \cite{Lauder2004a} Lauder takes $d_t=1$ and gives the following bounds 
-for the complexity of his deformation algorithm
+\begin{rem} In \cite{Lauder2004a} Lauder takes $d_t=1$ and states that his
+algorithm requires
 \begin{align*}
 \mbox{time: }  &\SoftOh\bigl(a^3 p^2 (d^{n(\omega+5)} e^{3n} + d^{6n} e^{5n}) \bigr), \\ 
 \mbox{space: } &\SoftOh\bigl(a^3 p^2 d^{6n} e^{4n} \bigr).
