@@ -2237,7 +2237,7 @@ in $\BigOh(k^{\omega})$ ring operations. An invertible
 $k \times k$ matrix can then be inverted in $\BigOh(k^{\omega})$ 
 ring operations as well. Moreover, it is known that $2 \leq \omega \leq 2.3727$. 
 
-We now turn to two specific $p$-adic operations.  First, images of elements of 
+Next we consider two specific $p$-adic operations.  First, images of elements of 
 $\QQ_{\mathfrak{q}}$ under~$\sigma^k$, for $0 < k < a$, can be computed to 
 $p$-adic precision~$N$ in time $\SoftOh(a \log^2 p + a N \log p)$. 
 Second, the Teichm\"uller lift of an element of $\FF_{\mathfrak{q}}$ can be 
@@ -2300,7 +2300,7 @@ We now analyse the computation of the connection matrix~$M$.
 The computation of the connection matrix~$M$ using 
 Algorithm~\ref{alg:Connection} takes
 \begin{align*}
-\mbox{time: }  &\SoftOh(a a' \log(p) \max \{ d^{n(\omega+2)} e^{n(\omega+1)}, d^{5n}e^{3n} \} d_t), \\
+\mbox{time: }  &\SoftOh(a a' \log(p) (d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n}e^{3n} ) d_t), \\
 \mbox{space: } &\SoftOh(a a' \log(p) d^{4n}e^{3n} d_t).
 \end{align*}
 \end{prop}
@@ -2445,8 +2445,8 @@ We now move on to the computation of the matrix~$\Phi_{\tau}$.
 The computation of the matrix~$\Phi_{\tau}$ from the matrix~$\Phi$ 
 and $\tau \in S(\FF_{\mathfrak{q}})$ takes
 \begin{align*}
-\mbox{time: }  &\SoftOh\bigl(a^2 a' p d^{4n}\bigr), \\ 
-\mbox{space: } &\SoftOh\bigl(a^2 a' p d^{4n}\bigr).
+\mbox{time: }  &\SoftOh\bigl(a^2 a' p d^{5n} e^n d_t \bigr), \\ 
+\mbox{space: } &\SoftOh\bigl(a^2 a' p d^{5n} e^n d_t \bigr).
 \end{align*}
 \end{prop}
 
@@ -2524,16 +2524,27 @@ $\SoftOh(b^2 (a \log(p)) (a d^n)) = \SoftOh(a^2 \log(p) d^{3n})$.
 \begin{thm}
 The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} takes
 \begin{align*}
-\mbox{time: }  &\SoftOh\Bigl( a a' \log(p) d_t \bigl(d^{n(\omega+2)} e^{n(\omega+1)} + d^{5n} e^{n}\bigr) + a^3 p d^{3n} + a^2 a' p d^{n(\omega+3)} e^n d_t \Bigr), \\
-\mbox{space: } &\SoftOh\bigl( a a' \log(p) d^{4n} e^{3n} d_t + a^2 a' p d^{4n} \bigr).
+\mbox{time: }  &\SoftOh\Bigl( 
+                a^3 p d^{3n} + 
+                a^2 a' p d^{n(\omega+4)} e^{2n} d_t^2+
+                aa' \bigl(d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n} e^{3n}\bigr) d_t 
+                \Bigr), \\
+\mbox{space: } &\SoftOh\bigl( a^2 a' p d^{4n} + a a' d^{4n} e^{3n} d_t \bigr).
 \end{align*}
 \end{thm}
 
 \begin{proof}
 This follows by adding all complexities from the previous propositions and 
-leaving out terms that are dominated by other terms.
+leaving out terms that are dominated by other terms or powers of
+logarithms of other terms.
 \end{proof}
 
+\begin{rem}
+
+\end{rem}
+
+\begin{comment}
+%Do not see the point of this remark anymore.
 \begin{rem}
 When $\mathfrak{q}=q$ and $d_t=1$, the bounds for the time and space 
 complexity simplify to
@@ -2542,6 +2553,7 @@ complexity simplify to
 \mbox{space: } &\SoftOh\bigl( a^2 \log(p) d^{4n} e^{3n} d_t + a^3 p d^{4n} \bigr).
 \end{align*}
 \end{rem}
+\end{comment}
 
 \begin{comment}
 While the current implementation of Algorithm~\ref{alg:Diagfrob} 
