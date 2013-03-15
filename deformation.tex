@@ -243,12 +243,11 @@ generality, for example for smooth projective hypersurfaces [[TODO]].
 
 Lauder [[TODO]] showed that instead of computing the action of the Frobenius map on
 the rigid cohomology spaces of a smooth projective hypersurface $X$ directly, 
-its is better to put $X$ in a family of smooth projective hypersurfaces that 
-contains a diagonal hypersurface, first compute the action of the Frobenius map on 
-the rigid cohomology of the diagonal hypersurface, and then solve a $p$-adic 
-differential equation to obtain the Frobenius map on the rigid cohomology of 
-the original hypersurface. He proved that the resulting deformation algorithm 
-has a better time complexity.
+it is better, at least in terms of time complexity, to put $X$ in a family of 
+smooth projective hypersurfaces that contains a diagonal hypersurface, first compute 
+the action of the Frobenius map on the rigid cohomology of the diagonal 
+hypersurface, and then solve a $p$-adic differential equation to obtain the 
+Frobenius map on the rigid cohomology of the original hypersurface. 
 
 Actually, this is not entirely correct, because in [[TODO]] Lauder did not work 
 with rigid cohomology, but with Dwork cohomology. The two cohomology theories 
@@ -259,16 +258,33 @@ precision bounds to make the algorithm more practical, and computed a lot of exa
 
 The aim of this paper is to continue where Lauder and Gerkmann left off. We make 
 improvements to just about every step of the algorithm. 
-%For example, by using 
-%recent bounds on the rate of convergence of $p$-adic differential equations, we
-%obtain much sharper bounds for the $p$-adic and $t$-adic precisions required at
-%different stages to
-%obtain provably correct results. 
 The resulting algorithm has lower time and space complexity than 
 Lauder's algorithm. Moreover, the first author has written a very fast publicly
-available C implementation of our algorithm using the library FLINT [[TODO]]. 
-This implementation improves the runtime of the examples in [[TODO]] by at least
+available C implementation of the algorithm using the library FLINT [[TODO]]. 
+This implementation lowers the runtime of the examples in [[TODO]] by at least
 three orders of magnitude.
+
+We now briefly describe the contents of the remaining sections in the paper. We
+will use some terminology that is introduced only in Section \ref{sec:Background}.
+The reader that is not familiar with the terminology yet should start reading there. 
+
+In Section \ref{sec:Background}, we recall the main theoretical results that we 
+will need in the rest of the paper. We limit ourselves to the bare minimum, since 
+there are already good references available for the relevant theory [[TODO]]. Here
+we also introduce a lot of terminology and notation for the rest of the paper. At 
+the end of this section we give an overview of the deformation method.
+
+In Section \ref{sec:Connection}, \\
+
+In Section \ref{sec:Diagonal}, \\
+
+In Section \ref{sec:DifferentialSystem}, \\
+
+In Section \ref{sec:ZetaFunctions}, \\
+
+In Section \ref{sec:Complexity}, \\
+
+In Section \ref{sec:Examples},
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Theoretical background}
@@ -1875,8 +1891,9 @@ in Algorithm~\ref{alg:expansion} below.
 
 \section{The zeta function of a fibre}
 
+\label{sec:ZetaFunctions}
+
 \subsection{Evaluation at a point}
-\label{sec:Evaluation}
 
 In the previous section we described how to compute the power series 
 expansion at $t=0$ ofthe matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
@@ -2036,7 +2053,6 @@ precision $N$.
 \end{rem}
 
 \subsection{Computing the zeta function}
-\label{sec:ZetaFunctions}
 
 Now we want to compute the zeta function of the fibre $X_{\tau}$ of
 our family $X/S$ lying over some $\tau \in S(\FF_{\mathfrak{q}})$, 
@@ -2278,6 +2294,8 @@ in Algorithm~\ref{alg:complete} below.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Complexity}
+
+\label{sec:Complexity}
 
 In this section we determine the complexity of Algorithm~\ref{alg:complete}.
 We denote $a' = \log_p q$, noting that $a'$ divides $a$, 
