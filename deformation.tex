@@ -247,27 +247,28 @@ its is better to put $X$ in a family of smooth projective hypersurfaces that
 contains a diagonal hypersurface, first compute the action of the Frobenius map on 
 the rigid cohomology of the diagonal hypersurface, and then solve a $p$-adic 
 differential equation to obtain the Frobenius map on the rigid cohomology of 
-the original hypersurface. He proved that this way one obtains a better time 
-complexity in terms of the variables $d,n$.
+the original hypersurface. He proved that the resulting deformation algorithm 
+has a better time complexity.
 
 Actually, this is not entirely correct, because in [[TODO]] Lauder did not work 
-with rigid cohomology, but with Dwork cohomology. These two cohomology theories 
+with rigid cohomology, but with Dwork cohomology. The two cohomology theories 
 are equivalent, but various comparison and finiteness results are more easily 
 stated and proved in rigid cohomology. In [[TODO]], Gerkmann reformulated Lauder's
 deformation algorithm in terms of rigid cohomology. Moreover, he improved various 
 precision bounds to make the algorithm more practical, and computed a lot of examples.
 
 The aim of this paper is to continue where Lauder and Gerkmann left off. We make 
-improvements to just about every step of the algorithm. For example, by using 
-recent bounds on the rate of convergence of $p$-adic differential equations, we
-obtain much sharper bounds for the $p$-adic and $t$-adic precisions required at
-different stages to
-obtain provably correct results. The algorithm that we obtain this way has lower 
-time and space complexity than Lauder's algorithm. The first author has written a 
-very fast C implementation of the algorithm using the library FLINT [[TODO]]. The 
-runtimes that we obtain for the examples in [[TODO]] are thousands of times 
-lower than the runtimes in that paper. 
- 
+improvements to just about every step of the algorithm. 
+%For example, by using 
+%recent bounds on the rate of convergence of $p$-adic differential equations, we
+%obtain much sharper bounds for the $p$-adic and $t$-adic precisions required at
+%different stages to
+%obtain provably correct results. 
+The resulting algorithm has lower time and space complexity than 
+Lauder's algorithm. Moreover, the first author has written a very fast publicly
+available C implementation of our algorithm using the library FLINT [[TODO]]. 
+This implementation improves the runtime of the examples in [[TODO]] by at least
+three orders of magnitude.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Theoretical background}
