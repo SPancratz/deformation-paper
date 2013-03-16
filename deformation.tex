@@ -220,8 +220,8 @@ is a rational function, i.e. it is contained in $\QQ(T)$, and
 so can be given by a finite amount of data. Therefore, it is natural 
 to ask whether it can be computed effectively. Actually, it 
 is not hard to come up with an algorithm. There 
-are well known bounds [[TODO]] for the degrees of the numerator and 
-denominator of $Z(X,T)$, that reduce its computation to that 
+are well known bounds \cite{Bombieri1966} for the degrees of the numerator and 
+denominator of $Z(X,T)$, that reduce the computation of $Z(X,T)$ to that 
 of a finite number of the $|X(\FF_{q^i})|$, which can be determined
 by naive counting. 
 
@@ -230,18 +230,20 @@ computed efficiently. Here efficiently could mean with low time complexity or
 just fast in practice. When $X$ is a (hyper)elliptic curve, this problem
 is important for cryptographic applications, and has therefore received
 a lot of attention. In this case, very efficient algorithms are available.
-For example, when $X$ is an elliptic curve, the Schoof-Atkins-Elkies 
-algorithm [[TODO]], that uses $\ell$-adic \'etale cohomology, has runtime 
-polynomial in $\log(q)$, and is also very fast in practice.
+For example, when $X$ is an elliptic curve, Schoof's 
+algorithm \cite{Schoof1995}, that uses $\ell$-adic \'etale cohomology, has runtime 
+polynomial in $\log(q)$, and is also very fast in practice using some 
+improvements by Atkins and Elkies.
 
 For more general $X$, the only available option is usually to compute the 
 rigid cohomology spaces of $X$, with their natural action of the Frobenius map, 
 and then use a Lefschetz formula to deduce the zeta function. This method was
 introduced by Kedlaya in the case of hyperelliptic curves in odd characteristic 
-[[TODO]]. The same idea has been shown to work in much greater 
-generality, for example for smooth projective hypersurfaces [[TODO]]. 
+\cite{Kedlaya2001}. The same idea has been shown to work in much greater 
+generality, for example for smooth projective hypersurfaces \cite{AbbottKedlayaRoe2006}. 
 
-Lauder [[TODO]] showed that instead of computing the action of the Frobenius map on
+Lauder \cite{Lauder2004a,Lauder2004b} showed that instead of computing the action 
+of the Frobenius map on
 the rigid cohomology spaces of a smooth projective hypersurface $X$ directly, 
 it is better, at least in terms of time complexity, to put $X$ in a family of 
 smooth projective hypersurfaces that contains a diagonal hypersurface, first compute 
@@ -249,20 +251,21 @@ the action of the Frobenius map on the rigid cohomology of the diagonal
 hypersurface, and then solve a $p$-adic differential equation to obtain the 
 Frobenius map on the rigid cohomology of the original hypersurface. 
 
-Actually, this is not entirely correct, because in [[TODO]] Lauder did not work 
+Actually, this is not entirely correct, because in \cite{Lauder2004a,Lauder2004b} 
+Lauder did not work 
 with rigid cohomology, but with Dwork cohomology. The two cohomology theories 
 are equivalent, but various comparison and finiteness results are more easily 
-stated and proved in rigid cohomology. In [[TODO]], Gerkmann reformulated Lauder's
+stated and proved in rigid cohomology. In \cite{Gerkmann2007} Gerkmann reformulated Lauder's
 deformation algorithm in terms of rigid cohomology. Moreover, he improved various 
-precision bounds to make the algorithm more practical, and computed a lot of examples.
+precision bounds, making the algorithm more practical, and he computed a lot of examples.
 
 The aim of this paper is to continue where Lauder and Gerkmann left off. We make 
 improvements to every step of the algorithm. 
 The resulting algorithm has lower time and space complexity than 
-Lauder's algorithm. Moreover, the first author has written a very fast publicly
+Lauder's algorithm. Moreover, the first author has written a publicly
 available C implementation of the algorithm using the library FLINT [[TODO]]. 
-This implementation lowers the runtime of the examples in [[TODO]] by at least
-three orders of magnitude.
+This implementation lowers the runtime of the examples in \cite{Gerkmann2007} by at least
+three orders of magnitude. So our work is a significant improvement of previous work.
 
 We now briefly describe the contents of the remaining sections. We
 will use some terminology that is introduced only in Section \ref{sec:Background}.
@@ -270,7 +273,7 @@ The reader that is not familiar with this terminology should start reading there
 
 In Section \ref{sec:Background}, we recall the main theoretical results that we 
 will need in the rest of the paper. We limit ourselves to the bare minimum, since 
-there are already good references available for the relevant theory [[TODO]]. 
+there are already good references available for the relevant theory \cite{Kedlaya2012}. 
 We also introduce a lot of terminology and notation for the rest of the paper. At 
 the end of this section we give an overview of the different steps of the deformation 
 method. The following four sections each treat one of these steps.
@@ -305,9 +308,10 @@ from various sources to bring down the required $p$-adic and $t$-adic precisions
 as much as possible. This results in Algorithm \ref{alg:complete}, which combines
 all previous algorithms, and is the main result of this paper.
 
-In Section \ref{sec:Complexity}, \\
-
-In Section \ref{sec:Examples},
+In Section \ref{sec:Complexity}, we analyse the time and space complexity of our 
+algorithm and compare these to \cite{Lauder2004a}. 
+In Section \ref{sec:Examples}, we compute various numerical examples, and compare 
+our runtimes to the ones in \cite{Gerkmann2007}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Theoretical background}
