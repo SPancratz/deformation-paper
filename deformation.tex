@@ -257,38 +257,53 @@ deformation algorithm in terms of rigid cohomology. Moreover, he improved variou
 precision bounds to make the algorithm more practical, and computed a lot of examples.
 
 The aim of this paper is to continue where Lauder and Gerkmann left off. We make 
-improvements to just about every step of the algorithm. 
+improvements to every step of the algorithm. 
 The resulting algorithm has lower time and space complexity than 
 Lauder's algorithm. Moreover, the first author has written a very fast publicly
 available C implementation of the algorithm using the library FLINT [[TODO]]. 
 This implementation lowers the runtime of the examples in [[TODO]] by at least
 three orders of magnitude.
 
-We now briefly describe the contents of the remaining sections in the paper. We
+We now briefly describe the contents of the remaining sections. We
 will use some terminology that is introduced only in Section \ref{sec:Background}.
-The reader that is not familiar with the terminology yet should start reading there. 
+The reader that is not familiar with this terminology should start reading there. 
 
 In Section \ref{sec:Background}, we recall the main theoretical results that we 
 will need in the rest of the paper. We limit ourselves to the bare minimum, since 
 there are already good references available for the relevant theory [[TODO]]. 
 We also introduce a lot of terminology and notation for the rest of the paper. At 
-the end of this section we give an overview of the deformation method.
+the end of this section we give an overview of the different steps of the deformation 
+method. The following four sections each treat one of these steps.
 
 In Section \ref{sec:Connection}, we explain how to compute the Gauss--Manin 
 connection on the cohomology of a family of smooth projective hypersurfaces. 
 We define an explicit monomial basis for the cohomology that we will use 
-throughout the paper. Our most important theoretical result in this section
-is Theorem \ref{thm:Isomorphism}, which allows us to compute more efficiently 
-in the cohomology, using the method of Griffiths and Dwork. The matrix of the 
-Gauss--Manin connection is computed in Algorithm \ref{alg:Connection}. At the
-end of this section we give lower bounds for the valuation of the matrix of 
-Frobenius, that are essential to control $p$-adic precision loss.
+throughout the paper. Our most important result in this section
+is Theorem \ref{thm:Isomorphism}, which allows us to compute very efficiently 
+in the cohomology. In Algorithm \ref{alg:Connection} we compute the matrix of 
+the Gauss--Manin connection. We prove some lower bounds for the valuation of 
+the matrix of Frobenius and its inverse, that are essential for controlling 
+$p$-adic precision loss in the Algorithm.
 
-In Section \ref{sec:Diagonal}, \\
+In Section \ref{sec:Diagonal}, we show how to compute the Frobenius matrix of
+a diagonal hypersurface over a prime field. Our method is based on a formula of Dwork, but by 
+rewriting this formula, we obtain Algorithm 
+\ref{alg:Diagfrob}, that performs better than the corresponding algorithms 
+of Lauder and Gerkmann, both in terms of time complexity and in practice. 
 
-In Section \ref{sec:DifferentialSystem}, \\
+In Section \ref{sec:DifferentialSystem}, we explain how to solve the differential
+equation for the Frobenius matrix. We use the same method as Lauder, but 
+incorporate improved convergence bounds for $p$-adic differential equations 
+by Kedlaya. Our most important result in this section is Theorem \ref{thm:Ni} 
+in which we collect the improved precision bounds that follow from our analysis.
+In Algorithm \ref{alg:expansion} we compute the power series expansion of the 
+Frobenius matrix.
 
-In Section \ref{sec:ZetaFunctions}, \\
+In Section \ref{sec:ZetaFunctions}, we describe how to evaluate the Frobenius
+matrix at some fibre, and deduce its zeta function. We combine bounds and tricks 
+from various sources to bring down the required $p$-adic and $t$-adic precisions 
+as much as possible. This results in Algorithm \ref{alg:complete}, which combines
+all previous algorithms, and is the main result of this paper.
 
 In Section \ref{sec:Complexity}, \\
 
