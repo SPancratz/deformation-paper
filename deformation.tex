@@ -339,8 +339,9 @@ where for all $i$:
 The proof of this theorem was completed by Deligne in \cite{Deligne1974}.
 \end{proof}
 
-Let $\QQ_q$ denote the unique unramified extension of $\QQ_p$ with 
-residue field $\FF_q$ and let $\ZZ_q$ be its ring of integers.
+We let $\QQ_q$ denote the unique unramified extension of $\QQ_p$ with 
+residue field $\FF_q$ and $\ZZ_q$ its ring of integers. We denote
+the $p$-adic valuation on $\QQ_q$ by $\ord_p(-)$.
 
 \begin{defn}
 Let $\Hrig^{i}(X)$ denote the rigid
@@ -572,12 +573,12 @@ p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 \QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag} = 
 \biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r(t)^j} \; : \; 
 a_{i,j} \in \QQ_q, \; \exists c > 0 \text{ s.t.}  
-\ord_p(a_{i,j}) \geq c(i+j)  
+\lim_{i+j \rightarrow \infty} \bigl(\ord_p(a_{i,j}) - c(i+j)\bigr) \geq 0 
 \biggr\}
 \]
-for the ring of $p$-adically meromorphic functions on $\mathbf{P}^1_{\QQ_q}$, 
-that are analytic outside of the union of the open disks of radius $\rho$
-around the zeroes of $r$ and the point at infinity, for some $\rho<1$. 
+for the ring of overconvergent functions, i.e. $p$-adically meromorphic functions on 
+$\mathbf{P}^1_{\QQ_q}$ that are analytic outside of the open disks of 
+radius $\rho$, around the zeroes of $r$ and the point at infinity, for some $\rho<1$. 
 \end{defn}
 
 \begin{assump}
