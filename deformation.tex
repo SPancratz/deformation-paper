@@ -311,7 +311,7 @@ all previous algorithms, and is the main result of this paper.
 In Section \ref{sec:Complexity}, we analyse the time and space complexity of our 
 algorithm and compare these to \cite{Lauder2004a}. 
 In Section \ref{sec:Examples}, we compute various numerical examples, and compare 
-our runtimes to the ones in \cite{Gerkmann2007}. 
+our runtimes to those in \cite{Gerkmann2007}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Theoretical background}
@@ -567,14 +567,17 @@ matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \ldots, e_b]$, i.e.\
 p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 \]
 
-\begin{defn} We denote
+\begin{defn} We write
 \[
 \QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag} = 
 \biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r(t)^j} \; : \; 
-a_{i,j} \in \QQ_q \text{ s.t. } \exists \rho > 1 \; 
-\lim_{|i|+|j| \rightarrow \infty} |a_{i,j}| \rho^{(|i|+|j|)} \rightarrow 0 
-\biggr\}.
-\] 
+a_{i,j} \in \QQ_q, \; \exists c > 0 \text{ s.t.}  
+\ord_p(a_{i,j}) \geq c(i+j)  
+\biggr\}
+\]
+for the ring of $p$-adically meromorphic functions on $\mathbf{P}^1_{\QQ_q}$, 
+that are analytic outside of the union of the open disks of radius $\rho$
+around the zeroes of $r$, for some $\rho<1$. 
 \end{defn}
 
 \begin{assump}
@@ -2022,8 +2025,8 @@ to a matrix of rational functions of order greater than or equal to
 at the point $z$. Here, $\alpha_1, \alpha_2(N)$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 $\delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr)$, 
-since for the matrix $\Psi$ of $p^{-1}\Frob_p$ with respect to 
-$[w_1,\ldots,w_b]$ we only have that $\ord_p{\Psi} \geq -\delta'$. 
+since for the matrix $\Phi'$ of $p^{-1}\Frob_p$ with respect to 
+$[w_1,\ldots,w_b]$ we only have that $\ord_p{\Phi'} \geq -\delta'$. 
 \end{rem}
 
 When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied,
