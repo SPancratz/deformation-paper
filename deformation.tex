@@ -341,7 +341,10 @@ The proof of this theorem was completed by Deligne in \cite{Deligne1974}.
 
 We let $\QQ_q$ denote the unique unramified extension of $\QQ_p$ with 
 residue field $\FF_q$ and $\ZZ_q$ its ring of integers. We denote
-the $p$-adic valuation on $\QQ_q$ by $\ord_p(-)$.
+the $p$-adic valuation on $\QQ_q$ by $\ord_p$, and extend it 
+to polynomials and matrices over $\QQ_q$ in the usual way, i.e. 
+by taking the minimum over the coefficients and entries, 
+respectively.
 
 \begin{defn}
 Let $\Hrig^{i}(X)$ denote the rigid
@@ -561,24 +564,28 @@ to this basis, i.e.\
 \[
 \nabla (e_j) = \sum_{i=1}^b M_{i,j} e_i.
 \]
-Let $r \in \ZZ_q[t]$ be a denominator for $M$, i.e. such that we can write 
+Let $r \in \ZZ_q[t]$ with $\ord_p(r)=0$ be a denominator for $M$, i.e. such that we can write 
 $M = G/r$ with $G \in M_{b \times b}(\QQ_q[t])$, and let $\Phi$ denote the 
 matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \ldots, e_b]$, i.e.\
 \[
 p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 \]
 
-\begin{defn} We write
+\begin{defn} We define the ring of overconvergent functions
 \[
 \QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag} = 
 \biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r(t)^j} \; : \; 
 a_{i,j} \in \QQ_q, \; \exists c > 0 \text{ s.t.}  
-\lim_{i+j \rightarrow \infty} \bigl(\ord_p(a_{i,j}) - c(i+j)\bigr) \geq 0 
-\biggr\}
+\lim_{i+j \rightarrow \infty} \bigl(\ord_p(a_{i,j}) - c(i+j)\bigr) \geq 0
+\biggr\},
 \]
-for the ring of overconvergent functions, i.e. $p$-adically meromorphic functions on 
-$\mathbf{P}^1_{\QQ_q}$ that are analytic outside of the open disks of 
-radius $\rho$, around the zeroes of $r$ and the point at infinity, for some $\rho<1$. 
+as the $p$-adically meromorphic functions on $\mathbf{P}^1_{\QQ_q}$ that are 
+analytic outside of the open disks of radius $\rho$, around the zeroes of $r$ 
+and the point at infinity, for some $\rho<1$. We extend the $p$-adic valuation 
+to this ring, and polynomials and matrices over it, by defining
+\[
+\ord_p \Bigl( \sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r(t)^j} \Bigr) = \min_{i,j} \{ \ord_p(a_{i,j})\}.
+\]
 \end{defn}
 
 \begin{assump}
@@ -1838,9 +1845,10 @@ slightly, for example when $\ord_p(M)$ is nonnegative.
 In order to determine the power series expansion of the matrix~$\Phi$, 
 we also need to compute the matrix $\sigma(C)^{-1}$. We could compute 
 the matrix~$C^{-1}$ using matrix inversion over the ring $\mathbf{Q}_q[[t]]$,
-and then apply $\sigma$ to it. However, solving \eqref{eq:01-GMDE-Dual} is 
-more efficient, especially if one applies $\sigma$ to this equation first 
-and solves for $\sigma(C)^{-1}$ directly.
+and then apply $\sigma$ to it. However, solving \eqref{eq:01-GMDE-Dual} turns
+out to be more efficient. 
+%especially if one applies $\sigma$ to this equation first 
+%and solves for $\sigma(C)^{-1}$ directly.
 \end{rem}
 
 We can now finally give all the necessary precisions for computing the power 
@@ -1904,12 +1912,12 @@ in Algorithm~\ref{alg:expansion} below.
 \item[] \hspace{0.6em} $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{\tilde{N}_C}}$
 \item[] $C \gets \sum_{i=0}^K C_i t^i \pmod{p^{N_C}}$
 \end{compactenum}
-\item Solve Equation \eqref{eq:01-GMDE-Dual} for $\sigma(C)^{-1}$ (see Remark~\ref{rem:sigmatrick}) to $t$-adic precision $K$ and $p$-adic precision $N_{C^{-1}}$:
+\item Solve Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
 \begin{compactenum}[a.]
 \item[] $\tilde{C}_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $\ceil{K/p}-1$ \textbf{do}
-\item[] \hspace{0.6em} $\tilde{C}_{i+1} \gets  \frac{-1}{\sigma(r_0)(i+1)} \biggl(\sum_j \sigma(-G_{i-j}^t) \tilde{C}_j + \sum_j \sigma(r_{i-j+1}) (j \tilde{C}_j) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
-\item[] $\sigma(C^{-1}) \gets \sum_{i=0}^{\ceil{K/p}} \tilde{C}_i t^{pi} \pmod{p^{N_{C^{-1}}}}$
+\item[] \hspace{0.6em} $\tilde{C}_{i+1} \gets  \frac{-1}{r_0(i+1)} \biggl(\sum_j -G_{i-j}^t \tilde{C}_j + \sum_j r_{i-j+1} (j \tilde{C}_j) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
+\item[] $C^{-1} \gets \sum_{i=0}^{\ceil{K/p}} \tilde{C}_i t^{i} \pmod{p^{N_{C^{-1}}}}$
 \end{compactenum}
 \item $\Phi \gets C \Phi_0 \sigma(C^{-1})$
 \item \textbf{return} $\Phi$
@@ -1945,8 +1953,8 @@ by rational functions, we need a bound on the pole order of these
 rational functions at their poles, as a function of~$N$.
 
 The bounds that Lauder ~\citep[\S 8.1]{Lauder2004a} and 
-Gerkmann~\citep[\S 6]{Gerkmann2007} used for this were very far from 
-being sharp, which significantly slowed down their algorithms.
+Gerkmann~\citep[\S 6]{Gerkmann2007} used for this were not very
+sharp, which significantly slowed down their algorithms.
 Recently, under some small additional assumptions, Kedlaya and the second 
 author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a much sharper bound,
 that we state here in a simplified form.
