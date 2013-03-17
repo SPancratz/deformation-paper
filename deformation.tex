@@ -276,7 +276,7 @@ will need in the rest of the paper. We limit ourselves to the bare minimum, sinc
 there are already good references available for the relevant theory \cite{Kedlaya2012}. 
 We also introduce a lot of terminology and notation for the rest of the paper. At 
 the end of this section we give an overview of the different steps of the deformation 
-method. The following four sections each treat one of these steps.
+method. The next four sections each treat one of these steps.
 
 In Section \ref{sec:Connection}, we explain how to compute the Gauss--Manin 
 connection on the cohomology of a family of smooth projective hypersurfaces. 
@@ -2013,15 +2013,17 @@ Let $\cB=[e_1,\ldots,e_b]$ denote our basis from Definition~\ref{defn:MonBasis},
 and let $W \in M_{b \times b}(\QQ_q(t))$ 
 be the change of basis matrix such that $w_j = \sum_{i=1}^b W_{ij} e_i$ for all 
 $1 \leq j \leq b$. Then, by \citep[Corollary 2.6]{KedlayaTuitman2012}, the matrix 
-$\Phi$ (as always defined with respect to the basis $\cB$) is congruent modulo 
-$p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
+$\Phi$ %(as always defined with respect to the basis $\cB$) 
+is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix of rational functions of order greater than or equal to 
 \[
 -(\alpha_1+p \alpha_2(N))+\ord_z(W)+p\ord_z(W^{-1})
 \]
 at the point $z$. Here, $\alpha_1, \alpha_2(N)$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
-$\delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr)$ everywhere.
+$\delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr)$, 
+since for the matrix $\Psi$ of $p^{-1}\Frob_p$ with respect to 
+$[w_1,\ldots,w_b]$ we only have that $\ord_p{\Psi} \geq -\delta'$. 
 \end{rem}
 
 When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied,
@@ -2160,7 +2162,7 @@ $W$ explicitly. When computing with respect to our basis $\cB$,
 there will be loss of precision. The loss of $p$-adic precision 
 in computing $\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most 
 $(a-1)\delta$, and the loss of 
-precision in the computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$ 
+precision in computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$ 
 is at most $(b-1) \delta$, by Proposition \ref{prop:productval} and 
 Corollary \ref{cor:delta}. Therefore, for $\chi(T)$ to be correct
 to $p$-adic precision $N-\delta$, it is sufficient to compute 
