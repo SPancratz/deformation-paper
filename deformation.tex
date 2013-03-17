@@ -2354,16 +2354,19 @@ integers can be multiplied in $\SoftOh(k)$ bit operations, and that
 two degree-$k$ polynomials can be multiplied in $\SoftOh(k)$ ring 
 operations.  We let $\omega$ denote the least exponent for matrix 
 multiplication, so that two $k \times k$ matrices can be multiplied 
-in $\BigOh(k^{\omega})$ ring operations. An invertible 
-$k \times k$ matrix can then be inverted in $\BigOh(k^{\omega})$ 
-ring operations as well. Moreover, it is known that $2 \leq \omega \leq 2.3727$. 
+in $\BigOh(k^{\omega})$ ring operations. An invertible $k \times k$ matrix 
+can then be inverted in $\BigOh(k^{\omega})$ ring operations as well. 
+Moreover, it is known that $2 \leq \omega \leq 2.3727$.  Finally, we 
+point out that the characteristic polynomial of a matrix can be 
+computed in $\BigOh(b^{\omega} \log b)$ field operations using 
+an algorithm of Keller-Gehrig~\citep{KellerGehrig1985}.
 
-Next we consider two specific $p$-adic operations.  First, images of elements of 
-$\QQ_{\mathfrak{q}}$ under~$\sigma^k$, for $0 < k < a$, can be computed to 
-$p$-adic precision~$N$ in time $\SoftOh(a \log^2 p + a N \log p)$. 
-Second, the Teichm\"uller lift of an element of $\FF_{\mathfrak{q}}$ can be 
-computed to precision~$N$ in time $\SoftOh(a N \log^2 p)$. For both of these
-statements we refer to \cite{Hubrechts2010}.
+Next we consider specific $p$-adic operations, referring the reader to 
+Hubrechts~\citep{Hubrechts2010} for further details.  First, images of elements 
+of $\QQ_{\mathfrak{q}}$ under~$\sigma^k$, for $0 < k < a$, can be computed to 
+$p$-adic precision~$N$ in time $\SoftOh(a \log^2 p + a N \log p)$.  Second, 
+the Teichm\"uller lift of an element of $\FF_{\mathfrak{q}}$ can be computed 
+to precision~$N$ in time $\SoftOh(a N \log^2 p)$.
 
 We start by estimating the degrees of the numerator and denominator of the
 connection matrix~$M$.
@@ -2496,20 +2499,49 @@ $\SoftOh(\tilde{N}_{\Phi_0}^2 \log(p)) = \SoftOh(a^2 \log(p) d^{2n} \log^2(d_t))
 \end{proof}
 
 \begin{rem}
-Note that the time complexity in Proposition \ref{prop:complexityPhi0} 
-is quasilinear in $p$, while in the work of Lauder \cite{Lauder2004a} 
-it was quasiquadratic. The main reason for this is that Lauder computed 
-in $\QQ_p(\pi)$, where a single multiplication already takes time 
-quasilinear in $p$. It will turn out that this improvement also lowers
-the overall time complexity of Algorithm \ref{alg:complete} from
-being quasiquadratic to quasilinear in $p$. 
+Note that the time complexity in Proposition~\ref{prop:complexityPhi0} 
+is quasilinear in~$p$, while in the work of Lauder~\cite{Lauder2004a} 
+it is quasiquadratic.  The main reason for this is that Lauder computed 
+in the unramified extension~$\QQ_p(\pi)$ of degree~$p$, where a single 
+multiplication already takes time quasilinear in~$p$.  It will turn out 
+that this crucial improvement also decreases the overall time complexity 
+of the deformation method from being quasiquadratic to quasilinear in~$p$.
 
-We should mention that there is also a small downside to our approach:  
-the time complexity in Proposition \ref{prop:complexityPhi0} is quasicubic 
-in $a$, while by using fast exponentials over $\QQ_p(\pi)[[z]]$, this can 
-be lowered to being quasiquadratic in $a$. [[TODO, perhaps give and prove 
-both complexity estimates, for completeness]]
+We should mention that there is a small downside to our approach.  The time 
+complexity in Proposition~\ref{prop:complexityPhi0} is quasicubic in~$a$, 
+while by using fast exponentials over $\QQ_p(\pi)[[z]]$, this can be 
+decreased to being quasiquadratic in~$a$, which again has an effect on the 
+entire deformation method.  We address this in the following proposition.
 \end{rem}
+
+\begin{prop}
+The matrix~$\Phi_0$ can be computed to the required precision in 
+\begin{align*}
+\mbox{time: }  &\SoftOh(p a^2 d^{2n} \log^2(d_t)) \bigl( p + d^n \bigr), \\
+\mbox{space: } &\SoftOh(p^2 a^2 d^{2n} \log^2 d_t).
+\end{align*}
+\end{prop}
+
+\begin{proof}
+The key idea is to slightly modify Algorithm~\ref{alg:Diagfrob} 
+and compute the $\BigOh(d^n)$ terms $\alpha_{u,v}$ directly from 
+Definition~\ref{defn:alpha}.  We first observe that the valuation 
+of the summands in the definition can be bounded by 
+$\ord_p(\lambda_m ((u_i+1)/d)_r (-1)^r \pi^{-r} a_i^{m-r}) \geq -1/2$. 
+As the only term with negative valuation is $\pi^{-r}$ and 
+$\mathcal{R} \in \BigOh(\tilde{N}_{\Phi_0})$, it suffices 
+to compute the terms $\lambda_m$ and $d^{-r}$ to $p$-adic 
+precision~$\BigOh(\tilde{N}_{\Phi_0})$.  This is where the main 
+difference occurs:  we compute the sequence 
+$(\lambda_m)_{m=0}^{\mathcal{M}}$ via the series expansion of 
+$\exp \pi (z - z^p)$ in $\QQ_p(\pi)[[z]]$ modulo $z^{\mathcal{M}+1}$, 
+which can be done in $\SoftOh(\mathcal{M})$ operations in $\QQ_p(\pi)$ 
+following Brent~\citep{Brent1976}.
+
+The remaining modifications to Algorithm~\ref{alg:Diagfrob} are 
+straightforward and the proof of the propositon can be completed 
+as before.
+\end{proof}
 
 We now consider the computation of the power series expansion of the 
 matrix~$\Phi$.
@@ -2584,12 +2616,13 @@ requires time
 \end{equation*}
 Finally, we consider the substitution of $\hat{\tau}$ 
 into the $b^2$ entries of the matrix $D(t) \Phi(t) \bmod t^K$. 
-Each of these can be thought of as a modular composition of polynomials over 
-$\QQ_{q}$, where the modulus is the minimal polynomial $m \in \QQ_q[t]$ of 
-$\hat{\tau}$ over $\QQ_{q}$, which is of degree at most $a/a'$. However, 
-care has to be taken to include the additional reduction modulo $m$ 
-of the polynomials of degree less than~$K$, so that polynomials 
-involved in the modular composition have degree less than~$a/a'$. 
+Each of these can be thought of as a modular composition of polynomials 
+over~$\QQ_{q}$, where the modulus~$m(t)$ is an irreducible polynomial defining 
+the extension $\QQ_{\mathfrak{q}}$ as a quotient of $\QQ_q[t]$, which is 
+of degree~$a/a'$. However, care has to be taken to include the additional 
+reduction modulo~$m(t)$ of the polynomials of degree less than~$K$, so that 
+polynomials involved in the modular composition have degree less 
+than~$a/a'$. 
 
 Thus, the substitutions require time 
 \begin{equation*}
@@ -2629,8 +2662,7 @@ of size $b \in \BigOh(d^n)$. This can be done in time
 \end{gather*}
 Next, we compute the reverse characteristic polynomial of matrix 
 $\Phi_{\tau}^{(a)} \in M_{b \times b}(\QQ_{\mathfrak{q}})$, which 
-using an algorithm of Keller-Gehrig~\citep{KellerGehrig1985} can 
-be accomplished in~$\BigOh(b^{\omega} \log b)$ field operations. 
+can be accomplished in~$\BigOh(b^{\omega} \log b)$ field operations. 
 This amounts to a time complexity of 
 \begin{equation*}
 \SoftOh\bigl(b^{\omega} (a \log(p))(a d^n) \bigr)
