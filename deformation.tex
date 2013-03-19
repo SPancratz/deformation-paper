@@ -226,9 +226,9 @@ of a finite number of the $|X(\FF_{q^i})|$, which can be determined
 by naive counting. 
 
 A more interesting problem is whether, and if so how, $Z(X,T)$ can be 
-computed efficiently. Here efficiently could mean with low time complexity or 
+computed efficiently. Here efficiently can mean with low time complexity or 
 just fast in practice. When $X$ is a (hyper)elliptic curve, this problem
-is important for cryptographic applications, and has therefore received
+is important for cryptographic applications, and has received
 a lot of attention. In this case, very efficient algorithms are available.
 For example, when $X$ is an elliptic curve, Schoof's 
 algorithm \cite{Schoof1995}, that uses $\ell$-adic \'etale cohomology, has runtime 
@@ -260,12 +260,13 @@ deformation algorithm in terms of rigid cohomology. Moreover, he improved variou
 precision bounds, making the algorithm more practical, and he computed a lot of examples.
 
 The aim of this paper is to continue where Lauder and Gerkmann left off. We make 
-improvements to every step of the algorithm. 
+improvements to almost every step of the algorithm. 
 The resulting algorithm has lower time and space complexity than 
 Lauder's algorithm. Moreover, the first author has written a publicly
 available C implementation of the algorithm using the library FLINT [[TODO]]. 
-This implementation lowers the runtime of the examples in \cite{Gerkmann2007} by at least
-three orders of magnitude. So our work is a significant improvement of previous work.
+This implementation lowers the runtime of the examples in \cite{Gerkmann2007} by at 
+least three orders of magnitude. So our work is a significant improvement of the work 
+of Lauder and Gerkmann.
 
 We now briefly describe the contents of the remaining sections. We
 will use some terminology that is introduced only in Section \ref{sec:Background}.
@@ -284,13 +285,13 @@ We define an explicit monomial basis for the cohomology that we will use
 throughout the paper. Our most important result in this section
 is Theorem \ref{thm:Isomorphism}, which allows us to compute very efficiently 
 in the cohomology. In Algorithm \ref{alg:Connection} we compute the matrix of 
-the Gauss--Manin connection. We prove some lower bounds for the valuation of 
+the Gauss--Manin connection. We also prove some lower bounds for the valuation of 
 the matrix of Frobenius and its inverse, that are essential for controlling 
 $p$-adic precision loss in the Algorithm.
 
 In Section \ref{sec:Diagonal}, we show how to compute the Frobenius matrix of
 a diagonal hypersurface over a prime field. Our method is based on a formula of Dwork, but by 
-rewriting this formula, we obtain Algorithm 
+rewriting this formula we obtain Algorithm 
 \ref{alg:Diagfrob}, that performs better than the corresponding algorithms 
 of Lauder and Gerkmann, both in terms of time complexity and in practice. 
 
@@ -303,10 +304,10 @@ In Algorithm \ref{alg:expansion} we compute the power series expansion of the
 Frobenius matrix.
 
 In Section \ref{sec:ZetaFunctions}, we describe how to evaluate the Frobenius
-matrix at some fibre, and deduce its zeta function. We combine bounds and tricks 
-from various sources to bring down the required $p$-adic and $t$-adic precisions 
+matrix at some fibre, and deduce its zeta function. We combine bounds from various 
+sources to bring down the required $p$-adic and $t$-adic precisions 
 as much as possible. This results in Algorithm \ref{alg:complete}, which combines
-all previous algorithms, and is the main result of this paper.
+all of our previous algorithms, and is the main result of the paper.
 
 In Section \ref{sec:Complexity}, we analyse the time and space complexity of our 
 algorithm and compare these to \cite{Lauder2004a}. 
@@ -341,10 +342,7 @@ The proof of this theorem was completed by Deligne in \cite{Deligne1974}.
 
 We let $\QQ_q$ denote the unique unramified extension of $\QQ_p$ with 
 residue field $\FF_q$ and $\ZZ_q$ its ring of integers. We denote
-the $p$-adic valuation on $\QQ_q$ by $\ord_p$, and extend it 
-to polynomials and matrices over $\QQ_q$ in the usual way, i.e. 
-by taking the minimum over the coefficients and entries, 
-respectively.
+the $p$-adic valuation on $\QQ_q$ by $\ord_p(\cdot)$. 
 
 \begin{defn}
 Let $\Hrig^{i}(X)$ denote the rigid
@@ -560,7 +558,7 @@ as formal power series, from which \eqref{eq:formulab} can be read off easily.
 Let $[e_1, \ldots, e_b]$ be some basis of sections of 
 $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and let $M \in M_{b \times b}(\QQ_q(t))$ 
 denote the matrix of the Gauss--Manin connection $\nabla$ with respect 
-to this basis, i.e.\ 
+to this basis, i.e.
 \[
 \nabla (e_j) = \sum_{i=1}^b M_{i,j} e_i.
 \]
@@ -573,33 +571,41 @@ p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 
 \begin{defn} We define the ring of overconvergent functions
 \[
-\QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag} = 
-\biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r(t)^j} \; : \; 
+\QQ_q \langle t, \frac{1}{r} \rangle^{\dag} = 
+\biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r^j} \; : \; 
 a_{i,j} \in \QQ_q, \; \exists c > 0 \text{ s.t.}  
 \lim_{i+j \rightarrow \infty} \bigl(\ord_p(a_{i,j}) - c(i+j)\bigr) \geq 0
 \biggr\},
 \]
 as the $p$-adically meromorphic functions on $\mathbf{P}^1_{\QQ_q}$ that are 
 analytic outside of the open disks of radius $\rho$, around the zeroes of $r$ 
-and the point at infinity, for some $\rho<1$. We extend the $p$-adic valuation 
-to this ring, and polynomials and matrices over it, by defining
-\[
-\ord_p \Bigl( \sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r(t)^j} \Bigr) = \min_{i,j} \{ \ord_p(a_{i,j})\}.
-\]
+and the point at infinity, for some $\rho<1$. 
+\end{defn}
+
+\begin{defn}
+We extend the $p$-adic valuation 
+to $\QQ_q \langle t, 1/r \rangle^{\dag}$ in the standard way, i.e. $\ord_p(f)$
+is defined as the maximum, over all ways of writing $f=\sum_{i,j=0}^{\infty} a_{i,j} (t^i / r^j)$,
+of the minimum, over $i,j \geq 0$, of $\ord_p(a_{i,j})$. Note that the  
+norm on $\QQ_q \langle t, 1/r \rangle^{\dag}$ corresponding to $\ord(\cdot)$ 
+is the Gauss norm. We also extend $\ord_p(\cdot)$ to polynomials and matrices over 
+$\QQ_q \langle t, 1/r \rangle^{\dag}$, by taking the 
+minimum over the coefficients and entries, respectively.
 \end{defn}
 
 \begin{assump}
 From now on we will always assume that $0 \in \mathcal{S}$. 
-Note that this can be achieved by applying a translation.
+Note that if this is not the case, then it can be achieved by 
+applying a translation.
 \end{assump}
 
 \begin{thm} \label{thm:eqphi} 
 The matrix $\Phi$ is an element of 
-$M_{b \times b}(\QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag})$ 
+$M_{b \times b}(\QQ_q \langle t, \frac{1}{r} \rangle^{\dag})$ 
 and satisfies the following differential equation:
-\begin{equation*}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \;\;\; \Phi(0)=\Phi_0,
-\end{equation*}
+\begin{align*}
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi &= p t^{p-1} \Phi \sigma(M), &\Phi(0)&=\Phi_0,
+\end{align*}
 where $\Phi_0$ is the matrix of $p^{-1}\Frob_p$ on $\Hrig^n(U_0)$ with respect 
 to the basis $[e_0,\ldots,e_b]$.
 \end{thm}
@@ -611,7 +617,7 @@ that $\Phi(0)=\Phi_0$ is also clear from Theorem~\ref{thm:frobstruc}. Now, if
 $M$ does not have any poles in a given residue disk, then $\Phi$ cannot have 
 any poles in that residue disk either, by Theorem~\ref{thm:KedlayaTuitman} 
 below. Hence the entries of $\Phi$ are contained in 
-$\QQ_q \langle t, \frac{1}{r(t)} \rangle^{\dag}$.
+$\QQ_q \langle t, \frac{1}{r} \rangle^{\dag}$.
 \end{proof}
 
 The deformation method can now be sketched as follows:
@@ -632,9 +638,9 @@ The deformation method can now be sketched as follows:
       $Z(X_{\tau},T)$ of the fibre $X_{\tau}$.
 \end{enumerate}
 
-This way one can `deform' the computation of the zeta function $Z(X_{\tau},T)$ 
-of some complicated fibre $X_{\tau}$ to that of some easier diagonal fibre, 
-by solving the $p$-adic differential equation from Theorem~\ref{thm:eqphi}.
+This way one can `deform' the computation for some complicated fibre $X_{\tau}$ to that 
+for some easier diagonal fibre, by solving the $p$-adic differential equation from 
+Theorem~\ref{thm:eqphi}.
 
 Note that we can only carry out these computations to finite $p$-adic 
 precision. Therefore, we need to recall some bounds on the loss of $p$-adic 
@@ -814,10 +820,10 @@ bases $F_k$ and $R_k$, respectively, and let $\pi \colon V_k \rightarrow W_k$
 denote the linear map that sends the elements of $B_k$ to zero and the 
 elements of $R_k$ to themselves. %safer formulation, projection not unique
 Then the map 
-\begin{equation}
-\phi_k \colon U_k \to W_k, \;\;\;
-(Q_0, \dotsc, Q_n) \mapsto \pi \bigl( Q_0 \partial_0 P + \dotsb + Q_n \partial_n P \bigr)
-\end{equation}
+\begin{align}
+\phi_k \colon U_k &\to W_k,
+&(Q_0, \dotsc, Q_n) &\mapsto \pi \bigl( Q_0 \partial_0 P + \dotsb + Q_n \partial_n P \bigr)
+\end{align}
 is an isomorphism of $L$-vector spaces.
 \end{thm}
 
@@ -1102,10 +1108,10 @@ For every
 $\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying $\overline{R}(\tau) \neq 0$, 
 there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_{\mathfrak{q}})$ such that 
 \begin{align*}
-\ord_p(W_{\tau}) & \geq -\sum_{i=1}^{n-1} \floor{\log_p(i)}, \\
-\ord_p(W_{\tau}^{-1}) & \geq -\ord_p\bigl((n-1)!\bigr), \\
-\ord_p\bigl(W_{\tau} \Phi_{\tau} \sigma(W_{\tau}^{-1})\bigr) & \geq 0, \\
-\ord_p\bigl(W_{\tau} \Phi_{\tau}^{-1} \sigma(W_{\tau}^{-1})\bigr) & \geq -(n-1).
+\ord_p(W_{\tau}) &\geq -\sum_{i=1}^{n-1} \floor{\log_p(i)},
+&\ord_p(W_{\tau}^{-1}) &\geq -\ord_p \bigl((n-1)! \bigr), \\
+\ord_p\bigl(W_{\tau} \Phi_{\tau} \sigma(W_{\tau}^{-1})\bigr) &\geq  0,
+&\ord_p\bigl(W_{\tau} \Phi_{\tau}^{-1} \sigma(W_{\tau}^{-1})\bigr) &\geq  -(n-1).
 \end{align*}
 \end{thm}
 
@@ -1726,25 +1732,25 @@ resultant $R$ defined in Definition~\ref{defn:resultant}. Note that the
 degree of $r$ might be smaller than the degree of $R$, which will speed up 
 our computations. By Assumption~\ref{assump:diag}, we have that 
 $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$. Recall that 
-$\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag} \bigr)$ 
+$\Phi \in M_{b \times b} \bigl(\QQ_q \langle t,\frac{1}{r} \rangle^{\dag} \bigr)$ 
 denotes the matrix for the $\sigma$-semilinear action of~$p^{-1} \Frob_p$ 
 on $\Hrig^{n}(U/S)$, where $\sigma$ is defined as 
 in Definition~\ref{defn:sigma}. 
 
 As we saw in Section~\ref{sec:Background}, these matrices satisfy 
 the differential equation
-\begin{equation} \label{eq:Phi}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M), \;\;\; \Phi(0)=\Phi_0,
-\end{equation}
+\begin{align} \label{eq:Phi}
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi &= p t^{p-1} \Phi \sigma(M), &\Phi(0)&=\Phi_0,
+\end{align}
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action 
 of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$. Our goal is the computation of 
 a power series expansion of~$\Phi$ at $t=0$.
 
 We first observe that if $C \in M_{b \times b}(\QQ_q[[t]])$ denotes 
 the unique solution to the homogeneous system
-\begin{equation} \label{eq:01-GMDE-Homogenous}
-\Bigl(\frac{d}{dt} + M\Bigr) C = 0, \;\;\; C(0)=I,
-\end{equation}
+\begin{align} \label{eq:01-GMDE-Homogenous}
+\Bigl(\frac{d}{dt} + M\Bigr) C &= 0,  &C(0)&=I,
+\end{align}
 where $I$ denotes the identity matrix, then the matrix
 $\Phi = C \Phi_0 \sigma(C)^{-1}$
 satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation 
@@ -1755,9 +1761,9 @@ with $G_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. Note that
 $r_0 \neq 0 \pmod{p}$.
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ at $t=0$ for 
 the equation
-\begin{equation*}
-r \frac{dC}{dt} + G C = 0, \;\;\; C(0)=I,
-\end{equation*}
+\begin{align*}
+r \frac{dC}{dt} + G C &= 0, &C(0)&=I,
+\end{align*}
 which is clearly equivalent to Equation~\eqref{eq:01-GMDE-Homogenous}, 
 using the recursion 
 \begin{align}
@@ -1825,9 +1831,9 @@ Indeed, the proof there shows that
 We use the bound from Theorem~\ref{thm:valC} and observe that it 
 also applies to the inverse matrix~$C^{-1}$, as this matrix satisfies 
 the dual differential equation 
-\begin{equation} \label{eq:01-GMDE-Dual}
-\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0, \;\;\; C^{-1}(0)=I,
-\end{equation}
+\begin{align} \label{eq:01-GMDE-Dual}
+\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t &= 0, &C^{-1}(0)&=I,
+\end{align}
 that carries a Frobenius structure given by the matrix $\bigl(\Phi^{-1}\bigr)^t$. 
 \end{proof}
 
@@ -1944,7 +1950,7 @@ and so cannot be evaluated at $\hat{\tau}$.
 
 However, since $\Phi$ is a matrix of overconvergent functions, i.e.\ 
 \[
-\Phi \in M_{b \times b}\Bigl(\QQ_q \langle t,\frac{1}{r(t)} \rangle^{\dag}\Bigr),
+\Phi \in M_{b \times b}\Bigl(\QQ_q \langle t,\frac{1}{r} \rangle^{\dag}\Bigr),
 \]
 it can be approximated to any given $p$-adic precision $N$ by a matrix 
 of rational functions, which can then be evaluated at $\hat{\tau}$. To 
@@ -2076,20 +2082,20 @@ $p^{-1} \Frob_p$ on $\Hrig^{n}(U_{\tau})$ to $p$-adic precision $N$,
 then we can use Theorem~\ref{thm:KedlayaTuitman} or Theorem~\ref{thm:Gerkmann}
 to find $K \in \NN$, 
 and a polynomial $D \in \ZZ_q[t]$ that divides some power of $r$, such that 
-$D(t) \Phi(t)$ is congruent modulo $p^N$ to a matrix of polynomials of degree 
+$D \Phi$ is congruent modulo $p^N$ to a matrix of polynomials of degree 
 at most $K$. 
 %Note that $D$ is a denominator for the rational function $\Phi(t) \pmod{p^N}$. 
 We then compute
 \begin{equation*}
-\Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
+\Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
 \end{equation*}
 
 \begin{rem} \label{rem:prectau}
 Note that $D(\hat{\tau}) \in \ZZ_q^{\times}$ because $\overline{R}(\tau) \neq 0$, 
-and $\ord_p(\Phi(t)) \geq -\delta$ by Corollary~\ref{cor:delta}. Therefore, it 
+and $\ord_p(\Phi) \geq -\delta$ by Corollary~\ref{cor:delta}. Therefore, it 
 is sufficient to compute $\hat{\tau}$ to $p$-adic precision $N+\delta$, by
 Proposition \ref{prop:matrixproductval}. Similarly, because $\ord_p(\hat{\tau})$ 
-is $p$-adically integral, it is sufficient to compute $\Phi(t)$ to $p$-adic 
+is $p$-adically integral, it is sufficient to compute $\Phi$ to $p$-adic 
 precision $N$.
 \end{rem}
 
@@ -2159,8 +2165,8 @@ $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we obtain
 Note that $(\Phi'_{\tau})^{(a)}= W \Phi_{\tau}^{(a)} W^{-1}$
 and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
 \begin{align*}
-\chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr), \;\;\; 
-\tilde{\chi}(T) = \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
+\chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr),
+&\tilde{\chi}(T) &= \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
 \end{align*}
 This completes the proof.
 \end{proof}
@@ -2398,11 +2404,11 @@ All $p$-adic precisions that we use lie in $\SoftOh(a d^n \log(d_t))$.
 \begin{proof}
 Note that $b \in \BigOh(d^n)$ and $\delta \in \BigOh(n)$.  
 In Theorem~\ref{thm:precPhitau}, we have that
-\begin{eqnarray*}
+\begin{align*}
 \max\{N_i\} \in \BigOh\bigl(a n b + \log(b) \bigr) 
-            \subset \SoftOh\bigl(a d^n \bigr), \;\;\;
-N           \in \SoftOh(a d^n).
-\end{eqnarray*}
+            &\subset \SoftOh\bigl(a d^n \bigr),
+&N          &\in \SoftOh(a d^n).
+\end{align*}
 Hence, the precisions $\tilde{N}$ and $\bar{N}$ set in 
 Algorithm~\ref{alg:complete} are $\SoftOh(ad^n)$ as well.
 It follows from Theorem \ref{thm:Gerkmann} that 
