@@ -638,9 +638,9 @@ The deformation method can now be sketched as follows:
       $Z(X_{\tau},T)$ of the fibre $X_{\tau}$.
 \end{enumerate}
 
-This way one can `deform' the computation for some complicated fibre $X_{\tau}$ to that 
-for some easier diagonal fibre, by solving the $p$-adic differential equation from 
-Theorem~\ref{thm:eqphi}.
+%This way one can `deform' the computation for some complicated fibre $X_{\tau}$ to that 
+%for some easier diagonal fibre, by solving the $p$-adic differential equation from 
+%Theorem~\ref{thm:eqphi}.
 
 Note that we can only carry out these computations to finite $p$-adic 
 precision. Therefore, we need to recall some bounds on the loss of $p$-adic 
@@ -1109,8 +1109,8 @@ $\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying $\overline{R}(\tau) \neq 0
 there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_{\mathfrak{q}})$ such that 
 \begin{align*}
 \ord_p(W_{\tau}) &\geq -\sum_{i=1}^{n-1} \floor{\log_p(i)},
-&\ord_p(W_{\tau}^{-1}) &\geq -\ord_p \bigl((n-1)! \bigr), \\
-\ord_p\bigl(W_{\tau} \Phi_{\tau} \sigma(W_{\tau}^{-1})\bigr) &\geq  0,
+&\ord_p\bigl(W_{\tau} \Phi_{\tau} \sigma(W_{\tau}^{-1})\bigr) &\geq  0, \\
+\ord_p(W_{\tau}^{-1}) &\geq -\ord_p \bigl((n-1)! \bigr),
 &\ord_p\bigl(W_{\tau} \Phi_{\tau}^{-1} \sigma(W_{\tau}^{-1})\bigr) &\geq  -(n-1).
 \end{align*}
 \end{thm}
@@ -1963,7 +1963,10 @@ Gerkmann~\citep[\S 6]{Gerkmann2007} used for this were not very
 sharp, which significantly slowed down their algorithms.
 Recently, under some small additional assumptions, Kedlaya and the second 
 author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a much sharper bound,
-that we state here in a simplified form.
+that we state below in a simplified form. For $z \in \mathbf{P}^1(\QQ_q)$, we
+denote the valuation on $\QQ_q(t)$ corresponding to $z$ by $\ord_z(\cdot)$, and
+we extend $\ord_z(\cdot)$ to polynomials and matrices over $\QQ_q(t)$, by
+taking the minimum over the coefficients and entries, respectively.
 
 \begin{thm} \label{thm:KedlayaTuitman}
 Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in 
@@ -2002,9 +2005,11 @@ and define
          \end{array}
          \right. 
 \end{align*}
-Then the matrix $\Phi$ is congruent modulo $p^{N}$ to a matrix of rational 
-functions of order greater than or equal to $-(\alpha_1+p \alpha_2(N))$ at the 
-point $z$. 
+Then the matrix $\Phi$ is congruent modulo $p^{N}$ to a matrix 
+$\Psi \in M_{b \times b}(\QQ_q(t))$ for which
+\begin{equation*}
+\ord_z(\Psi) \geq -(\alpha_1+p \alpha_2(N)).
+\end{equation*}
 \end{thm}
 
 \begin{proof}
@@ -2033,15 +2038,17 @@ be the change of basis matrix such that $w_j = \sum_{i=1}^b W_{ij} e_i$ for all
 $1 \leq j \leq b$. Then, by \citep[Corollary 2.6]{KedlayaTuitman2012}, the matrix 
 $\Phi$ %(as always defined with respect to the basis $\cB$) 
 is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
-to a matrix of rational functions of order greater than or equal to 
+to a matrix $\Psi \in M_{b \times b}(\QQ_q(t))$ for which
 \[
--(\alpha_1+p \alpha_2(N))+\ord_z(W)+p\ord_z(W^{-1})
+\ord_z(\Psi) \geq -(\alpha_1+p \alpha_2(N))+\ord_z(W)+p\ord_z(W^{-1}).
 \]
-at the point $z$. Here, $\alpha_1, \alpha_2(N)$ are defined as in 
+Here, $\alpha_1, \alpha_2(N)$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
-$\delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr)$, 
+\begin{equation*}
+\delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr), 
+\end{equation*}
 since for the matrix $\Phi'$ of $p^{-1}\Frob_p$ with respect to 
-$[w_1,\ldots,w_b]$ we only have that $\ord_p{\Phi'} \geq -\delta'$. 
+$[w_1,\ldots,w_b]$, in general we only have that $\ord_p{\Phi'} \geq -\delta'$. 
 \end{rem}
 
 When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied,
@@ -2069,8 +2076,11 @@ and put
 \mu +(p(n+h(N))-n) \nu + pi \deg_t(P) & \mbox{if $z = \infty$}.
 \end{cases}
 \]
-Then $\Phi$ is congruent modulo $p^N$  to a matrix of rational functions of 
-order greater than or equal to $\beta(N)$ at the point $z$.
+Then $\Phi$ is congruent modulo $p^N$ to a matrix 
+$\Psi \in M_{b \times b}(\QQ_q(t))$ for which
+\begin{equation*}
+\ord_z(\Psi) \geq \beta(N).
+\end{equation*}
 \end{thm}
 
 \begin{proof} \mbox{ }
@@ -2094,8 +2104,8 @@ We then compute
 Note that $D(\hat{\tau}) \in \ZZ_q^{\times}$ because $\overline{R}(\tau) \neq 0$, 
 and $\ord_p(\Phi) \geq -\delta$ by Corollary~\ref{cor:delta}. Therefore, it 
 is sufficient to compute $\hat{\tau}$ to $p$-adic precision $N+\delta$, by
-Proposition \ref{prop:matrixproductval}. Similarly, because $\ord_p(\hat{\tau})$ 
-is $p$-adically integral, it is sufficient to compute $\Phi$ to $p$-adic 
+Proposition \ref{prop:matrixproductval}. Similarly, since $\ord_p(\hat{\tau}) \geq 0$, 
+it is sufficient to compute $\Phi$ to $p$-adic 
 precision $N$.
 \end{rem}
 
@@ -2322,11 +2332,11 @@ in Algorithm~\ref{alg:complete} below.
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
 \item Determine $N$ from Theorem~\ref{thm:precPhitau}.
 \item Set $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-3) \delta$, $N' \gets N-\delta$.
-\item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D(t) \Phi(t)$ is a matrix 
+\item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D \Phi$ is a matrix 
       of polynomials of degree at most $K$ to $p$-adic precision $N$, using Theorem~\ref{thm:KedlayaTuitman}.
 \item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N,K)$}.
 \item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $\tilde{N}$.
-\item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D(t) \Phi(t) \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
+\item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
       to $p$-adic precision $N$, using $p$-adic working precision $\tilde{N}$.
 \item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N'$, 
       using $p$-adic working precision $\bar{N}$.
@@ -2614,14 +2624,14 @@ We first recall that the Teichm\"uller lift
 $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ 
 can be computed to $p$-adic precision $\tilde{N} \in \SoftOh(a d^n)$ 
 in time $\SoftOh(a^2 d^n \log^2 p)$.  Next, we observe that the 
-scalar-matrix product $D(t) \Phi(t) \bmod t^K$ over~$\QQ_q[t]$ 
+scalar-matrix product $D \Phi \bmod t^K$ over~$\QQ_q[t]$ 
 requires time 
 \begin{equation*}
 \SoftOh\bigl( b^2 K a' (a d^n) \log p \bigr) 
     \subset \SoftOh\bigl( a^2 a' p d^{5n} e^n d_t \bigr).
 \end{equation*}
 Finally, we consider the substitution of $\hat{\tau}$ 
-into the $b^2$ entries of the matrix $D(t) \Phi(t) \bmod t^K$. 
+into the $b^2$ entries of the matrix $D \Phi \bmod t^K$. 
 Each of these can be thought of as a modular composition of polynomials 
 over~$\QQ_{q}$, where the modulus~$m(t)$ is an irreducible polynomial defining 
 the extension $\QQ_{\mathfrak{q}}$ as a quotient of $\QQ_q[t]$, which is 
@@ -2638,7 +2648,7 @@ Thus, the substitutions require time
 Clearly, evaluating and inverting $D(\hat{\tau})$ and performing the 
 scalar multiplication can be ignored, and the result on the time complexity now follows.
 
-The space requirement is dominated by the matrix $D(t)\Phi(t) \bmod t^K$, 
+The space requirement is dominated by the matrix $D\Phi \bmod t^K$, 
 which has size 
 \begin{equation*}
 \SoftOh(b^2 K a' \log(p) (a d^n)) \subset \SoftOh(a^2 a' p d^{5n} e^n d_t). 
