@@ -1246,7 +1246,7 @@ to $p$-adic precision~$N$. It will turn out that this matrix has only one
 nonzero element in every row and column.
 
 We define the ramified extension~$\QQ_p(\pi)$ where $\pi^{p-1} = -p$, 
-and normalise the valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}.
+and extend the valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}.
 
 Let $u = (u_0, \dotsc, u_n)$ and $v = (v_0, \dotsc, v_n)$ be tuples 
 of integers such that $x^u, x^v \in B$ and $p (u_i+1) \equiv v_i+1 \pmod{d}$,
@@ -2083,8 +2083,74 @@ $\Psi \in M_{b \times b}(\QQ_q(t))$ for which
 \end{equation*}
 \end{thm}
 
-\begin{proof} \mbox{ }
-[[TODO?]]
+\begin{proof}
+First we extend $\sigma$ to the ring of overconvergent functions
+\begin{align*}
+\QQ_q \langle x_0, \ldots, x_n, t, \frac{1}{r}, \frac{1}{P} \rangle^{\dag} = \\
+&\Bigl\{ \sum_{i_0,\ldots,i_{n+3}=0}^{\infty} a_{i_0, \ldots, i_{n+3}} 
+\frac{x_0^{i_0} \ldots x_n^{i_{n}}t^{i_{n+1}}}{r^{i_{n+2}} P^{i_{n+3}}} \; : \;
+a_{i_0, \ldots i_{n+3}} \in \QQ_q, \; \\ 
+&\exists c > 0 \text{ s.t.} \lim_{i_0+\ldots+i_{n+3} \rightarrow \infty} \bigl(\ord_p(a_{i_0, \ldots, i_{n+3}} ) - 
+c(i_0+\ldots+i_{n+3})\bigr) \geq 0 \Bigr\},
+\end{align*}
+by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
+\begin{align*}
+\sigma(\frac{1}{P}) &= P^{-p} \Bigl( 1-\frac{(P^p-\sigma(P))}{P^p} \Bigr)^{-1},
+\end{align*}
+is an element of this ring, since 
+\begin{align*}
+\ord_p(P^p-\sigma(P)) \geq 1.
+\end{align*}
+
+We use the notation and terminology from Section \ref{sec:Connection}. 
+%that 
+%\begin{equation*}
+%\Omega = \sum_{i=0}^n (-1)^i x_i d x_0 \wedge \dotsb \wedge \widehat{d x_i} \wedge \dotsb \wedge d x_n.
+%\end{equation*}
+The action of $\sigma$ on the overconvergent functions induces the action of 
+$F_p$ on $\Hrig^n(U/S)$, so we have that
+\begin{equation*}
+p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{k}} \Bigr) \equiv
+\sum_{i=0}^{\infty} \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
+(x_0 \cdots x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr)
+\end{equation*}
+in $\Hrig^n(U/S)$, where $\eta_i \in \NN$ is defined by the equality 
+$(1-y)^{-i} = \sum_{i=0}^{\infty} \eta_i y^i$. 
+
+Using Algorithm \ref{alg:PoleRed}, we can write
+\begin{equation} \label{eqn:Froblift}
+\eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
+(x_0 \cdots x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr) \equiv
+\frac{\gamma_{i,1} \Omega}{P^1}+\ldots+\frac{\gamma_{i,n} \Omega}{P^n},
+\end{equation}
+where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for $0 \leq j \leq n$.
+Actually, we can slightly modify Algorithm \ref{alg:Decompose},  
+so that we only have to invert $\Delta_{n+1}$ as long as the pole 
+order is at least $n+1$. [[TODO]] Moreover, note that the left-hand side of
+Equation \eqref{eqn:Froblift} does not have a pole
+at $z \neq \infty$, and has a pole of order at most 
+$pi\deg_t(P)$ at $z=\infty$. This implies that
+\begin{align*}
+\ord_z(\gamma_{i,j}) &\geq 
+\begin{cases}
+\mu + (p(n+i)-n) \nu                 &\mbox{if } z \neq \infty, \\
+\mu + (p(n+i)-n) \nu + pi \deg_t(P)  &\mbox{if } z=\infty.
+\end{cases}
+\end{align*}
+
+For every $\tau \in S(\overline{\FF}_q)$ such that $\overline{R}(\tau) \neq 0$, we
+define lattices $\Lambda_{\tau,crys}$, $\Lambda_{\tau,\cB}$ in $\Hrig^n(U_{\tau})$
+as in the proof of Theorem \ref{thm:deltabound}. It follows from
+\cite[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation \eqref{eqn:Froblift}, 
+and the inclusion $(n-1)!\Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB}$, that
+\begin{align*}
+\frac{\gamma_{i,1} \Omega}{P^1}+\ldots+\frac{\gamma_{i,n} \Omega}{P^n} \subset 
+p^{i+(n-1)-\ord_p((n-1)!)-n \floor{\log_p(p(n+i)-1)}} \Lambda_{\tau,\cB},
+\end{align*}
+which implies that
+\begin{align*}
+\ord_p(\gamma_{i,j}) &\geq i+(n-1) - \ord_p((n-1)!) - n \floor{\log_p(p(n+i)-1)}. 
+\end{align*}
 \end{proof}
 
 Now if we want to compute the matrix $\Phi_{\tau}$ of the action of 
@@ -2097,7 +2163,7 @@ at most $K$.
 %Note that $D$ is a denominator for the rational function $\Phi(t) \pmod{p^N}$. 
 We then compute
 \begin{equation*}
-\Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}}.
+\Phi_{\tau} = D(\hat{\tau})^{-1} \bigl( \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bmod{p^{N}} \bigr).
 \end{equation*}
 
 \begin{rem} \label{rem:prectau}
