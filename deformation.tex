@@ -526,7 +526,7 @@ This theorem is well known, see for example~\citep{AbbottKedlayaRoe2006}.
 Since we need some intermediate results from the proof later on, we will 
 give a brief sketch here. First, by Theorem~\ref{thm:Lefschetz}, we have that
 \[
-Z(X_{\tau},T) = \prod_{i=0}^{2(n-1)} \det(1- T \Frob_{\mathfrak{q}} | \Hrig^i(X_{\tau}))^{(-1)^{(i+1)}}.
+Z(X_{\tau},T) = \prod_{i=0}^{2(n-1)} \det(1- T \Frob_{\mathfrak{q}} | \Hrig^i(X_{\tau}))^{(-1)^{i+1}}.
 \]
 Then, by the Lefschetz hyperplane theorem and Poincar\'e duality, we see 
 that $\Hrig^i(X_{\tau}) \cong \Hrig^i(\mathbf{P}^n_{\FF_{\mathfrak{q}}})$ 
@@ -540,8 +540,8 @@ $0$ &\mbox{if $i$ odd,}
 \end{cases} 
 \end{equation}
 where $(i)$ denotes the $i$-th Tate twist, for which $\Frob_p$ is multiplied 
-by $p^{-i}$. So all that remains to be determined is $\Hrig^{n-1}(X_{\tau})$. 
-Then one uses the excision short exact sequence
+by $p^{-i}$. It remains to determine $\Hrig^{n-1}(X_{\tau})$. One uses the 
+excision short exact sequence
 \begin{equation} \label{eqn:excision}
 \begin{CD}
 0 @>>> \Hrig^{n}(U_{\tau}) @>>> \Hrig^{n-1}(X_{\tau})(-1) @>>> \Hrig^{n+1}(\mathbf{P}^n_{\FF_{\mathfrak{q}}}) @>>> 0
@@ -572,7 +572,8 @@ matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \ldots, e_b]$, i.e.\
 p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 \]
 
-\begin{defn} We define the ring of overconvergent functions
+\begin{defn}
+We define the ring of overconvergent functions
 \[
 \QQ_q \langle t, \frac{1}{r} \rangle^{\dag} = 
 \biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r^j} \; : \; 
@@ -587,8 +588,9 @@ and the point at infinity, for some $\rho<1$.
 
 \begin{defn}
 We extend the $p$-adic valuation 
-to $\QQ_q \langle t, 1/r \rangle^{\dag}$ in the standard way, i.e.\ $\ord_p(f)$
-is defined as the maximum, over all ways of writing $f=\sum_{i,j=0}^{\infty} a_{i,j} (t^i / r^j)$,
+to $\QQ_q \langle t, 1/r \rangle^{\dag}$ in the standard way, i.e.\ 
+$\ord_p(f)$ is defined as the maximum, over all ways of writing 
+$f = \sum_{i,j=0}^{\infty} a_{i,j} t^i / r^j$,
 of the minimum, over $i,j \geq 0$, of $\ord_p(a_{i,j})$. Note that the  
 norm on $\QQ_q \langle t, 1/r \rangle^{\dag}$ corresponding to $\ord(\cdot)$ 
 is the Gauss norm. We also extend $\ord_p(\cdot)$ to polynomials and matrices over 
@@ -605,12 +607,13 @@ applying a translation.
 \begin{thm} \label{thm:eqphi} 
 The matrix $\Phi$ is an element of 
 $M_{b \times b}(\QQ_q \langle t, \frac{1}{r} \rangle^{\dag})$ 
-and satisfies the following differential equation:
-\begin{align*}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi &= p t^{p-1} \Phi \sigma(M), &\Phi(0)&=\Phi_0,
-\end{align*}
-where $\Phi_0$ is the matrix of $p^{-1}\Frob_p$ on $\Hrig^n(U_0)$ with respect 
-to the basis $[e_0,\ldots,e_b]$.
+and satisfies the differential equation
+\begin{equation*}
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M)
+\end{equation*}
+with initial condition $\Phi(0) = \Phi_0$, where $\Phi_0$ is the 
+matrix of $p^{-1}\Frob_p$ on $\Hrig^n(U_0)$ with respect to the 
+basis $[e_0,\ldots,e_b]$.
 \end{thm}
 
 \begin{proof}
@@ -624,7 +627,7 @@ $\QQ_q \langle t, \frac{1}{r} \rangle^{\dag}$.
 \end{proof}
 
 The deformation method can now be sketched as follows:
-\begin{enumerate}[Step 1]
+\begin{enumerate}[\it Step 1.]
 \item Compute the matrix $M$ of the Gauss--Manin connection $\nabla$.
 \item Compute the matrix $\Phi_0$ of the action of $p^{-1}\Frob_p$ on 
       $\Hrig^n(U_0)$. If the family is chosen such that $X_0$ is a diagonal 
@@ -635,8 +638,8 @@ The deformation method can now be sketched as follows:
       $\tau \in S(\FF_{\mathfrak{q}})$ into $\Phi$, to obtain the 
       matrix $\Phi_{\tau}$ of the action of $p^{-1}\Frob_p$ on 
       $\Hrig^n(U_{\tau})$. Compute the matrix $\Phi_{\tau}^{(a)}$ 
-      of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$, 
-      which is also equal to $(p^{-1}\Frob_p)^a$, on~$\Hrig^n(U_{\tau})$. 
+      of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ 
+      on~$\Hrig^n(U_{\tau})$, which is also equal to $(p^{-1}\Frob_p)^a$.
       Use Theorem~\ref{thm:hypersurface} to compute the zeta function 
       $Z(X_{\tau},T)$ of the fibre $X_{\tau}$.
 \end{enumerate}
