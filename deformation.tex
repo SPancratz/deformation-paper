@@ -834,7 +834,7 @@ is an isomorphism of $L$-vector spaces.
 \end{thm}
 
 \begin{proof}
-Recall that $R_k$ and $C_k$ have the same cardinality by Lemma \ref{lem:bijection}.
+Recall that $R_k$ and $C_k$ have the same cardinality by Lemma~\ref{lem:bijection}.
 If $R_k$ and $C_k$ are empty, then $U_k$ and $W_k$ are the zero vector spaces, 
 and the theorem holds trivially. So suppose that $R_k$ and $C_k$ are nonempty, 
 that is to say, $k \geq n/d + 1$. It is immediate that $\Delta_k$ is the matrix 
@@ -1017,7 +1017,7 @@ For the matrix of $\nabla$ to be correct to $p$-adic precision $N$, we have to
 carry out this computation to a somewhat higher precision $\tilde{N}$, because of 
 precision loss in Algorithm~\ref{alg:PoleRed}. 
 For all $k \in \NN$, by definition we have that $\ord_p(\Delta_k) \geq 0$, and from the proof
-of Theorem \ref{thm:Isomorphism} we know that $\ord_p(\det(\Delta_k))=0$. 
+of Theorem~\ref{thm:Isomorphism} we know that $\ord_p(\det(\Delta_k))=0$. 
 Therefore, there is no precision loss 
 in Algorithm~\ref{alg:Decompose}, and the only precision loss in Algorithm~\ref{alg:PoleRed} 
 comes from dividing by $k-1$ for $k=2,\ldots,n+1$. Hence it is sufficient to take 
@@ -2106,7 +2106,7 @@ by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
 \end{align*}
 is an element of this ring, since $\ord_p(P^p-\sigma(P)) \geq 1$.
 
-We use the notation and terminology from Section \ref{sec:Connection}. 
+We use the notation and terminology from Section~\ref{sec:Connection}. 
 %that 
 %\begin{equation*}
 %\Omega = \sum_{i=0}^n (-1)^i x_i d x_0 \wedge \dotsb \wedge \widehat{d x_i} \wedge \dotsb \wedge d x_n.
@@ -2121,14 +2121,14 @@ p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{k}} \Bigr) \equiv
 in $\Hrig^n(U/S)$, where $\eta_i \in \NN$ is defined by the equality 
 $(1-y)^{-i} = \sum_{i=0}^{\infty} \eta_i y^i$. 
 
-Using Algorithm \ref{alg:PoleRed}, we can write
+Using Algorithm~\ref{alg:PoleRed}, we can write
 \begin{equation} \label{eqn:Froblift}
 \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
 (x_0 \cdots x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr) \equiv
 \frac{\gamma_{i,1} \Omega}{P^1}+\ldots+\frac{\gamma_{i,n} \Omega}{P^n},
 \end{equation}
 where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for $0 \leq j \leq n$.
-Actually, we can slightly modify Algorithm \ref{alg:Decompose},  
+Actually, we can slightly modify Algorithm~\ref{alg:Decompose},  
 so that we only have to invert $\Delta_{n+1}$ as long as the pole 
 order is at least $n+1$. [[TODO]] Moreover, note that the left-hand side of
 Equation \eqref{eqn:Froblift} does not have a pole
@@ -2144,7 +2144,7 @@ $pi\deg_t(P)$ at $z=\infty$. This implies that
 
 For every $\tau \in S(\bar{\FF}_q)$ such that $\bar{R}(\tau) \neq 0$, we
 define lattices $\Lambda_{\tau,crys}$, $\Lambda_{\tau,\cB}$ in $\Hrig^n(U_{\tau})$
-as in the proof of Theorem \ref{thm:deltabound}. It follows from
+as in the proof of Theorem~\ref{thm:deltabound}. It follows from
 \citep[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation \eqref{eqn:Froblift}, 
 and the inclusion $(n-1)!\Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB}$, that
 \begin{equation*}
@@ -2175,7 +2175,7 @@ We then compute
 Note that $D(\hat{\tau}) \in \ZZ_q^{\times}$ because $\bar{R}(\tau) \neq 0$, 
 and $\ord_p(\Phi) \geq -\delta$ by Corollary~\ref{cor:delta}. Therefore, it 
 is sufficient to compute $\hat{\tau}$ to $p$-adic precision $N+\delta$, by
-Proposition \ref{prop:matrixproductval}. Similarly, since $\ord_p(\hat{\tau}) \geq 0$, 
+Proposition~\ref{prop:matrixproductval}. Similarly, since $\ord_p(\hat{\tau}) \geq 0$, 
 it is sufficient to compute $\Phi$ to $p$-adic 
 precision $N$.
 \end{rem}
@@ -2262,8 +2262,8 @@ there will be loss of precision. The loss of $p$-adic precision
 in computing $\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most 
 $(a-1)\delta$, and the loss of 
 precision in computing $\chi(T)$ from $\Phi_{\tau}^{(a)}$ 
-is at most $(b-1) \delta$, by Proposition \ref{prop:productval} and 
-Corollary \ref{cor:delta}. Therefore, for $\chi(T)$ to be correct
+is at most $(b-1) \delta$, by Proposition~\ref{prop:productval} and 
+Corollary~\ref{cor:delta}. Therefore, for $\chi(T)$ to be correct
 to $p$-adic precision $N-\delta$, it is sufficient to compute 
 $\chi(T)$ from $\Phi_{\tau}$ using $p$-adic working precision 
 \[
@@ -2492,7 +2492,7 @@ In Theorem~\ref{thm:precPhitau}, we have that
 \end{align*}
 Hence, the precisions $\tilde{N}$ and $\bar{N}$ set in 
 Algorithm~\ref{alg:complete} are $\SoftOh(ad^n)$ as well.
-It follows from Theorem \ref{thm:Gerkmann} that 
+It follows from Theorem~\ref{thm:Gerkmann} that 
 one can take 
 \[
 \deg(D), K \in \SoftOh(p (ad^n) \deg(R)) \subset  \SoftOh(apd^n (de)^n d_t).
