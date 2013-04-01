@@ -335,7 +335,7 @@ where for all $i$:
 \item the transformation $t \rightarrow q^m/t$ maps the $\alpha_{i,j}$ 
       bijectively to the $\alpha_{2d-i,k}$, preserving multiplicities,
 \item $\abs{\alpha_{i,j}} = q^{i/2}$ for all $j$, and every embedding 
-      $\overline{\QQ} \hookrightarrow \CC$. 
+      $\bar{\QQ} \hookrightarrow \CC$. 
 \end{enumerate}
 \end{thm}
 
@@ -1058,7 +1058,7 @@ respect to the basis $\cB$ by
 \[
 R = \prod_{k=\ceil{(n+1)/d}}^{n+1}  \det(\Delta_k),
 \]
-We let $\overline{R} \in \FF_q[t]$ be the 
+We let $\bar{R} \in \FF_q[t]$ be the 
 reduction modulo~$p$ of the polynomial~$R$.
 \end{defn}
 
@@ -1111,7 +1111,7 @@ following~\citep{AbbottKedlayaRoe2006}.
 
 \begin{thm} \label{thm:deltabound}
 For every 
-$\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying $\overline{R}(\tau) \neq 0$, 
+$\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying $\bar{R}(\tau) \neq 0$, 
 there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_{\mathfrak{q}})$ such that 
 \begin{align*}
 \ord_p(W_{\tau}) &\geq -\sum_{i=1}^{n-1} \floor{\log_p(i)},
@@ -1196,7 +1196,7 @@ Define the nonnegative integer
 
 \begin{proof}
 For every $\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying 
-$\overline{R}(\tau) \neq 0$, we can apply Theorem~\ref{thm:deltabound} 
+$\bar{R}(\tau) \neq 0$, we can apply Theorem~\ref{thm:deltabound} 
 to obtain
 \begin{align*}
 \ord_p(\Phi_{\tau}) &\geq \ord_p(W^{-1}_{\tau}) + 
@@ -1211,7 +1211,7 @@ and also
                                \ord_p(\sigma(W_{\tau})) \\
                          &\geq -\delta - (n-1).
 \end{align*}
-These inequalities hold for infinitely many~$\tau \in S(\overline{\FF}_q)$, 
+These inequalities hold for infinitely many~$\tau \in S(\bar{\FF}_q)$, 
 hence we obtain the required bounds.
 \end{proof}
 
@@ -1714,7 +1714,7 @@ $P(0) \in \ZZ_q[x_0,\ldots,x_n]$ is of the form
 $P_0=a_0 x_0^d + \dotsb + a_n x_n^d$ with $a_0,\dotsc,a_n \in \ZZ_p^{\times}$, 
 so that we can apply Algorithm~\ref{alg:Diagfrob}. Note that this assumption 
 also implies that we can take $\mathcal{S}$ to contain $0$ and that we have 
-$\overline{R}(0) \neq 0$.
+$\bar{R}(0) \neq 0$.
 \end{assump}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1950,7 +1950,7 @@ In the previous section we described how to compute the power series
 expansion at $t=0$ ofthe matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
 $\Hrig^{n}(U/S)$. We now want to evaluate $\Phi$ at the Teichm\"uller 
 lift~$\hat{\tau}$ of some nonzero $\tau \in S(\FF_{\mathfrak{q}})$ for 
-which $\overline{R}(\tau) \neq 0$, but the power series expansion of $\Phi$ 
+which $\bar{R}(\tau) \neq 0$, but the power series expansion of $\Phi$ 
 at $t=0$ usually only converges on the open unit disc $\abs{t} < 1$, 
 and so cannot be evaluated at $\hat{\tau}$. 
 
@@ -2142,7 +2142,7 @@ $pi\deg_t(P)$ at $z=\infty$. This implies that
 \end{cases}
 \end{align*}
 
-For every $\tau \in S(\overline{\FF}_q)$ such that $\overline{R}(\tau) \neq 0$, we
+For every $\tau \in S(\bar{\FF}_q)$ such that $\bar{R}(\tau) \neq 0$, we
 define lattices $\Lambda_{\tau,crys}$, $\Lambda_{\tau,\cB}$ in $\Hrig^n(U_{\tau})$
 as in the proof of Theorem \ref{thm:deltabound}. It follows from
 \citep[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation \eqref{eqn:Froblift}, 
@@ -2172,7 +2172,7 @@ We then compute
 \end{equation*}
 
 \begin{rem} \label{rem:prectau}
-Note that $D(\hat{\tau}) \in \ZZ_q^{\times}$ because $\overline{R}(\tau) \neq 0$, 
+Note that $D(\hat{\tau}) \in \ZZ_q^{\times}$ because $\bar{R}(\tau) \neq 0$, 
 and $\ord_p(\Phi) \geq -\delta$ by Corollary~\ref{cor:delta}. Therefore, it 
 is sufficient to compute $\hat{\tau}$ to $p$-adic precision $N+\delta$, by
 Proposition \ref{prop:matrixproductval}. Similarly, since $\ord_p(\hat{\tau}) \geq 0$, 
@@ -2397,7 +2397,7 @@ in Algorithm~\ref{alg:complete} below.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\overline{R}(\tau) \neq 0$.
+\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\bar{R}(\tau) \neq 0$.
 \Ensure  The zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
