@@ -222,7 +222,7 @@ is a rational function, i.e.\ it is contained in $\QQ(T)$, and
 hence can be given by a finite amount of data. Therefore, it is natural 
 to ask whether it can be computed effectively and, in fact, it is not 
 hard to provide with an algorithm as follows. Using well known bounds 
-by Bombieri~\cite{Bombieri1966} for the degrees of the numerator and 
+by Bombieri~\citep{Bombieri1966} for the degrees of the numerator and 
 denominator of $Z(X,T)$, one can reduce the computation of $Z(X,T)$ to that 
 of a finite number of the $\card{X(\FF_{q^i})}$, which can be determined 
 by naive counting.
@@ -232,7 +232,7 @@ computed efficiently, where `efficiently' can mean with low time complexity
 or just fast in practice. When $X$ is a (hyper-)elliptic curve, this problem
 is important in cryptographic applications and has been the subject of 
 a lot of attention, resulting in very efficient algorithms.  For example, 
-when $X$ is an elliptic curve, Schoof's algorithm \cite{Schoof1995}, which 
+when $X$ is an elliptic curve, Schoof's algorithm \citep{Schoof1995}, which 
 uses $\ell$-adic \'etale cohomology, has runtime polynomial in~$\log(q)$, 
 and is also very fast in practice using some improvements by Atkins and 
 Elkies.
@@ -241,11 +241,11 @@ For more general algebraic varieties~$X$, the only available option is
 usually to compute the rigid cohomology spaces of~$X$, with their natural 
 action of the Frobenius map, and then use a Lefschetz formula to deduce the 
 zeta function. This method was introduced by Kedlaya in the case of 
-hyperelliptic curves in odd characteristic~\cite{Kedlaya2001}.  The same 
+hyperelliptic curves in odd characteristic~\citep{Kedlaya2001}.  The same 
 idea has been shown to work in much greater generality, for example for 
-smooth projective hypersurfaces \cite{AbbottKedlayaRoe2006}. 
+smooth projective hypersurfaces \citep{AbbottKedlayaRoe2006}. 
 
-Lauder \cite{Lauder2004a,Lauder2004b} showed that instead of computing the 
+Lauder \citep{Lauder2004a,Lauder2004b} showed that instead of computing the 
 action of the Frobenius map on the rigid cohomology spaces of a smooth 
 projective hypersurface~$X$ directly, it is better, at least in terms of 
 time complexity, to embed $X$ in a family of smooth projective hypersurfaces 
@@ -255,10 +255,10 @@ of the diagonal hypersurface and then solves a $p$-adic differential equation
 to obtain the Frobenius map on the rigid cohomology of the original 
 hypersurface. 
 
-To be more precise, in~\cite{Lauder2004a,Lauder2004b} Lauder did not directly 
+To be more precise, in~\citep{Lauder2004a,Lauder2004b} Lauder did not directly 
 work with rigid cohomology but with Dwork cohomology. While the two 
 cohomology theories are equivalent, various comparison and finiteness results 
-are more easily stated and proved in rigid cohomology.  In~\cite{Gerkmann2007} 
+are more easily stated and proved in rigid cohomology.  In~\citep{Gerkmann2007} 
 Gerkmann reformulated Lauder's deformation method in terms of rigid 
 cohomology.  Moreover, he improved various $p$-adic precision bounds, making 
 the algorithm more practical, which he demonstrated with many examples.
@@ -268,7 +268,7 @@ We make improvements to almost every step of the algorithm, which results in
 an algorithm with lower time and space complexity than Lauder's original 
 algorithm . Moreover, the first author has written a publicly available 
 implementation of the algorithm using the library FLINT~\citep{FLINT}, which  
-lowers the runtime of the examples in \cite{Gerkmann2007} by at least three 
+lowers the runtime of the examples in \citep{Gerkmann2007} by at least three 
 orders of magnitude.
 
 We now briefly describe the contents of the remaining sections.  We 
@@ -279,7 +279,7 @@ terminology might prefer to start reading there.
 In Section~\ref{sec:Background}, we recall the main theoretical results that 
 underpin the remaining sections of the paper.  We limit ourselves to the bare 
 minimum as there are already good references available for the relevant theory, 
-see e.g.~\cite{Kedlaya2012}. We also introduce the required terminology and 
+see e.g.~\citep{Kedlaya2012}. We also introduce the required terminology and 
 notation. We conclude the section with an overview of the different steps of 
 the deformation method, which are then treated individually in the next four 
 sections.
@@ -341,7 +341,7 @@ where for all $i$:
 \end{thm}
 
 \begin{proof}
-The proof of this theorem was completed by Deligne in \cite{Deligne1974}.
+The proof of this theorem was completed by Deligne in \citep{Deligne1974}.
 \end{proof}
 
 We let $\QQ_q$ denote the unique unramified extension of $\QQ_p$ with 
@@ -355,7 +355,7 @@ over $\QQ_q$ that are contravariantly functorial in $X$, and they are
 equipped with an action of the $p$-th and $q$-th power Frobenius map 
 on $X$ that we denote by $\Frob_p$ and $\Frob_q$, respectively. For the 
 construction and basic properties of these spaces we refer 
-to~\cite{Berthelot1986}.
+to~\citep{Berthelot1986}.
 \end{defn}
 
 The relation between the zeta function and the rigid cohomology spaces 
@@ -478,7 +478,7 @@ structure on $\HdR^i(\mathfrak{X}/\mathfrak{S})$ by $\Frob_p$ as well.
 
 \begin{proof}
 This theorem is well known, and can be obtained by combining results of 
-Berthelot from various papers, most notably \cite{Berthelot1986}.   
+Berthelot from various papers, most notably \citep{Berthelot1986}.   
 \end{proof}
 
 \begin{defn}
@@ -490,7 +490,7 @@ with its Frobenius structure $\Frob_p$ from Theorem~\ref{thm:frobstruc}.
 One can show that $\Hrig^i(X/S)$ is again functorial in $X/S$ and so does 
 not depend on the lift $\mathcal{X}/\mathcal{S}$. Moreover, one can still 
 define $\Hrig^i(X/S)$ when $X/S$ cannot be lifted to characteristic zero, 
-see~\cite{Berthelot1986}.  However, for our purposes the above definition 
+see~\citep{Berthelot1986}.  However, for our purposes the above definition 
 will be sufficient.
 \end{rem}
 
@@ -523,7 +523,7 @@ b(d,n) = \frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr).
 \end{thm}
 
 \begin{proof}
-This theorem is well known, see for example~\cite{AbbottKedlayaRoe2006}. 
+This theorem is well known, see for example~\citep{AbbottKedlayaRoe2006}. 
 Since we need some intermediate results from the proof later on, we will 
 give a brief sketch here. First, by Theorem~\ref{thm:Lefschetz}, we have that
 \[
@@ -740,7 +740,7 @@ derivative operator with respect to~$x_i$.
 \end{prop}
 
 \begin{proof}
-The proof is straightforward, for details see \cite{Griffiths1969}.
+The proof is straightforward, for details see \citep{Griffiths1969}.
 \end{proof}
 
 The cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ is 
@@ -754,7 +754,7 @@ $\mbox{Fil}^n \HdR^{n}(\mathfrak{U}/\mathfrak{S}) = \HdR^{n}(\mathfrak{U}/\mathf
 Actually, the reverse filtration $\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
 corresponds to the restriction $H_k$ of the Hodge filtration on 
 $\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
-by~\cite{Griffiths1969}.
+by~\citep{Griffiths1969}.
 
 As we prefer to perform linear 
 algebra operations over a field, we will actually work with the de~Rham 
@@ -1105,7 +1105,7 @@ denotes a finite field extension of $\FF_q$.
 We need a priori lower bounds on the $p$-adic valuations of the matrices 
 $\Phi$ and $\Phi^{-1}$ to bound the loss of $p$-adic precision in our 
 computations. We will now recall how such bounds can be obtained 
-following~\cite{AbbottKedlayaRoe2006}.
+following~\citep{AbbottKedlayaRoe2006}.
 
 \begin{thm} \label{thm:deltabound}
 For every 
@@ -1224,8 +1224,8 @@ In this section we compute the action of Frobenius on the cohomology
 space $\Hrig^{n}(U_0) \cong \HdR^{n}(\mathfrak{U}_0)$ associated 
 to the diagonal fibre of the family. Our method is based on an 
 explicit formula of Dwork~\citep[\S 4]{Dwork1964}, which has already 
-been used by Lauder \cite{Lauder2004b} and Gerkmann 
-\cite{Gerkmann2007}. However, by rewriting this formula we obtain an 
+been used by Lauder \citep{Lauder2004b} and Gerkmann 
+\citep{Gerkmann2007}. However, by rewriting this formula we obtain an 
 algorithm that performs significantly better in practice than a direct 
 implementation.
 
@@ -1259,7 +1259,7 @@ $d k_u = \sum_{i=0}^n (u_i + 1)$ and similarly for $k_v$. For $w \in \QQ$
 and $r \geq 0$, we define the rising factorials $(w)_r = \prod_{j=0}^{r-1} (w + j)$, 
 and for $m \geq 0$, we let $\lambda_m$ denote the coefficient of $z^m$ in the 
 power series expansion of $\exp \bigl( \pi (z - z^p) \bigr)$. It is well known, see 
-for example~\cite{Dwork1962}, that 
+for example~\citep{Dwork1962}, that 
 \begin{equation} \label{eqn:dworkbound}
 \ord_p(\lambda_m) \geq \frac{p-1}{p^2} m. 
 \end{equation}
@@ -2292,7 +2292,7 @@ $N \geq \Gamma(b)$. Then for all $1 \leq i \leq b$, we have that
  
 \begin{proof} 
 Note that in this case $\delta=0$, so that $\ord_p(\Phi_{\tau}) \geq 0$. 
-However, by a theorem of Mazur \cite{Mazur1972}, the map $p^{-1} \Frob_p$ 
+However, by a theorem of Mazur \citep{Mazur1972}, the map $p^{-1} \Frob_p$ 
 sends $(H_k)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ into $p^k \Lambda_{\tau,crys}$, 
 where $\Lambda_{\tau,crys}$ is defined as in the proof of 
 Theorem~\ref{thm:deltabound}. Since 
@@ -2586,7 +2586,7 @@ $\SoftOh(\tilde{N}_{\Phi_0}^2 \log(p)) = \SoftOh(a^2 \log(p) d^{2n} \log^2(d_t))
 
 \begin{rem}
 Note that the time complexity in Proposition~\ref{prop:complexityPhi0} 
-is quasilinear in~$p$, while in the work of Lauder~\cite{Lauder2004a} 
+is quasilinear in~$p$, while in the work of Lauder~\citep{Lauder2004a} 
 it is quasiquadratic.  The main reason for this is that Lauder computed 
 in the unramified extension~$\QQ_p(\pi)$ of degree~$p$, where a single 
 multiplication already takes time quasilinear in~$p$.  It will turn out 
@@ -2779,7 +2779,7 @@ leaving out terms that are dominated by other terms or powers of
 logarithms of other terms.
 \end{proof}
 
-\begin{rem} In \cite{Lauder2004a} Lauder takes $d_t=1$ and states that his
+\begin{rem} In \citep{Lauder2004a} Lauder takes $d_t=1$ and states that his
 algorithm requires
 \begin{align*}
 \mbox{time: }  &\SoftOh\bigl(a^3 p^2 (d^{n(\omega+5)} e^{3n} + d^{6n} e^{5n}) \bigr), \\ 
