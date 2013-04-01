@@ -110,6 +110,8 @@ on smooth projective hypersurfaces}
 
 % Customised notation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\providecommand{\card}[1]{\lvert#1\rvert}                % Cardinality
+
 \providecommand{\abs}[1]{\lvert#1\rvert}                 % Absolute value
 \providecommand{\absbig}[1]{\bigl\lvert#1\bigr\rvert}    % Absolute value
 \providecommand{\absBig}[1]{\Bigl\lvert#1\Bigr\rvert}    % Absolute value
@@ -211,108 +213,110 @@ the prime~$p$, and let $X$ denote an algebraic variety over $\FF_q$.
 \begin{defn}
 The zeta function of $X$ is the formal power series
 \[
-Z(X,T) = \exp \Bigl(\sum_{i=1}^{\infty} |X(\FF_{q^i})| \frac{T^i}{i} \Bigr).
+Z(X,T) = \exp \Bigl(\sum_{i=1}^{\infty} \card{X(\FF_{q^i})} \frac{T^i}{i} \Bigr).
 \]
 \end{defn}
 
 As we will see in the next section, $Z(X,T)$ 
 is a rational function, i.e.\ it is contained in $\QQ(T)$, and 
-so can be given by a finite amount of data. Therefore, it is natural 
-to ask whether it can be computed effectively. Actually, it 
-is not hard to come up with an algorithm. There 
-are well known bounds \cite{Bombieri1966} for the degrees of the numerator and 
-denominator of $Z(X,T)$, that reduce the computation of $Z(X,T)$ to that 
-of a finite number of the $|X(\FF_{q^i})|$, which can be determined
-by naive counting. 
+hence can be given by a finite amount of data. Therefore, it is natural 
+to ask whether it can be computed effectively and, in fact, it is not 
+hard to provide with an algorithm as follows. Using well known bounds 
+by Bombieri~\cite{Bombieri1966} for the degrees of the numerator and 
+denominator of $Z(X,T)$, one can reduce the computation of $Z(X,T)$ to that 
+of a finite number of the $\card{X(\FF_{q^i})}$, which can be determined 
+by naive counting.
 
 A more interesting problem is whether, and if so how, $Z(X,T)$ can be 
-computed efficiently. Here efficiently can mean with low time complexity or 
-just fast in practice. When $X$ is a (hyper)elliptic curve, this problem
-is important for cryptographic applications, and has received
-a lot of attention. In this case, very efficient algorithms are available.
-For example, when $X$ is an elliptic curve, Schoof's 
-algorithm \cite{Schoof1995}, that uses $\ell$-adic \'etale cohomology, has runtime 
-polynomial in $\log(q)$, and is also very fast in practice using some 
-improvements by Atkins and Elkies.
+computed efficiently, where `efficiently' can mean with low time complexity 
+or just fast in practice. When $X$ is a (hyper-)elliptic curve, this problem
+is important in cryptographic applications and has been the subject of 
+a lot of attention, resulting in very efficient algorithms.  For example, 
+when $X$ is an elliptic curve, Schoof's algorithm \cite{Schoof1995}, which 
+uses $\ell$-adic \'etale cohomology, has runtime polynomial in~$\log(q)$, 
+and is also very fast in practice using some improvements by Atkins and 
+Elkies.
 
-For more general $X$, the only available option is usually to compute the 
-rigid cohomology spaces of $X$, with their natural action of the Frobenius map, 
-and then use a Lefschetz formula to deduce the zeta function. This method was
-introduced by Kedlaya in the case of hyperelliptic curves in odd characteristic 
-\cite{Kedlaya2001}. The same idea has been shown to work in much greater 
-generality, for example for smooth projective hypersurfaces \cite{AbbottKedlayaRoe2006}. 
+For more general algebraic varieties~$X$, the only available option is 
+usually to compute the rigid cohomology spaces of~$X$, with their natural 
+action of the Frobenius map, and then use a Lefschetz formula to deduce the 
+zeta function. This method was introduced by Kedlaya in the case of 
+hyperelliptic curves in odd characteristic~\cite{Kedlaya2001}.  The same 
+idea has been shown to work in much greater generality, for example for 
+smooth projective hypersurfaces \cite{AbbottKedlayaRoe2006}. 
 
-Lauder \cite{Lauder2004a,Lauder2004b} showed that instead of computing the action 
-of the Frobenius map on
-the rigid cohomology spaces of a smooth projective hypersurface $X$ directly, 
-it is better, at least in terms of time complexity, to put $X$ in a family of 
-smooth projective hypersurfaces that contains a diagonal hypersurface, first compute 
-the action of the Frobenius map on the rigid cohomology of the diagonal 
-hypersurface, and then solve a $p$-adic differential equation to obtain the 
-Frobenius map on the rigid cohomology of the original hypersurface. 
+Lauder \cite{Lauder2004a,Lauder2004b} showed that instead of computing the 
+action of the Frobenius map on the rigid cohomology spaces of a smooth 
+projective hypersurface~$X$ directly, it is better, at least in terms of 
+time complexity, to embed $X$ in a family of smooth projective hypersurfaces 
+containing a diagonal hypersurface.  Following the \emph{deformation method} 
+one first computes the action of the Frobenius map on the rigid cohomology 
+of the diagonal hypersurface and then solves a $p$-adic differential equation 
+to obtain the Frobenius map on the rigid cohomology of the original 
+hypersurface. 
 
-Actually, this is not entirely correct, because in \cite{Lauder2004a,Lauder2004b} 
-Lauder did not work 
-with rigid cohomology, but with Dwork cohomology. The two cohomology theories 
-are equivalent, but various comparison and finiteness results are more easily 
-stated and proved in rigid cohomology. In \cite{Gerkmann2007} Gerkmann reformulated Lauder's
-deformation algorithm in terms of rigid cohomology. Moreover, he improved various 
-precision bounds, making the algorithm more practical, and he computed a lot of examples.
+To be more precise, in~\cite{Lauder2004a,Lauder2004b} Lauder did not directly 
+work with rigid cohomology but with Dwork cohomology. While the two 
+cohomology theories are equivalent, various comparison and finiteness results 
+are more easily stated and proved in rigid cohomology.  In~\cite{Gerkmann2007} 
+Gerkmann reformulated Lauder's deformation method in terms of rigid 
+cohomology.  Moreover, he improved various $p$-adic precision bounds, making 
+the algorithm more practical, which he demonstrated with many examples.
 
-The aim of this paper is to continue where Lauder and Gerkmann left off. We make 
-improvements to almost every step of the algorithm. 
-The resulting algorithm has lower time and space complexity than 
-Lauder's algorithm. Moreover, the first author has written a publicly
-available C implementation of the algorithm using the library FLINT [[TODO]]. 
-This implementation lowers the runtime of the examples in \cite{Gerkmann2007} by at 
-least three orders of magnitude. So our work is a significant improvement of the work 
-of Lauder and Gerkmann.
+The aim of this paper is to continue where Lauder and Gerkmann left off. 
+We make improvements to almost every step of the algorithm, which results in 
+an algorithm with lower time and space complexity than Lauder's original 
+algorithm . Moreover, the first author has written a publicly available 
+implementation of the algorithm using the library FLINT~\citep{FLINT}, which  
+lowers the runtime of the examples in \cite{Gerkmann2007} by at least three 
+orders of magnitude.
 
-We now briefly describe the contents of the remaining sections. We
-will use some terminology that is introduced only in Section \ref{sec:Background}.
-The reader that is not familiar with this terminology should start reading there. 
+We now briefly describe the contents of the remaining sections.  We 
+necessarily rely on some terminology that is introduced only in 
+Section~\ref{sec:Background}.  The reader who is not familiar with this 
+terminology might prefer to start reading there.
 
-In Section \ref{sec:Background}, we recall the main theoretical results that we 
-will need in the rest of the paper. We limit ourselves to the bare minimum, since 
-there are already good references available for the relevant theory \cite{Kedlaya2012}. 
-We also introduce a lot of terminology and notation for the rest of the paper. At 
-the end of this section we give an overview of the different steps of the deformation 
-method. The next four sections each treat one of these steps.
+In Section~\ref{sec:Background}, we recall the main theoretical results that 
+underpin the remaining sections of the paper.  We limit ourselves to the bare 
+minimum as there are already good references available for the relevant theory, 
+see e.g.~\cite{Kedlaya2012}. We also introduce the required terminology and 
+notation. We conclude the section with an overview of the different steps of 
+the deformation method, which are then treated individually in the next four 
+sections.
 
-In Section \ref{sec:Connection}, we explain how to compute the Gauss--Manin 
+In Section~\ref{sec:Connection}, we explain how to compute the Gauss--Manin 
 connection on the cohomology of a family of smooth projective hypersurfaces. 
 We define an explicit monomial basis for the cohomology that we will use 
 throughout the paper. Our most important result in this section
-is Theorem \ref{thm:Isomorphism}, which allows us to compute very efficiently 
-in the cohomology. In Algorithm \ref{alg:Connection} we compute the matrix of 
-the Gauss--Manin connection. We also prove some lower bounds for the valuation of 
-the matrix of Frobenius and its inverse, that are essential for controlling 
-$p$-adic precision loss in the Algorithm.
+is Theorem~\ref{thm:Isomorphism}, which allows us to compute very efficiently 
+in the cohomology. We formalise the computation of the Gauss--Manin connection 
+matrix in Algorithm~\ref{alg:Connection}. We also prove some lower bounds for 
+the valuation of the matrix of Frobenius and its inverse, that are essential 
+for controlling $p$-adic precision loss in the algorithm.
 
-In Section \ref{sec:Diagonal}, we show how to compute the Frobenius matrix of
-a diagonal hypersurface over a prime field. Our method is based on a formula of Dwork, but by 
-rewriting this formula we obtain Algorithm 
-\ref{alg:Diagfrob}, that performs better than the corresponding algorithms 
-of Lauder and Gerkmann, both in terms of time complexity and in practice. 
+In Section~\ref{sec:Diagonal}, we show how to compute the Frobenius matrix of
+a diagonal hypersurface over a prime field. Our method is based on a formula 
+of Dwork, but by rewriting this formula we obtain Algorithm~\ref{alg:Diagfrob}, 
+which is a significant improvment to the corresponding algorithms of Lauder 
+and Gerkmann, both in terms of time complexity and in practice.
 
-In Section \ref{sec:DifferentialSystem}, we explain how to solve the differential
-equation for the Frobenius matrix. We use the same method as Lauder, but 
-incorporate improved convergence bounds for $p$-adic differential equations 
-by Kedlaya. Our most important result in this section is Theorem \ref{thm:Ni} 
-in which we collect the improved precision bounds that follow from our analysis.
-In Algorithm \ref{alg:expansion} we compute the power series expansion of the 
-Frobenius matrix.
+In Section~\ref{sec:DifferentialSystem}, we explain how to solve the 
+differential equation for the Frobenius matrix. We use the same method as 
+Lauder but incorporate improved convergence bounds for $p$-adic differential 
+equations by Kedlaya. We collect the precision bounds that follow from our 
+analysis in Theorem~\ref{thm:Ni} and formalise the computation of the power 
+series expansion of the Frobenius matrix in Algorithm~\ref{alg:expansion}.
 
-In Section \ref{sec:ZetaFunctions}, we describe how to evaluate the Frobenius
-matrix at some fibre, and deduce its zeta function. We combine bounds from various 
-sources to bring down the required $p$-adic and $t$-adic precisions 
-as much as possible. This results in Algorithm \ref{alg:complete}, which combines
-all of our previous algorithms, and is the main result of the paper.
+In Section~\ref{sec:ZetaFunctions}, we describe how to evaluate the Frobenius 
+matrix at some fibre and deduce its zeta function. We combine various bounds 
+from various sources to lower the required $p$-adic and $t$-adic precisions. 
+Finally, this results in Algorithm~\ref{alg:complete}, which combines all of 
+our previous algorithms, and is the main result of the paper.
 
-In Section \ref{sec:Complexity}, we analyse the time and space complexity of our 
-algorithm and compare these to \cite{Lauder2004a}. 
-In Section \ref{sec:Examples}, we compute various numerical examples, and compare 
-our runtimes to those in \cite{Gerkmann2007}. 
+In Section~\ref{sec:Complexity}, we analyse the time and space complexity of 
+our algorithm and compare these to Lauder's work~\citep{Lauder2004a}. 
+In Section~\ref{sec:Examples}, we compute various numerical examples, and 
+compare our runtimes to those provided by Gerkmann~\citep{Gerkmann2007}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Theoretical background}
