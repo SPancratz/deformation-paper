@@ -2091,22 +2091,20 @@ $\Psi \in M_{b \times b}(\QQ_q(t))$ for which
 
 \begin{proof}
 First we extend $\sigma$ to the ring of overconvergent functions
-\begin{align*}
-\QQ_q \langle x_0, \ldots, x_n, t, \frac{1}{r}, \frac{1}{P} \rangle^{\dag} = \\
-&\Bigl\{ \sum_{i_0,\ldots,i_{n+3}=0}^{\infty} a_{i_0, \ldots, i_{n+3}} 
+$\QQ_q \langle x_0, \dotsc, x_n, t, \frac{1}{r}, \frac{1}{P} \rangle^{\dag}$, 
+defined as 
+\begin{multline*}
+\Bigl\{ \sum_{i_0,\ldots,i_{n+3}=0}^{\infty} a_{i_0, \ldots, i_{n+3}} 
 \frac{x_0^{i_0} \ldots x_n^{i_{n}}t^{i_{n+1}}}{r^{i_{n+2}} P^{i_{n+3}}} \; : \;
 a_{i_0, \ldots i_{n+3}} \in \QQ_q, \; \\ 
-&\exists c > 0 \text{ s.t.} \lim_{i_0+\ldots+i_{n+3} \rightarrow \infty} \bigl(\ord_p(a_{i_0, \ldots, i_{n+3}} ) - 
+\exists c > 0 \text{ s.t.} \lim_{i_0+\ldots+i_{n+3} \rightarrow \infty} \bigl(\ord_p(a_{i_0, \ldots, i_{n+3}} ) - 
 c(i_0+\ldots+i_{n+3})\bigr) \geq 0 \Bigr\},
-\end{align*}
+\end{multline*}
 by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
 \begin{align*}
 \sigma(\frac{1}{P}) &= P^{-p} \Bigl( 1-\frac{(P^p-\sigma(P))}{P^p} \Bigr)^{-1},
 \end{align*}
-is an element of this ring, since 
-\begin{align*}
-\ord_p(P^p-\sigma(P)) \geq 1.
-\end{align*}
+is an element of this ring, since $\ord_p(P^p-\sigma(P)) \geq 1$.
 
 We use the notation and terminology from Section \ref{sec:Connection}. 
 %that 
@@ -2149,14 +2147,15 @@ define lattices $\Lambda_{\tau,crys}$, $\Lambda_{\tau,\cB}$ in $\Hrig^n(U_{\tau}
 as in the proof of Theorem \ref{thm:deltabound}. It follows from
 \cite[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation \eqref{eqn:Froblift}, 
 and the inclusion $(n-1)!\Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB}$, that
-\begin{align*}
+\begin{equation*}
 \frac{\gamma_{i,1} \Omega}{P^1}+\ldots+\frac{\gamma_{i,n} \Omega}{P^n} \subset 
 p^{i+(n-1)-\ord_p((n-1)!)-n \floor{\log_p(p(n+i)-1)}} \Lambda_{\tau,\cB},
-\end{align*}
+\end{equation*}
 which implies that
-\begin{align*}
-\ord_p(\gamma_{i,j}) &\geq i+(n-1) - \ord_p((n-1)!) - n \floor{\log_p(p(n+i)-1)}. 
-\end{align*}
+\begin{equation*}
+\ord_p(\gamma_{i,j}) \geq i+(n-1) - \ord_p((n-1)!) - n \floor{\log_p(p(n+i)-1)}.
+\qedhere
+\end{equation*}
 \end{proof}
 
 Now if we want to compute the matrix $\Phi_{\tau}$ of the action of 
