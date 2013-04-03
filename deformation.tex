@@ -494,7 +494,7 @@ will be sufficient.
 \end{rem}
 
 In this paper we will only be interested in one-parameter families of smooth 
-projective hypersurfaces. So we let $P \in \ZZ_q[t][x_0,\ldots,x_n]$ denote 
+projective hypersurfaces. So we let $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ denote 
 a homogeneous polynomial of degree $d$ and let 
 $\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$ be a Zariski open subset such that 
 $P$ defines a family $\mathcal{X}/\mathcal{S}$ of smooth hypersurfaces contained 
@@ -558,7 +558,7 @@ of~\citep[Corollaire 2.4 (i)]{sga7} that
 as formal power series, from which \eqref{eq:formulab} can be read off easily.
 \end{proof}
 
-Let $[e_1, \ldots, e_b]$ be some basis of sections of 
+Let $[e_1, \dotsc, e_b]$ be some basis of sections of 
 $\HdR^n(\mathfrak{U}/\mathfrak{S})$, and let $M \in M_{b \times b}(\QQ_q(t))$ 
 denote the matrix of the Gauss--Manin connection $\nabla$ with respect 
 to this basis, i.e.
@@ -567,7 +567,7 @@ to this basis, i.e.
 \]
 Let $r \in \ZZ_q[t]$ with $\ord_p(r)=0$ be a denominator for $M$, i.e.\ such that we can write 
 $M = G/r$ with $G \in M_{b \times b}(\QQ_q[t])$, and let $\Phi$ denote the 
-matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \ldots, e_b]$, i.e.\
+matrix of $p^{-1}\Frob_p$ with respect to the basis $[e_1, \dotsc, e_b]$, i.e.\
 \[
 p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 \]
@@ -613,7 +613,7 @@ and satisfies the differential equation
 \end{equation*}
 with initial condition $\Phi(0) = \Phi_0$, where $\Phi_0$ is the 
 matrix of $p^{-1}\Frob_p$ on $\Hrig^n(U_0)$ with respect to the 
-basis $[e_0,\ldots,e_b]$.
+basis $[e_0,\dotsc,e_b]$.
 \end{thm}
 
 \begin{proof}
@@ -653,7 +653,7 @@ precision. Therefore, we need to recall some bounds on the loss of $p$-adic
 precision when multiplying $p$-adic numbers and matrices. 
 
 \begin{prop} \label{prop:productval}
-Let $v_1,\ldots,v_{\ell} \in \ZZ$ and $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$,  
+Let $v_1,\dotsc,v_{\ell} \in \ZZ$ and $x_1, \dotsc, x_{\ell} \in \mathbf{Q}_q$,  
 $\ell \geq 2$, be such that $\ord_p(x_i) \geq v_i$ for all $i$. Suppose that 
 $N \in \ZZ$ satisfies $N \geq \sum_{j=1}^{\ell} v_j$. Let 
 $\tilde{x}_1, \dotsc, \tilde{x}_{\ell}$ denote $p$-adic approximations to 
@@ -682,7 +682,7 @@ for all $i$. The result now follows by combining these inequalities.
 \end{proof}
 
 \begin{prop} \label{prop:matrixproductval}
-Let $v_1,\ldots,v_{\ell} \in \ZZ$ and 
+Let $v_1,\dotsc,v_{\ell} \in \ZZ$ and 
 $A_1, \dotsc, A_{\ell} \in M_{b \times b}(\QQ_q)$, $\ell \geq 2$, be 
 such that $\ord_p(A_i) \geq v_i$ for all $i$. Suppose that $N \in \ZZ$ 
 satisfies $N \geq \sum_{j=1}^{\ell} v_j$. 
@@ -716,7 +716,7 @@ complement $\mathcal{U}/\mathcal{S}$ of a family of smooth hypersurfaces
 $\mathcal{X}/\mathcal{S}$ contained in $\mathbf{P}^n_{\mathcal{S}}$ over
 some Zariski open subset $\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$. Let 
 $\mathcal{X}/\mathcal{S}$ be defined by a homogeneous polynomial 
-$P \in \ZZ_q[t][x_0,\ldots,x_n]$ of degree $d$. First we recall how to 
+$P \in \ZZ_q[t][x_0,\dotsc,x_n]$ of degree $d$. First we recall how to 
 compute in $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ following the method 
 of Griffiths and Dwork.  
 
@@ -957,20 +957,20 @@ The set $\cB$ has cardinality
 \begin{proof}
 First note that if we denote
 \begin{align*}
-V &= \{(i_0,\cdots,i_n) \in (\ZZ/d\ZZ)^{n+1} : \sum_{j=0}^n i_j = -(n+1)\}, \\
-H_j &= \{(i_0,\cdots,i_n) \in (\ZZ/d\ZZ)^{n+1} : i_j = -1 \},
+V   &= \{(i_0,\dotsc,i_n) \in (\ZZ/d\ZZ)^{n+1} : \sum_{j=0}^n i_j = -(n+1)\}, \\
+H_j &= \{(i_0,\dotsc,i_n) \in (\ZZ/d\ZZ)^{n+1} : i_j = -1 \},
 \end{align*}
-then  $\cB$ is in one-to-one correspondence with the set $V-(H_0 \cup \cdots \cup H_n)$. 
+then  $\cB$ is in one-to-one correspondence with the set $V-(H_0 \cup \dotsb \cup H_n)$. 
 Now by the inclusion-exclusion principle, 
 \begin{align*}
-\abs{V \cap (H_0 \cup \cdots \cup H_n)} &= \sum_{j=0}^n \abs{V \cap H_j} - \sum_{0 \leq j < k \leq n} \abs{V \cap H_j \cap H_k}
-+ \cdots + (-1)^{n} \abs{V \cap H_0 \cap \cdots \cap H_n} \\
-&= {n+1 \choose 1} d^{n-1} -{n+1 \choose 2} d^{n-2} + \cdots + (-1)^{n-1} {n+1 \choose n} + (-1)^{n} \\
+\abs{V \cap (H_0 \cup \dotsb \cup H_n)} &= \sum_{j=0}^n \abs{V \cap H_j} - \sum_{0 \leq j < k \leq n} \abs{V \cap H_j \cap H_k}
++ \dotsb + (-1)^{n} \abs{V \cap H_0 \cap \dotsb \cap H_n} \\
+&= {n+1 \choose 1} d^{n-1} -{n+1 \choose 2} d^{n-2} + \dotsb + (-1)^{n-1} {n+1 \choose n} + (-1)^{n} \\
 &= (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}\bigr)+(-1)^n,
 \end{align*}
 so that
 \begin{align*}
-\abs{V-(H_0 \cup \cdots \cup H_n)}&=\abs{V}-\abs{V \cap (H_0 \cup \cdots \cup H_n)} \\
+\abs{V-(H_0 \cup \dotsb \cup H_n)}&=\abs{V}-\abs{V \cap (H_0 \cup \dotsb \cup H_n)} \\
 &= d^n - (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}+d (-1)^n \bigr) \\
 &= \frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr),
 \end{align*}
@@ -1020,7 +1020,7 @@ For all $k \in \NN$, by definition we have that $\ord_p(\Delta_k) \geq 0$, and f
 of Theorem~\ref{thm:Isomorphism} we know that $\ord_p(\det(\Delta_k))=0$. 
 Therefore, there is no precision loss 
 in Algorithm~\ref{alg:Decompose}, and the only precision loss in Algorithm~\ref{alg:PoleRed} 
-comes from dividing by $k-1$ for $k=2,\ldots,n+1$. Hence it is sufficient to take 
+comes from dividing by $k-1$ for $k=2,\dotsc,n+1$. Hence it is sufficient to take 
 $\tilde{N}=N + \ord_p(n!)$.
 \end{rem}
 
@@ -1152,7 +1152,7 @@ Putting all of these inclusions of lattices together, we find that
 \begin{equation} \label{eq:lattices}
 (n-1)! \Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB} \subset p^{-\sum_{i=1}^{n-1} \floor{\log_p(i)}} \Lambda_{\tau,crys}.
 \end{equation}
-Now let $[d_1, \ldots, d_b]$ denote a $\ZZ_q$-basis for $\Lambda_{\tau,crys}$ and 
+Now let $[d_1, \dotsc, d_b]$ denote a $\ZZ_q$-basis for $\Lambda_{\tau,crys}$ and 
 let $W_{\tau} \in M_{b \times b}(\QQ_q)$ be the matrix for which the $i$-th column 
 consists of the coordinates of $d_i$ with respect to the basis $\cB$. From the 
 inclusions~\eqref{eq:lattices} it is clear that 
@@ -1162,7 +1162,7 @@ inclusions~\eqref{eq:lattices} it is clear that
 \end{eqnarray*}
 Note that $W_{\tau} \Phi_{\tau} \sigma(W_{\tau}^{-1})$ is the matrix of 
 $p^{-1}\Frob_{p}$ on $\Hrig^n(U_{\tau})$ with respect to the basis 
-$[d_1,\ldots,d_b]$. Now $\Lambda_{\tau,crys}$ is contained in the crystalline 
+$[d_1,\dotsc,d_b]$. Now $\Lambda_{\tau,crys}$ is contained in the crystalline 
 cohomology space $H^{n-1}_{crys}(X_{\tau})$ which maps to itself 
 under~$\Frob_p$. So by the short exact sequence~\eqref{eqn:excision}, the 
 lattice $\Lambda_{\tau,crys}$ maps to itself under $p^{-1}\Frob_{p}$, and
@@ -1171,7 +1171,7 @@ lattice $\Lambda_{\tau,crys}$ maps to itself under $p^{-1}\Frob_{p}$, and
 \]
 Similarly, note that $W_{\tau} \Phi_{\tau}^{-1} \sigma(W_{\tau}^{-1})$ is 
 the matrix of $p\Frob_p^{-1}$ on $\Hrig^n(U_{\tau})$ with respect to the 
-basis $[d_1,\ldots,d_b]$. By Poincar\'e duality, the map $p^{n-1}\Frob_p^{-1}$ 
+basis $[d_1,\dotsc,d_b]$. By Poincar\'e duality, the map $p^{n-1}\Frob_p^{-1}$ 
 maps the crystalline cohomology space $H^{n-1}_{crys}(X_{\tau})$ to itself. 
 So by the short exact sequence \eqref{eqn:excision}, the lattice 
 $\Lambda_{\tau,crys}$ maps to itself under $p^{n-1} (p\Frob_p^{-1})$, and 
@@ -1709,8 +1709,8 @@ with only one $p$-adic inversion as all summands are integers.
 \begin{assump} \label{assump:diag}
 From now on we will always assume that our family of 
 hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by a 
-polynomial $P \in \ZZ_q[t][x_0,\ldots,x_n]$ for which 
-$P(0) \in \ZZ_q[x_0,\ldots,x_n]$ is of the form 
+polynomial $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ for which 
+$P(0) \in \ZZ_q[x_0,\dotsc,x_n]$ is of the form 
 $P_0=a_0 x_0^d + \dotsb + a_n x_n^d$ with $a_0,\dotsc,a_n \in \ZZ_p^{\times}$, 
 so that we can apply Algorithm~\ref{alg:Diagfrob}. Note that this assumption 
 also implies that we can take $\mathcal{S}$ to contain $0$ and that we have 
@@ -1910,7 +1910,7 @@ in Algorithm~\ref{alg:expansion} below.
 \label{alg:expansion}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ satisfying Assumption~\ref{assump:diag}, $t$-adic precision $K$, $p$-adic precision~$N$
+\Require $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ satisfying Assumption~\ref{assump:diag}, $t$-adic precision $K$, $p$-adic precision~$N$
 \Ensure  the power series expansion of $\Phi$ at $t=0$ to $t$-adic precision $K$ and $p$-adic precision $N$
 \Procedure{FrobSeriesExpansion}{$N,K$} 
 \State \begin{compactenum}[{\hspace{6pt}} 1.] \vspace{-1.24em}
@@ -2036,9 +2036,9 @@ roughly $-pN$.
 
 \begin{rem}
 The condition that $M$ has a simple pole at $z$ is not a serious restriction. 
-One can always find another basis $[w_1, \ldots, w_b]$ for which this condition is 
+One can always find another basis $[w_1, \dotsc, w_b]$ for which this condition is 
 satisfied, because the Gauss--Manin connection is known to be regular singular. 
-Let $\cB=[e_1,\ldots,e_b]$ denote our basis from Definition~\ref{defn:MonBasis},
+Let $\cB=[e_1,\dotsc,e_b]$ denote our basis from Definition~\ref{defn:MonBasis},
 and let $W \in M_{b \times b}(\QQ_q(t))$ 
 be the change of basis matrix such that $w_j = \sum_{i=1}^b W_{ij} e_i$ for all 
 $1 \leq j \leq b$. Then, by \citep[Corollary 2.6]{KedlayaTuitman2012}, the matrix 
@@ -2054,13 +2054,13 @@ Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 \delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr), 
 \end{equation*}
 since for the matrix $\Phi'$ of $p^{-1}\Frob_p$ with respect to 
-$[w_1,\ldots,w_b]$, in general we only have that $\ord_p{\Phi'} \geq -\delta'$. 
+$[w_1,\dotsc,w_b]$, in general we only have that $\ord_p{\Phi'} \geq -\delta'$. 
 \end{rem}
 
 When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied,
 we can use the alternative bound below. Recall that our family of smooth projective 
 hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by a homogeneous polynomial 
-$P \in \ZZ_q[t][x_0,\ldots,x_n]$ of degree $d$.
+$P \in \ZZ_q[t][x_0,\dotsc,x_n]$ of degree $d$.
 
 \begin{thm} \label{thm:Gerkmann}
 Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in 
@@ -2094,11 +2094,11 @@ First we extend $\sigma$ to the ring of overconvergent functions
 $\QQ_q \langle x_0, \dotsc, x_n, t, \frac{1}{r}, \frac{1}{P} \rangle^{\dag}$, 
 defined as 
 \begin{multline*}
-\Bigl\{ \sum_{i_0,\ldots,i_{n+3}=0}^{\infty} a_{i_0, \ldots, i_{n+3}} 
-\frac{x_0^{i_0} \ldots x_n^{i_{n}}t^{i_{n+1}}}{r^{i_{n+2}} P^{i_{n+3}}} \; : \;
-a_{i_0, \ldots i_{n+3}} \in \QQ_q, \; \\ 
-\exists c > 0 \text{ s.t.} \lim_{i_0+\ldots+i_{n+3} \rightarrow \infty} \bigl(\ord_p(a_{i_0, \ldots, i_{n+3}} ) - 
-c(i_0+\ldots+i_{n+3})\bigr) \geq 0 \Bigr\},
+\Bigl\{ \sum_{i_0,\dotsc,i_{n+3}=0}^{\infty} a_{i_0, \dotsc, i_{n+3}} 
+\frac{x_0^{i_0} \dotsm x_n^{i_{n}}t^{i_{n+1}}}{r^{i_{n+2}} P^{i_{n+3}}} \; : \;
+a_{i_0, \dotsc i_{n+3}} \in \QQ_q, \; \\ 
+\exists c > 0 \text{ s.t.} \lim_{i_0+\dotsb+i_{n+3} \rightarrow \infty} \bigl(\ord_p(a_{i_0, \dotsc, i_{n+3}} ) - 
+c(i_0+\dotsb+i_{n+3})\bigr) \geq 0 \Bigr\},
 \end{multline*}
 by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
 \begin{align*}
@@ -2116,7 +2116,7 @@ $F_p$ on $\Hrig^n(U/S)$, so we have that
 \begin{equation*}
 p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{k}} \Bigr) \equiv
 \sum_{i=0}^{\infty} \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \cdots x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr)
+(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr)
 \end{equation*}
 in $\Hrig^n(U/S)$, where $\eta_i \in \NN$ is defined by the equality 
 $(1-y)^{-i} = \sum_{i=0}^{\infty} \eta_i y^i$. 
@@ -2124,8 +2124,8 @@ $(1-y)^{-i} = \sum_{i=0}^{\infty} \eta_i y^i$.
 Using Algorithm~\ref{alg:PoleRed}, we can write
 \begin{equation} \label{eqn:Froblift}
 \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \cdots x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr) \equiv
-\frac{\gamma_{i,1} \Omega}{P^1}+\ldots+\frac{\gamma_{i,n} \Omega}{P^n},
+(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr) \equiv
+\frac{\gamma_{i,1} \Omega}{P^1}+\dotsb+\frac{\gamma_{i,n} \Omega}{P^n},
 \end{equation}
 where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for $0 \leq j \leq n$.
 Actually, we can slightly modify Algorithm~\ref{alg:Decompose},  
@@ -2148,7 +2148,7 @@ as in the proof of Theorem~\ref{thm:deltabound}. It follows from
 \citep[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation \eqref{eqn:Froblift}, 
 and the inclusion $(n-1)!\Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB}$, that
 \begin{equation*}
-\frac{\gamma_{i,1} \Omega}{P^1}+\ldots+\frac{\gamma_{i,n} \Omega}{P^n} \subset 
+\frac{\gamma_{i,1} \Omega}{P^1}+\dotsb+\frac{\gamma_{i,n} \Omega}{P^n} \subset 
 p^{i+(n-1)-\ord_p((n-1)!)-n \floor{\log_p(p(n+i)-1)}} \Lambda_{\tau,\cB},
 \end{equation*}
 which implies that
@@ -2279,7 +2279,7 @@ from Section~\ref{sec:Connection}.
 We continue to use the notation of Theorem~\ref{thm:preccharpoly}. Suppose that $p \geq n$. 
 Order the elements of $\cB = \bigcup_{k=1}^n \cB_k$ by decreasing $k$, and let $k(i)$ 
 denote the value of $k$ of the $i$-th element, for $1 \leq i \leq b$ . Define 
-$\Gamma: \{0,1, \ldots, b\} \rightarrow \NN_0$ as
+$\Gamma: \{0,1, \dotsc, b\} \rightarrow \NN_0$ as
 \[
 \Gamma(i) = \sum_{j=1}^{i} (n-k(j)).
 \]
@@ -2338,7 +2338,7 @@ identies, we have that
 \begin{equation} \label{eq:recursion}
 s_j+j \chi_j = - \sum_{i=1}^{j-1} s_{j-i} \chi_i.
 \end{equation}
-This means that if we are given $\chi_1,\ldots,\chi_{j-1}$, then 
+This means that if we are given $\chi_1,\dotsc,\chi_{j-1}$, then 
 we can limit $\chi_j$ to an explicit  disk in the complex plane of 
 radius $(b/j) \mathfrak{q}^{j (n-1) / 2}$. Therefore, 
 if we know each $\chi_i$ to $p$-adic precision $N_i$ satisfying
@@ -2397,7 +2397,7 @@ in Algorithm~\ref{alg:complete} below.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\ldots,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\bar{R}(\tau) \neq 0$.
+\Require $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\bar{R}(\tau) \neq 0$.
 \Ensure  The zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
@@ -2409,7 +2409,7 @@ in Algorithm~\ref{alg:complete} below.
 \item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $\tilde{N}$.
 \item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
       to $p$-adic precision $N$, using $p$-adic working precision $\tilde{N}$.
-\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \ldots \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N'$, 
+\item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N'$, 
       using $p$-adic working precision $\bar{N}$.
 \item Round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion}. 
 \item Set $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$.
