@@ -850,13 +850,13 @@ P_{t_0}(x_0, \dotsc, x_n) = a_0 x_0^d + \dotsb + a_n x_n^d
 with $a_0, \dotsc, a_n \in \ZZ_q^{\times}$.
 
 We now show that the determinant of $\Delta_k$ is nonzero in~$L$.  Since 
-evaluation of the matrix at 
-$t = t_0$, commutes with computing the determinant, it suffices to show that 
-the determinant of $(\Delta_k) \big |_{t=t_0}$ is nonzero.  Since, for 
-$0 \leq j \leq n$, we have $\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, 
-there is precisely one nonzero entry in each column and each row of $\Delta_k$.  
-Namely, in column $(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is the 
-nonzero entry $d a_j$. Note that this also implies that 
+evaluation of the matrix at \mbox{$t = t_0$} commutes with computing the 
+determinant, it suffices to show that the determinant of 
+$(\Delta_k) \big |_{t=t_0}$ is nonzero.  Since, for $0 \leq j \leq n$, 
+$\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, there is 
+precisely one nonzero entry in each column and each row of~$\Delta_k$.  
+Namely, in column $(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is 
+the nonzero entry $d a_j$. Note that this also implies that 
 $(\Delta_k) \big |_{t=t_0} \in \ZZ_{q}^{\times}$.
 \end{proof}
 
@@ -868,7 +868,7 @@ returns an expression
 Q = Q_0 \partial_0 P + \dotsb + Q_n \partial_n P + \gamma_k
 \end{equation*} 
 with $Q_0, \dotsc, Q_n \in L[x_0, \dotsc, x_n]$ homogeneous of 
-degree $kd-n$ and $\gamma_k$ in the $L$-span of $B_k$. We can in turn 
+degree $kd-n$ and $\gamma_k$ in the $L$-span of~$B_k$. We can in turn 
 use {\sc Decompose} to furnish another routine {\sc Reduce}, formalised 
 in Algorithm~\ref{alg:PoleRed}, which given a closed $n$-form $Q\Omega/P^k$ 
 with $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$ returns 
