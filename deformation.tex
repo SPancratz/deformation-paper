@@ -1078,23 +1078,18 @@ such~$k$, the result is clear.
 \end{proof}
 
 \begin{rem} 
-Note that in Algorithm~\ref{alg:Connection}, the matrices $\Delta_k^{-1}$ 
+Note that in Algorithm~\ref{alg:Connection}, the matrices~$\Delta_k^{-1}$ 
 only have to be computed once. After this, every call to {\sc{Decompose}} 
-is basically a multiplication by one of the $\Delta_k^{-1}$.  Although this 
+reduces to a multiplication by one of the~$\Delta_k^{-1}$.  Although this 
 does not improve the complexity of Algorithm~\ref{alg:Connection}, it is 
-quite an improvement in practice. 
+a significant improvement in practice.
 
 Actually, instead of computing the inverse $\Delta_k^{-1}$, it is better 
-to compute the decomposition $\Delta_k = L U P$, where $L$ is lower triangular, 
-$U$ is upper triangular, and $P$ is a permutation matrix. Such a decomposition 
-is guaranteed to exist for any square invertible matrix. Since $\Delta_k$ has 
-a lot of zero entries, techniques from sparse linear algebra can be used to 
-compute it. For more details see [[TODO]].
-
-%[[TODO? Seb, is $(\Delta_k)^{-1}$ or the LUP decomposition sparse as well, is this important?]]
-
-These improvements crucially depend on the fact that we only have to solve 
-square linear systems, as a consequence of Theorem~\ref{thm:Isomorphism}.
+to compute the decomposition $\Delta_k = L U P$, where $L$ is lower 
+triangular, $U$ is upper triangular, and $P$ is a permutation matrix, which 
+is guaranteed to exist for any square matrix.  While generalisations to 
+non-square matrices exist, in this form the improvement relies on 
+Theorem~\ref{thm:Isomorphism}.
 \end{rem}
 
 In the rest of this section we will freely use the definitions and notation 
