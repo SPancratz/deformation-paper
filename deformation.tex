@@ -963,10 +963,13 @@ H_j &= \{(i_0,\dotsc,i_n) \in (\ZZ/d\ZZ)^{n+1} : i_j = -1 \},
 then  $\cB$ is in one-to-one correspondence with the set $V-(H_0 \cup \dotsb \cup H_n)$. 
 Now by the inclusion-exclusion principle, 
 \begin{align*}
-\abs{V \cap (H_0 \cup \dotsb \cup H_n)} &= \sum_{j=0}^n \abs{V \cap H_j} - \sum_{0 \leq j < k \leq n} \abs{V \cap H_j \cap H_k}
-+ \dotsb + (-1)^{n} \abs{V \cap H_0 \cap \dotsb \cap H_n} \\
-&= {n+1 \choose 1} d^{n-1} -{n+1 \choose 2} d^{n-2} + \dotsb + (-1)^{n-1} {n+1 \choose n} + (-1)^{n} \\
-&= (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}\bigr)+(-1)^n,
+\abs{V \cap (H_0 \cup \dotsb \cup H_n)} 
+& = \sum_{j=0}^n \abs{V \cap H_j} 
+    - \sum_{0 \leq j < k \leq n} \abs{V \cap H_j \cap H_k} \\
+& \quad + \dotsb + (-1)^{n} \abs{V \cap H_0 \cap \dotsb \cap H_n} \\
+& = {n+1 \choose 1} d^{n-1} -{n+1 \choose 2} d^{n-2} 
+    + \dotsb + (-1)^{n-1} {n+1 \choose n} + (-1)^{n} \\
+& = (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}\bigr)+(-1)^n,
 \end{align*}
 so that
 \begin{align*}
