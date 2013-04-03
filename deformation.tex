@@ -1043,14 +1043,13 @@ This is formalised in Algorithm~\ref{alg:Connection} below.
 \For{$g \in B$} 
 \State $k \gets  (\deg(g)+(n+1))/d$
 \State $Q \gets  - k g P_t$ 
-\State $\gamma_{1}, \dotsc, \gamma_n \gets$
-      {\sc Reduce($P,Q$)} 
+\State $\gamma_{1}, \dotsc, \gamma_n \gets$ {\sc Reduce($P,Q$)} 
 \For{$f \in B$}
-\State $l \gets (\deg(f)+(n+1))/d$
-\State $M_{f,g} \gets$ the coefficient of $f$ in $\gamma_l$
+\State $l \gets \bigl(\deg(f)+(n+1)\bigr)/d$
+\State $M_{f,g} \gets$ Coefficient of $f$ in $\gamma_l$
 \EndFor
 \EndFor
-\textbf{return} $M$
+\Return $M$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
