@@ -2046,7 +2046,7 @@ Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 \begin{equation*}
 \delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr), 
 \end{equation*}
-since for the matrix $\Phi'$ of $p^{-1}\Frob_p$ with respect to 
+since for the matrix $\Phi'$ of $p^{-1}\Frob_p$ with respect to the basis 
 $[w_1,\dotsc,w_b]$, in general we only have that $\ord_p{\Phi'} \geq -\delta'$. 
 \end{rem}
 
@@ -2083,36 +2083,35 @@ $\Psi \in M_{b \times b}(\QQ_q(t))$ for which
 \end{thm}
 
 \begin{proof}
-First we extend $\sigma$ to the ring of overconvergent functions
-$\QQ_q \langle x_0, \dotsc, x_n, t, \frac{1}{r}, \frac{1}{P} \rangle^{\dag}$, 
-defined as 
-\begin{multline*}
-\Bigl\{ \sum_{i_0,\dotsc,i_{n+3}=0}^{\infty} a_{i_0, \dotsc, i_{n+3}} 
+First we extend $\sigma$ to the ring of overconvergent functions:
+\begin{align*}
+A^{\dag} =
+&\Bigl\{ \sum_{i_0,\dotsc,i_{n+3}=0}^{\infty} a_{i_0, \dotsc, i_{n+3}} 
 \frac{x_0^{i_0} \dotsm x_n^{i_{n}}t^{i_{n+1}}}{r^{i_{n+2}} P^{i_{n+3}}} \; : \;
 a_{i_0, \dotsc i_{n+3}} \in \QQ_q, \; \\ 
-\exists c > 0 \text{ s.t.} \lim_{i_0+\dotsb+i_{n+3} \rightarrow \infty} \bigl(\ord_p(a_{i_0, \dotsc, i_{n+3}} ) - 
+&\exists c > 0 \text{ s.t.} \lim_{i_0+\dotsb+i_{n+3} \rightarrow \infty} \bigl(\ord_p(a_{i_0, \dotsc, i_{n+3}} ) - 
 c(i_0+\dotsb+i_{n+3})\bigr) \geq 0 \Bigr\},
-\end{multline*}
-by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
-\begin{align*}
-\sigma(\frac{1}{P}) &= P^{-p} \Bigl( 1-\frac{(P^p-\sigma(P))}{P^p} \Bigr)^{-1},
 \end{align*}
-is an element of this ring, since $\ord_p(P^p-\sigma(P)) \geq 1$.
-
-We use the notation and terminology from Section~\ref{sec:Connection}. 
-%that 
-%\begin{equation*}
-%\Omega = \sum_{i=0}^n (-1)^i x_i d x_0 \wedge \dotsb \wedge \widehat{d x_i} \wedge \dotsb \wedge d x_n.
-%\end{equation*}
-The action of $\sigma$ on the overconvergent functions induces the action of 
-$F_p$ on $\Hrig^n(U/S)$, so we have that
+by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
+\begin{equation*}
+\sigma(\frac{1}{P}) = P^{-p} \Bigl( 1-\frac{(P^p-\sigma(P))}{P^p} \Bigr)^{-1}
+\end{equation*}
+is an element of $A^{\dag}$, since 
+\begin{equation*}
+\ord_p(P^p-\sigma(P)) \geq 1.
+\end{equation*}
+We use the notation and terminology from Section~\ref{sec:Connection}.
+It is known that the de Rham cohomology of 
+$A^{\dag}/\QQ_q \langle t,1/r \rangle^{\dag}$ 
+is isomorphic to the rigid cohomology of $U/S$, and that the action of 
+$F_p$ on the rigid cohomology of $U/S$ is induced by $\sigma$, so we have that
 \begin{equation*}
 p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{k}} \Bigr) \equiv
 \sum_{i=0}^{\infty} \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
 (x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr)
 \end{equation*}
 in $\Hrig^n(U/S)$, where $\eta_i \in \NN$ is defined by the equality 
-$(1-y)^{-i} = \sum_{i=0}^{\infty} \eta_i y^i$. 
+$(1-y)^{-k} = \sum_{i=0}^{\infty} \eta_i y^i$.
 
 Using Algorithm~\ref{alg:PoleRed}, we can write
 \begin{equation} \label{eqn:Froblift}
