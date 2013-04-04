@@ -548,14 +548,14 @@ excision short exact sequence
 \end{CD} 
 \end{equation}
 to relate $\Hrig^{n-1}(X_{\tau})$ to $\Hrig^{n}(U_{\tau})$ and complete 
-the proof of \eqref{eq:formulazeta}. As for the proof of 
+the proof of~\eqref{eq:formulazeta}. As for the proof of 
 formula~\eqref{eq:formulab}, we have not found an exact reference 
 in the literature. However, it is a straightforward consequence 
 of~\citep[Corollaire 2.4 (i)]{sga7} that 
 \[
 \sum_{n=1}^{\infty} b(d,n) x^{n-1} = \frac{(d-1)}{(1+x)(1-(d-1)x)} = \frac{1}{xd} \Bigl( \frac{d-1}{1-(d-1)x} - \frac{d-1}{1+x} \Bigr)
 \] 
-as formal power series, from which \eqref{eq:formulab} can be read off easily.
+as formal power series, from which~\eqref{eq:formulab} can be read off easily.
 \end{proof}
 
 Let $[e_1, \dotsc, e_b]$ be some basis of sections of 
@@ -989,7 +989,7 @@ is a basis for the $L$-vector space $\HdR^n(\mathfrak{U}_L)$.
 \begin{proof}
 We already know that $\HdR^n(\mathfrak{U}_L)$ is spanned by the classes of the 
 $n$-forms $Q \Omega / P^k$ with $Q \in L[x_0, \dotsc, x_n]$ homogeneous of degree 
-$kd - (n+1)$ for $k \in \NN$. Applying Algorithm ~\ref{alg:PoleRed}, we obtain an 
+$kd - (n+1)$ for $k \in \NN$. Applying Algorithm~\ref{alg:PoleRed}, we obtain an 
 expression for the class of $Q \Omega / P^k$ as an $L$-linear combination of 
 elements in $\cB$.  This shows that $\cB$ spans the vector space 
 $\HdR^n(\mathfrak{U}_L)$. However, we know from Theorem~\ref{thm:hypersurface} that 
@@ -1170,7 +1170,7 @@ Similarly, note that $W_{\tau} \Phi_{\tau}^{-1} \sigma(W_{\tau}^{-1})$ is
 the matrix of $p\Frob_p^{-1}$ on $\Hrig^n(U_{\tau})$ with respect to the 
 basis $[d_1,\dotsc,d_b]$. By Poincar\'e duality, the map $p^{n-1}\Frob_p^{-1}$ 
 maps the crystalline cohomology space $H^{n-1}_{crys}(X_{\tau})$ to itself. 
-So by the short exact sequence \eqref{eqn:excision}, the lattice 
+So by the short exact sequence~\eqref{eqn:excision}, the lattice 
 $\Lambda_{\tau,crys}$ maps to itself under $p^{n-1} (p\Frob_p^{-1})$, and 
 \begin{equation*}
 \ord_p(W_{\tau} \Phi_{\tau}^{-1} \sigma(W_{\tau}^{-1})) \geq -(n-1). \qedhere
@@ -1425,7 +1425,7 @@ From Lemma~\ref{lem:lambdam} we obtain
 \ord_2 \bigl(\mu_m\bigr) 
     = \floorBig{\frac{3m}{4}} - m + \ord_2(\lambda_m).
 \end{equation*}
-Using the bound \eqref{eqn:dworkbound}, we find that 
+Using the bound~\eqref{eqn:dworkbound}, we find that 
 \begin{equation*}
 \ord_2 \bigl(\mu_m\bigr) 
     \geq \floorBig{\frac{3m}{4}} - m + \ceil{\frac{m}{4}} = 0. \qedhere
@@ -1513,7 +1513,7 @@ $\mu_m \in \ZZ_p$ for all $m \geq 0$.
 \begin{proof}
 It is clear that $\mu_m \in \QQ$.  From Lemma~\ref{lem:lambdam} 
 we observe that $\lambda_m = \pi^m p^{- \floor{m/p}} \mu_m$, and 
-using the bound \eqref{eqn:dworkbound}, it follows that 
+using the bound~\eqref{eqn:dworkbound}, it follows that 
 \begin{equation*}
 \ord_p (\mu_m) \geq \frac{p-1}{p^2} m + \floor{\frac{m}{p}} - \frac{m}{p-1}.
 \end{equation*}
@@ -1752,7 +1752,7 @@ the unique solution to the homogeneous system
 \end{align}
 where $I$ denotes the identity matrix, then the matrix
 $\Phi = C \Phi_0 \sigma(C)^{-1}$
-satisfies Equation \eqref{eq:Phi}. So it is sufficient to solve Equation 
+satisfies Equation~\eqref{eq:Phi}. So it is sufficient to solve Equation 
 \eqref{eq:01-GMDE-Homogenous}.
 
 Let us write $G = \sum_{i=0}^{\deg(G)} G_i t^i$ and $r= \sum_{i=0}^{\deg(r)} r_i t^i$,
@@ -1850,7 +1850,7 @@ slightly, for example when $\ord_p(M)$ is nonnegative.
 In order to determine the power series expansion of the matrix~$\Phi$, 
 we also need to compute the matrix $\sigma(C)^{-1}$. We could compute 
 the matrix~$C^{-1}$ using matrix inversion over the ring $\mathbf{Q}_q[[t]]$,
-and then apply $\sigma$ to it. However, solving \eqref{eq:01-GMDE-Dual} turns
+and then apply $\sigma$ to it. However, solving~\eqref{eq:01-GMDE-Dual} turns
 out to be more efficient. 
 %especially if one applies $\sigma$ to this equation first 
 %and solves for $\sigma(C)^{-1}$ directly.
@@ -1878,9 +1878,9 @@ the matrix $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$, and
 the matrix $C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic precision 
 $N_{C^{-1}}$.
 
-Therefore, while solving Equation \eqref{eq:01-GMDE-Homogenous} for $C$ and 
-Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$, using a recursion like in 
-Equation \eqref{eq:recursiondifeq}, it is sufficient to use $p$-adic 
+Therefore, while solving Equation~\eqref{eq:01-GMDE-Homogenous} for $C$ and 
+Equation~\eqref{eq:01-GMDE-Dual} for $C^{-1}$, using a recursion like in 
+Equation~\eqref{eq:recursiondifeq}, it is sufficient to use $p$-adic 
 working precisions $\tilde{N}_C$ and $\tilde{N}_{C^{-1}}$, respectively.
 \end{thm}
 
@@ -1910,14 +1910,14 @@ in Algorithm~\ref{alg:expansion} below.
 \item Determine $N_{\Phi_0},N_C,N_{C^{-1}},\tilde{N}_C$, and $\tilde{N}_{C^{-1}}$ from Theorem~\ref{thm:Ni}.
 \item $M \gets \textsc{GMConnection}(P,?)$
 \item $\Phi_0 \gets \textsc{DiagFrob}(P_0,N_{\Phi_0})$
-\item Solve Equation \eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
+\item Solve Equation~\eqref{eq:01-GMDE-Homogenous} for $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$:
 \begin{compactenum}[a.] 
 \item[] $C_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $K-1$ \textbf{do} 
 \item[] \hspace{0.6em} $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{\tilde{N}_C}}$
 \item[] $C \gets \sum_{i=0}^K C_i t^i \pmod{p^{N_C}}$
 \end{compactenum}
-\item Solve Equation \eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
+\item Solve Equation~\eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
 \begin{compactenum}[a.]
 \item[] $\tilde{C}_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $\ceil{K/p}-1$ \textbf{do}
@@ -1957,7 +1957,7 @@ convert the power series expansion for $\Phi$ to such an approximation
 by rational functions, we need a bound on the pole order of these 
 rational functions at their poles, as a function of~$N$.
 
-The bounds that Lauder ~\citep[\S 8.1]{Lauder2004a} and 
+The bounds that Lauder~\citep[\S 8.1]{Lauder2004a} and 
 Gerkmann~\citep[\S 6]{Gerkmann2007} used for this were not very
 sharp, which significantly slowed down their algorithms.
 Recently, under some small additional assumptions, Kedlaya and the second 
@@ -2123,7 +2123,7 @@ where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for $0 \leq j \leq n$
 Actually, we can slightly modify Algorithm~\ref{alg:Decompose},  
 so that we only have to invert $\Delta_{n+1}$ as long as the pole 
 order is at least $n+1$. [[TODO]] Moreover, note that the left-hand side of
-Equation \eqref{eqn:Froblift} does not have a pole
+Equation~\eqref{eqn:Froblift} does not have a pole
 at $z \neq \infty$, and has a pole of order at most 
 $pi\deg_t(P)$ at $z=\infty$. This implies that
 \begin{align*}
@@ -2137,7 +2137,7 @@ $pi\deg_t(P)$ at $z=\infty$. This implies that
 For every $\tau \in S(\bar{\FF}_q)$ such that $\bar{R}(\tau) \neq 0$, we
 define lattices $\Lambda_{\tau,crys}$, $\Lambda_{\tau,\cB}$ in $\Hrig^n(U_{\tau})$
 as in the proof of Theorem~\ref{thm:deltabound}. It follows from
-\citep[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation \eqref{eqn:Froblift}, 
+\citep[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation~\eqref{eqn:Froblift}, 
 and the inclusion $(n-1)!\Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB}$, that
 \begin{equation*}
 \frac{\gamma_{i,1} \Omega}{P^1}+\dotsb+\frac{\gamma_{i,n} \Omega}{P^n} \subset 
@@ -2313,7 +2313,7 @@ N_i = \floorbig{\log_p \bigl( 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2} \bi
 
 \begin{proof}
 By Theorem~\ref{thm:weildeligne} and the short exact 
-sequence \eqref{eqn:excision}, we have that
+sequence~\eqref{eqn:excision}, we have that
 \[
 \chi(T)=\prod_{i=1}^b (1-\alpha_i T),
 \]
@@ -2337,7 +2337,7 @@ if we know each $\chi_i$ to $p$-adic precision $N_i$ satisfying
 \[
 p^{N_i} > 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2},
 \] 
-then we can determine $\chi(T)$ exactly using the recursion \eqref{eq:recursion}.
+then we can determine $\chi(T)$ exactly using the recursion~\eqref{eq:recursion}.
 \end{proof}
 
 \begin{thm} \label{thm:precPhitau}
@@ -2403,7 +2403,7 @@ in Algorithm~\ref{alg:complete} below.
       to $p$-adic precision $N$, using $p$-adic working precision $\tilde{N}$.
 \item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N'$, 
       using $p$-adic working precision $\bar{N}$.
-\item Round $\chi(T)$ to $\ZZ[T]$ using the recursion \eqref{eq:recursion}. 
+\item Round $\chi(T)$ to $\ZZ[T]$ using the recursion~\eqref{eq:recursion}. 
 \item Set $Z(X_{\tau},T) \gets \bigl( \chi(T)^{(-1)^n} \bigr)/\bigl((1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)\bigr)$.
 \item \Return $Z(X_{\tau},T)$
 \end{compactenum}
