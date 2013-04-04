@@ -1738,39 +1738,39 @@ in Definition~\ref{defn:sigma}.
 
 As we saw in Section~\ref{sec:Background}, these matrices satisfy 
 the differential equation
-\begin{align} \label{eq:Phi}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi &= p t^{p-1} \Phi \sigma(M), &\Phi(0)&=\Phi_0,
-\end{align}
+\begin{equation} \label{eq:Phi}
+\Bigl(\frac{d}{dt} + M\Bigr) \Phi = p t^{p-1} \Phi \sigma(M) 
+\end{equation}
+with initial condition $\Phi(0) = \Phi_0$, 
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action 
 of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$. Our goal is the computation of 
 a power series expansion of~$\Phi$ at $t=0$.
 
 We first observe that if $C \in M_{b \times b}(\QQ_q[[t]])$ denotes 
 the unique solution to the homogeneous system
-\begin{align} \label{eq:01-GMDE-Homogenous}
-\Bigl(\frac{d}{dt} + M\Bigr) C &= 0,  &C(0)&=I,
-\end{align}
-where $I$ denotes the identity matrix, then the matrix
-$\Phi = C \Phi_0 \sigma(C)^{-1}$
-satisfies Equation~\eqref{eq:Phi}. So it is sufficient to solve Equation 
-\eqref{eq:01-GMDE-Homogenous}.
+\begin{equation} \label{eq:01-GMDE-Homogenous}
+\Bigl(\frac{d}{dt} + M\Bigr) C = 0 
+\end{equation}
+with initial condition $C(0) = I$, where $I$ denotes the identity matrix, 
+then the matrix $\Phi = C \Phi_0 \sigma(C)^{-1}$ satisfies 
+Equation~\eqref{eq:Phi}. So it is sufficient to solve 
+Equation~\eqref{eq:01-GMDE-Homogenous}.
 
 Let us write $G = \sum_{i=0}^{\deg(G)} G_i t^i$ and $r= \sum_{i=0}^{\deg(r)} r_i t^i$,
 with $G_i \in M_{b \times b}(\QQ_q)$ and $r_i \in \ZZ_q$, for all $i$. Note that
 $r_0 \neq 0 \pmod{p}$.
 We can now obtain a power series solution $C = \sum_{i \geq 0} C_i t^i$ at $t=0$ for 
 the equation
-\begin{align*}
-r \frac{dC}{dt} + G C &= 0, &C(0)&=I,
-\end{align*}
-which is clearly equivalent to Equation~\eqref{eq:01-GMDE-Homogenous}, 
-using the recursion 
-\begin{align}
-C_0 &= I, \notag \\ 
-C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
+\begin{equation*}
+r \frac{dC}{dt} + G C = 0
+\end{equation*}
+with initial condition $C(0) = I$, which is clearly equivalent to 
+Equation~\eqref{eq:01-GMDE-Homogenous}, using the recursion $C_0 = I$, 
+\begin{equation} \label{eq:recursiondifeq}
+C_{i+1} = \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(G)\}}}^i G_{i-j} C_j + 
-    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr). \label{eq:recursiondifeq}
-\end{align}
+    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr).
+\end{equation}
 
 However, we will only carry out this computation to some finite $p$-adic 
 working precision $\tilde{N}$. If we want $C$ to be correct to $p$-adic 
@@ -1798,16 +1798,15 @@ $\ord_p(\Phi^{-1}) \geq -\delta-(n-1)$.
 \end{proof}
 
 Let $D=\sum_{i \geq 0} D_i t^i$ denote an approximation to $C$ 
-defined by a recursion
+defined by a recursion $D_0 = I$, 
 \begin{align*}
-D_0 &= I \\
-D_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
+D_{i+1} = \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(B)\}}}^i G_{i-j} D_j + 
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j D_j) \biggr) + 
     p^{\tilde{N}} E_{i+1},
 \end{align*}
 where $(E_i)_{i \geq 1}$ is a sequence of $p$-adically integral matrices, 
-i.e.\ suppose that the matrices $D_i$ are computed with working 
+i.e.\ suppose that the matrices~$D_i$ are computed with working 
 precision~$\tilde{N}$.
 
 \begin{thm} \label{thm:errorprop}
@@ -1830,10 +1829,11 @@ Indeed, the proof there shows that
 We use the bound from Theorem~\ref{thm:valC} and observe that it 
 also applies to the inverse matrix~$C^{-1}$, as this matrix satisfies 
 the dual differential equation 
-\begin{align} \label{eq:01-GMDE-Dual}
-\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t &= 0, &C^{-1}(0)&=I,
-\end{align}
-that carries a Frobenius structure given by the matrix $\bigl(\Phi^{-1}\bigr)^t$. 
+\begin{equation} \label{eq:01-GMDE-Dual}
+\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t = 0
+\end{equation}
+with initial condition $C^{-1}(0) = I$ that carries a Frobenius structure 
+given by the matrix~$(\Phi^{-1})^t$. 
 \end{proof}
 
 \begin{rem}
