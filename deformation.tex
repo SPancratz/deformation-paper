@@ -1940,7 +1940,7 @@ in Algorithm~\ref{alg:expansion} below.
 \subsection{Evaluation at a point}
 
 In the previous section we described how to compute the power series 
-expansion at $t=0$ ofthe matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
+expansion at $t=0$ of the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
 $\Hrig^{n}(U/S)$. We now want to evaluate $\Phi$ at the Teichm\"uller 
 lift~$\hat{\tau}$ of some nonzero $\tau \in S(\FF_{\mathfrak{q}})$ for 
 which $\bar{R}(\tau) \neq 0$, but the power series expansion of $\Phi$ 
@@ -1949,7 +1949,7 @@ and so cannot be evaluated at $\hat{\tau}$.
 
 However, since $\Phi$ is a matrix of overconvergent functions, i.e.\ 
 \[
-\Phi \in M_{b \times b}\Bigl(\QQ_q \langle t,\frac{1}{r} \rangle^{\dag}\Bigr),
+\Phi \in M_{b \times b}\Bigl(\QQ_q \bigl\langle t,\frac{1}{r} \bigr\rangle^{\dag}\Bigr),
 \]
 it can be approximated to any given $p$-adic precision $N$ by a matrix 
 of rational functions, which can then be evaluated at $\hat{\tau}$. To 
@@ -1973,7 +1973,7 @@ $\mathbf{P}^{1}_{\mathbf{Q}_q}$, and let $z$ be an unramified geometric point
 of $\mathfrak{Z}$ such that $\mathfrak{Z}$ does not contain any other points 
 with the same reduction modulo~$p$. 
 Suppose that the connection matrix $M$ has at most a simple pole at~$z$ and that 
-the exponents $\{ \lambda_1, \dotsc, \lambda_{b} \}$ of $M$ at $z$, which are defined 
+the exponents $\lambda_1, \dotsc, \lambda_{b}$ of $M$ at $z$, which are defined 
 as the eigenvalues of $(t - z) M \vert_{t=z}$ and known to be rational numbers, are 
 contained in $\ZZ_p \cap \QQ$. Let $\delta$ be defined as in 
 Definition~\ref{defn:delta}. For $i \in \NN$, put
@@ -2094,7 +2094,8 @@ c(i_0+\dotsb+i_{n+3})\bigr) \geq 0 \Bigr\},
 \end{align*}
 by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
 \begin{equation*}
-\sigma(\frac{1}{P}) = P^{-p} \Bigl( 1-\frac{(P^p-\sigma(P))}{P^p} \Bigr)^{-1}
+\sigma\Bigl(\frac{1}{P}\Bigr) = 
+    P^{-p} \biggl( 1-\frac{P^p-\sigma(P)}{P^p} \biggr)^{-1}
 \end{equation*}
 is an element of $A^{\dag}$, since 
 \begin{equation*}
@@ -2169,7 +2170,7 @@ and $\ord_p(\Phi) \geq -\delta$ by Corollary~\ref{cor:delta}. Therefore, it
 is sufficient to compute $\hat{\tau}$ to $p$-adic precision $N+\delta$, by
 Proposition~\ref{prop:matrixproductval}. Similarly, since $\ord_p(\hat{\tau}) \geq 0$, 
 it is sufficient to compute $\Phi$ to $p$-adic 
-precision $N$.
+precision~$N$.
 \end{rem}
 
 \subsection{Computing the zeta function}
