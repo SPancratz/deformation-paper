@@ -2668,7 +2668,8 @@ The result on the time complexity now follows.
 
 The space requirement is dominated by the matrix~$C$, which has size
 \begin{equation*}
-\SoftOh(b^2 K (a' \log(p)) (a d^n \log(d_t))) = \SoftOh(a^2 a' p d^{5n} e^n d_t). \qedhere
+\SoftOh(b^2 K (a' \log(p)) (a d^n \log(d_t))) \subset 
+    \SoftOh(a^2 a' p d^{5n} e^n d_t). \qedhere
 \end{equation*}
 \end{proof}
 
@@ -2698,10 +2699,10 @@ Finally, we consider the substitution of $\hat{\tau}$
 into the $b^2$ entries of the matrix $D \Phi \bmod t^K$. 
 Each of these can be thought of as a modular composition of polynomials 
 over~$\QQ_{q}$, where the modulus~$m(t)$ is an irreducible polynomial defining 
-the extension $\QQ_{\mathfrak{q}}$ as a quotient of $\QQ_q[t]$, which is 
-of degree~$a/a'$. However, care has to be taken to include the additional 
-reduction modulo~$m(t)$ of the polynomials of degree less than~$K$, so that 
-polynomials involved in the modular composition have degree less 
+the extension $\QQ_{\mathfrak{q}} / \QQ_{q}$ as a quotient of $\QQ_q[t]$, 
+which is of degree~$a/a'$. However, care has to be taken to include the 
+additional reduction modulo~$m(t)$ of the polynomials of degree less than~$K$, 
+so that polynomials involved in the modular composition have degree less 
 than~$a/a'$. 
 
 Thus, the substitutions require time 
