@@ -2784,72 +2784,6 @@ So our complexity bounds are an improvement of his.
 \end{rem}
 
 \begin{comment}
-%Do not see the point of this remark anymore.
-\begin{rem}
-When $\mathfrak{q}=q$ and $d_t=1$, the bounds for the time and space 
-complexity simplify to
-\begin{align*}
-\mbox{time: }  &\SoftOh\Bigl( a^2 \log(p) d_t \bigl(d^{n(\omega+2)} e^{n(\omega+1)} + d^{5n} e^{n}\bigr) + a^3 p d^{n(\omega+3)} e^n d_t \Bigr), \\
-\mbox{space: } &\SoftOh\bigl( a^2 \log(p) d^{4n} e^{3n} d_t + a^3 p d^{4n} \bigr).
-\end{align*}
-\end{rem}
-\end{comment}
-
-\begin{comment}
-While the current implementation of Algorithm~\ref{alg:Diagfrob} 
-performs very well in practice, its time complexity is quasi-cubic in 
-the $p$-adic precision~$N$, which is \emph{not} optimal.  Both of 
-these aspects are due to the use of the sequence $(\mu_m)_{m=0}^{M}$ 
-defined over $\ZZ_p$ instead of the coefficients $(\lambda_m)_{m=0}^{M}$ 
-defined over $\QQ_p(\pi)$.  We can achieve a better time complexity by 
-utilising fast exponentials of power series:
-
-\begin{thm} \label{thm:DiagfrobComplexity2}
-There exists an algorithm for computing the matrix for the 
-action of $p^{-1} \Frob_p$ on $\Hrig^{n}(U)$ in time complexity 
-\begin{equation*}
-(M \log M \log \log M) (p \log p) \cM(\tilde{N} \log p) 
-+ d^n n \bigl( \cM(\log d) 
-              + \tilde{N} (p \log p) \cM(\tilde{N} \log p) \bigr)
-\end{equation*}
-where $\cM(-)$ denotes the complexity of integer multiplication 
-and $\tilde{N} \in \BigOh(N + n \log_p n)$, $M \in \BigOh(p \tilde{N})$.
-\end{thm}
-
-\begin{proof}
-The key idea is to slightly modify Algorithm~\ref{alg:Diagfrob} 
-and use Definition~\ref{defn:alpha}, working directly with the sequence 
-$(\lambda_m)_{m=0}^{M}$.  As we will be using operations in the 
-totally ramified extension~$\QQ_p(\pi)$ to 
-$p$-adic precision~$\tilde{N}$, we remark that the cost of 
-an arithmetic operation in its ring of integers is 
-$\BigOh\bigl((p \log p) \cM(\tilde{N} \log p)\bigr)$, 
-achieved by polynomial multiplication based on the fast Fourier 
-transform.
-
-We first observe that the valuation of the summands in 
-Equation~\eqref{eq:alpha} can be bounded by 
-$\ord_p \bigl(\lambda_m (u_i / d)_r (-1)^r \pi^{-r} {\hat{a}_i}^{m-r} \bigr) \geq - 1/2$.
-As the only term with negative valuation is $\pi^{-r}$ and 
-$R \in \BigOh(\tilde{N})$, it suffices to precompute 
-the sequences $(\lambda_m)_{m=0}^{M}$ and $(d^{-r})_{r=0}^{R}$ 
-to $p$-adic precision $\tilde{N}$.  While the computation 
-of the latter remains unchanged, the computation of the former 
-can be improved significantly using fast exponentials of 
-power series in $\QQ_p(\pi)[[z]]$ as described by 
-Bernstein~\citep[\S 9.3]{Bernstein2008}.  This allows for 
-computing the sequence $(\lambda_m)_{m=0}^{M}$ in 
-$\BigOh\bigl( (M \log M \log \log M) \bigr)$ operations 
-in~$\QQ_p(\pi)$ to precision~$\tilde{N}$.  The only 
-remaining change to our analysis of Algorithm~\ref{alg:Diagfrob} 
-occurs in {Step~(v)}, where for each matrix entry we have to consider 
-$\BigOh(n R)$ multiplications in~$\QQ_p(\pi)$ instead 
-of~$\ZZ_p$.
-\end{proof}
-\end{comment}
-
-\begin{comment}
-
 \subsection{Implementation}
 
 \subsubsection{Parallelisation}
@@ -2894,8 +2828,8 @@ carried out in parallel:
 \subsubsection{Magma}
 
 \subsubsection{Flint}
-
 \end{comment}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Examples}
