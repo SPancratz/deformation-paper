@@ -836,8 +836,8 @@ is an isomorphism of $L$-vector spaces.
 \begin{proof}
 Recall that $R_k$ and $C_k$ have the same cardinality by Lemma~\ref{lem:bijection}.
 If $R_k$ and $C_k$ are empty, then $U_k$ and $W_k$ are the zero vector spaces, 
-and the theorem holds trivially. So suppose that $R_k$ and $C_k$ are nonempty, 
-that is to say, $k \geq n/d + 1$. It is immediate that $\Delta_k$ is the matrix 
+and the theorem holds trivially. So suppose that $R_k$ and $C_k$ are nonempty. 
+It is immediate that $\Delta_k$ is the matrix 
 representing $\phi_k$ with respect to the bases $C_k$ and $R_k$ of $U_k$ and $W_k$, 
 respectively.
 
@@ -849,11 +849,11 @@ P_{t_0}(x_0, \dotsc, x_n) = a_0 x_0^d + \dotsb + a_n x_n^d
 \end{equation*}
 with $a_0, \dotsc, a_n \in \ZZ_q^{\times}$.
 
-We now show that the determinant of $\Delta_k$ is nonzero in~$L$.  Since 
+We now show that the determinant of $\Delta_k$ is nonzero.  Since 
 evaluation of the matrix at \mbox{$t = t_0$} commutes with computing the 
 determinant, it suffices to show that the determinant of 
-$(\Delta_k) \big |_{t=t_0}$ is nonzero.  Since, for $0 \leq j \leq n$, 
-$\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, there is 
+$(\Delta_k) \big |_{t=t_0}$ is nonzero. Since, for $0 \leq j \leq n$, 
+we have that $\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, there is 
 precisely one nonzero entry in each column and each row of~$\Delta_k$.  
 Namely, in column $(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is 
 the nonzero entry $d a_j$. Note that this also implies that 
