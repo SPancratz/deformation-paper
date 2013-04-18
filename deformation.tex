@@ -779,6 +779,10 @@ We also write $\cB_k = \{Q \Omega / P^k : Q \in B_k\}$ and denote
 $B = B_1 \cup \dotsb \cup B_n$ and $\cB = \cB_1 \cup \dotsb \cup \cB_n$.
 \end{defn}
 
+\begin{rem}
+Note that $B_k = \emptyset$ when $k < (n+1)/d$ or $k \geq n+1$.
+\end{rem}
+
 We will show below that if the family $\mathcal{X}/{\mathcal{S}}$ contains 
 a diagonal fibre, then the set $\cB$ forms a basis for $\HdR^n(\mathfrak{U}_L)$.
 
@@ -2105,35 +2109,46 @@ We use the notation and terminology from Section~\ref{sec:Connection}.
 It is known that the de Rham cohomology of 
 $A^{\dag}/\QQ_q \langle t,1/r \rangle^{\dag}$ 
 is isomorphic to the rigid cohomology of $U/S$, and that the action of 
-$F_p$ on the rigid cohomology of $U/S$ is induced by $\sigma$, so we have that
+$F_p$ on the rigid cohomology of $U/S$ is induced by $\sigma$. Recall
+that our basis vectors for $\Hrig(U/S)$ %TODO, not really Hrig(U/S), only after shrinking S
+are of the form $\frac{x^u \Omega}{P^{l}}$ with $x^u \in B_l$ and $l \leq n$. 
+We observe that
 \begin{equation*}
-p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{k}} \Bigr) \equiv
+p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{l}} \Bigr) \equiv
 \sum_{i=0}^{\infty} \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr)
+(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(l+i)}} \Bigr)
 \end{equation*}
 in $\Hrig^n(U/S)$, where $\eta_i \in \NN$ is defined by the equality 
-$(1-y)^{-k} = \sum_{i=0}^{\infty} \eta_i y^i$.
-
+$(1-y)^{-l} = \sum_{i=0}^{\infty} \eta_i y^i$.
 Using Algorithm~\ref{alg:PoleRed}, we can write
 \begin{equation} \label{eqn:Froblift}
 \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(k+i)}} \Bigr) \equiv
+(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(l+i)}} \Bigr) \equiv
 \frac{\gamma_{i,1} \Omega}{P^1}+\dotsb+\frac{\gamma_{i,n} \Omega}{P^n},
 \end{equation}
-where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for $0 \leq j \leq n$.
-Actually, we can slightly modify Algorithm~\ref{alg:Decompose},  
-so that we only have to invert $\Delta_{n+1}$ as long as the pole 
-order is at least $n+1$. [[TODO]] Moreover, note that the left-hand side of
-Equation~\eqref{eqn:Froblift} does not have a pole
-at $z \neq \infty$, and has a pole of order at most 
-$pi\deg_t(P)$ at $z=\infty$. This implies that
-\begin{align*}
+where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for all $i \geq 0$ and 
+$0 \leq j \leq n$. 
+
+Actually, we can slightly modify 
+Algorithm~\ref{alg:Decompose}, so that we only have to solve systems of the 
+form $\Delta_{n+1} v = w$, as long as $k \geq n+1$. Indeed, we may assume, 
+without loss of generality, that $Q=x^v$ is a monomial, and can find some 
+other monomial $x^w$ such that $x^{v-w}$ is of degree $(n+1)d-(n+1)$. Now we 
+apply Algorithm~\ref{alg:Decompose} to $x^{v-w}$, noting that $B_{n+1}=\emptyset$, 
+and multiply the output by $x^w$ to obtain the decomposition of $x^v$. 
+
+Note that the left-hand side of Equation~\eqref{eqn:Froblift} does not have a pole
+at $z \neq \infty$, and has order at least $-pi\deg_t(P)$ at $z=\infty$. When applying 
+Algorithm~\ref{alg:PoleRed} to this expression, as long as the pole order satisfies 
+$k \geq n+1$, the order at $z$ drops by at most $\nu$ in every reduction step, 
+and it drops by at most $\mu$ in the remaining reduction steps. This implies that
+\begin{align} \label{al:ordz}
 \ord_z(\gamma_{i,j}) &\geq 
 \begin{cases}
 \mu + (p(n+i)-n) \nu                 &\mbox{if } z \neq \infty, \\
-\mu + (p(n+i)-n) \nu + pi \deg_t(P)  &\mbox{if } z=\infty.
+\mu + (p(n+i)-n) \nu - pi \deg_t(P)  &\mbox{if } z=\infty.
 \end{cases}
-\end{align*}
+\end{align}
 
 For every $\tau \in S(\bar{\FF}_q)$ such that $\bar{R}(\tau) \neq 0$, we
 define lattices $\Lambda_{\tau,crys}$, $\Lambda_{\tau,\cB}$ in $\Hrig^n(U_{\tau})$
@@ -2147,9 +2162,17 @@ p^{i+(n-1)-\ord_p((n-1)!)-n \floor{\log_p(p(n+i)-1)}} \Lambda_{\tau,\cB},
 which implies that
 \begin{equation*}
 \ord_p(\gamma_{i,j}) \geq i+(n-1) - \ord_p((n-1)!) - n \floor{\log_p(p(n+i)-1)}.
-\qedhere
 \end{equation*}
+The entries of $\Phi$ are coefficients of sums of the form 
+$\sum_{i=0}^{\infty} \gamma_{i,j}$. Now modulo $p^N$, we can 
+restrict this sum to terms for which $\ord_p(\gamma_{i,j})<N$,
+and we can compute the order at $z$ of these terms using
+\eqref{al:ordz}. This completes the proof.
 \end{proof}
+
+\begin{rem}
+A result similar to Theorem \ref{thm:Gerkmann} was obtained by Gerkmann in \citep{Gerkmann2007}.
+\end{rem}
 
 Now if we want to compute the matrix $\Phi_{\tau}$ of the action of 
 $p^{-1} \Frob_p$ on $\Hrig^{n}(U_{\tau})$ to $p$-adic precision $N$, 
