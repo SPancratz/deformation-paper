@@ -505,7 +505,7 @@ $U=\mathcal{U} \otimes \QQ_q$, $S=\mathcal{S} \otimes \FF_q$ for the special
 fibres of $\mathcal{X},\mathcal{U}$, $\mathcal{S}$, respectively.
 
 \begin{thm} \label{thm:hypersurface} 
-For all $\tau \in S(\FF_{\mathfrak{q}})$, we have that
+For all $\tau \in S(\FF_{\mathfrak{q}})$, we have
 \begin{equation} \label{eq:formulazeta}
 Z(X_{\tau},T) = \frac{\chi(T)^{(-1)^n}}{(1 - T) (1 - \mathfrak{q}T) \dotsm (1 - \mathfrak{q}^{n-1}T)},
 \end{equation}
@@ -522,7 +522,7 @@ b(d,n) = \frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr).
 \begin{proof}
 This theorem is well known, see for example~\citep{AbbottKedlayaRoe2006}. 
 Since we need some intermediate results from the proof later on, we will 
-give a brief sketch here. First, by Theorem~\ref{thm:Lefschetz}, we have that
+give a brief sketch here. First, by Theorem~\ref{thm:Lefschetz}, we have 
 \[
 Z(X_{\tau},T) = \prod_{i=0}^{2(n-1)} \det(1- T \Frob_{\mathfrak{q}} | \Hrig^i(X_{\tau}))^{(-1)^{i+1}}.
 \]
@@ -855,7 +855,7 @@ We now show that the determinant of $\Delta_k$ is nonzero.  Since
 evaluation of the matrix at \mbox{$t = t_0$} commutes with computing the 
 determinant, it suffices to show that the determinant of 
 $(\Delta_k) \big |_{t=t_0}$ is nonzero. Since, for $0 \leq j \leq n$, 
-we have that $\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, there is 
+we have $\partial_j P_{t_0} (x_0, \dotsc, x_n) = d a_j x_j^{d-1}$, there is 
 precisely one nonzero entry in each column and each row of~$\Delta_k$.  
 Namely, in column $(j, g) \in C_k$ and row $g x_j^{d-1} \in R_k$ there is 
 the nonzero entry $d a_j$. Note that this also implies that 
@@ -864,7 +864,7 @@ $(\Delta_k) \big |_{t=t_0} \in \ZZ_{q}^{\times}$.
 
 We can use Theorem~\ref{thm:Isomorphism} to give a routine {\sc Decompose}, 
 formalised in Algorithm~\ref{alg:Decompose}, which given 
-$Q \in \QQ_q(t)[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$, 
+$Q \in \QQ_q(t)[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$
 returns an expression 
 \begin{equation*}
 Q = Q_0 \partial_0 P + \dotsb + Q_n \partial_n P + \gamma_k
@@ -1013,7 +1013,7 @@ $\Omega_{\QQ_q(t)} \otimes \HdR^n(\mathfrak{U}_{\QQ_q(t)})$. We apply
 Algorithm~\ref{alg:PoleRed} in order to write
 \begin{equation}
 dt \otimes \frac{- k x^u P_t \Omega}{P^{k+1}} \equiv 
-dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega
+dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega,
 \end{equation}
 where $\gamma_i$ is an element in the $\QQ_q(t)$-span of~$B_i$ for $1 \leq i \leq n$. 
 
@@ -1021,7 +1021,7 @@ where $\gamma_i$ is an element in the $\QQ_q(t)$-span of~$B_i$ for $1 \leq i \le
 For the matrix $M$ of $\nabla$ to be correct to $p$-adic precision $N_M$, we have to 
 carry out this computation to a somewhat higher working precision $N'_M$, because of 
 precision loss in Algorithm~\ref{alg:PoleRed}. 
-For all $k \in \NN$, by definition we have that $\ord_p(\Delta_k) \geq 0$, and from the proof
+For all $k \in \NN$, by definition $\ord_p(\Delta_k) \geq 0$, and from the proof
 of Theorem~\ref{thm:Isomorphism} we know that $\ord_p(\det(\Delta_k))=0$. 
 Therefore, there is no precision loss 
 in Algorithm~\ref{alg:Decompose}, and the only precision loss in Algorithm~\ref{alg:PoleRed} 
@@ -1187,7 +1187,7 @@ Define the nonnegative integer
 \]
 \end{defn}
 
-\begin{cor} \label{cor:delta} We have that
+\begin{cor} \label{cor:delta} We have 
 \begin{align*}
 \ord_p(\Phi) &\geq -\delta, \\
 \ord_p(\Phi^{-1}) &\geq -\delta-(n-1).
@@ -1377,7 +1377,7 @@ Let $x^u, x^v \in B$, $0 \leq i \leq n$, and $m, r$, be such that
 \[
 p(u_i + 1) - (v_i + 1) = d(m-pr).
 \] 
-Then we have that $r = \floor{m/p}$.
+Then we have $r = \floor{m/p}$.
 \end{prop}
 
 \begin{proof}
@@ -1600,8 +1600,9 @@ We start with an elementary lemma.
 
 \begin{lem} \label{lem:log}
 Given integers $\alpha, \beta \geq 2$ and defining 
-$x = \beta + \log_{\alpha}(\beta) + 1$, we have that 
-for all real numbers $y \geq x$, 
+$x = \beta + \log_{\alpha}(\beta) + 1$, 
+for all real numbers $y \geq x$,
+we have 
 \begin{equation*}
 y - \log_b(y) \geq \beta.
 \end{equation*}
@@ -1760,7 +1761,7 @@ Kedlaya~\citep{Kedlaya2010}.
 We let $\delta$ be defined as in Definition~\ref{defn:delta}. 
 
 \begin{thm} \label{thm:valC}
-For all $i \geq 1$, we have that
+For all $i \geq 1$, we have
 \begin{equation*}
 \ord_p(C_i) \geq - \bigl(2 \delta + (n - 1)\bigr) \ceil{\log_p(i)}.
 \end{equation*}
@@ -1829,7 +1830,7 @@ it follows that
 \begin{equation} \label{eq:CtildeminusC}
 \tilde{C}(t) - C(t) = C(t) \Bigl( \exp \Bigl( \int_{0}^t \bigl( \tilde{M}(s)-M(s) \bigr) ds \Bigr)- I \Bigr).
 \end{equation}
-Since $\ord_p(\tilde{M}-M) \geq N_M$, we have that 
+Since $\ord_p(\tilde{M}-M) \geq N_M$, we have 
 \[
 \ord_p \Bigl( \overline{\int_{0}^t \bigl( \tilde{M}(s)-M(s) \bigr) ds }\Bigr) \geq 
 N_C + (2 \delta + n-1) \ceil{\log_p(K-1)}+1,
@@ -1852,7 +1853,7 @@ write $M = G/r$, with $G = \sum_{i=0}^{\deg(G)} G_i t^i \in M_{b \times b}(\QQ_q
 and $r = \sum_{i=0}^{\deg(r)} r_i t^i \in \ZZ_q[t]$ a divisor of the 
 resultant $R$ defined in Definition~\ref{defn:resultant}. Note that the 
 degree of $r$ might be smaller than the degree of $R$, which will speed up 
-our computations. By Assumption~\ref{assump:diag}, we have that 
+our computations. By Assumption~\ref{assump:diag}, we have
 $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$.  
 
 We can now obtain a power series solution $C = \sum_{i=0}^{\infty} C_i t^i$ to
@@ -2288,7 +2289,7 @@ of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$.
 Let us still denote $a=\log_p(\mathfrak{q})$. Recall that $\Phi_{\tau}$ 
 is the matrix of the action of $p^{-1} \Frob_p$ on~$\Hrig^{n}(U_{\tau})$ 
 with respect to the basis $\cB$. As this action is $\sigma$-semilinear, 
-we have that 
+we have
 \begin{equation*}
 \Phi_{\tau}^{(a)} = 
     \Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau})
@@ -2310,7 +2311,7 @@ Let us denote
 \tilde{\chi}(T) = 1 + \sum_{i=1}^b \tilde{\chi}_i T^i 
                 = \det\bigl( 1 - T \tilde{\Phi}_{\tau}^{(a)}\bigr).
 \]
-Then for all $1 \leq i \leq b$, we have that 
+Then for all $1 \leq i \leq b$, we have
 \[
 \ord_p (\chi_i - \tilde{\chi}_i) \geq N_{\Phi}-\delta.
 \]
@@ -2321,7 +2322,7 @@ Recall from Theorem~\ref{thm:deltabound} that there exists a matrix
 $W_{\tau} \in M_{b \times b}(\QQ_q)$ satisfying 
 $\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, such that for 
 $\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ 
-we have that \mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
+we have \mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
 
 Defining the matrix 
 $\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma(W)^{-1}$, we find that 
@@ -2374,7 +2375,7 @@ $\Gamma: \{0,1, \dotsc, b\} \rightarrow \NN_0$ as
 Let $N_{\Phi} \in \NN$ be such that $N_{\Phi} \geq \Gamma(b)$.
 Suppose that $\tilde{\Phi}_{\tau}$ is an approximation to $\Phi_{\tau}$ 
 satisfying $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$. 
-Then for all $1 \leq i \leq b$, we have that 
+Then for all $1 \leq i \leq b$, we have
 \[
 \ord_p(\chi_i-\tilde{\chi}_i) \geq N_{\Phi} + \Gamma(i-1).
 \]
@@ -2410,7 +2411,7 @@ N_{\chi_i} = \floorbig{\log_p \bigl( 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) /
 
 \begin{proof}
 By Theorem~\ref{thm:weildeligne} and the short exact 
-sequence~\eqref{eqn:excision}, we have that
+sequence~\eqref{eqn:excision}, we have
 \[
 \chi(T)=\prod_{i=1}^b (1-\alpha_i T),
 \]
@@ -2423,7 +2424,7 @@ $s_j = \sum_{i=1}^{b} \alpha_i^j$, then clearly
 \]
 for all $1 \leq j \leq b$. Moreover, if we denote 
 $\chi(T) = 1+\sum_{i=1}^{b} \chi_i T^i$, then by the Newton--Girard 
-identies, we have that
+identies, we have
 \begin{equation} \label{eq:recursion}
 s_j+j \chi_j = - \sum_{i=1}^{j-1} s_{j-i} \chi_i.
 \end{equation}
@@ -2459,7 +2460,7 @@ $\det(\Phi^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, then this can
 be improved further. Since 
 $\prod_{i=1}^b \alpha_i = \epsilon \mathfrak{q}^{b(n-1)/2}$, and 
 the $\alpha_i$ are permuted under the map 
-$\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$, we have that
+$\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$, we have
 \begin{equation*}
 \chi_{b-i}=\epsilon (-1)^{b} \mathfrak{q}^{(n-1)(b/2-i)} \chi_b. 
 \end{equation*}
@@ -2575,7 +2576,7 @@ All $p$-adic precisions that we use lie in $\SoftOh(a d^n \log(d_t))$.
 
 \begin{proof}
 Note that $b \in \BigOh(d^n)$ and $\delta \in \BigOh(n)$.  
-In Theorem~\ref{thm:precPhitau}, we have that
+In Theorem~\ref{thm:precPhitau}, we have
 \begin{align*}
 \max_{1 \leq i \leq b} \{N_{\chi_i}\} \in \BigOh\bigl(a n b + \log(b) \bigr) 
             &\subset \SoftOh\bigl(a d^n \bigr),
@@ -2688,11 +2689,11 @@ decreased to being quasiquadratic in~$a$, which again has an effect on the
 entire deformation method.  We address this in the following proposition.
 \end{rem}
 
-\begin{prop}
+\begin{prop} \label{prop:compPhi0}
 The matrix~$\Phi_0$ can be computed to the required precision in 
 \begin{align*}
-\mbox{time: }  &\SoftOh\bigl(p a^2 d^{2n} (p + d^n) \log^2(d_t) \bigr), \\
-\mbox{space: } &\SoftOh\bigl(p^2 a^2 d^{2n} \log^2(d_t)\bigr).
+\mbox{time: }  &\SoftOh\bigl(a^2 p d^{2n} (p + d^n) \log^2(d_t) \bigr), \\
+\mbox{space: } &\SoftOh\bigl(a^2 p^2 d^{2n} \log^2(d_t)\bigr).
 \end{align*}
 \end{prop}
 
@@ -2858,7 +2859,20 @@ The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
                 a^2 a' p d^{n(\omega+4)} e^{2n} d_t^2+
                 aa' \bigl(d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n} e^{3n}\bigr) d_t 
                 \Bigr), \\
-\mbox{space: } &\SoftOh\bigl( a^2 a' p d^{4n} + a a' d^{4n} e^{3n} d_t \bigr).
+\mbox{space: } &\SoftOh\bigl( a^2 a' p d^{5n} d_t + a a' d^{4n} e^{3n} d_t \bigr).
+\end{align*}
+Alternatively, computing the matrix $\Phi_0$ as in the proof of Proposition~\ref{prop:compPhi0}, 
+the computation of $Z(X_{\tau},T)$ requires
+\begin{align*}
+\mbox{time: }  &\SoftOh\Bigl( 
+                a^2 p^2 d^{2n} + 
+                a^2 a' p d^{n(\omega+4)} e^{2n} d_t^2+
+                aa' \bigl(d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n} e^{3n}\bigr) d_t 
+                \Bigr), \\
+\mbox{space: } &\SoftOh\bigl( 
+                a^2 p^2 d^{2n} + 
+                a^2 a' p d^{5n} d_t + 
+                a a' d^{4n} e^{3n} d_t \bigr).
 \end{align*}
 \end{thm}
 
@@ -2874,9 +2888,8 @@ algorithm requires
 \mbox{time: }  &\SoftOh\bigl(a^3 p^2 (d^{n(\omega+5)} e^{3n} + d^{6n} e^{5n}) \bigr), \\ 
 \mbox{space: } &\SoftOh\bigl(a^3 p^2 d^{6n} e^{4n} \bigr).
 \end{align*}
-So our complexity bounds are an improvement of his.
+All of our complexity bounds are clearly an improvement of this.
 \end{rem}
-
 \begin{comment}
 \subsection{Implementation}
 
