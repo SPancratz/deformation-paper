@@ -2154,7 +2154,7 @@ and put
 \[
 \beta(N) = \begin{cases}
 \mu +(p(n+h(N))-n) \nu & \mbox{if $z \neq \infty$}, \\
-\mu +(p(n+h(N))-n) \nu - pi \deg_t(P) & \mbox{if $z = \infty$}.
+\mu +(p(n+h(N))-n) \nu - p h(N) \deg_t(P) & \mbox{if $z = \infty$}.
 \end{cases}
 \]
 Then $\Phi$ is congruent modulo $p^N$ to a matrix 
@@ -2257,7 +2257,7 @@ For any $N_{\Phi} \in \NN$,
 we can use Theorem~\ref{thm:KedlayaTuitman} or Theorem~\ref{thm:Gerkmann}
 to find $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that 
 $D \Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix of polynomials of degree 
-at most $K$. We then compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
+less than $K$. We then compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
 precision $N_{\Phi}$ using Algorithm~\ref{alg:expansion}. For any $\tau \in S(\bar{\FF}_q)$, 
 we can now compute
 \begin{equation*}
