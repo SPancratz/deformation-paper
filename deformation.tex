@@ -450,9 +450,6 @@ with connection $F \colon \sigma^* \mathcal{E} \rightarrow \mathcal{E}$
 defined on some strict neighbourhood of $V$. 
 \end{defn}
 
-In the rest of this section, and indeed this paper, $\FF_{\mathfrak{q}}$ always
-denotes a finite field extension of $\FF_q$ and $a=\log_p(\mathfrak{q})$.
-
 \begin{thm} \label{thm:frobstruc}
 Let $\mathcal{S}$ be a Zariski open subset of $\mathbf{P}^1_{\ZZ_q}$ and 
 suppose that $\mathcal{X}/\mathcal{S}$ is a smooth family of algebraic 
@@ -460,10 +457,11 @@ varieties that admits a relative normal crossing compactification. Denote
 the generic fibres of $\mathcal{S}$, $\mathcal{X}$ by 
 $\mathfrak{S}=\mathcal{S} \otimes \QQ_q$, $\mathfrak{X}=\mathcal{X} \otimes \QQ_q$ 
 and the special fibres by $S=\mathcal{S} \otimes \FF_q$, 
-$X=\mathcal{X} \otimes \FF_q$, respectively. For all $i$, the vector bundle 
+$X=\mathcal{X} \otimes \FF_q$, respectively. The vector bundle 
 $\HdR^i(\mathfrak{X}/\mathfrak{S})$ with the Gauss--Manin connection $\nabla$ 
 admits a Frobenius structure $F$ with the following property. 
-For any $\tau \in S(\FF_{\mathfrak{q}})$,
+For any finite field extension $\FF_{\mathfrak{q}}$ of $\FF_q$ and
+$\tau \in S(\FF_{\mathfrak{q}})$,
 \[
 (\Hrig^i(X_{\tau}),\Frob_p) \cong (\HdR^i(\mathfrak{X}/\mathfrak{S}),F)_{\hat{\tau}}
 \] 
@@ -491,18 +489,33 @@ see~\citep{Berthelot1986}.  However, for our purposes the above definition
 will be sufficient.
 \end{rem}
 
-In this paper we will only be interested in one-parameter families of smooth 
+In this paper we restrict our attention to one-parameter families of smooth 
 projective hypersurfaces. So we let $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ denote 
 a homogeneous polynomial of degree $d$ and let 
 $\mathcal{S} \subset \mathbf{P}^1_{\ZZ_q}$ be a Zariski open subset such that 
 $P$ defines a family $\mathcal{X}/\mathcal{S}$ of smooth hypersurfaces contained 
-in $\mathbf{P}^n_{\mathcal{S}}$. Moreover, we let $\mathcal{U}/\mathcal{S}$ 
+in $\mathbf{P}^n_{\mathcal{S}}$. 
+%TODO I was thinking about including this, but only makes things messier 
+%\begin{rem} 
+%We let $\mathfrak{r} \in \ZZ_q[t]$ denote
+%the Macaulay resultant  \citep[Chapter 1]{Macaulay1994} 
+%of the sequence of homogeneous polynomials
+%$(P,x_0 \frac{\partial P}{\partial x_0},\dotsc,x_n\frac{ \partial P}{\partial x_n})$.
+%The zero locus of $\mathfrak{r}$ contains the points
+%$t \in \mathbf{P}^1_{\ZZ_q} \setminus \{\infty\}$
+%for which $X_t$ is not smooth. Hence we can take $\mathcal{S}$ 
+%to be the complement of the closed set $\{\mathfrak{r}=0 \} \cup \{\infty\}$
+%in $\mathbf{P}^1_{\ZZ_q}$.   
+%\end{rem}
+We let $\mathcal{U}/\mathcal{S}$ 
 denote the complement of $\mathcal{X}/\mathcal{S}$ in $\mathbf{P}^n_{\mathcal{S}}$,
 and write $\mathfrak{X}=\mathcal{X} \otimes \QQ_q$, 
 $\mathfrak{U}=\mathcal{U} \otimes \QQ_q$, $\mathfrak{S}=\mathcal{S} \otimes \QQ_q$
 for the generic fibres, and $X=\mathcal{X} \otimes \FF_q$, 
 $U=\mathcal{U} \otimes \QQ_q$, $S=\mathcal{S} \otimes \FF_q$ for the special 
-fibres of $\mathcal{X},\mathcal{U}$, $\mathcal{S}$, respectively.
+fibres of $\mathcal{X},\mathcal{U}$, $\mathcal{S}$, respectively. Moreover, 
+we let $\FF_{\mathfrak{q}}$ be a finite field extension of $\FF_q$ and 
+denote $a=\log_p(\mathfrak{q})$.
 
 \begin{thm} \label{thm:hypersurface} 
 For all $\tau \in S(\FF_{\mathfrak{q}})$, we have
@@ -596,7 +609,7 @@ $\QQ_q \langle t, 1/r \rangle^{\dag}$, by taking the
 minimum over the coefficients and entries, respectively.
 \end{defn}
 
-\begin{assump}
+\begin{assump} \label{assump:S}
 From now on we will always assume that $0 \in \mathcal{S}$. 
 Note that if this is not the case, then it can be achieved by 
 applying a translation.
@@ -995,7 +1008,9 @@ $kd - (n+1)$ for $k \in \NN$. Applying Algorithm~\ref{alg:PoleRed}, we obtain an
 expression for the class of $Q \Omega / P^k$ as an $\QQ_q(t)$-linear combination of 
 elements in $\cB$.  This shows that $\cB$ spans the vector space 
 $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$. However, we know from Theorem~\ref{thm:hypersurface} that 
-$\dim \HdR^n(\mathfrak{U}_{\QQ_q(t)}) = \bigl((d-1)/d\bigr) \bigl( (d-1)^n - (-1)^n \bigr)$.  
+\[
+\dim \HdR^n(\mathfrak{U}_{\QQ_q(t)}) = \bigl((d-1)/d\bigr) \bigl( (d-1)^n - (-1)^n \bigr).
+\]  
 Therefore, it follows from Proposition~\ref{prop:BasisSize} that $\cB$ is linearly 
 independent as well.
 \end{proof}
@@ -1006,13 +1021,13 @@ $x^u \Omega / P^k \in \cB_k$.  Following the description in
 Section~\ref{sec:Background}, we compute
 \begin{equation} \label{eqn:nabla}
 \nabla \biggl(\frac{x^u \Omega}{P^k}\biggr) \equiv 
-dt \otimes \frac{- k x^u P_t \Omega}{P^{k+1}},
+dt \otimes \frac{- k x^u \frac{\partial P}{\partial t} \Omega}{P^{k+1}},
 \end{equation}
-where $P_t = dP/dt$ and $\equiv$ denotes equality in 
+where $\equiv$ denotes equality in 
 $\Omega_{\QQ_q(t)} \otimes \HdR^n(\mathfrak{U}_{\QQ_q(t)})$. We apply 
 Algorithm~\ref{alg:PoleRed} in order to write
 \begin{equation}
-dt \otimes \frac{- k x^u P_t \Omega}{P^{k+1}} \equiv 
+dt \otimes \frac{- k x^u \frac{\partial P}{ \partial t} \Omega}{P^{k+1}} \equiv 
 dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega,
 \end{equation}
 where $\gamma_i$ is an element in the $\QQ_q(t)$-span of~$B_i$ for $1 \leq i \leq n$. 
@@ -1045,7 +1060,7 @@ This is formalised in Algorithm~\ref{alg:Connection} below.
 \State \textit{Execute the following steps with $p$-adic working precision $N'_M$}:
 \For{$g \in B$} 
 \State $k \gets  (\deg(g)+(n+1))/d$
-\State $Q \gets  - k g P_t$ 
+\State $Q \gets  - k g \frac{\partial P}{\partial t}$ 
 \State $\gamma_{1}, \dotsc, \gamma_n \gets$ {\sc Reduce($P,Q$)} 
 \For{$f \in B$}
 \State $l \gets \bigl(\deg(f)+(n+1)\bigr)/d$
@@ -1058,13 +1073,10 @@ This is formalised in Algorithm~\ref{alg:Connection} below.
 \end{algorithm}
 
 \begin{defn} \label{defn:resultant}
-We define the resultant $R \in \ZZ_q[t]$ of the polynomial~$P$ with 
-respect to the basis $\cB$ by
+We define the polynomial $R \in \ZZ_q[t]$ by
 \[
-R = \prod_{k=2}^{n+1}  \det(\Delta_k),
+R = \prod_{k=2}^{n+1}  \det(\Delta_k).
 \]
-We let $\bar{R} \in \FF_q[t]$ be the 
-reduction modulo~$p$ of the polynomial~$R$.
 \end{defn}
 
 \begin{prop} \label{thm:denom}
@@ -1079,6 +1091,22 @@ are introduced is when the subroutine {\sc{Reduce}} calls its subroutine
 happens only for $k=2, \dotsc, n+1$ and at most once for each 
 such~$k$, the result is clear.
 \end{proof}
+
+\begin{rem}
+Recall that $\cB$ is a basis for $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$, but not
+necessarily for $\HdR^n(\mathfrak{U}/\mathfrak{S})$. However, if the zero locus
+of $R$ in $\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$, then $\cB$ is 
+a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$: it 
+spans the cohomology since one can apply Algorithm~\ref{alg:PoleRed}, and it is 
+linearly independent because it is so generically. Therefore, it will be convenient
+to choose $\mathcal{S}$ a bit smaller, so that this condition is satisfied. 
+\end{rem}
+
+\begin{assump} \label{assump:R}
+From now on we will always assume that the zero locus of $R$ in 
+$\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$, so that 
+$\cB$ is a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
+\end{assump}
 
 \begin{rem} 
 Note that in Algorithm~\ref{alg:Connection}, the matrices~$\Delta_k^{-1}$ 
@@ -1110,8 +1138,8 @@ computations. We will now recall how such bounds can be obtained
 following~\citep{AbbottKedlayaRoe2006}.
 
 \begin{thm} \label{thm:deltabound}
-For every 
-$\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying $\bar{R}(\tau) \neq 0$, 
+For any finite field extension $\FF_{\mathfrak{q}}$ of $\FF_q$ and
+$\tau \in S(\FF_{\mathfrak{q}})$, 
 there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_{\mathfrak{q}})$ such that 
 \begin{align*}
 \ord_p(W_{\tau}) &\geq -\sum_{i=1}^{n-1} \floor{\log_p(i)},
@@ -1146,13 +1174,13 @@ $\Lambda_{\tau,\cB}$ is also a lattice in $\Hrig^n(U_{\tau})$. Now we know that
 \]
 The inclusion on the left follows by explicitly reducing the generators of 
 $\Lambda_{\tau,mon}$ to the basis $\cB$ with Algorithm~\ref{alg:PoleRed} using 
-that $R(\hat{\tau}) \in \ZZ_q^{\times}$, and the inclusion on the right is clear.
+that $R(\hat{\tau}) \in \ZZ_{\mathfrak{q}}^{\times}$, and the inclusion on the right is clear.
 
 Putting all of these inclusions of lattices together, we find that
 \begin{equation} \label{eq:lattices}
 (n-1)! \Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB} \subset p^{-\sum_{i=1}^{n-1} \floor{\log_p(i)}} \Lambda_{\tau,crys}.
 \end{equation}
-Now let $[d_1, \dotsc, d_b]$ denote a $\ZZ_q$-basis for $\Lambda_{\tau,crys}$ and 
+Now let $[d_1, \dotsc, d_b]$ denote a $\ZZ_{\mathfrak{q}}$-basis for $\Lambda_{\tau,crys}$ and 
 let $W_{\tau} \in M_{b \times b}(\QQ_q)$ be the matrix for which the $i$-th column 
 consists of the coordinates of $d_i$ with respect to the basis $\cB$. From the 
 inclusions~\eqref{eq:lattices} it is clear that 
@@ -1195,8 +1223,8 @@ Define the nonnegative integer
 \end{cor}
 
 \begin{proof}
-For every $\tau \in \mathcal{S}(\FF_{\mathfrak{q}})$ satisfying 
-$\bar{R}(\tau) \neq 0$, we can apply Theorem~\ref{thm:deltabound} 
+For every $\tau \in \mathcal{S}(\bar{\FF}_{\mathfrak{q}})$, 
+we can apply Theorem~\ref{thm:deltabound} 
 to obtain
 \begin{align*}
 \ord_p(\Phi_{\tau}) &\geq \ord_p(W^{-1}_{\tau}) + 
@@ -1709,10 +1737,15 @@ hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by a
 polynomial $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ for which 
 $P(0) \in \ZZ_q[x_0,\dotsc,x_n]$ is of the form 
 $P_0=a_0 x_0^d + \dotsb + a_n x_n^d$ with $a_0,\dotsc,a_n \in \ZZ_p^{\times}$, 
-so that we can apply Algorithm~\ref{alg:Diagfrob}. Note that this assumption 
-also implies that we can take $\mathcal{S}$ to contain $0$ and that we have 
-$\bar{R}(0) \neq 0$.
+so that we can apply Algorithm~\ref{alg:Diagfrob}. 
 \end{assump}
+
+\begin{rem}
+Note that Assumption~\ref{assump:diag} 
+also implies that $\mathcal{S}$ can be chosen to satisfy Assumption~\ref{assump:S} 
+and Assumption \ref{assump:R}, since $P_0$ defines a smooth hypersurface and 
+we have that $R(0) \in \ZZ_p^{\times}$. 
+\end{rem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2024,8 +2057,8 @@ in Algorithm~\ref{alg:expansion} below.
 In the previous section we described how to compute the power series 
 expansion at $t=0$ of the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
 $\Hrig^{n}(U/S)$. We now want to evaluate $\Phi$ at the Teichm\"uller 
-lift~$\hat{\tau}$ of some nonzero $\tau \in S(\FF_{\mathfrak{q}})$ for 
-which $\bar{R}(\tau) \neq 0$, but the power series expansion of $\Phi$ 
+lift~$\hat{\tau}$ of some nonzero $\tau \in S(\FF_{\mathfrak{q}})$, but 
+the power series expansion of $\Phi$ 
 at $t=0$ usually only converges on the open unit disc $\abs{t} < 1$, 
 and so cannot be evaluated at $\hat{\tau}$. 
 
@@ -2228,7 +2261,7 @@ and it drops by at most $\mu$ in the remaining reduction steps. This implies tha
 \end{cases}
 \end{align}
 
-For every $\tau \in S(\bar{\FF}_q)$ such that $\bar{R}(\tau) \neq 0$, we
+For every $\tau \in S(\bar{\FF}_q)$, we
 define lattices $\Lambda_{\tau,crys}$, $\Lambda_{\tau,\cB}$ in $\Hrig^n(U_{\tau})$
 as in the proof of Theorem~\ref{thm:deltabound}. It follows from
 \citep[Proposition 3.4.6]{AbbottKedlayaRoe2006}, Equation~\eqref{eqn:Froblift}, 
@@ -2487,7 +2520,7 @@ in Algorithm~\ref{alg:complete} below.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$ such that $\bar{R}(\tau) \neq 0$.
+\Require $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$.
 \Ensure  The zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
@@ -2615,7 +2648,7 @@ these matrices, this takes time
 \SoftOh((de)^{n \omega} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)) = 
     \SoftOh(a a' \log(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t).
 \]
-Then we multiply each of the monomials in our basis with $-k P_t$ 
+Then we multiply each of the monomials in our basis with $-k \frac{\partial P}{\partial t}$ 
 for some $1 \leq k \leq n$ and reduce the product to the basis by 
 repeatedly using Algorithm~\ref{alg:Decompose}.  For each of these 
 monomials this takes time 
