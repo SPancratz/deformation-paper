@@ -2287,19 +2287,36 @@ A result similar to Theorem \ref{thm:Gerkmann}, but presented quite
 differently, was already obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}.
 \end{rem}
 
-For any $N_{\Phi} \in \NN$, 
-we can use Theorem~\ref{thm:KedlayaTuitman} or Theorem~\ref{thm:Gerkmann}
-to find $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that 
-$D \Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix of polynomials of degree 
-less than $K$. We then compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
-precision $N_{\Phi}$ using Algorithm~\ref{alg:expansion}. For any $\tau \in S(\bar{\FF}_q)$, 
-we can now compute
+For all $N_{\Phi} \in \NN$ and all unramified geometric points
+$z \in \mathbf{P}^1_{\QQ_q}$, using either Theorem~\ref{thm:KedlayaTuitman} 
+or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\gamma_{z} \in \NN_0$, 
+such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix 
+$\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$, for which
+\begin{equation*}
+\ord_z(\tilde{\Phi}) \geq -\gamma_z.
+\end{equation*}
+Note that we can (and will) take $\gamma_z=0$ if the connection matrix $M$ does not have 
+a pole at $z$, i.e. if the polynomial $r$ does not have a zero at $z$. We now define the 
+polynomial
+\begin{equation*}
+D = \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\gamma_z} 
+    \prod_{z \neq \infty, \ord_p(z) < 0}(\frac{t}{z}-1)^{\gamma_z}.
+\end{equation*}
+It is clear that $D \in \ZZ_q[t]$, that $D$ divides some power of $r$,
+and that $D \Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix of 
+polynomials of degree less than
+\begin{equation*}
+K = \bigl(\sum_{z} \gamma_z \bigr) +1.
+\end{equation*}
+We now compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
+precision $N_{\Phi}$ using Algorithm~\ref{alg:expansion}. For any 
+$\tau \in S(\bar{\FF}_q)$, we can then compute
 \begin{equation*}
 \Phi_{\tau} = D(\hat{\tau})^{-1}  \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bigr) \bmod{p^{N_{\Phi}}}.
 \end{equation*}
 Since $\ord_p(D(\hat{\tau}))=0$, $\ord_p(\hat{\tau}) \geq 0$ and
 $\ord_p(\Phi) \geq -\delta$, 
-the matrix $\Phi_{\tau}$ will then also be correct to precision $N_{\Phi}$ 
+the matrix $\Phi_{\tau}$ will now also be correct to precision $N_{\Phi}$ 
 provided that $\hat{\tau}$ is computed to $p$-adic precision $N_{\Phi}+\delta$,
 by Proposition~\ref{prop:matrixproductval}.
 
@@ -2529,7 +2546,7 @@ in Algorithm~\ref{alg:complete} below.
 \item $N_{\Phi}' \gets N_{\Phi}+(a+b-3) \delta$
 %\item Set $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-3) \delta$, $N' \gets N-\delta$.
 \item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D \Phi$ is a matrix 
-      of polynomials of degree at most $K$ to $p$-adic precision $N_{\Phi}$, using Theorem~\ref{thm:KedlayaTuitman}
+      of polynomials of degree less than $K$ to $p$-adic precision $N_{\Phi}$, using Theorem~\ref{thm:KedlayaTuitman}
       or Theorem~\ref{thm:Gerkmann}.
 \item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N_{\Phi},K)$}.
 \item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $N_{\Phi}+\delta$.
