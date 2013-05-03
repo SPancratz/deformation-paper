@@ -460,8 +460,8 @@ and the special fibres by $S=\mathcal{S} \otimes \FF_q$,
 $X=\mathcal{X} \otimes \FF_q$, respectively. The vector bundle 
 $\HdR^i(\mathfrak{X}/\mathfrak{S})$ with the Gauss--Manin connection $\nabla$ 
 admits a Frobenius structure $F$ with the following property. 
-For any finite field extension $\FF_{\mathfrak{q}}$ of $\FF_q$ and
-$\tau \in S(\FF_{\mathfrak{q}})$,
+For any finite field extension $\FF_{\mathfrak{q}}/\FF_q$ and
+all $\tau \in S(\FF_{\mathfrak{q}})$,
 \[
 (\Hrig^i(X_{\tau}),\Frob_p) \cong (\HdR^i(\mathfrak{X}/\mathfrak{S}),F)_{\hat{\tau}}
 \] 
@@ -514,7 +514,7 @@ $\mathfrak{U}=\mathcal{U} \otimes \QQ_q$, $\mathfrak{S}=\mathcal{S} \otimes \QQ_
 for the generic fibres, and $X=\mathcal{X} \otimes \FF_q$, 
 $U=\mathcal{U} \otimes \QQ_q$, $S=\mathcal{S} \otimes \FF_q$ for the special 
 fibres of $\mathcal{X},\mathcal{U}$, $\mathcal{S}$, respectively. Moreover, 
-we let $\FF_{\mathfrak{q}}$ be a finite field extension of $\FF_q$ and 
+we let $\FF_{\mathfrak{q}}/FF_q$ be a finite field extension and 
 denote $a=\log_p(\mathfrak{q})$.
 
 \begin{thm} \label{thm:hypersurface} 
@@ -1096,16 +1096,16 @@ such~$k$, the result is clear.
 Recall that $\cB$ is a basis for $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$, but not
 necessarily for $\HdR^n(\mathfrak{U}/\mathfrak{S})$. However, if the zero locus
 of $R$ in $\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$, then $\cB$ is 
-a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$: it 
-spans the cohomology since one can apply Algorithm~\ref{alg:PoleRed}, and it is 
-linearly independent because it is so generically. Therefore, it will be convenient
-to choose $\mathcal{S}$ a bit smaller, so that this condition is satisfied. 
+a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$. That it 
+spans the cohomology can be seen by applying Algorithm~\ref{alg:PoleRed}, and that it 
+is linearly independent follows because it is so over $\QQ_q(t)$. Therefore, it will 
+be convenient to choose $\mathcal{S}$ smaller, so that this condition is satisfied. 
 \end{rem}
 
 \begin{assump} \label{assump:R}
 From now on we will always assume that the zero locus of $R$ in 
-$\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$, so that 
-$\cB$ is a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
+$\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$. In particular
+this implies that $\cB$ is a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
 \end{assump}
 
 \begin{rem} 
@@ -1129,8 +1129,9 @@ respect to the basis $\cB$. We have seen that there exists a Frobenius
 structure $\Frob_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$. Let 
 $\Phi \in M_{b \times b}(\QQ_q \langle t, \frac{1}{r} \rangle^{\dag})$ 
 denote the matrix of the action of $p^{-1}\Frob_p$, where $r$ is the 
-denominator of the connection matrix $M$. Recall that $\FF_{\mathfrak{q}}$ 
-denotes a finite field extension of $\FF_q$. 
+denominator of the connection matrix $M$. Recall that 
+$\FF_{\mathfrak{q}}/FF_q$ 
+denotes a finite field extension. 
 
 We need a priori lower bounds on the $p$-adic valuations of the matrices 
 $\Phi$ and $\Phi^{-1}$ to bound the loss of $p$-adic precision in our 
@@ -1138,8 +1139,8 @@ computations. We will now recall how such bounds can be obtained
 following~\citep{AbbottKedlayaRoe2006}.
 
 \begin{thm} \label{thm:deltabound}
-For any finite field extension $\FF_{\mathfrak{q}}$ of $\FF_q$ and
-$\tau \in S(\FF_{\mathfrak{q}})$, 
+For any finite field extension $\FF_{\mathfrak{q}}/\FF_q$ and
+all $\tau \in S(\FF_{\mathfrak{q}})$, 
 there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_{\mathfrak{q}})$ such that 
 \begin{align*}
 \ord_p(W_{\tau}) &\geq -\sum_{i=1}^{n-1} \floor{\log_p(i)},
@@ -1605,12 +1606,12 @@ where $\delta$ is defined as in Definition~\ref{defn:delta}.
 \begin{proof}
 Recall from Corollary~\ref{cor:delta} that the valuations 
 of the entries of the matrix~$\Phi_0$ are bounded from below by $-\delta$. 
-Thus, by Theorem~\ref{thm:01-03-diagfrob}, 
+Thus by Theorem~\ref{thm:01-03-diagfrob}, 
 \begin{equation*}
 -\delta \leq \ord_p\bigl((k(v)-1)!\bigr) + n 
-           - \ord_p\bigl((k(u)-1)! \alpha_{u,v}\bigr)
+           - \ord_p\bigl((k(u)-1)! \alpha_{u,v}\bigr),
 \end{equation*}
-Since $k(v) \leq n$, the result follows.
+and since $k(v) \leq n$, the result follows.
 \end{proof}
 
 \begin{cor} \label{cor:Ntilde}
@@ -2324,7 +2325,7 @@ by Proposition~\ref{prop:matrixproductval}.
 
 Now we want to compute the zeta function of the fibre $X_{\tau}$ of
 our family $X/S$ lying over some $\tau \in S(\FF_{\mathfrak{q}})$, 
-where $\FF_{\mathfrak{q}}$ denotes a finite finite field extension of $\FF_q$.  
+where $\FF_{\mathfrak{q}}/FF_q$ denotes a finite field extension.  
 Recall from Theorem~\ref{thm:hypersurface} 
 that the zeta function of $X_{\tau}$ is of the form
 \begin{equation*}
