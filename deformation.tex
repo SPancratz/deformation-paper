@@ -1579,7 +1579,8 @@ In particular, we have that $\alpha_{u, v}$ is a $p$-adic integer.
 
 \begin{proof}
 This is an immediate consequence of Theorem~\ref{thm:alpha}, 
-Proposition~\ref{prop:mpr},Definition~\ref{defn:mup} and Lemma~\ref{lem:mup}.
+Proposition~\ref{prop:mpr}, Definition~\ref{defn:mup} and 
+Lemma~\ref{lem:mup}.
 \end{proof}
 
 \subsection{Estimates}
@@ -1863,17 +1864,13 @@ it follows that
 \begin{equation} \label{eq:CtildeminusC}
 \tilde{C}(t) - C(t) = C(t) \Bigl( \exp \Bigl( \int_{0}^t \bigl( \tilde{M}(s)-M(s) \bigr) ds \Bigr)- I \Bigr).
 \end{equation}
-Since $\ord_p(\tilde{M}-M) \geq N_M$, we have 
-\[
-\ord_p \Bigl( \overline{\int_{0}^t \bigl( \tilde{M}(s)-M(s) \bigr) ds }\Bigr) \geq 
-N_C + (2 \delta + n-1) \ceil{\log_p(K-1)}+1,
-\]
-so for all $1 \leq i \leq K-1$, we obtain the bound
+Since $\ord_p(\tilde{M}-M) \geq N_M$, we obtain
 \begin{equation*}
 \ord_p \Bigl( \overline{\frac{1}{i!} \Bigl(\int_{0}^t \bigl( \tilde{M}(s)-M(s) \bigr) ds \Bigr)^i } \Bigr) \geq 
-N_C + (2 \delta + n-1) \ceil{\log_p(K-1)},
+N_C + (2 \delta + n-1) \ceil{\log_p(K-1)}
 \end{equation*}
-where we have used that $\ord_p(i!) \leq i$. Moreover, from Theorem~\ref{thm:valC}, we already know that 
+for all $1 \leq i \leq K-1$, where we have used that $\ord_p(i!) \leq \frac{i}{p-1} \leq 1$. 
+Moreover, from Theorem~\ref{thm:valC}, we already know that 
 \[
 \ord_p(\overline{C}) \geq -(2 \delta + n-1) \ceil{\log_p(K-1)}.
 \] 
@@ -1881,15 +1878,20 @@ From these two inequalities and Equation~\eqref{eq:CtildeminusC}, we
 deduce that $\ord_p(\overline{\tilde{C}-C}) \geq N_C$.
 \end{proof}
 
-Now we explain how to compute the solution to Equation~\eqref{eq:01-GMDE-Homogenous}. We can 
-write $M = G/r$, with $G = \sum_{i=0}^{\deg(G)} G_i t^i \in M_{b \times b}(\QQ_q[t])$, 
-and $r = \sum_{i=0}^{\deg(r)} r_i t^i \in \ZZ_q[t]$ a divisor of the 
-resultant $R$ defined in Definition~\ref{defn:resultant}. Note that the 
-degree of $r$ might be smaller than the degree of $R$, which will speed up 
-our computations. By Assumption~\ref{assump:diag}, we have
+Now we explain how to compute the solution $C$ to Equation~\eqref{eq:01-GMDE-Homogenous} 
+to $p$-adic precision $N_C$ and $t$-adic precision $K$, assuming that the connection 
+matrix $M$ has been computed to $p$-adic precision $N_M$ as defined in 
+Proposition~\ref{prop:N_M}. We can write $M = G/r$, with 
+$G = \sum_{i=0}^{\deg(G)} G_i t^i \in M_{b \times b}(\QQ_q[t])$ 
+and $r = \sum_{i=0}^{\deg(r)} r_i t^i \in \ZZ_q[t]$ a divisor of the polynomial $R$ defined in 
+Definition~\ref{defn:resultant}. 
+%TODO small problem, if M is computed to some p-adic precision, the poles are not determined exactly,
+%so R and r etc. should be computed to infinite precision?? 
+Note that the degree of $r$ might be smaller than the degree 
+of $R$, which will speed up our computations. By Assumption~\ref{assump:diag}, we have
 $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$.  
 
-We can now obtain a power series solution $C = \sum_{i=0}^{\infty} C_i t^i$ to
+We can obtain a power series solution $C = \sum_{i=0}^{\infty} C_i t^i$ to
 the equation
 \begin{align*}
 r \frac{dC}{dt} + G C &= 0, &C(0)& = I,
@@ -1902,14 +1904,13 @@ C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
     \sum_{j=\max{\{0,i-\deg(G)\}}}^i G_{i-j} C_j + 
     \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr).
 \end{align}
-We will only carry out this computation to some finite $p$-adic 
+Again we will only carry out this computation to some finite $p$-adic 
 working precision~$N'_C$, and if we want $C$ to be correct to $p$-adic 
 precision~$N_C$, then the precision $N'_C$ has to be somewhat higher, 
 because of error propagation. An expression for $N'_C$, in terms of 
 $N_C$ and the desired $t$-adic precision $K$, was already given by 
 Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be
-significantly improved 
-using Theorem~\ref{thm:valC}, as we will now show. 
+significantly improved using Theorem~\ref{thm:valC}, as we will now show. 
 
 Let $\tilde{C}=\sum_{i=0}^{\infty} \tilde{C}_i t^i$ denote an 
 approximation to $C$ computed using the approximate recursion:  
@@ -1937,7 +1938,7 @@ The matrix $\tilde{C}$ satisfies the differential equation
 \frac{d\tilde{C}}{dt}+M \tilde{C}&=E, &\tilde{C}(0)&=I,
 \end{align*}
 where we have denoted $E=\sum_{i=1}^{\infty} E_i t^i$.
-One now checks that the matrix $C^{-1}\tilde{C}$ satisfies 
+One also checks that the matrix $C^{-1}\tilde{C}$ satisfies 
 the differential equation
 \begin{align*}
 \frac{d(C^{-1}\tilde{C})}{dt} &=C^{-1} E, &(C^{-1}\tilde{C})(0)&=I,
@@ -1952,7 +1953,7 @@ Remark~\ref{rem:Cinv} that
 \ord_p(\overline{C}),\ord_p(\overline{C^{-1}}) \geq 
 -(2 \delta + n-1) \ceil{\log_p(K-1)},
 \end{equation}
-so that we obtain
+hence we obtain
 \[
 \ord_p \Bigl(\overline{\int_{0}^t C^{-1}(s) E(s) ds }\Bigr) \geq 
 N_{C} + \Bigl( \bigl(2 \delta + (n-1)\bigr) \Bigr) \ceil{\log_p(K-1)}.
