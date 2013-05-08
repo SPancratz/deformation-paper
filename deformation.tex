@@ -514,7 +514,7 @@ $\mathfrak{U}=\mathcal{U} \otimes \QQ_q$, $\mathfrak{S}=\mathcal{S} \otimes \QQ_
 for the generic fibres, and $X=\mathcal{X} \otimes \FF_q$, 
 $U=\mathcal{U} \otimes \QQ_q$, $S=\mathcal{S} \otimes \FF_q$ for the special 
 fibres of $\mathcal{X},\mathcal{U}$, $\mathcal{S}$, respectively. Moreover, 
-we let $\FF_{\mathfrak{q}}/FF_q$ be a finite field extension and 
+we let $\FF_{\mathfrak{q}}/\FF_q$ be a finite field extension and 
 denote $a=\log_p(\mathfrak{q})$.
 
 \begin{thm} \label{thm:hypersurface} 
@@ -1045,7 +1045,7 @@ comes from dividing by $k-1$ for $k=2,\dotsc,n+1$. Hence it is sufficient to tak
 N_M'=N_M + \ord_p(n!).
 \end{equation*}
 \end{rem}
-This is formalised in Algorithm~\ref{alg:Connection} below.
+This is formalised in Algorithm~\ref{alg:Connection}.
 
 \begin{algorithm}
 \caption{Compute the Gauss--Manin connection matrix}
@@ -1130,7 +1130,7 @@ structure $\Frob_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$. Let
 $\Phi \in M_{b \times b}(\QQ_q \langle t, \frac{1}{r} \rangle^{\dag})$ 
 denote the matrix of the action of $p^{-1}\Frob_p$, where $r$ is the 
 denominator of the connection matrix $M$. Recall that 
-$\FF_{\mathfrak{q}}/FF_q$ 
+$\FF_{\mathfrak{q}}/\FF_q$ 
 denotes a finite field extension. 
 
 We need a priori lower bounds on the $p$-adic valuations of the matrices 
@@ -1683,7 +1683,7 @@ Note that this includes all terms with $r = 0$.
 
 Finally, we formalise the procedure for computing 
 the entries of~$\Phi_0$ to $p$-adic precision~$N_{\Phi_0}$ in 
-Algorithm~\ref{alg:Diagfrob} below.
+Algorithm~\ref{alg:Diagfrob}.
 
 \begin{algorithm}
 \caption{Compute the matrix $\Phi_0$.}
@@ -1972,7 +1972,8 @@ out to be more efficient.
 \end{rem}
 
 We can now finally give all the necessary precisions for computing the power 
-series expansion for $\Phi$ at $t=0$ to any given $p$-adic and $t$-adic precisions.
+series expansion for $\Phi$ at $t=0$ to $t$-adic precision $K$ and $p$-adic 
+precision $N_{\Phi}$.
 
 \begin{thm} \label{thm:Ni}
 Let $K,N_{\Phi} \in \NN$ and define:
@@ -2013,7 +2014,7 @@ follow from Proposition~\ref{thm:errorprop}.
 
 Now we have all the ingredients to compute the power series expansion of 
 $\Phi$ at $t=0$ to any given $p$-adic and $t$-adic precisions, as formalised 
-in Algorithm~\ref{alg:expansion} below.
+in Algorithm~\ref{alg:expansion}.
 
 \begin{algorithm}
 \caption{Compute the power series expansion of $\Phi$ at $t=0$.}
@@ -2059,7 +2060,8 @@ in Algorithm~\ref{alg:expansion} below.
 In the previous section we described how to compute the power series 
 expansion at $t=0$ of the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
 $\Hrig^{n}(U/S)$. We now want to evaluate $\Phi$ at the Teichm\"uller 
-lift~$\hat{\tau}$ of some nonzero $\tau \in S(\FF_{\mathfrak{q}})$, but 
+lift~$\hat{\tau}$ of some nonzero $\tau \in S(\FF_{\mathfrak{q}})$, 
+where $\FF_{\mathfrak{q}}/\FF_q$ denotes a finite field extension, but 
 the power series expansion of $\Phi$ 
 at $t=0$ usually only converges on the open unit disc $\abs{t} < 1$, 
 and so cannot be evaluated at $\hat{\tau}$. 
@@ -2288,36 +2290,39 @@ A result similar to Theorem \ref{thm:Gerkmann}, but presented quite
 differently, was already obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}.
 \end{rem}
 
-For all $N_{\Phi} \in \NN$ and all unramified geometric points
+\begin{thm} \label{thm:defD}
+Let $N_{\Phi} \in \NN$. We can explicitly find $D \in \ZZ_q[t]$ and
+$K \in \NN$, such that $D$ divides some power of $r$,
+and $D \Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix of 
+polynomials of degree less than $K$.
+\end{thm}
+
+\begin{proof}
+For all unramified geometric points
 $z \in \mathbf{P}^1_{\QQ_q}$, using either Theorem~\ref{thm:KedlayaTuitman} 
 or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\gamma_{z} \in \NN_0$, 
 such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix 
-$\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$, for which
-\begin{equation*}
-\ord_z(\tilde{\Phi}) \geq -\gamma_z.
-\end{equation*}
+$\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
+$\ord_z(\tilde{\Phi}) \geq -\gamma_z$.
 Note that we can (and will) take $\gamma_z=0$ if the connection matrix $M$ does not have 
-a pole at $z$, i.e. if the polynomial $r$ does not have a zero at $z$. We now define the 
-polynomial
-\begin{equation*}
-D = \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\gamma_z} 
-    \prod_{z \neq \infty, \ord_p(z) < 0}(\frac{t}{z}-1)^{\gamma_z}.
-\end{equation*}
-It is clear that $D \in \ZZ_q[t]$, that $D$ divides some power of $r$,
-and that $D \Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix of 
-polynomials of degree less than
-\begin{equation*}
-K = \bigl(\sum_{z} \gamma_z \bigr) +1.
-\end{equation*}
-We now compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
+a pole at $z$, i.e. if the polynomial $r$ does not have a zero at $z$. We now define 
+\begin{align*}
+D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\gamma_z} 
+    \prod_{z \neq \infty, \ord_p(z) < 0}(\frac{t}{z}-1)^{\gamma_z}, 
+&K&= \bigl(\sum_{z} \gamma_z \bigr) +1,    
+\end{align*}
+which clearly satisfy all the conditions.
+\end{proof}
+
+We compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
 precision $N_{\Phi}$ using Algorithm~\ref{alg:expansion}. For any 
-$\tau \in S(\bar{\FF}_q)$, we can then compute
+$\tau \in S(\bar{\FF}_q)$, we can now compute
 \begin{equation*}
 \Phi_{\tau} = D(\hat{\tau})^{-1}  \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} \bigr) \bmod{p^{N_{\Phi}}}.
 \end{equation*}
 Since $\ord_p(D(\hat{\tau}))=0$, $\ord_p(\hat{\tau}) \geq 0$ and
 $\ord_p(\Phi) \geq -\delta$, 
-the matrix $\Phi_{\tau}$ will now also be correct to precision $N_{\Phi}$ 
+the matrix $\Phi_{\tau}$ will also be correct to precision $N_{\Phi}$ 
 provided that $\hat{\tau}$ is computed to $p$-adic precision $N_{\Phi}+\delta$,
 by Proposition~\ref{prop:matrixproductval}.
 
@@ -2325,7 +2330,7 @@ by Proposition~\ref{prop:matrixproductval}.
 
 Now we want to compute the zeta function of the fibre $X_{\tau}$ of
 our family $X/S$ lying over some $\tau \in S(\FF_{\mathfrak{q}})$, 
-where $\FF_{\mathfrak{q}}/FF_q$ denotes a finite field extension.  
+where $\FF_{\mathfrak{q}}/\FF_q$ denotes a finite field extension.  
 Recall from Theorem~\ref{thm:hypersurface} 
 that the zeta function of $X_{\tau}$ is of the form
 \begin{equation*}
@@ -2532,7 +2537,7 @@ the two coefficients $\chi_{\ceil{b/2}-j}$ and $\chi_{\floor{b/2}+j}$.
 \end{rem}
 
 We now formalise the complete algorithm for computing $Z(X_{\tau},T)$ 
-in Algorithm~\ref{alg:complete} below.
+in Algorithm~\ref{alg:complete}.
 
 \begin{algorithm} 
 \caption{Compute $Z(X_{\tau},T)$.}
@@ -2546,9 +2551,7 @@ in Algorithm~\ref{alg:complete} below.
 \item Determine $N_{\Phi}$ from Theorem~\ref{thm:precPhitau}.
 \item $N_{\Phi}' \gets N_{\Phi}+(a+b-3) \delta$
 %\item Set $\tilde{N} \gets N + \delta$, $\bar{N} \gets N+(a+b-3) \delta$, $N' \gets N-\delta$.
-\item Determine $K \in \NN$, and $D \in \ZZ_q[t]$ that divides some power of $r$, such that $D \Phi$ is a matrix 
-      of polynomials of degree less than $K$ to $p$-adic precision $N_{\Phi}$, using Theorem~\ref{thm:KedlayaTuitman}
-      or Theorem~\ref{thm:Gerkmann}.
+\item Determine $K \in \NN$ and $D \in \ZZ_q[t]$ from Corollary \ref{thm:defD}.
 \item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N_{\Phi},K)$}.
 \item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $N_{\Phi}+\delta$.
 \item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
@@ -2562,6 +2565,20 @@ in Algorithm~\ref{alg:complete} below.
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\begin{rem}
+The output of Algorithm~\ref{alg:complete} only depends on $X_{\tau}$. In particular, 
+we can also take a polynomial $\bar{P} \in \FF_q[t][x_0,\dotsc,x_n]$ as input, and at the 
+start of the algorithm take $P$ to be an arbitrary lift of $\bar{P}$. For the complexity 
+analysis in the next section for example, we therefore take the input size to be the size 
+of $\bar{P}$.  However, from a practical point of view, it is more convenient to keep the 
+lift $P$ as the input, since:
+\begin{enumerate} 
+\item the matrices $M, \Phi_0, C, \Phi, \Phi_{\tau}$ do depend on $P$, 
+\item Assumption~\ref{assump:diag} needs to hold for $P$,
+\item the runtime and memory usage of the algorithm depend strongly on $P$. 
+\end{enumerate}
+\end{rem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2942,52 +2959,6 @@ algorithm requires
 \end{align*}
 All of our complexity bounds are clearly an improvement of this.
 \end{rem}
-\begin{comment}
-\subsection{Implementation}
-
-\subsubsection{Parallelisation}
-
-Many of the steps in the algorithm can be
-carried out in parallel:
-\begin{itemize}
-\item In Algorithm~\ref{alg:Connection}, the images of the different 
-      basis vectors under $\nabla$ can be computed independently.
-\item In Algorithm~\ref{alg:Diagfrob}, the elements of the sequence 
-      $(\mu_m)_{m=0}^{\mathcal{M}}$ can be computed independently.
-\item At first sight Algorithm~\ref{alg:expansion} cannot be parallelised easily 
-      as every $C_{i}$ depends on some $C_{j}$ with $j < i$. However, in
-      the computation of every single $C_i$ the different matrix products can
-      still be computed independently.
-\item The computation of 
-      $\Phi_{\tau}^{(a)}=\Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau})$ 
-      can be carried out in parallel.  Instead of computing 
-      a running product from left to right, one can use a 
-      product tree.  We formalise this in Algorithm~\ref{alg:ParallelProduct} below, 
-      assuming for simplicity that $a = 2^k$.  In this notation, the execution 
-      of the loops indexed by~$i$ can be parallelised.
-      \begin{algorithm}
-      \caption{Parallel computation of $\Phi_{\tau}^{(a)}$}
-      \label{alg:ParallelProduct}
-      \begin{algorithmic}
-      \vspace{1mm}
-      \For{$i \gets 0$ \textbf{to} $a-1$}
-          \State $M_i \gets \sigma^{i}(\Phi_{\tau})$
-      \EndFor
-      \For{$j=k-1$ \textbf{to} $0$}
-          \State $h \gets 2^{k-j}$
-          \For{$i \gets 0$ \textbf{to} $2^j-1$}
-          \State $M_{2^j-1 + ih} \gets M_{2^j-1 + i h} M_{2^j-1 + ih + h/2}$
-          \EndFor
-      \EndFor
-      \Return $M_0$
-      \end{algorithmic}
-      \end{algorithm}
-\end{itemize}
-
-\subsubsection{Magma}
-
-\subsubsection{Flint}
-\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
