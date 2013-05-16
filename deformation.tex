@@ -200,6 +200,7 @@ on smooth projective hypersurfaces}
 
 \maketitle
 
+\setcounter{tocdepth}{2}
 \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2097,8 +2098,8 @@ as the eigenvalues of $(t - z) M \vert_{t=z}$ and known to be rational numbers, 
 contained in $\ZZ_p \cap \QQ$. Let $\delta$ be defined as in 
 Definition~\ref{defn:delta}. For $i \in \NN$, put
 \begin{align*}
-f(i) = \max \Bigl\{ \bigl( -2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil, 
-(b-1) \ord_p(M) + \bigl( -2 \delta + (n-1) \bigr) \lfloor \log_p(i) \rfloor 
+f(i) = \max \Bigl\{ -\bigl(2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil, 
+(b-1) \ord_p(M) -\bigl(2 \delta + (n-1) \bigr) \lfloor \log_p(i) \rfloor 
 \Bigr\},
 \end{align*}
 and define 
@@ -2140,13 +2141,13 @@ we might not know them exactly a priori.
 \end{proof}
 
 \begin{rem}
-In practice, the various constants $-2 \delta + (n-1), c, \alpha_1, -\delta$ 
+In practice, the various constants $-(2 \delta + (n-1)), c, \alpha_1, -\delta$ 
 are always very small in absolute value, so that $g(N)$ is about $N$, and 
 the lower bound for the order of~$\Phi$ modulo $p^N$ at the point $z$ is 
 roughly $-pN$.
 \end{rem}
 
-\begin{rem}
+\begin{rem} \label{rem:basischange}
 The condition that $M$ has a simple pole at $z$ is not a serious restriction. 
 One can always find another basis $[w_1, \dotsc, w_b]$ for which this condition is 
 satisfied, because the Gauss--Manin connection is known to be regular singular. 
@@ -2292,9 +2293,9 @@ differently, was already obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}
 
 \begin{thm} \label{thm:defD}
 Let $N_{\Phi} \in \NN$. We can explicitly find $D \in \ZZ_q[t]$ and
-$K \in \NN$, such that $D$ divides some power of $r$,
-and $D \Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix of 
-polynomials of degree less than $K$.
+$K \in \NN$, such that $D$ divides some power of the denominator $r$ 
+of the connection matrix $M$, and $D \Phi$ is congruent modulo $p^{N_{\Phi}}$ 
+to a matrix of polynomials of degree less than $K$.
 \end{thm}
 
 \begin{proof}
@@ -2305,13 +2306,13 @@ such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 $\ord_z(\tilde{\Phi}) \geq -\gamma_z$.
 Note that we can (and will) take $\gamma_z=0$ if the connection matrix $M$ does not have 
-a pole at $z$, i.e. if the polynomial $r$ does not have a zero at $z$. We now define 
+a pole at $z$, so that $\gamma_z$ vanishes for all but finitely many $z$. We now define 
 \begin{align*}
-D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\gamma_z} 
+D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\gamma_z}
     \prod_{z \neq \infty, \ord_p(z) < 0}(\frac{t}{z}-1)^{\gamma_z}, 
-&K&= \bigl(\sum_{z} \gamma_z \bigr) +1,    
+&K&= \bigl(\sum_{z} \gamma_z \bigr) +1,
 \end{align*}
-which clearly satisfy all the conditions.
+which satisfy all the conditions.
 \end{proof}
 
 We compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
@@ -2511,7 +2512,7 @@ This follows easily by combining Theorem~\ref{thm:N0} with
 Theorem~\ref{thm:preccharpoly} and Theorem~\ref{thm:pgeqn}, respectively.
 \end{proof}
 
-\begin{rem}
+\begin{rem} \label{rem:epsilon}
 If the sign $\epsilon = \pm 1$ is known for which 
 $\det(\Phi^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, then this can 
 be improved further. Since 
@@ -2966,9 +2967,194 @@ All of our complexity bounds are clearly an improvement of this.
 \label{sec:Examples}
 
 \subsection{Quintic curve}
-\subsection{Generic quintic curve}
+
+We consider the family of genus six curves over $\QQ$ given by 
+\begin{equation*}
+P=x_0^5 + x_1^5 + x_2^5 + t x_0 x_1 x_2^3 \in \QQ[t][x_0,x_1,x_2]
+\end{equation*}
+which Gerkmann considers in~\citep[\S 7.4]{Gerkmann2007}. Following him, 
+we will consider $P$ as an element of $\ZZ_p[t][x_0,x_1,x_2]$ for 
+$p=2,3,7$. Note that these are really three different examples.
+The connection matrix $M \in M_{12 \times 12}(\QQ(t))$ only has to 
+be computed once, and turns out to have denominator $r=27t^5+3125$. 
+The set of exponents at each of the zeros of $r$ is $\{0,-1\}$, and 
+after changing basis by
+\[ 
+W=\mbox{diag}(t^{-1},t,t^{-2},t^{-1},1,1,1,1,1,t^2,t^2,1)
+\] 
+as in 
+Remark~\ref{rem:basischange}, 
+the set of exponents  at $\infty$ is $\{-2/3,2/3,1,4/3,7/3,8/3,13/3,14/3\}$. 
+Note that by
+Remark \ref{rem:epsilon}, we only need to determine the bottom 
+half of the coefficients of the polynomial $\chi(T)$ directly.
+
+\subsubsection{p=2}
+
+We take $a=\log_p(\mathfrak{q})=50$, and let $\tau \in \FF_{\mathfrak{q}}$ 
+be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
+$\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$. Since the roots of $r$ are integral and 
+different modulo $2$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
+We find $\gamma_z=320$ at all zeroes of $r$ and $\gamma_{\infty}=12$, so that we
+obtain $K=1613$ for the $t$-adic precision. We now compute the remaining $p$-adic 
+precisions
+$N_{\Phi_0}=174$, $N_C=163$, $N_{C^{-1}}=164$, $N_M=187$, 
+$N_C'=184$, $N_{C^{-1}}'=183$, $N_{\Phi_0}'=176$ and $N_M'=188$.
+
+\subsubsection{p=3}
+
+We take $a=\log_p(\mathfrak{q})=40$, and let $\tau \in \FF_{\mathfrak{q}}$ 
+be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
+$\delta=0$ and $N_{\Phi}=N_{\Phi}'=122$. Since the roots of $r$ are all contained
+in the residue disk at $\infty$, we cannot apply Theorem~\ref{thm:KedlayaTuitman}
+and have to apply Theorem~\ref{thm:Gerkmann} instead. At each of the zeros of $r$
+we find $\mu=0$, $\nu=-1$, $\gamma_z=397$ and at $\infty$ we find 
+$\mu=-3$, $\nu=-2$, $\gamma_{\infty}=793$, so that we obtain $K=2779$ for the
+$t$-adic precision. We now compute the remaining $p$-adic 
+precisions
+$N_{\Phi_0}=137$, $N_C=129$, $N_{C^{-1}}=130$, $N_M=147$, 
+$N_C'=146$, $N_{C^{-1}}'=143$, $N_{\Phi_0}'=139$ and $N_M'=147$.
+
+\subsubsection{p=7}
+
+We take $a=\log_p(\mathfrak{q})=10$, and let $\tau \in \FF_{\mathfrak{q}}$ 
+be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
+$\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$. Since the roots of $r$ are integral and 
+different modulo $7$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
+We find $\gamma_z=224$ at all zeroes of $r$ and $\gamma_{\infty}=25$, so that we
+obtain $K=1146$ for the $t$-adic precision. We now compute the remaining $p$-adic 
+precisions
+$N_{\Phi_0}=38$, $N_C=34$, $N_{C^{-1}}=37$, $N_M=44$, 
+$N_C'=43$, $N_{C^{-1}}'=40$, $N_{\Phi_0}'=40$ and $N_M'=44$.
+
+\subsubsection{Timings}
+
+We now compare the performance of our FLINT implementation against the 
+timings reported by Gerkmann. [[TODO]] recompute $p=3$ with new $K$, 
+compute p=2,7 \\ 
+
+\begin{tabular}{l|l|l}
+$p=2$            & \mbox{P-T} & \mbox{G}           \\
+\hline                 
+M                &              &                 \\
+\hline                 
+$\Phi_0$         &              &                 \\
+\hline                 
+$\Phi$           &              &                 \\
+\hline
+$Z(X_{\tau},T)$  &              &                 \\
+\hline
+total            &              &                 \\
+\end{tabular}
+\quad
+\begin{tabular}{l|l|l}
+$p=3$            & \mbox{P-T} & \mbox{G} \\
+\hline                 
+M                & 0.00s        & ?               \\
+\hline                 
+$\Phi_0$         & 0.04s        & 5.86m           \\
+\hline                 
+$\Phi$           & 1.77s        & 1.38m           \\
+\hline
+$Z(X_{\tau},T)$  & 7.40s        & 101.40m         \\
+\hline
+total            & 9.21s        & 108.64m         \\
+\end{tabular}
+\quad
+\begin{tabular}{l|l|l}
+$p=7$            & \mbox{P-T} & \mbox{G}           \\
+\hline                 
+M                &              &                 \\
+\hline                 
+$\Phi_0$         &              &                 \\
+\hline                 
+$\Phi$           &              &                 \\
+\hline
+$Z(X_{\tau},T)$  &              &                 \\
+\hline
+total            &              &                 \\
+\end{tabular}
+
 \subsection{Quartic surface}
+
+We consider the family of quartic K3 surfaces over $\QQ$ given by
+\begin{equation*}
+P=x_0^4 + x_1^4 + x_2^4 + x_3^4 + t x_0 x_1 x_2 x_3 \in \QQ[t][x_0,x_1,x_2,x_3],
+\end{equation*}
+which Gerkmann considers in~\citep[\S 7.5]{Gerkmann2007}. The connection matrix 
+$M \in M_{21 \times 21}(\QQ(t))$ turns out to have denominator 
+$r=t^4-256$. The set of exponents at each of the zeros of $r$ is $\{-3/2,-1/2,0\}$, 
+and after changing basis by
+\[
+W=\mbox{diag}(t^{-2},1,1,1,1,1,1,1,1,1,t^{-1},1,1,1,1,1,1,1,1,1,1)
+\] 
+as in Remark~\ref{rem:basischange}, the set of exponents  at $\infty$ is 
+$\{1,2,3\}$. 
+
+We will now consider $P$ as an element of $\ZZ_p[t][x_0,x_1,x_2]$
+for $p=3$. We take $a=\log_p(\mathfrak{q})=20$, let $\alpha \in \FF_{\mathfrak{q}}$
+be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_{p}$, and take
+$\tau=\alpha^{2345}$. Note that a priori the sign of the functional equation is 
+unknown, so that we have to compute all the coefficients of $\chi(T)$. \\  
+
+\begin{comment} The computation of the connection matrix is near instantaneous 
+again, although in this case this is largely due to the sparseness 
+of multivariate polynomial defining the family.  The Frobenius 
+matrix for the fibre at $t = 0$ is determined in $0.02$~seconds 
+($45.26$~minutes).  The local solutions $C(t)$ and $C(t)^{-1}$ 
+require $0.27$ and $0.08$ seconds, which together with the 
+computation local expansion of Frobenius in $0.15$ seconds 
+yields $0.5$~seconds ($19.9$~minutes).  The analytic continuation, 
+evaluation at the Teichm\"uller lift of $t_1$  and construction 
+of the $q$th-power Frobenius take $0.02$, $0.04$ and $0.62$ seconds, 
+respectively, adding up to $0.68$~seconds ($18.66$~minutes).  The 
+root-unitary polynomial that we find is given by 
+\begin{align*}
+3^{20} p\bigl(3^{-20} T\bigr) & = 
+  -3486784401 T^{21} - 39675197243 T^{20} - 191506614866 T^{19} \\
+& \quad - 482588946510 T^{18} - 552821487569 T^{17} + 243001138765 T^{16} \\
+& \quad + 1641410078472 T^{15} + 1793016627512 T^{14} - 410199003010 T^{13} \\
+& \quad - 2617001208822 T^{12} - 1586643774924 T^{11} + 1586643774924 T^{10} \\
+& \quad + 2617001208822 T^9 + 410199003010 T^8 - 1793016627512 T^7 \\
+& \quad - 1641410078472 T^6 - 243001138765 T^5 + 552821487569 T^4 \\
+& \quad + 482588946510 T^3 + 191506614866 T^2 + 39675197243 T + 3486784401.
+\end{align*}
+
+\end{comment}
+
 \subsection{Generic quartic surface}
+
+We consider a generic quartic surface, defined by a homogeneous equation 
+with $35$~non-zero coefficients,
+\begin{equation*}
+\begin{split}
+x_0^4 + x_1^4 + x_2^4 + x_3^4 
++ t \bigl( & -3 x_0^3 x_1 + 2 x_0^3 x_2 - 2 x_0 x_1 x_2 x_3 + x_0^3 x_3 - x_0 x_1^3 - 3 x_1^3 x_2 + x_2^3 x_3 \\ &
+          + 2 x_1^3 x_3 + x_0 x_2^3 - 2 x_1 x_2^3 - x_0 x_3^3 + x_1 x_3^3 + 3 x_2 x_3^3 + x_0^2 x_1^2 \\ & 
+          + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 
+          + 2 x_0^2 x_1 x_2 \\ & + x_0^2 x_1 x_3 + 3 x_0^3 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 
+          + 3 x_1^2 x_2 x_3 - x_0 x_1 x_2^2 \\ & 
+          + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr)
+\end{split}
+\end{equation*}
+defined over $\mathbf{F}_5$ with $t_1 = 1$.
+
+This example is a surface and we have $p \geq n$, hence the matrix of Frobenius 
+is automatically integral.  We aim to compute $5 p(T/5)$ instead of $p(T)$, 
+following Remark~\ref{rem:N0Surfaces}.  This allows us to take $N_0 = 10$, 
+$N_1 = N_2 = 11$, $N_3 = 21$, $N_3' = 23$, and $N_4 = 33$, together with 
+$K_1 = 60$ and $K_2 = 13740$.
+
+The Gauss--Manin connection matrix is computed in $323.55$~seconds and found 
+to have denominator $r(t)$ of degree~$228$, which explains the large value 
+of the $t$-adic parameter~$K_2$.  The matrix for $p^{-1} \Frob_p$ on 
+$\Hrig^{n}(U_0)$ is computed in $0.01$~seconds.  The local 
+solutions $C$ and $C^{-1}$ form the most time-consuming part in this example, 
+requiring $1909.3$ and $342.22$~seconds.  The matrix product to determine the 
+local expansion of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ 
+takes $262.6$~seconds. Finally, the analytic continuation and evaluation steps 
+require $4.53$ and $0.18$~seconds, respectively.
+
 
 \phantomsection
 
