@@ -2514,7 +2514,7 @@ Theorem~\ref{thm:preccharpoly} and Theorem~\ref{thm:pgeqn}, respectively.
 
 \begin{rem} \label{rem:epsilon}
 If the sign $\epsilon = \pm 1$ is known for which 
-$\det(\Phi^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, then this can 
+$\det(\Phi_{\tau}^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, then this can 
 be improved further. Since 
 $\prod_{i=1}^b \alpha_i = \epsilon \mathfrak{q}^{b(n-1)/2}$, and 
 the $\alpha_i$ are permuted under the map 
@@ -3094,8 +3094,13 @@ $\{1,2,3\}$.
 We will now consider $P$ as an element of $\ZZ_p[t][x_0,x_1,x_2]$
 for $p=3$. We take $a=\log_p(\mathfrak{q})=20$, let $\alpha \in \FF_{\mathfrak{q}}$
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_{p}$, and take
-$\tau=\alpha^{2345}$. Note that a priori the sign of the functional equation is 
-unknown, so that we have to compute all the coefficients of $\chi(T)$. \\  
+$\tau=\alpha^{2345}$.  We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=43$.  
+Since the roots of $r$ are integral and different modulo $3$, we can apply 
+Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\gamma_z=148$ at all zeroes 
+of $r$ and $\gamma_{\infty}=6$, so that we
+obtain $K=599$ for the $t$-adic precision. We now compute the remaining $p$-adic 
+precisions $N_{\Phi_0}=65$, $N_C=53$, $N_{C^{-1}}=55$, $N_M=74$, 
+$N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$.
 
 \begin{comment} The computation of the connection matrix is near instantaneous 
 again, although in this case this is largely due to the sparseness 
@@ -3132,7 +3137,7 @@ x_0^4 + x_1^4 + x_2^4 + x_3^4
 + t \bigl( & -3 x_0^3 x_1 + 2 x_0^3 x_2 - 2 x_0 x_1 x_2 x_3 + x_0^3 x_3 - x_0 x_1^3 - 3 x_1^3 x_2 + x_2^3 x_3 \\ &
           + 2 x_1^3 x_3 + x_0 x_2^3 - 2 x_1 x_2^3 - x_0 x_3^3 + x_1 x_3^3 + 3 x_2 x_3^3 + x_0^2 x_1^2 \\ & 
           + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 
-          + 2 x_0^2 x_1 x_2 \\ & + x_0^2 x_1 x_3 + 3 x_0^3 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 
+          + 2 x_0^2 x_1 x_2 \\ & + x_0^2 x_1 x_3 + 3 x_0^2 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 
           + 3 x_1^2 x_2 x_3 - x_0 x_1 x_2^2 \\ & 
           + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr)
 \end{split}
