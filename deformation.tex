@@ -759,7 +759,7 @@ $Q \in H^0(\mathfrak{S},\mathcal{O}_{\mathfrak{S}})[x_0, x_1, \dotsc, x_n]$
 homogeneous of degree $kd - (n + 1)$.  It follows from a theorem of 
 Macaulay~\citep[\S 4, (4.11)]{Griffiths1969} that 
 $\mbox{Fil}^n \HdR^{n}(\mathfrak{U}/\mathfrak{S}) = \HdR^{n}(\mathfrak{U}/\mathfrak{S})$. 
-Actually, the reverse filtration $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
+Actually, the reverse filtration $H_i=\mbox{Fil}^{n-i} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
 corresponds to the restriction of the Hodge filtration on 
 $\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
 by~\citep{Griffiths1969}.
@@ -1028,15 +1028,15 @@ the dimension of $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$ is equal to the cardinality o
 $\cB$, so that $\cB$ is linearly independent as well.
 \end{proof}
 
-\begin{rem}
-Let $H_k$ denote the restriction of the Hodge filtration on 
+\begin{rem} \label{rem:hnumbers}
+Let $H_i$ denote the restriction of the Hodge filtration on 
 $\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$
 and write 
 \[
-h^{k,n-1-k}=\mbox{rank}(H^k/H^{k+1})
+h^{i,n-1-i}=\mbox{rank}(H^i/H^{i+1})
 \] 
 for the corresponding Hodge numbers.
-Recall that $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
+Recall that $H_i=\mbox{Fil}^{n-i} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
 for the filtration by the pole order defined in Section~\ref{sec:Connection}. Applying 
 the loop in Algorithm~\ref{alg:PoleRed} just once, to lower the pole 
 order from $k$ to $k-1$, we see that $\cB_k$ spans 
@@ -2413,20 +2413,20 @@ Then for all $1 \leq i \leq b$, we have
 \begin{proof} 
 Recall from Theorem~\ref{thm:deltabound} that there exists a matrix 
 $W_{\tau} \in M_{b \times b}(\QQ_q)$ satisfying 
-$\ord_p(W)+\ord_p(W^{-1}) \geq -\delta$, such that for 
-$\Phi_{\tau}'=W \Phi_{\tau} \sigma(W)^{-1}$ 
+$\ord_p(W_{\tau})+\ord_p(W_{\tau}^{-1}) \geq -\delta$, such that for 
+$\Phi_{\tau}'=W_{\tau} \Phi_{\tau} \sigma(W)^{-1}$ 
 we have \mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
 
 Defining the matrix 
-$\tilde{\Phi}_{\tau}'=W \tilde{\Phi}_{\tau} \sigma(W)^{-1}$, we find that 
+$\tilde{\Phi}_{\tau}'=W_{\tau} \tilde{\Phi}_{\tau} \sigma(W)^{-1}$, we find that 
 $\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N-\delta$, and in particular
 $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we obtain
 \[
 \ord_p \Bigl( \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr) 
             - \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr) \Bigr) \geq N-\delta.
 \] 
-Note that $(\Phi'_{\tau})^{(a)}= W \Phi_{\tau}^{(a)} W^{-1}$
-and $(\tilde{\Phi}'_{\tau})^{(a)}= W \tilde{\Phi}_{\tau}^{(a)} W^{-1}$, so that
+Note that $(\Phi'_{\tau})^{(a)}= W_{\tau} \Phi_{\tau}^{(a)} W_{\tau}^{-1}$
+and $(\tilde{\Phi}'_{\tau})^{(a)}= W_{\tau} \tilde{\Phi}_{\tau}^{(a)} W_{\tau}^{-1}$, so that
 \begin{align*}
 \chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr),
 &\tilde{\chi}(T) &= \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
@@ -2439,7 +2439,7 @@ So if we know $\Phi_{\tau}$ to $p$-adic precision $N_{\Phi}$, then
 $\chi(T)$ is determined to precision $N_{\Phi}-\delta$.
 However, we cannot compute $\chi(T)$ as in the proof of 
 Theorem~\ref{thm:preccharpoly}, since we do not know the matrix 
-$W$ explicitly. When computing with respect to our basis $\cB$,
+$W_{\tau}$ explicitly. When computing with respect to our basis $\cB$,
 there will be loss of $p$-adic precision. The loss of precision 
 in computing $\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most 
 $(a-1)\delta$, and the loss of 
@@ -2454,41 +2454,49 @@ $\chi(T)$ from $\Phi_{\tau}$ using $p$-adic working precision
 \end{rem}
 
 When $p \geq n$, one can improve Theorem~\ref{thm:preccharpoly} by taking into 
-account the Hodge filtration $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
-from Section~\ref{sec:Connection} as follows.
+account the Hodge numbers $h^{i,n-1-i}$ of $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$.
+Recall from Remark \ref{rem:hnumbers} that $h^{i,n-1-i}=\card{B_k}$.
+
+\begin{defn}
+Define $\Gamma: [0,b] \rightarrow \RR$ to be the function whose graph is the convex 
+polygon in the plane whose left-most point is the origin and which has slope $i$ over
+the interval of the horizontal axis 
+\[
+[h^{0,n-1}+\dotsc+h^{i-1,n-i},h^{0,n-1}+\dotsc+h^{i,n-i+1}].
+\]
+Note that $\Gamma(b)=b(n-1)/2$ since $h^{i,n-1-i}=h^{n-1-i,i}$ for all $0 \leq i \leq n-1$.
+\end{defn}
 
 \begin{thm} \label{thm:pgeqn}
 We continue to use the notation of Theorem~\ref{thm:preccharpoly}. Suppose that $p \geq n$. 
-Order the elements of $\cB = \bigcup_{k=1}^n \cB_k$ by decreasing $k$, and let $k(i)$ 
-denote the value of $k$ of the $i$-th element, for $1 \leq i \leq b$ . Define 
-$\Gamma: \{0,1, \dotsc, b\} \rightarrow \NN_0$ as
-\[
-\Gamma(i) = \sum_{j=1}^{i} (n-k(j)).
-\]
-Let $N_{\Phi} \in \NN$ be such that $N_{\Phi} \geq \Gamma(b)$.
-Suppose that $\tilde{\Phi}_{\tau}$ is an approximation to $\Phi_{\tau}$ 
-satisfying $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$. 
+Let $N_{\Phi} \in \NN$ be such that $N_{\Phi} \geq b(n-1)/2$. Suppose that $\tilde{\Phi}_{\tau}$ 
+is an approximation to $\Phi_{\tau}$ satisfying $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$. 
 Then for all $1 \leq i \leq b$, we have
 \[
-\ord_p(\chi_i-\tilde{\chi}_i) \geq N_{\Phi} + \Gamma(i-1).
+\ord_p(\chi_i-\tilde{\chi}_i) \geq N_{\Phi} + a\Gamma(i-1).
 \]
 \end{thm}
  
 \begin{proof} 
 Note that in this case $\delta=0$, so that $\ord_p(\Phi_{\tau}) \geq 0$. 
-However, by a theorem of Mazur \citep{Mazur1972}, the map $p^{-1} \Frob_p$ 
-sends $(H_k)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ into $p^k \Lambda_{\tau,crys}$, 
+By a theorem of Mazur \citep{Mazur1972}, the map $p^{-1} \Frob_p$ 
+sends $(H_i)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ into $p^i \Lambda_{\tau,crys}$, 
 where $\Lambda_{\tau,crys}$ is defined as in the proof of 
-Theorem~\ref{thm:deltabound}. Since 
-$\cB_k \subset \mbox{Fil}^{k} \HdR^{n}(\mathfrak{U}/\mathfrak{S}) = H_{n-k}$, 
-the map $p^{-1} \Frob_p$ sends $\cB_k$ into $p^{n-k} \Lambda_{\tau,crys}$. 
-So if the $i$-th vector in our basis $\cB$ is an element of $\cB_k$, then 
-the $i$-th column of $\Phi_{\tau}$ will be divisible by $p^{n-k}$. Note that 
-the $i$-th column of $\Phi_{\tau}^{(a)}$ will then be divisible by $p^{n-k}$ 
-as well. The coefficients $\chi_i$ and $\tilde{\chi}_i$ are alternating sums 
-of products of $i$ elements from different columns of $\Phi_{\tau}^{(a)}$ 
-and $\tilde{\Phi}_{\tau}^{(a)}$, respectively.  Therefore, the required bound 
-follows from Theorem~\ref{prop:productval}. 
+Theorem~\ref{thm:deltabound}. This implies that the so called Hodge polygon 
+of the $F$-crystal $(\Lambda_{\tau,crys},p^{-1} \Frob_p)$ lies above the graph of 
+$\Gamma$. It then follows that the Hodge polygon of the $F$-crystal 
+$(\Lambda_{\tau,crys},\mathfrak{q}^{-1} \Frob_{\mathfrak{q}})$ lies
+above the graph of $a\Gamma$. So we can find an invertible matrix 
+$W_{\tau} \in M_{b \times b}(\ZZ_{\mathfrak{q}})$ such that for all 
+$1 \leq i \leq b$, the sum of the valuations of any $i$ different rows 
+of $W_{\tau} \Phi_{\tau}^{(a)} W_{\tau}^{-1}$ is at least $\Gamma(i)$.
+Note that 
+$\ord_p(W_{\tau }\Phi_{\tau}^{(a)} W_{\tau}^{-1}-W_{\tau } \tilde{\Phi}_{\tau}^{(a)} W_{\tau}^{-1}) \geq N_{\Phi}$.
+The coefficients $\chi_i$ and $\tilde{\chi}_i$ are alternating sums 
+of products of $i$ elements from different columns of 
+$W_{\tau }\Phi_{\tau}^{(a)} W_{\tau}^{-1}$ 
+and $W_{\tau } \tilde{\Phi}_{\tau}^{(a)} W_{\tau}^{-1}$, respectively.  
+Therefore, the required bound follows from Theorem~\ref{prop:productval}. 
 \end{proof}
 
 Now we ask to what $p$-adic precision~$N_{\chi_i}$ we need to compute $\chi_i$ 
@@ -2538,7 +2546,7 @@ compute $\Phi_{\tau}$ with $p$-adic precision
 \begin{align*}
 N_{\Phi} &= \max_{1 \leq i \leq b} \{ N_{\chi_i} \} +\delta.
 \intertext{If moreover $p \geq n$, then this can be improved to}
-N_{\Phi} &= \max_{1 \leq i \leq b} \{ N_{\chi_i} -\Gamma(i-1) \}.
+N_{\Phi} &= \max_{1 \leq i \leq b} \{ N_{\chi_i} -a\Gamma(i-1) \}.
 \end{align*}
 \end{thm}
 
