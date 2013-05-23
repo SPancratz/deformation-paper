@@ -2336,16 +2336,16 @@ to a matrix of polynomials of degree less than $K$.
 \begin{proof}
 For all unramified geometric points
 $z \in \mathbf{P}^1_{\QQ_q}$, using either Theorem~\ref{thm:KedlayaTuitman} 
-or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\gamma_{z} \in \NN_0$, 
+or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\theta_{z} \in \NN_0$, 
 such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
-$\ord_z(\tilde{\Phi}) \geq -\gamma_z$.
-Note that we can (and will) take $\gamma_z=0$ if the connection matrix $M$ does not have 
-a pole at $z$, so that $\gamma_z$ vanishes for all but finitely many $z$. We now define 
+$\ord_z(\tilde{\Phi}) \geq -\theta_z$.
+Note that we can (and will) take $\theta_z=0$ if the connection matrix $M$ does not have 
+a pole at $z$, so that $\theta_z$ vanishes for all but finitely many $z$. We now define 
 \begin{align*}
-D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\gamma_z}
-    \prod_{z \neq \infty, \ord_p(z) < 0}(\frac{t}{z}-1)^{\gamma_z}, 
-&K&= \bigl(\sum_{z} \gamma_z \bigr) +1,
+D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
+    \prod_{z \neq \infty, \ord_p(z) < 0}(\frac{t}{z}-1)^{\theta_z}, 
+&K&= \bigl(\sum_{z} \theta_z \bigr) +1,
 \end{align*}
 which satisfy all the conditions.
 \end{proof}
@@ -3030,7 +3030,7 @@ We take $a=\log_p(\mathfrak{q})=50$, and let $\tau \in \FF_{\mathfrak{q}}$
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
 $\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$. Since the roots of $r$ are integral and 
 different modulo $2$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
-We find $\gamma_z=320$ at all zeroes of $r$ and $\gamma_{\infty}=12$, so that we
+We find $\theta_z=320$ at all zeroes of $r$ and $\theta_{\infty}=12$, so that we
 obtain $K=1613$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=174$, $N_C=163$, $N_{C^{-1}}=164$, $N_M=187$, 
@@ -3043,8 +3043,8 @@ be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compu
 $\delta=0$ and $N_{\Phi}=N_{\Phi}'=122$. Since the roots of $r$ are all contained
 in the residue disk at $\infty$, we cannot apply Theorem~\ref{thm:KedlayaTuitman}
 and have to apply Theorem~\ref{thm:Gerkmann} instead. At each of the zeros of $r$
-we find $\mu=0$, $\nu=-1$, $\gamma_z=397$ and at $\infty$ we find 
-$\mu=-3$, $\nu=-2$, $\gamma_{\infty}=793$, so that we obtain $K=2779$ for the
+we find $\mu=0$, $\nu=-1$, $\theta_z=397$ and at $\infty$ we find 
+$\mu=-3$, $\nu=-2$, $\theta_{\infty}=793$, so that we obtain $K=2779$ for the
 $t$-adic precision. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=137$, $N_C=129$, $N_{C^{-1}}=130$, $N_M=147$, 
@@ -3056,7 +3056,7 @@ We take $a=\log_p(\mathfrak{q})=10$, and let $\tau \in \FF_{\mathfrak{q}}$
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
 $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$. Since the roots of $r$ are integral and 
 different modulo $7$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
-We find $\gamma_z=224$ at all zeroes of $r$ and $\gamma_{\infty}=25$, so that we
+We find $\theta_z=224$ at all zeroes of $r$ and $\theta_{\infty}=25$, so that we
 obtain $K=1146$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=38$, $N_C=34$, $N_{C^{-1}}=37$, $N_M=44$, 
@@ -3131,8 +3131,8 @@ for $p=3$. We take $a=\log_p(\mathfrak{q})=20$, let $\alpha \in \FF_{\mathfrak{q
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_{p}$, and take
 $\tau=\alpha^{2345}$.  We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=43$.  
 Since the roots of $r$ are integral and different modulo $3$, we can apply 
-Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\gamma_z=148$ at all zeroes 
-of $r$ and $\gamma_{\infty}=6$, so that we
+Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=148$ at all zeroes 
+of $r$ and $\theta_{\infty}=6$, so that we
 obtain $K=599$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions $N_{\Phi_0}=65$, $N_C=53$, $N_{C^{-1}}=55$, $N_M=74$, 
 $N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$. \\
