@@ -529,7 +529,7 @@ denotes the reverse characteristic polynomial of the action of
 $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ on $\Hrig^n(U_{\tau})$. 
 Moreover, the polynomial $\chi(T)$ has degree 
 \begin{equation} \label{eq:formulab}
-b(d,n) = \frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr).
+\frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr).
 \end{equation}
 \end{thm}
 
@@ -560,14 +560,8 @@ excision short exact sequence
 \end{CD} 
 \end{equation}
 to relate $\Hrig^{n-1}(X_{\tau})$ to $\Hrig^{n}(U_{\tau})$ and complete 
-the proof of~\eqref{eq:formulazeta}. As for the proof of 
-formula~\eqref{eq:formulab}, we have not found an exact reference 
-in the literature. However, it is a straightforward consequence 
-of~\citep[Corollaire 2.4 (i)]{sga7} that 
-\[
-\sum_{n=1}^{\infty} b(d,n) x^{n-1} = \frac{(d-1)}{(1+x)(1-(d-1)x)} = \frac{1}{xd} \Bigl( \frac{d-1}{1-(d-1)x} - \frac{d-1}{1+x} \Bigr)
-\] 
-as formal power series, from which~\eqref{eq:formulab} can be read off easily.
+the proof of~\eqref{eq:formulazeta}. We will show in Proposition~\ref{prop:rankcoho}
+that the dimension of $\Hrig^{n-1}(U_{\tau})$ is given by~\eqref{eq:formulab}.
 \end{proof}
 
 Let $[e_1, \dotsc, e_b]$ be some basis of sections of 
@@ -758,15 +752,15 @@ The proof is straightforward, for details see \citep{Griffiths1969}.
 \end{proof}
 
 The cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ is 
-equipped with an increasing filtration for which 
+equipped with an increasing filtration by the pole order, for which 
 $\mbox{Fil}^k \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ consists of all elements 
 that can be represented by $n$-forms $Q \Omega / P^k$ with 
 $Q \in H^0(\mathfrak{S},\mathcal{O}_{\mathfrak{S}})[x_0, x_1, \dotsc, x_n]$ 
 homogeneous of degree $kd - (n + 1)$.  It follows from a theorem of 
 Macaulay~\citep[\S 4, (4.11)]{Griffiths1969} that 
 $\mbox{Fil}^n \HdR^{n}(\mathfrak{U}/\mathfrak{S}) = \HdR^{n}(\mathfrak{U}/\mathfrak{S})$. 
-Actually, the reverse filtration $\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
-corresponds to the restriction $H_k$ of the Hodge filtration on 
+Actually, the reverse filtration $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
+corresponds to the restriction of the Hodge filtration on 
 $\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
 by~\citep{Griffiths1969}.
 
@@ -960,7 +954,7 @@ where $\equiv$ denotes equality in cohomology.
 \end{algorithm}
 
 We now establish that the set~$\cB$ indeed forms a basis for 
-$\HdR^n(\mathfrak{U}_{\QQ_q(t)})$, as announced before.  We begin with an 
+$\HdR^n(\mathfrak{U}_{\QQ_q(t)})$, as announced before.  We start with an 
 auxiliary result describing the cardinality of the set~$\cB$.
 
 \begin{prop} \label{prop:BasisSize}
@@ -974,26 +968,47 @@ The set $\cB$ has cardinality
 First note that if we denote
 \begin{align*}
 V   &= \{(u_0,\dotsc,u_n) \in (\ZZ/d\ZZ)^{n+1} : \sum_{j=0}^n u_j = -(n+1)\}, \\
-H_j &= \{(u_0,\dotsc,u_n) \in (\ZZ/d\ZZ)^{n+1} : u_j = -1 \},
+W_j &= \{(u_0,\dotsc,u_n) \in (\ZZ/d\ZZ)^{n+1} : u_j = -1 \},
 \end{align*}
-then  $\cB$ is in one-to-one correspondence with the set $V-(H_0 \cup \dotsb \cup H_n)$. 
+then  $\cB$ is in one-to-one correspondence with the set $V-(W_0 \cup \dotsb \cup W_n)$. 
 Now by the inclusion-exclusion principle, 
 \begin{align*}
-\abs{V \cap (H_0 \cup \dotsb \cup H_n)} 
-& = \sum_{j=0}^n \abs{V \cap H_j} 
-    - \sum_{0 \leq j < k \leq n} \abs{V \cap H_j \cap H_k} \\
-& \quad + \dotsb + (-1)^{n} \abs{V \cap H_0 \cap \dotsb \cap H_n} \\
+\abs{V \cap (W_0 \cup \dotsb \cup W_n)} 
+& = \sum_{j=0}^n \abs{V \cap W_j} 
+    - \sum_{0 \leq j < k \leq n} \abs{V \cap W_j \cap W_k} \\
+& \quad + \dotsb + (-1)^{n} \abs{V \cap W_0 \cap \dotsb \cap W_n} \\
 & = {n+1 \choose 1} d^{n-1} -{n+1 \choose 2} d^{n-2} 
     + \dotsb + (-1)^{n-1} {n+1 \choose n} + (-1)^{n} \\
 & = (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}\bigr)+(-1)^n,
 \end{align*}
 so that
 \begin{align*}
-\abs{V-(H_0 \cup \dotsb \cup H_n)}&=\abs{V}-\abs{V \cap (H_0 \cup \dotsb \cup H_n)} \\
+\abs{V-(W_0 \cup \dotsb \cup W_n)}&=\abs{V}-\abs{V \cap (W_0 \cup \dotsb \cup W_n)} \\
 &= d^n - (1/d)\bigl(d^{n+1}+(-1)^{n+1} - (d-1)^{n+1}+d (-1)^n \bigr) \\
 &= \frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr),
 \end{align*}
 and the proof is complete.
+\end{proof}
+
+\begin{prop} \label{prop:rankcoho}
+The rank of $\HdR^n(\mathfrak{U}/\mathfrak{S})$ is
+\[
+\frac{1}{d} \bigl((d-1)^{n+1} + (-1)^{n+1}(d-1) \bigr).
+\]
+\end{prop}
+
+\begin{proof}
+Let $\mathfrak{U}_m/\mathfrak{S}$ denote the complement of a family
+$\mathfrak{X}_m/\mathfrak{S}$ of smooth projective hypersurfaces of 
+degree $\mathfrak{d}$ in 
+$\mathbf{P}^m_{\mathfrak{S}}$ and let $b(\mathfrak{d},m)$ denote the rank 
+of $\HdR^m(\mathfrak{U}_m/\mathfrak{S})$. It is known that 
+$b(\mathfrak{d},m)$ only depends on $\mathfrak{d}$,$m$. Moreover, 
+taking $x=y=z$ in~\citep[Corollaire 2.4 (i)]{sga7}, we find that
+\[
+\sum_{m=1}^{\infty} b(\mathfrak{d},m) x^{m-1} = \frac{(d-1)}{(1+x)(1-(d-1)x)} = \frac{1}{xd} \Bigl( \frac{d-1}{1-(d-1)x} - \frac{d-1}{1+x} \Bigr)
+\]
+as formal power series. From this the result follows easily. 
 \end{proof}
 
 \begin{thm} \label{thm:Basis}
@@ -1008,13 +1023,33 @@ $n$-forms $Q \Omega / P^k$ with $Q \in \QQ_q(t)[x_0, \dotsc, x_n]$ homogeneous o
 $kd - (n+1)$ for $k \in \NN$. Applying Algorithm~\ref{alg:PoleRed}, we obtain an 
 expression for the class of $Q \Omega / P^k$ as an $\QQ_q(t)$-linear combination of 
 elements in $\cB$.  This shows that $\cB$ spans the vector space 
-$\HdR^n(\mathfrak{U}_{\QQ_q(t)})$. However, we know from Theorem~\ref{thm:hypersurface} that 
-\[
-\dim \HdR^n(\mathfrak{U}_{\QQ_q(t)}) = \bigl((d-1)/d\bigr) \bigl( (d-1)^n - (-1)^n \bigr).
-\]  
-Therefore, it follows from Proposition~\ref{prop:BasisSize} that $\cB$ is linearly 
-independent as well.
+$\HdR^n(\mathfrak{U}_{\QQ_q(t)})$. However, by the two propositions above,
+the dimension of $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$ is equal to the cardinality of
+$\cB$, so that $\cB$ is linearly independent as well.
 \end{proof}
+
+\begin{rem}
+Let $H_k$ denote the restriction of the Hodge filtration on 
+$\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$
+and write 
+\[
+h^{k,n-1-k}=\mbox{rank}(H^k/H^{k+1})
+\] 
+for the corresponding Hodge numbers.
+Recall that $H_k=\mbox{Fil}^{n-k} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
+for the filtration by the pole order defined in Section~\ref{sec:Connection}. Applying 
+the loop in Algorithm~\ref{alg:PoleRed} just once, to lower the pole 
+order from $k$ to $k-1$, we see that $\cB_k$ spans 
+\[
+\mbox{Fil}^{k} \HdR^{n}(\mathfrak{U}_{\QQ_q(t)}) / \mbox{Fil}^{k-1} \HdR^{n}(\mathfrak{U}_{\QQ_q(t)})
+\]
+for all $1 \leq k \leq n$. Hence it follows that $\card{B_k} \geq h^{n-k,k-1}$ , but since
+\[
+\sum_{k=1}^n \card{B_k} = \dim \HdR^n(\mathfrak{U}_{\QQ_q(t)}) = \sum_{k=1}^n h^{n-k,k-1},
+\] 
+this implies that $\card{B_k} = h^{n-k,k-1}$ for all $1 \leq k \leq n$. So the Hodge numbers
+can be read off from the basis $\cB$.
+\end{rem}
 
 We now describe the action of the Gauss--Manin connection~$\nabla$ on 
 $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$.  Suppose that we are given a basis element 
@@ -3100,7 +3135,21 @@ Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\gamma_z=148$ at all zeroe
 of $r$ and $\gamma_{\infty}=6$, so that we
 obtain $K=599$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions $N_{\Phi_0}=65$, $N_C=53$, $N_{C^{-1}}=55$, $N_M=74$, 
-$N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$.
+$N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$. \\
+
+\begin{tabular}{l|l|l}
+                 & \mbox{P-T} & \mbox{G}           \\
+\hline                 
+M                &              &                 \\
+\hline                 
+$\Phi_0$         &              &                 \\
+\hline                 
+$\Phi$           &              &                 \\
+\hline
+$Z(X_{\tau},T)$  &              &                 \\
+\hline
+total            &              &                 \\
+\end{tabular}
 
 \begin{comment} The computation of the connection matrix is near instantaneous 
 again, although in this case this is largely due to the sparseness 
