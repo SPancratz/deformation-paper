@@ -3027,9 +3027,9 @@ All of our complexity bounds are clearly an improvement of this.
 
 \subsection{Quintic curve}
 
-We consider the family of genus six curves over $\QQ$ given by 
+We consider the family of genus six curves over $\ZZ$ given by 
 \begin{equation*}
-P=x_0^5 + x_1^5 + x_2^5 + t x_0 x_1 x_2^3 \in \QQ[t][x_0,x_1,x_2]
+P=x_0^5 + x_1^5 + x_2^5 + t x_0 x_1 x_2^3 \in \ZZ[t][x_0,x_1,x_2]
 \end{equation*}
 which Gerkmann considers in~\citep[\S 7.4]{Gerkmann2007}. Following him, 
 we will consider $P$ as an element of $\ZZ_p[t][x_0,x_1,x_2]$ for 
@@ -3136,7 +3136,7 @@ total            &              & 3.29m           \\
 
 \subsection{Quartic surface}
 
-We consider the family of quartic K3 surfaces over $\QQ$ given by
+We consider the family of quartic K3 surfaces over $\ZZ_3$ given by
 \begin{equation*}
 P=x_0^4 + x_1^4 + x_2^4 + x_3^4 + t x_0 x_1 x_2 x_3 \in \QQ[t][x_0,x_1,x_2,x_3],
 \end{equation*}
@@ -3150,16 +3150,17 @@ W=\mbox{diag}(t^{-2},1,1,1,1,1,1,1,1,1,t^{-1},1,1,1,1,1,1,1,1,1,1)
 as in Remark~\ref{rem:basischange}, the set of exponents  at $\infty$ is 
 $\{1,2,3\}$. 
 
-We will now consider $P$ as an element of $\ZZ_p[t][x_0,x_1,x_2]$
-for $p=3$. We take $a=\log_p(\mathfrak{q})=20$, let $\alpha \in \FF_{\mathfrak{q}}$
-be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_{p}$, and take
+We take $a=\log_3(\mathfrak{q})=20$, let $\alpha \in \FF_{\mathfrak{q}}$
+be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_{3}$, and take
 $\tau=\alpha^{2345}$.  We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=43$.  
 Since the roots of $r$ are integral and different modulo $3$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=148$ at all zeroes 
 of $r$ and $\theta_{\infty}=6$, so that we
 obtain $K=599$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions $N_{\Phi_0}=65$, $N_C=53$, $N_{C^{-1}}=55$, $N_M=74$, 
-$N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$. \\
+$N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$.
+
+\subsubsection{Timings}
 
 \begin{tabular}{l|l|l}
                  & \mbox{P-T} & \mbox{G}          \\
@@ -3202,21 +3203,37 @@ root-unitary polynomial that we find is given by
 
 \subsection{Generic quartic surface}
 
-We consider a generic quartic surface, defined by a homogeneous equation 
-with $35$~non-zero coefficients,
+We consider the family of generic quartic K3 surfaces over $\ZZ_5$ given by 
 \begin{equation*}
 \begin{split}
-x_0^4 + x_1^4 + x_2^4 + x_3^4 
+P=x_0^4 + x_1^4 + x_2^4 + x_3^4 
 + t \bigl( & -3 x_0^3 x_1 + 2 x_0^3 x_2 - 2 x_0 x_1 x_2 x_3 + x_0^3 x_3 - x_0 x_1^3 - 3 x_1^3 x_2 + x_2^3 x_3 \\ &
           + 2 x_1^3 x_3 + x_0 x_2^3 - 2 x_1 x_2^3 - x_0 x_3^3 + x_1 x_3^3 + 3 x_2 x_3^3 + x_0^2 x_1^2 \\ & 
           + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 
           + 2 x_0^2 x_1 x_2 \\ & + x_0^2 x_1 x_3 + 3 x_0^2 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 
           + 3 x_1^2 x_2 x_3 - x_0 x_1 x_2^2 \\ & 
           + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr)
-\end{split}
+\end{split},
 \end{equation*}
-defined over $\mathbf{F}_5$ with $t_1 = 1$.
+and we take $\tau$ to be  $1 \in S(\FF_5)$. [[TODO]] (Re)compute precisions and run again.
 
+\subsubsection{Timings}
+
+\begin{tabular}{l|l}
+                 & \mbox{P-T}        \\
+\hline                 
+M                &                   \\
+\hline                 
+$\Phi_0$         &                   \\
+\hline                 
+$\Phi$           &                   \\
+\hline
+$Z(X_{\tau},T)$  &                   \\
+\hline
+total            &                   \\
+\end{tabular}
+
+\begin{comment}
 This example is a surface and we have $p \geq n$, hence the matrix of Frobenius 
 is automatically integral.  We aim to compute $5 p(T/5)$ instead of $p(T)$, 
 following Remark~\ref{rem:N0Surfaces}.  This allows us to take $N_0 = 10$, 
@@ -3232,7 +3249,7 @@ requiring $1909.3$ and $342.22$~seconds.  The matrix product to determine the
 local expansion of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ 
 takes $262.6$~seconds. Finally, the analytic continuation and evaluation steps 
 require $4.53$ and $0.18$~seconds, respectively.
-
+\end{comment}
 
 \phantomsection
 
