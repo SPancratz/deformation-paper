@@ -588,7 +588,7 @@ a_{i,j} \in \QQ_q, \; \exists c > 0 \text{ s.t.}
 \biggr\},
 \]
 as the $p$-adically meromorphic functions on $\mathbf{P}^1_{\QQ_q}$ that are 
-analytic outside of the open disks of radius $\rho$ around the zeroes of $r$ 
+analytic outside of the open disks of radius $\rho$ around the zeros of $r$ 
 and the point at infinity for some $\rho<1$. 
 \end{defn}
 
@@ -3029,14 +3029,14 @@ All of our complexity bounds are clearly an improvement of this.
 
 We consider the family of genus six curves over $\ZZ$ given by 
 \begin{equation*}
-P=x_0^5 + x_1^5 + x_2^5 + t x_0 x_1 x_2^3 \in \ZZ[t][x_0,x_1,x_2]
+P=x_0^5 + x_1^5 + x_2^5 + t x_0 x_1 x_2^3,
 \end{equation*}
 which Gerkmann considers in~\citep[\S 7.4]{Gerkmann2007}. Following him, 
 we will consider $P$ as an element of $\ZZ_p[t][x_0,x_1,x_2]$ for 
 $p=2,3,7$. Note that these are really three different examples.
 The connection matrix $M \in M_{12 \times 12}(\QQ(t))$ only has to 
 be computed once, and turns out to have denominator $r=27t^5+3125$. 
-The set of exponents at each of the zeros of $r$ is $\{0,-1\}$, and 
+The set of exponents at each of the zeros of $r$ is $\{-1,0\}$, and 
 after changing basis by
 \[ 
 W=\mbox{diag}(t^{-1},t,t^{-2},t^{-1},1,1,1,1,1,t^2,t^2,1)
@@ -3048,19 +3048,21 @@ Note that by
 Remark \ref{rem:epsilon}, we only need to determine the bottom 
 half of the coefficients of the polynomial $\chi(T)$ directly.
 
-\subsubsection{p=2}
+\subsubsection{Precisions}
+
+\textbf{p=2} \\
 
 We take $a=\log_p(\mathfrak{q})=50$, and let $\tau \in \FF_{\mathfrak{q}}$ 
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
-$\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$. Since the roots of $r$ are integral and 
+$\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$. Since the roots of $r$ are $2$-adic integers and 
 different modulo $2$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
-We find $\theta_z=320$ at all zeroes of $r$ and $\theta_{\infty}=12$, so that we
+We find $\theta_z=320$ at all zeros of $r$ and $\theta_{\infty}=12$, so that we
 obtain $K=1613$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=174$, $N_C=163$, $N_{C^{-1}}=164$, $N_M=187$, 
-$N_C'=184$, $N_{C^{-1}}'=183$, $N_{\Phi_0}'=176$ and $N_M'=188$.
+$N_C'=184$, $N_{C^{-1}}'=183$, $N_{\Phi_0}'=176$ and $N_M'=188$. \\
 
-\subsubsection{p=3}
+\noindent \textbf{p=3} \\
 
 We take $a=\log_p(\mathfrak{q})=40$, and let $\tau \in \FF_{\mathfrak{q}}$ 
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
@@ -3072,15 +3074,15 @@ $\mu=-3$, $\nu=-2$, $\theta_{\infty}=793$, so that we obtain $K=2779$ for the
 $t$-adic precision. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=137$, $N_C=129$, $N_{C^{-1}}=130$, $N_M=147$, 
-$N_C'=146$, $N_{C^{-1}}'=143$, $N_{\Phi_0}'=139$ and $N_M'=147$.
+$N_C'=146$, $N_{C^{-1}}'=143$, $N_{\Phi_0}'=139$ and $N_M'=147$. \\
 
-\subsubsection{p=7}
+\noindent \textbf{p=7} \\
 
 We take $a=\log_p(\mathfrak{q})=10$, and let $\tau \in \FF_{\mathfrak{q}}$ 
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
-$\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$. Since the roots of $r$ are integral and 
+$\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$. Since the zeros of $r$ are $7$-adic integers and 
 different modulo $7$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
-We find $\theta_z=224$ at all zeroes of $r$ and $\theta_{\infty}=25$, so that we
+We find $\theta_z=224$ at all zeros of $r$ and $\theta_{\infty}=25$, so that we
 obtain $K=1146$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=38$, $N_C=34$, $N_{C^{-1}}=37$, $N_M=44$, 
@@ -3132,13 +3134,16 @@ $\Phi$           &              & 0.89m           \\
 $Z(X_{\tau},T)$  &              & 1.09m           \\
 \hline
 total            &              & 3.29m           \\
-\end{tabular}
+\end{tabular} \\
+
+\begin{rem}
+\end{rem}
 
 \subsection{Quartic surface}
 
 We consider the family of quartic K3 surfaces over $\ZZ_3$ given by
 \begin{equation*}
-P=x_0^4 + x_1^4 + x_2^4 + x_3^4 + t x_0 x_1 x_2 x_3 \in \QQ[t][x_0,x_1,x_2,x_3],
+P=x_0^4 + x_1^4 + x_2^4 + x_3^4 + t x_0 x_1 x_2 x_3,
 \end{equation*}
 which Gerkmann considers in~\citep[\S 7.5]{Gerkmann2007}. The connection matrix 
 $M \in M_{21 \times 21}(\QQ(t))$ turns out to have denominator 
@@ -3150,11 +3155,13 @@ W=\mbox{diag}(t^{-2},1,1,1,1,1,1,1,1,1,t^{-1},1,1,1,1,1,1,1,1,1,1)
 as in Remark~\ref{rem:basischange}, the set of exponents  at $\infty$ is 
 $\{1,2,3\}$. 
 
+\subsubsection{Precisions}
+
 We take $a=\log_3(\mathfrak{q})=20$, let $\alpha \in \FF_{\mathfrak{q}}$
 be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_{3}$, and take
 $\tau=\alpha^{2345}$.  We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=43$.  
-Since the roots of $r$ are integral and different modulo $3$, we can apply 
-Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=148$ at all zeroes 
+Since the zeros of $r$ are $3$-adic integers and different modulo $3$, we can apply 
+Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=148$ at all zeros 
 of $r$ and $\theta_{\infty}=6$, so that we
 obtain $K=599$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions $N_{\Phi_0}=65$, $N_C=53$, $N_{C^{-1}}=55$, $N_M=74$, 
@@ -3176,46 +3183,38 @@ $Z(X_{\tau},T)$  &              & 18.66m          \\
 total            &              & 83.82m          \\
 \end{tabular}
 
-\begin{comment} The computation of the connection matrix is near instantaneous 
-again, although in this case this is largely due to the sparseness 
-of multivariate polynomial defining the family.  The Frobenius 
-matrix for the fibre at $t = 0$ is determined in $0.02$~seconds 
-($45.26$~minutes).  The local solutions $C(t)$ and $C(t)^{-1}$ 
-require $0.27$ and $0.08$ seconds, which together with the 
-computation local expansion of Frobenius in $0.15$ seconds 
-yields $0.5$~seconds ($19.9$~minutes).  The analytic continuation, 
-evaluation at the Teichm\"uller lift of $t_1$  and construction 
-of the $q$th-power Frobenius take $0.02$, $0.04$ and $0.62$ seconds, 
-respectively, adding up to $0.68$~seconds ($18.66$~minutes).  The 
-root-unitary polynomial that we find is given by 
-\begin{align*}
-3^{20} p\bigl(3^{-20} T\bigr) & = 
-  -3486784401 T^{21} - 39675197243 T^{20} - 191506614866 T^{19} \\
-& \quad - 482588946510 T^{18} - 552821487569 T^{17} + 243001138765 T^{16} \\
-& \quad + 1641410078472 T^{15} + 1793016627512 T^{14} - 410199003010 T^{13} \\
-& \quad - 2617001208822 T^{12} - 1586643774924 T^{11} + 1586643774924 T^{10} \\
-& \quad + 2617001208822 T^9 + 410199003010 T^8 - 1793016627512 T^7 \\
-& \quad - 1641410078472 T^6 - 243001138765 T^5 + 552821487569 T^4 \\
-& \quad + 482588946510 T^3 + 191506614866 T^2 + 39675197243 T + 3486784401.
-\end{align*}
+\begin{rem}
+\end{rem}
 
-\end{comment}
+\subsection{Generic quintic curve}
 
-\subsection{Generic quartic surface}
-
-We consider the family of generic quartic K3 surfaces over $\ZZ_5$ given by 
+We consider the family of generic quintic curves over $\ZZ_{11}$ given by 
 \begin{equation*}
 \begin{split}
-P=x_0^4 + x_1^4 + x_2^4 + x_3^4 
-+ t \bigl( & -3 x_0^3 x_1 + 2 x_0^3 x_2 - 2 x_0 x_1 x_2 x_3 + x_0^3 x_3 - x_0 x_1^3 - 3 x_1^3 x_2 + x_2^3 x_3 \\ &
-          + 2 x_1^3 x_3 + x_0 x_2^3 - 2 x_1 x_2^3 - x_0 x_3^3 + x_1 x_3^3 + 3 x_2 x_3^3 + x_0^2 x_1^2 \\ & 
-          + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 
-          + 2 x_0^2 x_1 x_2 \\ & + x_0^2 x_1 x_3 + 3 x_0^2 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 
-          + 3 x_1^2 x_2 x_3 - x_0 x_1 x_2^2 \\ & 
-          + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr)
-\end{split},
+%P:=X^5+Y^5+Z^5+t*(3*X^4*Y-X^4*Z+2*X*Y^4+Y^4*Z+4*X*Z^4+5*Y*Z^4
+%   +X^3*Y^2+X^3*Z^2+ X^2*Y^3+Y^3*Z^2+X^2*Z^3+Y^2*Z^3
+%   +X^3*Y*Z+X*Y^3*Z+X*Y*Z^3+X^2*Y^2*Z+X^2*Y*Z^2+X*Y^2*Z^2);
+P=x_0^5 + x_1^5 + x_2^5
++ t \bigl( & 3x_0^4 x_1-x_0^4 x_2+2 x_0 x_1^4+x_1^4 x_2+4 x_0 x_2^4+5 x_1 x_2^4 + x_0^3 x_1^2+x_0^3 x_2^2 \\ 
+           + & x_0^2 x_1^3+ x_1^3 x_2^2+x_0^2 x_2^3+x_1^2 x_2^3 + x_0^3 x_1 x_2 + x_0 x_1^3 x_2 + x_0 x_1 x_2^3 \\ 
+           + & x_0^2 x_1^2 x_3 + x_0^2 x_1 x_2^2 + x_0 x_1^2 x_2^2 \bigr).
+\end{split}
 \end{equation*}
-and we take $\tau$ to be  $1 \in S(\FF_5)$. [[TODO]] (Re)compute precisions and run again.
+The connection matrix $M \in M_{12 \times 12}(\QQ(t))$ has denominator $r=r_1 r_2$, with $r_1,r_2 \in \ZZ[t]$ irreducible
+of degree $30$ and $48$, respectively. The set of exponents is $\{ 0,1 \}$ at the zeros of $r_1$ and $\{ -1,0 \}$ at the
+zeros of $r_2$. Moreover, the matrix $M$ has a simple pole at $\infty$ and the set of exponents is $\{1,2\}$ there.
+
+\subsubsection{Precisions}
+
+We take $a=\log_{11}(\mathfrak{q})=10$ and let $\tau$ be a zero of the Conway polynomial of 
+$\FF_{\mathfrak{q}}/\FF_{11}$. We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.
+Since the zeros of $r$ are $11$-adic integers and different modulo $11$, we can apply 
+Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=660$ at the zeros of $r_2$
+and $\theta_{\infty}=9$ at $\infty$. At the zeros of $r_1$, which are apparent singularities, 
+we get a better bound by applying Theorem~\ref{thm:Gerkmann} with $\mu=-1$, $\nu=0$ and find 
+$\theta_z=1$. So we obtain $K=31720$ for the $t$-adic precision. We now compute the remaining 
+$p$-adic precisions $N_{\Phi_0}=40$, $N_C=35$, $N_{C^{-1}}=36$, $N_M=47$, $N_C'=46$, $N_{C^{-1}}'=43$, 
+$N_{\Phi_0}'=42$ and $N_M'=47$.
 
 \subsubsection{Timings}
 
@@ -3233,23 +3232,39 @@ $Z(X_{\tau},T)$  &                   \\
 total            &                   \\
 \end{tabular}
 
-\begin{comment}
-This example is a surface and we have $p \geq n$, hence the matrix of Frobenius 
-is automatically integral.  We aim to compute $5 p(T/5)$ instead of $p(T)$, 
-following Remark~\ref{rem:N0Surfaces}.  This allows us to take $N_0 = 10$, 
-$N_1 = N_2 = 11$, $N_3 = 21$, $N_3' = 23$, and $N_4 = 33$, together with 
-$K_1 = 60$ and $K_2 = 13740$.
+\subsection{Generic quartic surface}
 
-The Gauss--Manin connection matrix is computed in $323.55$~seconds and found 
-to have denominator $r(t)$ of degree~$228$, which explains the large value 
-of the $t$-adic parameter~$K_2$.  The matrix for $p^{-1} \Frob_p$ on 
-$\Hrig^{n}(U_0)$ is computed in $0.01$~seconds.  The local 
-solutions $C$ and $C^{-1}$ form the most time-consuming part in this example, 
-requiring $1909.3$ and $342.22$~seconds.  The matrix product to determine the 
-local expansion of $p^{-1} \Frob_p$ on $\Hrig^{n}(U/S)$ 
-takes $262.6$~seconds. Finally, the analytic continuation and evaluation steps 
-require $4.53$ and $0.18$~seconds, respectively.
-\end{comment}
+We consider the family of generic quartic K3 surfaces over $\ZZ_{7}$ given by 
+\begin{equation*}
+\begin{split}
+P=x_0^4 + x_1^4 + x_2^4 + x_3^4 
++ t \bigl( & -3 x_0^3 x_1 + 2 x_0^3 x_2 - 2 x_0 x_1 x_2 x_3 + x_0^3 x_3 - x_0 x_1^3 - 3 x_1^3 x_2 + x_2^3 x_3 \\ &
+          + 2 x_1^3 x_3 + x_0 x_2^3 - 2 x_1 x_2^3 - x_0 x_3^3 + x_1 x_3^3 + 3 x_2 x_3^3 + x_0^2 x_1^2 \\ & 
+          + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 
+          + 2 x_0^2 x_1 x_2 \\ & + x_0^2 x_1 x_3 + 3 x_0^2 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 
+          + 3 x_1^2 x_2 x_3 - x_0 x_1 x_2^2 \\ & 
+          + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr),
+\end{split}
+\end{equation*}
+and we take $\tau$ to be  $1$. [[TODO]] (Re)compute precisions and run again.
+
+\subsubsection{Precisions}
+
+\subsubsection{Timings}
+
+\begin{tabular}{l|l}
+                 & \mbox{P-T}        \\
+\hline                 
+M                &                   \\
+\hline                 
+$\Phi_0$         &                   \\
+\hline                 
+$\Phi$           &                   \\
+\hline
+$Z(X_{\tau},T)$  &                   \\
+\hline
+total            &                   \\
+\end{tabular}
 
 \phantomsection
 
