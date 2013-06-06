@@ -1101,7 +1101,7 @@ This is formalised in Algorithm~\ref{alg:Connection}.
 \State \textit{Execute the following steps with $p$-adic working precision $N'_M$}:
 \For{$g \in B$} 
 \State $k \gets  (\deg(g)+(n+1))/d$
-\State $Q \gets  - k g \frac{\partial P}{\partial t}$ 
+\State $Q \gets  - k g (\partial P / \partial t)$
 \State $\gamma_{1}, \dotsc, \gamma_n \gets$ {\sc Reduce($P,Q$)} 
 \For{$f \in B$}
 \State $l \gets \bigl(\deg(f)+(n+1)\bigr)/d$
