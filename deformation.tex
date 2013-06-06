@@ -2643,16 +2643,17 @@ in Algorithm~\ref{alg:complete}.
 \end{algorithm}
 
 \begin{rem}
-The output of Algorithm~\ref{alg:complete} only depends on $X_{\tau}$. In particular, 
-we can also take a polynomial $\bar{P} \in \FF_q[t][x_0,\dotsc,x_n]$ as input, and at the 
-start of the algorithm take $P$ to be an arbitrary lift of $\bar{P}$. For the complexity 
-analysis in the next section for example, we therefore take the input size to be the size 
-of $\bar{P}$.  However, from a practical point of view, it is more convenient to keep the 
-lift $P$ as the input, since:
+The output of Algorithm~\ref{alg:complete} only depends on $X_{\tau}$.  
+In particular, we can also take a polynomial 
+$\bar{P} \in \FF_q[t][x_0,\dotsc,x_n]$ as input and at the start of 
+the algorithm take $P$ to be an arbitrary lift of $\bar{P}$. For the 
+complexity analysis in the next section, we thus take the input size 
+to be the size of $\bar{P}$.  However, from a practical point of view, 
+it is convenient to keep the lift $P$ as the input, since:
 \begin{enumerate} 
-\item the matrices $M, \Phi_0, C, \Phi, \Phi_{\tau}$ do depend on $P$, 
+\item the matrices $M, \Phi_0, C, \Phi, \Phi_{\tau}$ do depend on $P$,
 \item Assumption~\ref{assump:diag} needs to hold for $P$,
-\item the runtime and memory usage of the algorithm depend strongly on $P$. 
+\item the runtime and memory usage of the algorithm depend on $P$.
 \end{enumerate}
 \end{rem}
 
