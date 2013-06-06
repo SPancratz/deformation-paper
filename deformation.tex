@@ -765,11 +765,13 @@ by~\citep{Griffiths1969}.
 
 As we prefer to perform linear 
 algebra operations over a field, we will actually work with the de~Rham 
-cohomology vector space $\HdR^{n}(\mathfrak{U}_{\QQ_q(t)})$ of the generic fibre 
+cohomology vector space $\HdR^{n}\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$ of 
+the generic fibre 
 \[
 \mathfrak{U}_{\QQ_q(t)} = \mathfrak{U}/\mathfrak{S} \times_{\mathfrak{S}} \Spec \QQ_q(t).
 \] 
-We now define an explicit basis of a simple form for $\HdR^{n}(\mathfrak{U}_{\QQ_q(t)})$ 
+We now define an explicit basis of a simple form for 
+$\HdR^{n}\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$ 
 for the families that we are interested in.
 
 \begin{defn} \label{defn:MonBasis}
@@ -789,7 +791,8 @@ We also denote
 \end{defn}
 
 We will show below that if the family $\mathcal{X}/{\mathcal{S}}$ contains 
-a diagonal fibre, then the set $\cB$ forms a basis for $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$.
+a diagonal fibre, then the set $\cB$ forms a basis for 
+$\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$.
 
 \begin{defn} \label{defn:IndexSets}
 For $k \in \NN$, let $C_k^{(0)}$ be the set of monomials of total 
@@ -921,7 +924,7 @@ where $\equiv$ denotes equality in cohomology.
 
 
 \begin{algorithm}
-\caption{Reduce $Q \Omega / P^k$ in $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$}
+\caption{Reduce $Q \Omega / P^k$ in $\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$}
 \label{alg:PoleRed}
 \begin{algorithmic}
 \vspace{1mm}
@@ -953,8 +956,9 @@ where $\equiv$ denotes equality in cohomology.
 \end{algorithm}
 
 We now establish that the set~$\cB$ indeed forms a basis for 
-$\HdR^n(\mathfrak{U}_{\QQ_q(t)})$, as announced before.  We start with an 
-auxiliary result describing the cardinality of the set~$\cB$.
+$\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$, as announced before.  
+We start with an auxiliary result describing the cardinality of 
+the set~$\cB$.
 
 \begin{prop} \label{prop:BasisSize}
 The set $\cB$ has cardinality
@@ -1011,19 +1015,22 @@ as formal power series. From this the result follows easily.
 \end{proof}
 
 \begin{thm} \label{thm:Basis}
-Suppose that the family of smooth projective hypersurfaces $\mathcal{X}/\mathcal{S}$ 
-contains a diagonal fibre.  Then the set~$\cB$ from Definition~\ref{defn:MonBasis} 
-is a basis for the $\QQ_q(t)$-vector space $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$.
+Suppose that the family of smooth projective hypersurfaces 
+$\mathcal{X}/\mathcal{S}$ contains a diagonal fibre.  Then the 
+set~$\cB$ from Definition~\ref{defn:MonBasis} is a basis for 
+the $\QQ_q(t)$-vector space $\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$.
 \end{thm}
 
 \begin{proof}
-We already know that $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$ is spanned by the classes of the 
-$n$-forms $Q \Omega / P^k$ with $Q \in \QQ_q(t)[x_0, \dotsc, x_n]$ homogeneous of degree 
-$kd - (n+1)$ for $k \in \NN$. Applying Algorithm~\ref{alg:PoleRed}, we obtain an 
-expression for the class of $Q \Omega / P^k$ as an $\QQ_q(t)$-linear combination of 
-elements in $\cB$.  This shows that $\cB$ spans the vector space 
-$\HdR^n(\mathfrak{U}_{\QQ_q(t)})$. However, by the two propositions above,
-the dimension of $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$ is equal to the cardinality of
+We already know that $\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$ is 
+spanned by the classes of the $n$-forms $Q \Omega / P^k$ with 
+$Q \in \QQ_q(t)[x_0, \dotsc, x_n]$ homogeneous of degree 
+$kd - (n+1)$ for $k \in \NN$. Applying Algorithm~\ref{alg:PoleRed}, we 
+obtain an expression for the class of $Q \Omega / P^k$ as a 
+$\QQ_q(t)$-linear combination of elements in $\cB$.  This shows that 
+$\cB$ spans the vector space $\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$. 
+However, by the two propositions above,the dimension of 
+$\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$ is equal to the cardinality of
 $\cB$, so that $\cB$ is linearly independent as well.
 \end{proof}
 
@@ -1040,18 +1047,18 @@ for the filtration by the pole order defined in Section~\ref{sec:Connection}. Ap
 the loop in Algorithm~\ref{alg:PoleRed} just once, to lower the pole 
 order from $k$ to $k-1$, we see that $\cB_k$ spans 
 \[
-\mbox{Fil}^{k} \HdR^{n}(\mathfrak{U}_{\QQ_q(t)}) / \mbox{Fil}^{k-1} \HdR^{n}(\mathfrak{U}_{\QQ_q(t)})
+\mbox{Fil}^{k} \HdR^{n}\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr) / \mbox{Fil}^{k-1} \HdR^{n}\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)
 \]
 for all $1 \leq k \leq n$. Hence it follows that $\card{B_k} \geq h^{n-k,k-1}$ , but since
 \[
-\sum_{k=1}^n \card{B_k} = \dim \HdR^n(\mathfrak{U}_{\QQ_q(t)}) = \sum_{k=1}^n h^{n-k,k-1},
+\sum_{k=1}^n \card{B_k} = \dim \HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr) = \sum_{k=1}^n h^{n-k,k-1},
 \] 
 this implies that $\card{B_k} = h^{n-k,k-1}$ for all $1 \leq k \leq n$. So the Hodge numbers
 can be read off from the basis $\cB$.
 \end{rem}
 
 We now describe the action of the Gauss--Manin connection~$\nabla$ on 
-$\HdR^n(\mathfrak{U}_{\QQ_q(t)})$.  Suppose that we are given a basis element 
+$\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$.  Suppose that we are given a basis element 
 $x^u \Omega / P^k \in \cB_k$.  Following the description in 
 Section~\ref{sec:Background}, we compute
 \begin{equation} \label{eqn:nabla}
@@ -1059,8 +1066,8 @@ Section~\ref{sec:Background}, we compute
 dt \otimes \frac{- k x^u \frac{\partial P}{\partial t} \Omega}{P^{k+1}},
 \end{equation}
 where $\equiv$ denotes equality in 
-$\Omega_{\QQ_q(t)} \otimes \HdR^n(\mathfrak{U}_{\QQ_q(t)})$. We apply 
-Algorithm~\ref{alg:PoleRed} in order to write
+$\Omega_{\QQ_q(t)} \otimes \HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$. 
+We apply Algorithm~\ref{alg:PoleRed} in order to write
 \begin{equation}
 dt \otimes \frac{- k x^u \frac{\partial P}{ \partial t} \Omega}{P^{k+1}} \equiv 
 dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega,
@@ -1128,10 +1135,10 @@ such~$k$, the result is clear.
 \end{proof}
 
 \begin{rem}
-Recall that $\cB$ is a basis for $\HdR^n(\mathfrak{U}_{\QQ_q(t)})$, but not
-necessarily for $\HdR^n(\mathfrak{U}/\mathfrak{S})$. However, if the zero locus
-of $R$ in $\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$, then $\cB$ is 
-a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$. That it 
+Recall that $\cB$ is a basis for $\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$, 
+but not necessarily for $\HdR^n(\mathfrak{U}/\mathfrak{S})$. However, if the 
+zero locus of $R$ in $\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$, 
+then $\cB$ is a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$. That it 
 spans the cohomology can be seen by applying Algorithm~\ref{alg:PoleRed}, and that it 
 is linearly independent follows because it is so over $\QQ_q(t)$. Therefore, it will 
 be convenient to choose $\mathcal{S}$ smaller, so that this condition is satisfied. 
@@ -1187,7 +1194,8 @@ there exists a matrix $W_{\tau} \in M_{b \times b}(\QQ_{\mathfrak{q}})$ such tha
 
 \begin{proof}
 Let $\Lambda_{\tau, crys}$ be the image of the integral logarithmic de Rham 
-cohomology space $\HdR^n(\mathbf{P}_{\mathbf{Z}_{\mathfrak{q}}}^n,\mathcal{X}_{\hat{\tau}})$ 
+cohomology space 
+$\HdR^n\bigl(\mathbf{P}_{\mathbf{Z}_{\mathfrak{q}}}^n,\mathcal{X}_{\hat{\tau}}\bigr)$ 
 in the rigid cohomology space $\Hrig^n(U_{\tau})$. It is known that
 $\Lambda_{\tau, crys} \otimes \QQ_{\mathfrak{q}} \cong \Hrig^n(U_{\tau})$, 
 so that $\Lambda_{\tau, crys}$ is a lattice in $\Hrig^n(U_{\tau})$.  Let 
