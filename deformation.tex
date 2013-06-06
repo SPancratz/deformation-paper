@@ -2299,17 +2299,19 @@ $0 \leq j \leq n$.
 
 Actually, we can slightly modify 
 Algorithm~\ref{alg:Decompose}, so that we only have to solve systems of the 
-form $\Delta_{n+1} v = w$, as long as $k \geq n+1$. Indeed, we may assume, 
-without loss of generality, that $Q=x^v$ is a monomial, and can find some 
-other monomial $x^w$ such that $x^{v-w}$ is of degree $(n+1)d-(n+1)$. Now we 
-apply Algorithm~\ref{alg:Decompose} to $x^{v-w}$, noting that $B_{n+1}=\emptyset$, 
-and multiply the output by $x^w$ to obtain the decomposition of $x^v$. 
+form $\Delta_{n+1} v = w$ as long as the pole order is at least~$n+1$.  
+Indeed, we may assume, without loss of generality, that $Q=x^v$ is a monomial, 
+and can find some other monomial $x^w$ such that $x^{v-w}$ is of degree 
+$(n+1)d-(n+1)$. Now we apply Algorithm~\ref{alg:Decompose} to $x^{v-w}$, 
+noting that $B_{n+1}=\emptyset$, and multiply the output by $x^w$ to obtain 
+the decomposition of $x^v$. 
 
-Note that the left-hand side of Equation~\eqref{eqn:Froblift} does not have a pole
-at $z \neq \infty$, and has order at least $-pi\deg_t(P)$ at $z=\infty$. When applying 
-Algorithm~\ref{alg:PoleRed} to this expression, as long as the pole order satisfies 
-$k \geq n+1$, the order at $z$ drops by at most $\nu$ in every reduction step, 
-and it drops by at most $\mu$ in the remaining reduction steps. This implies that
+Note that the left-hand side of Equation~\eqref{eqn:Froblift} does not have a 
+pole at $z \neq \infty$, and has order at least $-pi\deg_t(P)$ at $z=\infty$. 
+When applying Algorithm~\ref{alg:PoleRed} to this expression, as long as the 
+pole order is at least~$n+1$, the order at~$z$ drops by at most $\nu$ in every 
+reduction step, and it drops by at most $\mu$ in the remaining reduction steps. 
+This implies that
 \begin{align} \label{al:ordz}
 \ord_z(\gamma_{i,j}) &\geq 
 \begin{cases}
