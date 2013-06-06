@@ -2359,12 +2359,13 @@ or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\theta_{z} \in \NN_0$
 such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 $\ord_z(\tilde{\Phi}) \geq -\theta_z$.
-Note that we can (and will) take $\theta_z=0$ if the connection matrix $M$ does not have 
-a pole at $z$, so that $\theta_z$ vanishes for all but finitely many $z$. We now define 
+Note that we can (and will) take $\theta_z=0$ if the connection matrix $M$ 
+does not have a pole at $z$, so that $\theta_z$ vanishes for all but finitely 
+many $z$. We now define 
 \begin{align*}
 D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
-    \prod_{z \neq \infty, \ord_p(z) < 0}(\frac{t}{z}-1)^{\theta_z}, 
-&K&= \bigl(\sum_{z} \theta_z \bigr) +1,
+     \prod_{z \neq \infty, \ord_p(z) < 0}\Bigl(\frac{t}{z}-1\Bigr)^{\theta_z}, 
+&K&= \Bigl(\sum_{z} \theta_z \Bigr) +1,
 \end{align*}
 which satisfy all the conditions.
 \end{proof}
