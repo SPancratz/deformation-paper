@@ -2277,20 +2277,21 @@ It is known that the de Rham cohomology of
 $A^{\dag}/\QQ_q \langle t,1/r \rangle^{\dag}$ 
 is isomorphic to the rigid cohomology of $U/S$, and that the action of 
 $F_p$ on the rigid cohomology of $U/S$ is induced by $\sigma$. Recall
-that our basis vectors for $\Hrig(U/S)$ %TODO, not really Hrig(U/S), only after shrinking S
-are of the form $x^u \Omega / P^{l}$ with $x^u \in B_l$ and $l \leq n$. 
-We observe that
+that our basis vectors for $\Hrig(U/S)$ 
+%TODO, not really Hrig(U/S), only after shrinking S
+are of the form $x^u \Omega / P^{\ell}$ with $x^u \in B_{\ell}$ and 
+$\ell \leq n$.  We observe that
 \begin{equation*}
-p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{l}} \Bigr) \equiv
+p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{\ell}} \Bigr) \equiv
 \sum_{i=0}^{\infty} \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(l+i)}} \Bigr)
+(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(\ell+i)}} \Bigr)
 \end{equation*}
 in $\Hrig^n(U/S)$, where $\eta_i \in \NN$ is defined by the equality 
-$(1-y)^{-l} = \sum_{i=0}^{\infty} \eta_i y^i$.
+$(1-y)^{-\ell} = \sum_{i=0}^{\infty} \eta_i y^i$.
 Using Algorithm~\ref{alg:PoleRed}, we can write
 \begin{equation} \label{eqn:Froblift}
 \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(l+i)}} \Bigr) \equiv
+(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(\ell+i)}} \Bigr) \equiv
 \frac{\gamma_{i,1} \Omega}{P^1}+\dotsb+\frac{\gamma_{i,n} \Omega}{P^n},
 \end{equation}
 where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for all $i \geq 0$ and 
