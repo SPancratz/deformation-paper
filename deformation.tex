@@ -3046,66 +3046,63 @@ All of our complexity bounds are clearly an improvement of this.
 
 \subsection{Quintic curve}
 
-We consider the family of genus six curves over $\ZZ$ given by 
+We consider the family of genus six curves over $\ZZ$ given by the polynomial 
 \begin{equation*}
 P=x_0^5 + x_1^5 + x_2^5 + t x_0 x_1 x_2^3,
 \end{equation*}
-which Gerkmann considers in~\citep[\S 7.4]{Gerkmann2007}. Following him, 
-we will consider $P$ as an element of $\ZZ_p[t][x_0,x_1,x_2]$ for 
-$p=2,3,7$. Note that these are really three different examples.
-The connection matrix $M \in M_{12 \times 12}(\QQ(t))$ only has to 
-be computed once, and turns out to have denominator $r=27t^5+3125$. 
+which Gerkmann~\citep[\S 7.4]{Gerkmann2007} considers as an element of 
+$\ZZ_p[t][x_0,x_1,x_2]$ for $p=2,3,7$.  Note that these are, in fact, 
+three examples.  The connection matrix $M \in M_{12 \times 12}(\QQ(t))$ 
+only has to be computed once, and turns out to have denominator $r=27t^5+3125$.
 The set of exponents at each of the zeros of $r$ is $\{-1,0\}$, and 
 after changing basis by
 \[ 
 W=\mbox{diag}(t^{-1},t,t^{-2},t^{-1},1,1,1,1,1,t^2,t^2,1)
 \] 
-as in 
-Remark~\ref{rem:basischange}, 
-the set of exponents  at $\infty$ is $\{-2/3,2/3,1,4/3,7/3,8/3,13/3,14/3\}$. 
-Note that by
-Remark \ref{rem:epsilon}, we only need to determine the bottom 
+as in Remark~\ref{rem:basischange}, the set of exponents at~$\infty$ is 
+$\{-2/3,2/3,1,4/3,7/3,8/3,13/3,14/3\}$.  Note that by
+Remark~\ref{rem:epsilon}, we only need to determine the bottom 
 half of the coefficients of the polynomial $\chi(T)$ directly.
 
 \subsubsection{Precisions}
 
-\textbf{p=2} \\
-
-We take $a=\log_p(\mathfrak{q})=50$, and let $\tau \in \FF_{\mathfrak{q}}$ 
-be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
-$\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$. Since the roots of $r$ are $2$-adic integers and 
-different modulo $2$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
-We find $\theta_z=320$ at all zeros of $r$ and $\theta_{\infty}=12$, so that we
-obtain $K=1613$ for the $t$-adic precision. We now compute the remaining $p$-adic 
-precisions
+\noindent
+\textit{Prime $p=2$.} 
+We take $\log_p(\mathfrak{q})=50$ and let $\tau \in \FF_{\mathfrak{q}}$ be 
+a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$.  We first 
+compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$.  As the roots of~$r$ are 
+$2$-adic integers and distinct  modulo~$2$, we can apply 
+Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=320$ at all 
+zeros~$z$ of $r$ and $\theta_{\infty}=12$ so that $K=1613$ for the $t$-adic 
+precision. We now compute the remaining $p$-adic precisions
 $N_{\Phi_0}=174$, $N_C=163$, $N_{C^{-1}}=164$, $N_M=187$, 
-$N_C'=184$, $N_{C^{-1}}'=183$, $N_{\Phi_0}'=176$ and $N_M'=188$. \\
+$N_C'=184$, $N_{C^{-1}}'=183$, $N_{\Phi_0}'=176$, and $N_M'=188$. \\
 
-\noindent \textbf{p=3} \\
-
-We take $a=\log_p(\mathfrak{q})=40$, and let $\tau \in \FF_{\mathfrak{q}}$ 
-be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
-$\delta=0$ and $N_{\Phi}=N_{\Phi}'=122$. Since the roots of $r$ are all contained
-in the residue disk at $\infty$, we cannot apply Theorem~\ref{thm:KedlayaTuitman}
-and have to apply Theorem~\ref{thm:Gerkmann} instead. At each of the zeros of $r$
-we find $\mu=0$, $\nu=-1$, $\theta_z=397$ and at $\infty$ we find 
-$\mu=-3$, $\nu=-2$, $\theta_{\infty}=793$, so that we obtain $K=2779$ for the
-$t$-adic precision. We now compute the remaining $p$-adic 
+\noindent 
+\textit{Prime $p=3$.}
+We take $\log_p(\mathfrak{q})=40$ and let $\tau \in \FF_{\mathfrak{q}}$ be 
+a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$.  We first 
+compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=122$. As the roots of~$r$ are all 
+contained in the residue disk at~$\infty$, we cannot apply 
+Theorem~\ref{thm:KedlayaTuitman} and have to apply Theorem~\ref{thm:Gerkmann} 
+instead. At each of the zeros of~$r$ we find $\mu=0$, $\nu=-1$, $\theta_z=397$ 
+and at $\infty$ we find $\mu=-3$, $\nu=-2$, $\theta_{\infty}=793$, so that 
+$K=2779$ for the $t$-adic precision. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=137$, $N_C=129$, $N_{C^{-1}}=130$, $N_M=147$, 
-$N_C'=146$, $N_{C^{-1}}'=143$, $N_{\Phi_0}'=139$ and $N_M'=147$. \\
+$N_C'=146$, $N_{C^{-1}}'=143$, $N_{\Phi_0}'=139$, and $N_M'=147$. \\
 
-\noindent \textbf{p=7} \\
-
-We take $a=\log_p(\mathfrak{q})=10$, and let $\tau \in \FF_{\mathfrak{q}}$ 
-be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first compute
-$\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$. Since the zeros of $r$ are $7$-adic integers and 
-different modulo $7$, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. 
-We find $\theta_z=224$ at all zeros of $r$ and $\theta_{\infty}=25$, so that we
-obtain $K=1146$ for the $t$-adic precision. We now compute the remaining $p$-adic 
-precisions
+\noindent
+\textit{Prime $p=7$.}
+We take $\log_p(\mathfrak{q})=10$, and let $\tau \in \FF_{\mathfrak{q}}$ be 
+a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first 
+compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.  As the zeros of $r$ are 
+$7$-adic integers and distinct modulo~$7$, we can apply 
+Theorem~\ref{thm:KedlayaTuitman} everywhere.  We find $\theta_z=224$ at all 
+zeros~$z$ of $r$ and $\theta_{\infty}=25$, so that $K=1146$ for the $t$-adic 
+precision. We now compute the remaining $p$-adic precisions
 $N_{\Phi_0}=38$, $N_C=34$, $N_{C^{-1}}=37$, $N_M=44$, 
-$N_C'=43$, $N_{C^{-1}}'=40$, $N_{\Phi_0}'=40$ and $N_M'=44$.
+$N_C'=43$, $N_{C^{-1}}'=40$, $N_{\Phi_0}'=40$, and $N_M'=44$.
 
 \subsubsection{Timings}
 
