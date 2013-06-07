@@ -2093,7 +2093,7 @@ in Algorithm~\ref{alg:expansion}.
 \begin{compactenum}[a.]
 \item[] $(C^{-1})_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $\ceil{K/p}-2$ \textbf{do}
-\item[] \hspace{0.6em} $(C^{-1})_{i+1} \gets  \frac{-1}{r_0(i+1)} \biggl(\sum_j -G_{i-j}^t (C^{-1})_j + \sum_j r_{i-j+1} (j (C^{-1})_j) \biggr) \pmod{p^{\tilde{N}_{C^{-1}}}}$
+\item[] \hspace{0.6em} $(C^{-1})_{i+1} \gets  \frac{-1}{r_0(i+1)} \biggl(\sum_j -G_{i-j}^t (C^{-1})_j + \sum_j r_{i-j+1} (j (C^{-1})_j) \biggr) \pmod{p^{N'_{C^{-1}}}}$
 \item[] $C^{-1} \gets \sum_{i=0}^{\ceil{K/p}-1} (C^{-1})_i t^{i} \pmod{p^{N_{C^{-1}}}}$
 \end{compactenum}
 \item $\Phi \gets C \Phi_0 \sigma(C^{-1})$
