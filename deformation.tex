@@ -1152,18 +1152,18 @@ this implies that $\cB$ is a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
 \end{assump}
 
 \begin{rem} 
-Note that in Algorithm~\ref{alg:Connection}, the matrices~$\Delta_k^{-1}$ 
-only have to be computed once. After this, every call to {\sc{Decompose}} 
-reduces to a multiplication by one of the~$\Delta_k^{-1}$.  Although this 
-does not improve the complexity of Algorithm~\ref{alg:Connection}, it is 
-a significant improvement in practice.
-
-Actually, instead of computing the inverse $\Delta_k^{-1}$, it is better 
-to compute the decomposition $\Delta_k = L U P$, where $L$ is lower 
-triangular, $U$ is upper triangular, and $P$ is a permutation matrix, which 
-is guaranteed to exist for any square matrix.  While generalisations to 
-non-square matrices exist, in this form the improvement relies on 
-Theorem~\ref{thm:Isomorphism}.
+Note that in Algorithm~\ref{alg:Connection}, it is sufficient to invert 
+the matrices~$\Delta_k^{-1}$ just once. After this, every call to {\sc{Decompose}} 
+reduces to a multiplication by one of the~$\Delta_k^{-1}$. Actually, instead 
+of computing the inverse $\Delta_k^{-1}$, it is better to compute the 
+decomposition $\Delta_k = L U P$, where $L$ is lower triangular, $U$ is 
+upper triangular and $P$ is a permutation matrix, which 
+is guaranteed to exist for any square matrix. Since the matrices $\Delta_k$
+contain a lot of zeros, methods from sparse linear algebra can be used to compute this 
+decomposition. After this, every call to {\sc{Decompose}} reduces to solving a 
+lower and an upper diagonal linear system. Although all of this 
+does not improve the complexity of Algorithm~\ref{alg:Connection}, it does result 
+in an enormous improvement in practice.
 \end{rem}
 
 In the rest of this section we will freely use the definitions and notation 
