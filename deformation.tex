@@ -1957,7 +1957,7 @@ Again we will only carry out this computation to some finite $p$-adic
 working precision~$N'_C$, and if we want $C$ to be correct to $p$-adic 
 precision~$N_C$, then the precision $N'_C$ has to be somewhat higher 
 because of error propagation. An expression for $N'_C$, in terms of 
-$N_C$ and the desired $t$-adic precision $K$, was already given by 
+$N_C$ and the desired $t$-adic precision $K$, was given by 
 Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be
 significantly improved using Theorem~\ref{thm:valC}, as we will now show. 
 
@@ -2013,7 +2013,7 @@ we deduce that $\ord_p(\overline{\tilde{C}-C}) \geq N_C$.
 
 \begin{rem}
 A result similar to Proposition~\ref{thm:errorprop} with a larger constant in front of 
-the logarithm was already obtained by Lauder in \citep[Theorem 5.1]{Lauder2006}. We have
+the logarithm was obtained by Lauder in \citep[Theorem 5.1]{Lauder2006}. We have
 not been able to find something similar to Proposition~\ref{prop:N_M} in Lauder's work.
 \end{rem}
 
@@ -2134,8 +2134,8 @@ The bounds used by Lauder~\citep[\S 8.1]{Lauder2004a} and
 Gerkmann~\citep[\S 6]{Gerkmann2007} were not very sharp, 
 which significantly slowed down their algorithms.
 Recently, under some small additional assumptions, Kedlaya and the second 
-author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a much sharper bound 
-that we state below in a simplified form. For $z \in \mathbf{P}^1(\QQ_q)$, we
+author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a sharper bound 
+that we state below in a simplified form. For $z \in \mathbf{P}^1(\bar{\QQ}_q)$, we
 denote the valuation on $\QQ_q(t)$ corresponding to $z$ by $\ord_z(-)$, and
 we extend $\ord_z(-)$ to polynomials and matrices over $\QQ_q(t)$, by
 taking the minimum over the coefficients and entries, respectively.
@@ -2194,7 +2194,7 @@ we might not know them exactly a priori.
 \end{proof}
 
 \begin{rem}
-In practice, the various constants $-(2 \delta + (n-1)), c, \alpha_1, -\delta$ 
+In practice, the various constants $-(2 \delta + (n-1))$, $c$, $\alpha_1$, $-\delta$ 
 are always very small in absolute value, so that $g(N)$ is about $N$, and 
 the lower bound for the order of~$\Phi$ modulo $p^N$ at the point $z$ is 
 roughly $-pN$.
@@ -2343,8 +2343,8 @@ and we can compute the order at $z$ of these terms using
 \end{proof}
 
 \begin{rem}
-A result similar to Theorem \ref{thm:Gerkmann}, but presented quite 
-differently, was already obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}.
+A result similar to (but weaker than) Theorem \ref{thm:Gerkmann} 
+was obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}.
 \end{rem}
 
 \begin{thm} \label{thm:defD}
@@ -2355,7 +2355,7 @@ to a matrix of polynomials of degree less than $K$.
 \end{thm}
 
 \begin{proof}
-For all unramified geometric points
+For all geometric points
 $z \in \mathbf{P}^1_{\QQ_q}$, using either Theorem~\ref{thm:KedlayaTuitman} 
 or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\theta_{z} \in \NN_0$ 
 such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix 
