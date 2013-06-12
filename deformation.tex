@@ -2230,13 +2230,12 @@ $[w_1,\dotsc,w_b]$, in general we only have that $\ord_p(\Phi') \geq -\delta'$.
 
 When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied,
 we can use the alternative bound below. Recall that our family of smooth projective 
-hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by a homogeneous polynomial 
-$P \in \ZZ_q[t][x_0,\dotsc,x_n]$ of degree $d$.
+hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by the homogeneous polynomial 
+$P \in \ZZ_q[t][x_0,\dotsc,x_n]$.
 
 \begin{thm} \label{thm:Gerkmann}
-Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in 
-$\mathbf{P}^{1}_{\mathbf{Q}_q}$, and let $z \in \mathfrak{Z}(\bar{\QQ}_q)$ be a geometric point 
-of $\mathfrak{Z}$. Define the matrices $\Delta_k$ over $\QQ_q(t)$ as in 
+Let $z \in \mathbf{P}^1(\bar{\QQ}_q)$ be a geometric point.
+Define the matrices $\Delta_k$ over $\QQ_q(t)$ as in 
 Definition~\ref{defn:Deltak}, and put
 \begin{eqnarray*}
 \mu &=& \sum_{k=2}^n \ord_z(\Delta_k^{-1}), \\
@@ -2248,7 +2247,7 @@ h(N) = \max \{ i \in \NN : i+(n-1)+\ord_p ((n-1)!)-n \floor{\log_p(p(n+i)-1)} < 
 \end{align*}
 and put
 \[
-\beta(N) = \begin{cases}
+\beta = \begin{cases}
 \mu +(p(n+h(N))-n) \nu & \mbox{if $z \neq \infty$}, \\
 \mu +(p(n+h(N))-n) \nu - p h(N) \deg_t(P) & \mbox{if $z = \infty$}.
 \end{cases}
@@ -2256,7 +2255,7 @@ and put
 Then $\Phi$ is congruent modulo $p^N$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \begin{equation*}
-\ord_z(\tilde{\Phi}) \geq \beta(N).
+\ord_z(\tilde{\Phi}) \geq \beta.
 \end{equation*}
 \end{thm}
 
