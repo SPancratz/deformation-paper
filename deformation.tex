@@ -2139,16 +2139,21 @@ that we state below in a simplified form. For $z \in \mathbf{P}^1(\bar{\QQ}_q)$,
 denote the valuation on $\QQ_q(t)$ corresponding to $z$ by $\ord_z(-)$, and
 we extend $\ord_z(-)$ to polynomials and matrices over $\QQ_q(t)$, by
 taking the minimum over the coefficients and entries, respectively.
+Recall that $M$ denotes the matrix of the Gauss--Manin connection $\nabla$
+with respect to the basis $\cB$ from Definition~\ref{defn:MonBasis}.
 
 \begin{thm} \label{thm:KedlayaTuitman}
-Let $\mathfrak{Z}$ denote the complement of $\mathfrak{S}$ in 
-$\mathbf{P}^{1}_{\mathbf{Q}_q}$, and let $z \in \mathfrak{Z}(\bar{\QQ}_q)$ be a geometric point 
-of $\mathfrak{Z}$ such that $\mathfrak{Z}$ does not contain any other points 
-with the same reduction modulo~$p$. 
-Suppose that the connection matrix $M$ has at most a simple pole at~$z$ and that 
-the exponents $\lambda_1, \dotsc, \lambda_{b}$ of $M$ at $z$, which are defined 
-as the eigenvalues of $(t - z) M \vert_{t=z}$ and known to be rational numbers, are 
-contained in $\ZZ_p \cap \QQ$. Let $\delta$ be defined as in 
+Let $z \in \mathbf{P}^1(\bar{\QQ}_q)$ be a geometric point such that:
+%such that $\mathfrak{Z}$ does not contain any other points 
+%with the same reduction modulo~$p$.
+\begin{enumerate} 
+\item $M$ has at most a simple pole at~$z$,
+\item $M$ has no other poles with the same reduction modulo~$p$ as $z$, 
+\item the exponents $\lambda_1, \dotsc, \lambda_{b}$ of $M$ at $z$, which are defined 
+      as the eigenvalues  of the residue matrix $(t - z) M \vert_{t=z}$ and 
+      known to be rational numbers, are contained in $\ZZ_p \cap \QQ$. 
+\end{enumerate}
+Let $\delta$ be defined as in 
 Definition~\ref{defn:delta}. For $i \in \NN$, put
 \begin{align*}
 f(i) = \max \Bigl\{ -\bigl(2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil, 
@@ -2169,7 +2174,7 @@ g(N) &= \max \{i \in \NN : i + f(i) - \delta + c  < N \},
 and define
 \begin{align*}
 \alpha_1    &= \lfloor -p \min_i \{ \lambda_i \} + \max_{i} \{\lambda_i\} \rfloor, \\ 
-\alpha_2(N) &=  \left \{ 
+\alpha_2    &=  \left \{ 
          \begin{array}{cl}
          0  & \mbox{if $M$ does not have a pole at $z$},  \\
          0  & \mbox{if $z \in \{0,\infty \}$}, \\
@@ -2180,7 +2185,7 @@ and define
 Then the matrix $\Phi$ is congruent modulo $p^{N}$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \begin{equation*}
-\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2(N)).
+\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2).
 \end{equation*}
 \end{thm}
 
@@ -2212,9 +2217,9 @@ $\Phi$ %(as always defined with respect to the basis $\cB$)
 is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \[
-\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2(N))+\ord_z(W)+p\ord_z(W^{-1}).
+\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1}).
 \]
-Here, $\alpha_1$ and $\alpha_2(N)$ are defined as in 
+Here, $\alpha_1$ and $\alpha_2$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 \begin{equation*}
 \delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr), 
