@@ -2353,21 +2353,29 @@ was obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}.
 
 \begin{thm} \label{thm:defD}
 Let $N_{\Phi} \in \NN$. We can explicitly find $D \in \ZZ_q[t]$ and
-$K \in \NN$, such that $D$ divides some power of the denominator $r$ 
-of the connection matrix $M$, and $D \Phi$ is congruent modulo $p^{N_{\Phi}}$ 
-to a matrix of polynomials of degree less than $K$.
+$K \in \NN$, where 
+$D$ divides some power of the polynomial $R$ 
+from Definition~\ref{defn:resultant}, such that
+$D \Phi$ is congruent modulo 
+$p^{N_{\Phi}}$ to a matrix of polynomials of degree less than $K$.
 \end{thm}
 
 \begin{proof}
 For all geometric points
-$z \in \mathbf{P}^1_{\QQ_q}$, using either Theorem~\ref{thm:KedlayaTuitman} 
+$z \in \mathbf{P}^1(\bar{\QQ}_q)$, using either Theorem~\ref{thm:KedlayaTuitman} 
 or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\theta_{z} \in \NN_0$ 
 such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
-$\ord_z(\tilde{\Phi}) \geq -\theta_z$.
-Note that we can (and will) take $\theta_z=0$ if the connection matrix $M$ 
-does not have a pole at $z$, so that $\theta_z$ vanishes for all but finitely 
-many $z$. We now define 
+$\ord_z(\tilde{\Phi}) \geq -\theta_z$. By Theorem~\ref{thm:Gerkmann}, 
+we can take $\theta_z=0$ for $z \neq \infty$ if $R(z) \neq 0$,
+so that $\theta_z$ vanishes for all but finitely many $z$.
+Moreover, by Theorem~\ref{thm:KedlayaTuitman}, we can also take
+$\theta_z=0$ if the connection matrix $M$ 
+does not have a pole with the same reduction modulo~$p$ as $z$. 
+%[[TODO]], perhaps at some point make a remark about the theta_z being
+%invariant under Gal(\bar{Qq}/Qq) which shows that D is defined over
+%Qq, but this is a bit annoying to write down, perhaps leave it this way
+We now define 
 \begin{align*}
 D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
      \prod_{z \neq \infty, \ord_p(z) < 0}\Bigl(\frac{t}{z}-1\Bigr)^{\theta_z}, 
