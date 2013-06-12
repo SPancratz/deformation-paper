@@ -2635,7 +2635,7 @@ in Algorithm~\ref{alg:complete}.
 \label{alg:complete}
 \begin{algorithmic}
 \vspace{1mm}
-\Require $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag}, and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$.
+\Require $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ homogeneous of degree $d$ satisfying Assumption~\ref{assump:diag} and $\tau \in S(\mathbf{F}_{\mathfrak{q}})$.
 \Ensure  The zeta function $Z(X_{\tau},T)$ of the fibre $X_{\tau}$ lying over $\tau$.
 \Procedure{ZetaFunction}{$P,\tau$}
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
@@ -3010,6 +3010,18 @@ We need to store $\BigOh(\log(a))$ matrices of size~$b$ with entries
 in~$\QQ_{\mathfrak{q}}$.  This requires space 
 $\SoftOh(b^2 (a \log(p)) (a d^n)) \subset \SoftOh(a^2 \log(p) d^{3n})$.
 \end{proof}
+
+We can now state the total time and space requirements of 
+Algorithm~\ref{alg:complete}. Recall that $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ 
+denotes a homogeneous polynomial
+of degree $d$ satisfying Assumption~\ref{assump:diag} 
+and that $\tau \in S(\mathbf{F}_{\mathfrak{q}})$, where 
+$\FF_{\mathfrak{q}}/\FF_q$ denotes a finite field extension
+of characteristic $p$. 
+Moreover, we write $a=\log_p(\mathfrak{q})$, $a'=\log_p(q)$ and let
+$d_t$ be the degree of $P$ in the variable $t$. Finally,
+we let $e$ denote the base of the natural
+logarithm and $\omega$ an exponent for matrix multiplication.
 
 \begin{thm}
 The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
