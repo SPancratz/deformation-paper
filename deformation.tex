@@ -1319,7 +1319,7 @@ as in Definition~\ref{defn:MonBasis}.
 Our goal is to compute 
 the matrix~$\Phi_0$ representing the action of $p^{-1} \Frob_p$ on 
 $\Hrig^n(U_0) \cong \HdR^n(\mathfrak{U}_0)$, with respect to the basis~$\cB$, 
-to $p$-adic precision~$N$. It will turn out that this matrix has only one
+to $p$-adic precision~$N_{\Phi_0}$. It will turn out that this matrix has only one
 nonzero element in every row and column.
 
 We define the ramified extension~$\QQ_p(\pi)$ where $\pi^{p-1} = -p$, 
@@ -1385,7 +1385,8 @@ However, to simplify notation, we will keep the index $m$.
 \subsection{Alternative formulas}
 
 At first sight it appears that this computation genuinely has to 
-take place in the extension field~$\QQ_p(\pi)$.  This is, however, 
+take place in the extension field~$\QQ_p(\pi)$ even though the entries
+of the matrix $\Phi_0$ are of course contained in $\QQ_p$.  This is, however, 
 not the case as we will show now.  The terms $\alpha_{u,v}$ 
 will turn out to be elements of~$\ZZ_p$, and we provide expressions 
 for them that are more suitable for computations.
@@ -1439,8 +1440,7 @@ After substituting $m-r = (p-1)r + \bigl(p(u_i+1) - (v_i+1)\bigr)/d$, we obtain
 the required formula.
 \end{proof}
 
-In particular, Theorem~\ref{thm:alpha} implies that $\alpha_{u, v} \in \QQ_p$.
-Our next aim is to show that $\alpha_{u,v}$ is $p$-adically integral.  First, 
+Our aim is to show that $\alpha_{u,v}$ is $p$-adically integral.  First, 
 we collect a few intermediate results.
 
 \begin{prop} \label{prop:mpr}
