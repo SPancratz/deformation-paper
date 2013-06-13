@@ -2728,7 +2728,8 @@ are also $\SoftOh((de)^n d_t)$.
 Next we estimate the $p$-adic precisions that we require.
 
 \begin{prop}
-All $p$-adic precisions that we use lie in $\SoftOh(a d^n \log(d_t))$.
+All $p$-adic precisions that we use lie in $\SoftOh(a d^n \log(d_t))$ 
+and $\deg(D), K$ lie in $\SoftOh(apd^n (de)^n d_t)$.
 \end{prop}
 
 \begin{proof}
@@ -2741,10 +2742,17 @@ In Theorem~\ref{thm:precPhitau}, we have
 \end{align*}
 The precisions $N'_{\Phi}$ and $N_{\Phi} \pm \delta$ in 
 Algorithm~\ref{alg:complete} are then $\SoftOh(ad^n)$ as well.
-It follows from Theorem~\ref{thm:Gerkmann} that one can take 
+It follows from Theorem~\ref{thm:Gerkmann} that in
+Theorem~\ref{thm:defD} we can take
+\begin{align*}
+\deg{D} &\leq \deg \bigl( \prod_{k=2}^n \det(\Delta_k) \bigr) + (p(n+h(N_{\Phi}))-n) \deg(\det(\Delta_{n+1})), \\
+K &\leq \deg(D)+ 1+\deg(\prod_{k=2}^n \Delta_k^{-1}) + (p(n+h(N_{\Phi}))-n) \deg(\Delta_{n+1}^{-1}) + ph(N_{\Phi}) d_t. \\
+\end{align*} 
+Consequently, we find that 
 \[
-\deg(D), K \in \SoftOh(p (ad^n) \deg(R)) \subset  \SoftOh(apd^n (de)^n d_t).
-\] 
+\deg(D), K \in \SoftOh(apd^n (de)^n d_t).
+\]
+
 The $p$-adic precisions $N_{\Phi_0},N_C,N_M,N_{C^{-1}},N'_{C}$ and $N'_{C^{-1}}$ in
 Theorem~\ref{thm:Ni} are $\SoftOh(ad^n \log(d_t))$, noting that the logarithms 
 that appear there are to base~$p$. Finally, the remaining $p$-adic precisions 
