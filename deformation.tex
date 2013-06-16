@@ -2106,7 +2106,7 @@ in Algorithm~\ref{alg:expansion}.
 
 \label{sec:ZetaFunctions}
 
-\subsection{Evaluating of $\Phi$ at a point}
+\subsection{Evaluating $\Phi$ at a point}
 
 In the previous section we described how to compute the power series 
 expansion at $t=0$ of the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
@@ -3222,10 +3222,11 @@ We take $a=\log_{11}(\mathfrak{q})=10$ and let $\tau$ be a zero of the Conway po
 $\FF_{\mathfrak{q}}/\FF_{11}$. We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.
 Since the zeros of $r$ are $11$-adic integers and different modulo $11$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=660$ at the zeros of $r_2$
-and $\theta_{\infty}=9$ at $\infty$. At the zeros $z$ of $r_1$, which are apparent singularities, 
-we get a better bound by applying Theorem~\ref{thm:Gerkmann} with $\mu_z=-1$, $\nu_z=0$ and find 
-$\theta_z=1$. After checking that, we can take $s=r_1 r_2^{660}$ and $K=31720$. We now compute the remaining 
-$p$-adic precisions $N_{\Phi_0}=40$, $N_C=35$, $N_{C^{-1}}=36$, $N_M=47$, $N_C'=46$, $N_{C^{-1}}'=43$, 
+and $\theta_{\infty}=9$ at $\infty$. At the zeros $z$ of $r_1$, noting that 
+$R$ has no other zeros in the residue disk at $z$, we get a better bound by applying 
+Theorem~\ref{thm:Gerkmann} with $\mu_z=-1$, $\nu_z=0$ and find $\theta_z=1$, so that we can 
+take $s=r_1 r_2^{660}$ and $K=31720$. We now compute the remaining $p$-adic precisions 
+$N_{\Phi_0}=40$, $N_C=35$, $N_{C^{-1}}=36$, $N_M=47$, $N_C'=46$, $N_{C^{-1}}'=43$, 
 $N_{\Phi_0}'=42$ and $N_M'=47$.
 
 \subsubsection{Timings}
@@ -3255,9 +3256,11 @@ P=x_0^4 + x_1^4 + x_2^4 + x_3^4
           + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr),
 \end{split}
 \end{equation*}
-and we take $\tau$ to be  $1$. [[TODO]] (Re)compute precisions and run again.
+and we take $\tau$ to be  $1$. 
 
 \subsubsection{Precisions}
+
+We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=$.
 
 \subsubsection{Timings}
 
