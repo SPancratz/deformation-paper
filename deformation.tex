@@ -1156,8 +1156,8 @@ of computing the inverse $\Delta_k^{-1}$, it is better to compute the
 decomposition $\Delta_k = L U P$, where $L$ is lower triangular, $U$ is 
 upper triangular and $P$ is a permutation matrix, which 
 is guaranteed to exist for any square matrix. Since the matrices $\Delta_k$
-contain a lot of zeros, methods from sparse linear algebra can be used to compute this 
-decomposition. After this, every call to {\sc{Decompose}} reduces to solving a 
+contain a lot of zeros, methods from sparse linear algebra can be used to compute such
+a decomposition. After this, every call to {\sc{Decompose}} reduces to solving a 
 lower and an upper diagonal linear system. Although all of this 
 does not improve the complexity of Algorithm~\ref{alg:Connection}, it does result 
 in an enormous improvement in practice.
@@ -2106,7 +2106,7 @@ in Algorithm~\ref{alg:expansion}.
 
 \label{sec:ZetaFunctions}
 
-\subsection{Evaluation at a point}
+\subsection{Evaluating of $\Phi$ at a point}
 
 In the previous section we described how to compute the power series 
 expansion at $t=0$ of the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
@@ -2138,20 +2138,16 @@ we extend $\ord_z(-)$ to polynomials and matrices over $\QQ_q(t)$, by
 taking the minimum over the coefficients and entries, respectively.
 Recall that $M$ denotes the matrix of the Gauss--Manin connection $\nabla$
 with respect to the basis $\cB$ from Definition~\ref{defn:MonBasis}.
+Let $\delta$ be defined as in Definition~\ref{defn:delta}.
 
 \begin{thm} \label{thm:KedlayaTuitman}
-Let $z \in \mathbf{P}^1(\bar{\QQ}_q)$ be a geometric point such that:
-%such that $\mathfrak{Z}$ does not contain any other points 
-%with the same reduction modulo~$p$.
-\begin{enumerate} 
-\item $M$ has at most a simple pole at~$z$,
-\item $M$ has no other poles with the same reduction modulo~$p$ as $z$, 
-\item the exponents $\lambda_1, \dotsc, \lambda_{b}$ of $M$ at $z$, which are defined 
-      as the eigenvalues  of the residue matrix $(t - z) M \vert_{t=z}$ and 
-      known to be rational numbers, are contained in $\ZZ_p \cap \QQ$. 
-\end{enumerate}
-Let $\delta$ be defined as in 
-Definition~\ref{defn:delta}. For $i \in \NN$, put
+Let $D \subset \mathbf{P}^1(\bar{\QQ}_q)$ be a residue disk and
+$z \in D$ a point such that $M$ has at most a simple pole at~$z$ 
+and no other poles contained in $D$. Suppose that 
+the exponents $\lambda_1, \dotsc, \lambda_{b}$ of $M$ at $z$, which are defined 
+as the eigenvalues  of the matrix $(t - z) M \vert_{t=z}$ and 
+known to be rational numbers, are contained in $\ZZ_p \cap \QQ$. 
+For $i \in \NN$, put
 \begin{align*}
 f(i) = \max \Bigl\{ -\bigl(2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil, 
 (b-1) \ord_p(M) -\bigl(2 \delta + (n-1) \bigr) \lfloor \log_p(i) \rfloor 
@@ -2177,13 +2173,14 @@ and define
          0  & \mbox{if $z \in \{0,\infty \}$}, \\
          g(N) & \mbox{otherwise}.
          \end{array}
-         \right. 
+         \right.
 \end{align*}
-Then the matrix $\Phi$ is congruent modulo $p^{N}$ to a matrix 
-$\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
+Then the matrix $\Phi$ is congruent 
+modulo $p^{N}$ to a matrix $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \begin{equation*}
-\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2).
+\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)
 \end{equation*}
+and $\tilde{\Phi}$ has no other poles contained in $D$.
 \end{thm}
 
 \begin{proof}
@@ -2225,18 +2222,19 @@ since for the matrix $\Phi'$ of $p^{-1}\Frob_p$ with respect to the basis
 $[w_1,\dotsc,w_b]$, in general we only have that $\ord_p(\Phi') \geq -\delta'$. 
 \end{rem}
 
-When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied,
-we can use the alternative bound below. Recall that our family of smooth projective 
-hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by the homogeneous polynomial 
-$P \in \ZZ_q[t][x_0,\dotsc,x_n]$.
+When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied, 
+we can use the alternative bound below. Recall that our family of 
+smooth projective hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by the homogeneous 
+polynomial $P \in \ZZ_q[t][x_0,\dotsc,x_n]$.
 
 \begin{thm} \label{thm:Gerkmann}
-Let $z \in \mathbf{P}^1(\bar{\QQ}_q)$ be a geometric point.
 Define the matrices $\Delta_k$ over $\QQ_q(t)$ as in 
-Definition~\ref{defn:Deltak}, and put
+Definition~\ref{defn:Deltak}.
+Let $D \subset \mathbf{P}^1(\bar{\QQ}_q)$ be a residue disk
+and for any point $z \in D$ put
 \begin{eqnarray*}
-\mu &=& \sum_{k=2}^n \ord_z(\Delta_k^{-1}), \\
-\nu &=& \ord_z(\Delta_{n+1}^{-1}).
+\mu_z &=& \sum_{k=2}^n \ord_z(\Delta_k^{-1}), \\
+\nu_z &=& \ord_z(\Delta_{n+1}^{-1}).
 \end{eqnarray*}
 For $N \in \NN$, define 
 \begin{align*}
@@ -2244,16 +2242,17 @@ h(N) = \max \{ i \in \NN : i+(n-1)+\ord_p ((n-1)!)-n \floor{\log_p(p(n+i)-1)} < 
 \end{align*}
 and put
 \[
-\beta = \begin{cases}
-\mu +(p(n+h(N))-n) \nu & \mbox{if $z \neq \infty$}, \\
-\mu +(p(n+h(N))-n) \nu - p h(N) \deg_t(P) & \mbox{if $z = \infty$}.
+\beta_z = \begin{cases}
+-\mu_z -(p(n+h(N))-n) \nu_z & \mbox{if $z \neq \infty$}, \\
+-\mu_z -(p(n+h(N))-n) \nu_z + p h(N) \deg_t(P) & \mbox{if $z = \infty$}.
 \end{cases}
 \]
 Then $\Phi$ is congruent modulo $p^N$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \begin{equation*}
-\ord_z(\tilde{\Phi}) \geq \beta.
+\ord_z(\tilde{\Phi}) \geq -\beta_z,
 \end{equation*}
+for all points $z \in D$.
 \end{thm}
 
 \begin{proof}
@@ -2312,14 +2311,14 @@ the decomposition of~$x^v$.
 Note that the left-hand side of Equation~\eqref{eqn:Froblift} does not have a 
 pole at $z \neq \infty$, and has order at least $-pi\deg_t(P)$ at $z=\infty$. 
 When applying Algorithm~\ref{alg:PoleRed} to this expression, as long as the 
-pole order is at least~$n+1$, the order at~$z$ drops by at most $\nu$ in every 
-reduction step, and it drops by at most $\mu$ in the remaining reduction steps. 
+pole order is at least~$n+1$, the order at~$z$ drops by at most $\nu_z$ in every 
+reduction step, and it drops by at most $\mu_z$ in the remaining reduction steps. 
 This implies that
 \begin{align} \label{al:ordz}
 \ord_z(\gamma_{i,j}) &\geq 
 \begin{cases}
-\mu + (p(n+i)-n) \nu                 &\mbox{if } z \neq \infty, \\
-\mu + (p(n+i)-n) \nu - pi \deg_t(P)  &\mbox{if } z=\infty.
+\mu_z + (p(n+i)-n) \nu_z                 &\mbox{if } z \neq \infty, \\
+\mu_z + (p(n+i)-n) \nu_z - pi \deg_t(P)  &\mbox{if } z=\infty.
 \end{cases}
 \end{align}
 
@@ -2349,36 +2348,27 @@ was obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}.
 \end{rem}
 
 \begin{thm} \label{thm:defD}
-Let $N_{\Phi} \in \NN$. We can explicitly find $D \in \ZZ_q[t]$ and
-$K \in \NN$, where 
-$D$ divides some power of the polynomial $R$ 
-from Definition~\ref{defn:resultant}, such that
-$D \Phi$ is congruent modulo 
-$p^{N_{\Phi}}$ to a matrix of polynomials of degree less than $K$.
+Let $N_{\Phi} \in \NN$. We can explicitly find $s \in \ZZ_q[t]$ and $K \in \NN$, 
+where $s$ divides some power of the polynomial $R$ from Definition~, such that 
+$s \Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix of polynomials of degree 
+less than $K$. 
 \end{thm}
 
 \begin{proof}
-For all geometric points
-$z \in \mathbf{P}^1(\bar{\QQ}_q)$, using either Theorem~\ref{thm:KedlayaTuitman} 
-or Theorem~\ref{thm:Gerkmann}, we can explicitly find $\theta_{z} \in \NN_0$ 
-such that $\Phi$ is congruent modulo $p^{N_{\Phi}}$ to a matrix 
-$\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
-$\ord_z(\tilde{\Phi}) \geq -\theta_z$. By Theorem~\ref{thm:Gerkmann}, 
-we can take $\theta_z=0$ for $z \neq \infty$ if $R(z) \neq 0$,
-so that $\theta_z$ vanishes for all but finitely many $z$.
-Moreover, by Theorem~\ref{thm:KedlayaTuitman}, we can also take
-$\theta_z=0$ if the connection matrix $M$ 
-does not have a pole with the same reduction modulo~$p$ as $z$. 
-%[[TODO]], perhaps at some point make a remark about the theta_z being
-%invariant under Gal(\bar{Qq}/Qq) which shows that D is defined over
-%Qq, but this is a bit annoying to write down, perhaps leave it this way
-We now define 
+On every residue disk $D \subset \mathbf{P}^1(\bar{\QQ}_q)$, we can 
+apply either Theorem~\ref{thm:KedlayaTuitman} (when it applies) or Theorem~\ref{thm:Gerkmann}, to find
+$\theta_z \in \NN_0$ for all $z \in D$, such that $\Phi$ is congruent modulo~$p^N$ to a matrix
+$\tilde{\Phi}\in M_{b \times b}(\QQ_q(t))$ for which $\ord_z(\tilde{\Phi}) \geq -\theta_z$, for
+all $z \in D$. By Theorem~\ref{thm:Gerkmann}, we can take $\theta_z=0$ for $z \neq \infty$ if 
+$R(z) \neq 0$, so that $\theta_z$ vanishes for all but finitely many $z \in \mathbf{P}^1(\bar{\QQ}_q)$.
+Moreover, we may assume that $\theta_z=\theta_{z'}$ if $z,z'$ are conjugated over $\QQ_q$.
+We now define
 \begin{align*}
-D &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
+s &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
      \prod_{z \neq \infty, \ord_p(z) < 0}\Bigl(\frac{t}{z}-1\Bigr)^{\theta_z}, 
 &K&= \Bigl(\sum_{z} \theta_z \Bigr) +1,
 \end{align*}
-which satisfy all the conditions.
+which clearly satisfy all the required conditions.
 \end{proof}
 
 We compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
@@ -2386,10 +2376,10 @@ precision $N_{\Phi}$ using Algorithm~\ref{alg:expansion}. For any
 $\tau \in S(\bar{\FF}_q)$, we can now compute
 \begin{equation*}
 \Phi_{\tau} = 
-  D(\hat{\tau})^{-1} \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} 
+  s(\hat{\tau})^{-1} \bigl( s \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} 
   \bmod{p^{N_{\Phi}}}.
 \end{equation*}
-Since $\ord_p(D(\hat{\tau}))=0$, $\ord_p(\hat{\tau}) \geq 0$ and
+Since $\ord_p(s(\hat{\tau}))=0$, $\ord_p(\hat{\tau}) \geq 0$ and
 $\ord_p(\Phi) \geq -\delta$, 
 the matrix $\Phi_{\tau}$ will also be correct to precision $N_{\Phi}$ 
 provided that $\hat{\tau}$ is computed to $p$-adic precision $N_{\Phi}+\delta$,
@@ -2639,10 +2629,10 @@ in Algorithm~\ref{alg:complete}.
 \State \begin{compactenum}[{\hspace{1em} } 1.] \vspace{-1.24em}
 \item Determine $N_{\Phi}$ from Theorem~\ref{thm:precPhitau}.
 \item $N_{\Phi}' \gets N_{\Phi}+(a+b-3) \delta$
-\item Determine $K \in \NN$ and $D \in \ZZ_q[t]$ from Theorem \ref{thm:defD}.
+\item Determine $K \in \NN$ and $s \in \ZZ_q[t]$ from Theorem \ref{thm:defD}.
 \item Compute $\Phi \gets$ \textsc{FrobSeriesExpansion($N_{\Phi},K)$}.
 \item Determine $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ to $p$-adic precision $N_{\Phi}+\delta$.
-\item Compute $\Phi_{\tau} \gets D(\hat{\tau})^{-1} \bigl( D \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
+\item Compute $\Phi_{\tau} \gets s(\hat{\tau})^{-1} \bigl( a \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}}$ 
       to $p$-adic precision $N_{\Phi}$, using $p$-adic working precision $N_{\Phi}+\delta$.
 \item Compute $\chi(T) \gets \det\bigl(1-T \bigl(\Phi_{\tau} \sigma(\Phi_{\tau}) \dotsm \sigma^{a-1}(\Phi_{\tau}) \bigr)  \bigr)$ to $p$-adic precision $N_{\Phi}-\delta$, 
       using $p$-adic working precision $N'_{\Phi}$.
@@ -2726,11 +2716,11 @@ denominators of all intermediate results in Algorithm~\ref{alg:Connection}
 are also $\SoftOh((de)^n d_t)$.
 \end{proof}
 
-Next we estimate the $p$-adic precisions that we require.
+Next we estimate the precisions that we require.
 
 \begin{prop}
 All $p$-adic precisions that we use lie in $\SoftOh(a d^n \log(d_t))$ 
-and $\deg(D), K$ are both $\SoftOh(apd^n (de)^n d_t)$.
+and $\deg(s), K$ are both $\SoftOh(apd^n (de)^n d_t)$.
 \end{prop}
 
 \begin{proof}
@@ -2746,12 +2736,12 @@ Algorithm~\ref{alg:complete} are then $\SoftOh(ad^n)$ as well.
 It follows from Theorem~\ref{thm:Gerkmann} that in
 Theorem~\ref{thm:defD} we can take
 \begin{align*}
-\deg{D} &\leq \deg  \Bigl( \prod_{k=2}^n \det(\Delta_k) \Bigr) + (p(n+h(N_{\Phi}))-n) \deg(\det(\Delta_{n+1})), \\
-K &\leq \deg(D)+ 1+\deg \Bigl(\prod_{k=2}^n \Delta_k^{-1}\Bigr) + (p(n+h(N_{\Phi}))-n) \deg(\Delta_{n+1}^{-1}) + ph(N_{\Phi}) d_t. \\
+\deg{s} &\leq \deg  \Bigl( \prod_{k=2}^n \det(\Delta_k) \Bigr) + (p(n+h(N_{\Phi}))-n) \deg(\det(\Delta_{n+1})), \\
+K &\leq \deg(s)+ 1+\deg \Bigl(\prod_{k=2}^n \Delta_k^{-1}\Bigr) + (p(n+h(N_{\Phi}))-n) \deg(\Delta_{n+1}^{-1}) + ph(N_{\Phi}) d_t. 
 \end{align*} 
-Consequently, we find that 
+Consequently, we obtain
 \[
-\deg(D), K \in \SoftOh(apd^n (de)^n d_t).
+\deg(s), K \in \SoftOh(apd^n (de)^n d_t).
 \]
 
 The $p$-adic precisions $N_{\Phi_0},N_C,N_M,N_{C^{-1}},N'_{C}$ and $N'_{C^{-1}}$ in
@@ -2950,14 +2940,14 @@ We first recall that the Teichm\"uller lift
 $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ 
 can be computed to $p$-adic precision $N_{\Phi}+\delta \in \SoftOh(a d^n)$ 
 in time $\SoftOh(a^2 d^n \log^2(p))$.  Next, we observe that the 
-scalar-matrix product $D \Phi \bmod t^K$ over~$\QQ_q[t]$ 
+scalar-matrix product $s \Phi \bmod t^K$ over~$\QQ_q[t]$ 
 requires time 
 \begin{equation*}
 \SoftOh\bigl( b^2 K a' (a d^n) \log(p) \bigr) 
     \subset \SoftOh\bigl( a^2 a' p d^{5n} e^n d_t \bigr).
 \end{equation*}
 Finally, we consider the substitution of $\hat{\tau}$ 
-into the $b^2$ entries of the matrix $D \Phi \bmod t^K$. 
+into the $b^2$ entries of the matrix $s \Phi \bmod t^K$. 
 Each of these can be thought of as a modular composition of polynomials 
 over~$\QQ_{q}$, where the modulus~$m(t)$ is an irreducible polynomial defining 
 the extension $\QQ_{\mathfrak{q}} / \QQ_{q}$ as a quotient of $\QQ_q[t]$, 
@@ -2971,10 +2961,10 @@ Thus, the substitutions require time %TODO include complexity of modular composi
 \SoftOh\Bigl( b^2 \bigl(K (a' \log(p)) (a d^n) + (a/a') (a' \log(p)) (a d^n) \bigr) \Bigr)
     \subset \SoftOh(a^2 a' p d^{5n} e^n d_t).
 \end{equation*}
-Clearly, evaluating and inverting $D(\hat{\tau})$ and performing the 
+Clearly, evaluating and inverting $s(\hat{\tau})$ and performing the 
 scalar multiplication can be ignored, and the result on the time complexity now follows.
 
-The space requirement is dominated by the matrix $D\Phi \bmod t^K$, 
+The space requirement is dominated by the matrix $s \Phi \bmod t^K$, 
 which has size 
 \begin{equation*}
 \SoftOh(b^2 K (a' \log(p)) (a d^n)) \subset \SoftOh(a^2 a' p d^{5n} e^n d_t). 
@@ -3111,8 +3101,8 @@ a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$.  We first
 compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$.  As the roots of~$r$ are 
 $2$-adic integers and distinct  modulo~$2$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=320$ at all 
-zeros~$z$ of $r$ and $\theta_{\infty}=12$ so that $K=1613$ for the $t$-adic 
-precision. We now compute the remaining $p$-adic precisions
+zeros~$z$ of $r$ and $\theta_{\infty}=12$, so that we can take $s=r^{320}$ 
+and $K=1613$. We now compute the remaining $p$-adic precisions
 $N_{\Phi_0}=174$, $N_C=163$, $N_{C^{-1}}=164$, $N_M=187$, 
 $N_C'=184$, $N_{C^{-1}}'=183$, $N_{\Phi_0}'=176$, and $N_M'=188$. \\
 
@@ -3123,9 +3113,9 @@ a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$.  We first
 compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=122$. As the roots of~$r$ are all 
 contained in the residue disk at~$\infty$, we cannot apply 
 Theorem~\ref{thm:KedlayaTuitman} and have to apply Theorem~\ref{thm:Gerkmann} 
-instead. At each of the zeros of~$r$ we find $\mu=0$, $\nu=-1$, $\theta_z=397$ 
-and at $\infty$ we find $\mu=-3$, $\nu=-2$, $\theta_{\infty}=793$, so that 
-$K=2779$ for the $t$-adic precision. We now compute the remaining $p$-adic 
+instead. At each of the zeros $z$ of~$r$ we find $\mu_z=0$, $\nu_z=-1$, $\theta_z=397$ 
+and at $\infty$ we find $\mu_{\infty}=-3$, $\nu_{\infty}=-2$, $\theta_{\infty}=793$, so that 
+we can take $s=r^{397}$ and $K=2779$. We now compute the remaining $p$-adic 
 precisions
 $N_{\Phi_0}=137$, $N_C=129$, $N_{C^{-1}}=130$, $N_M=147$, 
 $N_C'=146$, $N_{C^{-1}}'=143$, $N_{\Phi_0}'=139$, and $N_M'=147$. \\
@@ -3137,16 +3127,15 @@ a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$. We first
 compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.  As the zeros of $r$ are 
 $7$-adic integers and distinct modulo~$7$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere.  We find $\theta_z=224$ at all 
-zeros~$z$ of $r$ and $\theta_{\infty}=25$, so that $K=1146$ for the $t$-adic 
-precision. We now compute the remaining $p$-adic precisions
+zeros~$z$ of $r$ and $\theta_{\infty}=25$, so that we can take $s=r^{224}$ and
+$K=1146$. We now compute the remaining $p$-adic precisions
 $N_{\Phi_0}=38$, $N_C=34$, $N_{C^{-1}}=37$, $N_M=44$, 
 $N_C'=43$, $N_{C^{-1}}'=40$, $N_{\Phi_0}'=40$, and $N_M'=44$.
 
 \subsubsection{Timings}
 
 We now compare the performance of our FLINT implementation with the 
-timings reported by Gerkmann. [[TODO]] recompute $p=3$ with new $K$, 
-compute p=2,7 \\ 
+timings reported by Gerkmann.  \\ 
 
 \begin{center}
 \begin{tabular}{l l l l l l l} \toprule
@@ -3188,8 +3177,8 @@ be a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_{3}$, and take
 $\tau=\alpha^{2345}$.  We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=43$.  
 Since the zeros of $r$ are $3$-adic integers and different modulo $3$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=148$ at all zeros 
-of $r$ and $\theta_{\infty}=6$, so that we
-obtain $K=599$ for the $t$-adic precision. We now compute the remaining $p$-adic 
+of $r$ and $\theta_{\infty}=6$, so that we can take $s=r^{148}$
+and $K=599$. We now compute the remaining $p$-adic 
 precisions $N_{\Phi_0}=65$, $N_C=53$, $N_{C^{-1}}=55$, $N_M=74$, 
 $N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$.
 
@@ -3233,9 +3222,9 @@ We take $a=\log_{11}(\mathfrak{q})=10$ and let $\tau$ be a zero of the Conway po
 $\FF_{\mathfrak{q}}/\FF_{11}$. We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.
 Since the zeros of $r$ are $11$-adic integers and different modulo $11$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=660$ at the zeros of $r_2$
-and $\theta_{\infty}=9$ at $\infty$. At the zeros of $r_1$, which are apparent singularities, 
-we get a better bound by applying Theorem~\ref{thm:Gerkmann} with $\mu=-1$, $\nu=0$ and find 
-$\theta_z=1$. So we obtain $K=31720$ for the $t$-adic precision. We now compute the remaining 
+and $\theta_{\infty}=9$ at $\infty$. At the zeros $z$ of $r_1$, which are apparent singularities, 
+we get a better bound by applying Theorem~\ref{thm:Gerkmann} with $\mu_z=-1$, $\nu_z=0$ and find 
+$\theta_z=1$. After checking that, we can take $s=r_1 r_2^{660}$ and $K=31720$. We now compute the remaining 
 $p$-adic precisions $N_{\Phi_0}=40$, $N_C=35$, $N_{C^{-1}}=36$, $N_M=47$, $N_C'=46$, $N_{C^{-1}}'=43$, 
 $N_{\Phi_0}'=42$ and $N_M'=47$.
 
