@@ -1150,7 +1150,7 @@ this implies that $\cB$ is a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
 
 \begin{rem} 
 Note that in Algorithm~\ref{alg:Connection}, it is sufficient to invert 
-the matrices~$\Delta_k^{-1}$ just once. After this, every call to {\sc{Decompose}} 
+the matrices~$\Delta_k^{-1}$ once. After this, every call to {\sc{Decompose}} 
 reduces to a multiplication by one of the~$\Delta_k^{-1}$. Actually, instead 
 of computing the inverse $\Delta_k^{-1}$, it is better to compute the 
 decomposition $\Delta_k = L U P$, where $L$ is lower triangular, $U$ is 
@@ -2361,7 +2361,9 @@ $\theta_z \in \NN_0$ for all $z \in D$, such that $\Phi$ is congruent modulo~$p^
 $\tilde{\Phi}\in M_{b \times b}(\QQ_q(t))$ for which $\ord_z(\tilde{\Phi}) \geq -\theta_z$, for
 all $z \in D$. By Theorem~\ref{thm:Gerkmann}, we can take $\theta_z=0$ for $z \neq \infty$ if 
 $R(z) \neq 0$, so that $\theta_z$ vanishes for all but finitely many $z \in \mathbf{P}^1(\bar{\QQ}_q)$.
-Moreover, we may assume that $\theta_z=\theta_{z'}$ if $z,z'$ are conjugated over $\QQ_q$.
+Moreover, by Theorem~\ref{thm:KedlayaTuitman}, we can also take $\theta_z=0$ if the matrix $M$ does
+not have a pole in the residue disk at $z$. 
+Finally, we may assume that $\theta_z=\theta_{z'}$ if $z,z'$ are conjugated over $\QQ_q$.
 We now define
 \begin{align*}
 s &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
@@ -3222,8 +3224,8 @@ We take $a=\log_{11}(\mathfrak{q})=10$ and let $\tau$ be a zero of the Conway po
 $\FF_{\mathfrak{q}}/\FF_{11}$. We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.
 Since the zeros of $r$ are $11$-adic integers and different modulo $11$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=660$ at the zeros of $r_2$
-and $\theta_{\infty}=9$ at $\infty$. At the zeros $z$ of $r_1$, noting that 
-$R$ has no other zeros in the residue disk at $z$, we get a better bound by applying 
+and $\theta_{\infty}=9$ at $\infty$. At the residue disk of a zero $z$ of $r_1$, noting that 
+$R$ has no other zeros there, we get a better bound by applying 
 Theorem~\ref{thm:Gerkmann} with $\mu_z=-1$, $\nu_z=0$ and find $\theta_z=1$, so that we can 
 take $s=r_1 r_2^{660}$ and $K=31720$. We now compute the remaining $p$-adic precisions 
 $N_{\Phi_0}=40$, $N_C=35$, $N_{C^{-1}}=36$, $N_M=47$, $N_C'=46$, $N_{C^{-1}}'=43$, 
@@ -3256,11 +3258,27 @@ P=x_0^4 + x_1^4 + x_2^4 + x_3^4
           + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr),
 \end{split}
 \end{equation*}
-and we take $\tau$ to be  $1$. 
+The connection matrix $M \in M_{21 \times 21}(\QQ(t))$ has denominator $r=r_1 r_2 r_3$, 
+with $r_1,r_2,r_3 \in \ZZ[t]$ irreducible of degree $16$, $104$ and $108$, respectively. 
+The matrix $M$ has a simple pole at $\infty$ and the set of exponents is $\{1,2,3\}$ there.
+We have not been able to compute the exponents of $M$ at the zeros of $r_1,r_2,r_3$ using 
+MAGMA.
 
 \subsubsection{Precisions}
 
-We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=$.
+We take $\tau$ to be  $1 \in \FF_7$. We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=4$. Since we
+do not know the exponents of $M$ at its finite poles, we cannot use Theorem~\ref{thm:KedlayaTuitman} at poles
+outside the residue disk at infinity. Applying Theorem~\ref{thm:Gerkmann} at all the zeros $z$ of $R$, using
+the bound $\ord_z(\Delta_k^{-1}) \geq -\ord_z(\det(\Delta_k))$, we find that we can take 
+$s=\det(\Delta_2)\det(\Delta_3)\det(\Delta_4)^{67}$, which has degree $25027$. However, most of the zeros of
+$R$ do not lie in the residue disk of a pole of $M$, so the corresponding factors can be dropped from $s$, which
+brings the degree of $s$ down to $8498$. Note that this does require factorizing the polynomials $\det(\Delta_2)$, 
+$\det(\Delta_3)$, $\det(\Delta_4)$ over $\FF_7[t]$ and lifting a couple of factors to $\ZZ_7[t]$, but this takes 
+almost no time using MAGMA. We can apply Theorem~\ref{thm:KedlayaTuitman} at $\infty$ to find $\theta_{\infty}=-4$,
+so that we can take $K=8495$. We now compute the remaining $p$-adic precisions 
+$N_{\Phi_0}=22$, $N_C=12$, $N_{C^{-1}}=14$, $N_M=30$, $N_C'=29$, $N_{C^{-1}}'=24$, 
+$N_{\Phi_0}'=25$ and $N_M'=30$.
+
 
 \subsubsection{Timings}
 
