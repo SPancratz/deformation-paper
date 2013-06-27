@@ -3074,6 +3074,13 @@ tend to suffer from.
 \section{Examples}
 \label{sec:Examples}
 
+In this section we compute some examples using the (preliminary) implementation of our algorithm 
+that is available at \url{https://github.com/SPancratz/deformation}. All computations were carried
+out on a laptop with two Intel Core i7-3540M processors running at 3GHz and with 8Gb of RAM, but all
+computations were carried out on a single processor and maximum memory usage was about 1.5 Gb. Timings
+are obtained using the C function clock() and are stated in minutes (m) or seconds (s). We are still
+working on the implementation and hope to include updated timings in the final version of this paper.
+
 \subsection{Quintic curve}
 
 We consider the family of genus six curves over $\ZZ$ given by the polynomial 
@@ -3154,6 +3161,9 @@ Total           & 9.90s& 7.94m & 7.73s & 108.64m & 0.45s& 3.29m \\ \bottomrule
 \end{center}
 
 \begin{rem}
+Our timings in these examples are $50-500$ lower than those of Gerkmann, 
+taking into account that the 101.40m entry in the second column should probably
+be 101.40s. 
 \end{rem}
 
 \subsection{Quartic surface}
@@ -3198,7 +3208,26 @@ Total           & 0.99s& 83.82m \\ \bottomrule
 \end{center}
 
 \begin{rem}
+Our timings in this example are about 5000 times lower than that of Gerkmann. 
 \end{rem}
+
+\begin{rem}
+We should mention that Gerkmann does not include timings for part of his computations.
+For example, he does not mention the time it takes to compute the $p$-adic precision 
+parameter that he calls $\delta$  (which involves solving $b^2$ differential equations 
+similar to the one for the matrix $C$!). Also, he seems to have made some mistakes in 
+the precision analysis. For example, for the quartic surface his final 
+$p$-adic precision does not seem to be high enough to recover the exact zeta function with 
+the precision bounds that he is using.
+\end{rem}
+
+Our remaining examples could not have been computed with previous implementations of the
+deformation method and, as far as we know, not with any other method either. For example, Lauder noted 
+that he could not compute the connection matrix for a quartic surface given by a polynomial 
+with more than a \emph{few} nonzero terms. This was the main motivation for the work in the Phd-thesis 
+of the first author and the present paper. We are now able to compute the zeta function of
+for example quintic curves and quartic surfaces over small finite fields given by a polynomial with 
+\emph{all} of its coefficients nonzero.
 
 \subsection{Generic quintic curve}
 
@@ -3236,11 +3265,11 @@ $N_{\Phi_0}'=42$ and $N_M'=47$.
 \begin{center}
 \begin{tabular}{l l} \toprule
 Computation     & P--T \\ \midrule
-$M$             &      \\
-$\Phi_0$        &      \\
-$\Phi$          &      \\
-$Z(X_{\tau},T)$ &      \\
-Total           &      \\ \bottomrule
+$M$             & 4.43s     \\
+$\Phi_0$        & 0.04s     \\
+$\Phi$          & 3.76m     \\
+$Z(X_{\tau},T)$ & 9.48s     \\
+Total           & 3.99m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
@@ -3272,10 +3301,10 @@ outside the residue disk at infinity. Applying Theorem~\ref{thm:Gerkmann} at all
 the bound $\ord_z(\Delta_k^{-1}) \geq -\ord_z(\det(\Delta_k))$, we find that we can take 
 $s=\det(\Delta_2)\det(\Delta_3)\det(\Delta_4)^{67}$, which has degree $25027$. However, most of the zeros of
 $R$ do not lie in the residue disk of a pole of $M$, so the corresponding factors can be dropped from $s$, which
-brings the degree of $s$ down to $8498$. Note that this does require factorizing the polynomials $\det(\Delta_2)$, 
+brings the degree of $s$ down to $8833$. Note that this does require factorizing the polynomials $\det(\Delta_2)$, 
 $\det(\Delta_3)$, $\det(\Delta_4)$ over $\FF_7[t]$ and lifting a couple of factors to $\ZZ_7[t]$, but this takes 
 almost no time using MAGMA. We can apply Theorem~\ref{thm:KedlayaTuitman} at $\infty$ to find $\theta_{\infty}=-4$,
-so that we can take $K=8495$. We now compute the remaining $p$-adic precisions 
+so that we can take $K=8830$. We now compute the remaining $p$-adic precisions 
 $N_{\Phi_0}=22$, $N_C=12$, $N_{C^{-1}}=14$, $N_M=30$, $N_C'=29$, $N_{C^{-1}}'=24$, 
 $N_{\Phi_0}'=25$ and $N_M'=30$.
 
@@ -3285,11 +3314,11 @@ $N_{\Phi_0}'=25$ and $N_M'=30$.
 \begin{center}
 \begin{tabular}{l l} \toprule
 Computation     & P--T \\ \midrule
-$M$             &      \\
-$\Phi_0$        &      \\
-$\Phi$          &      \\
-$Z(X_{\tau},T)$ &      \\
-Total           &      \\ \bottomrule
+$M$             & 3.55m     \\
+$\Phi_0$        & 0.02s     \\
+$\Phi$          & 17.53m     \\
+$Z(X_{\tau},T)$ & 6.7s     \\
+Total           & 21.19m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
