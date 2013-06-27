@@ -3076,10 +3076,10 @@ tend to suffer from.
 
 In this section we compute some examples using the (preliminary) implementation of our algorithm 
 that is available at \url{https://github.com/SPancratz/deformation}. All computations were carried
-out on a laptop with two Intel Core i7-3540M processors running at 3GHz and with 8Gb of RAM, but all
-computations were carried out on a single processor and maximum memory usage was about 1.5 Gb. Timings
+out on a laptop with two Intel Core i7-3540M processors running at 3GHz and with 8Gb of RAM, but only used 
+a single processor and no more than about 1.5 Gb of RAM. Timings
 are obtained using the C function clock() and are stated in minutes (m) or seconds (s). We are still
-working on the implementation and hope to include updated timings in the final version of this paper.
+working on improving the implementation and hope to include updated timings in the final version of this paper.
 
 \subsection{Quintic curve}
 
@@ -3223,9 +3223,9 @@ the precision bounds that he is using.
 
 Our remaining examples could not have been computed with previous implementations of the
 deformation method and, as far as we know, not with any other method either. For example, Lauder noted 
-that he could not compute the connection matrix for a quartic surface given by a polynomial 
-with more than a \emph{few} nonzero terms. This was the main motivation for the work in the Phd-thesis 
-of the first author and the present paper. We are now able to compute the zeta function of
+that he could not compute the connection matrix for a family of quintic curves or quartic surfaces given 
+by a polynomial with more than a \emph{few} nonzero terms. This was the main motivation for the work in 
+the Phd-thesis of the first author and the present paper. We are now able to compute the zeta function of
 for example quintic curves and quartic surfaces over small finite fields given by a polynomial with 
 \emph{all} of its coefficients nonzero.
 
