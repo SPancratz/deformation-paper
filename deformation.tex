@@ -262,15 +262,20 @@ cohomology theories are equivalent, various comparison and finiteness results
 are more easily stated and proved in the context of rigid cohomology.  In~\citep{Gerkmann2007} 
 Gerkmann reformulated Lauder's deformation method in terms of rigid 
 cohomology.  Moreover, he improved various precision bounds, making 
-the algorithm more practical, which he demonstrated with many examples.
+the algorithm more practical, which he demonstrated with many examples. Kedlaya 
+introduced a lot of new ideas and results to further lower precision bounds for 
+the deformation method in \citep{Kedlaya2012}.
 
-The aim of this paper is to continue where Lauder and Gerkmann left off. 
-We make improvements to almost every step of the algorithm, which results in 
-an algorithm with lower time and space complexity than Lauder's original 
-algorithm. Moreover, the first author has written a publicly available 
-implementation of the algorithm using the library FLINT~\citep{FLINT}, which  
-lowers the runtime of the examples in~\citep{Gerkmann2007} by at a factor 
-of $50$ to $5000$.
+The aim of this paper is to continue where Lauder, Gerkmann and Kedlaya left 
+off. We make improvements to about every step of the algorithm. This results 
+in an algorithm with both lower time and space complexity than Lauder's 
+original algorithm, but perhaps more importantly, which is a lot more efficient
+in practice. The first author has written a (publicly available) 
+implementation of our algorithm using the library FLINT~\citep{FLINT}. 
+This implementation lowers the runtimes of the examples in~\citep{Gerkmann2007} 
+by a factor of $50$ to $5000$. Moreover, it can be used to compute the zeta 
+function in many cases where this was not possible before, e.g. for generic 
+quartic surfaces.
 
 We now briefly describe the contents of the remaining sections,
 necessarily relying on some terminology that is introduced only 
