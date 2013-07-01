@@ -2209,8 +2209,9 @@ Definition~\ref{defn:MonBasis}. Now by \citep[Corollary 2.6]{KedlayaTuitman2012}
 the matrix $\Phi$ is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \[
-\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1}).
+\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1})
 \]
+and $\tilde{\Phi}$ has no other poles contained in $D$.
 Here, $\alpha_1$ and $\alpha_2$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 \begin{equation*}
@@ -3327,7 +3328,12 @@ that we get $\det(\Delta_k)$ for free, since we already compute the $LUP$
 decomposition of $\Delta_k$ anyway. Factorizing the polynomials $r,R$ over 
 $\QQ$ and $\FF_p$ was instantaneous in all cases. The only thing that 
 did take more time was the computation of the exponents in the 
-generic examples.
+generic examples. For the family of generic quintic curves this took 
+$10s$,  $47s$ and $1.5s$ at the zeros of $r_1$, the zeros of $r_2$ and
+at $\infty$, respectively. For the family of generic quartic surfaces,
+we were not able to compute the exponents at the zeros of $r_2$ and $r_3$
+within reasonable time. Note however that we did not use them in the
+precision analysis either.
 \end{rem}
 
 \phantomsection
