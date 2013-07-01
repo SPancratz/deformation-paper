@@ -262,15 +262,20 @@ cohomology theories are equivalent, various comparison and finiteness results
 are more easily stated and proved in the context of rigid cohomology.  In~\citep{Gerkmann2007} 
 Gerkmann reformulated Lauder's deformation method in terms of rigid 
 cohomology.  Moreover, he improved various precision bounds, making 
-the algorithm more practical, which he demonstrated with many examples.
+the algorithm more practical, which he demonstrated with many examples. Kedlaya 
+introduced a lot of new ideas and results to further lower precision bounds for 
+the deformation method in \citep{Kedlaya2012}.
 
-The aim of this paper is to continue where Lauder and Gerkmann left off. 
-We make improvements to almost every step of the algorithm, which results in 
-an algorithm with lower time and space complexity than Lauder's original 
-algorithm. Moreover, the first author has written a publicly available 
-implementation of the algorithm using the library FLINT~\citep{FLINT}, which  
-lowers the runtime of the examples in~\citep{Gerkmann2007} by at a factor 
-of $50$ to $5000$.
+The aim of this paper is to continue where Lauder, Gerkmann and Kedlaya left 
+off. We make improvements to about every step of the algorithm. This results 
+in an algorithm with both lower time and space complexity than Lauder's 
+original algorithm, but perhaps more importantly, which is a lot more efficient
+in practice. The first author has written a (publicly available) 
+implementation of our algorithm using the library FLINT~\citep{FLINT}. 
+This implementation lowers the runtimes of the examples in~\citep{Gerkmann2007} 
+by a factor of $50$ to $5000$. Moreover, it can be used to compute the zeta 
+function in many cases where this was not possible before, e.g. for generic 
+quartic surfaces.
 
 We now briefly describe the contents of the remaining sections,
 necessarily relying on some terminology that is introduced only 
@@ -2199,18 +2204,17 @@ roughly $-pN$.
 
 \begin{rem} \label{rem:basischange}
 The condition that $M$ has a simple pole at $z$ is not a serious restriction. 
-One can always find another basis $[w_1, \dotsc, w_b]$ for which this condition is 
-satisfied because the Gauss--Manin connection is known to be regular singular. 
-Let $\cB=[e_1,\dotsc,e_b]$ denote our basis from Definition~\ref{defn:MonBasis},
-and let $W \in M_{b \times b}(\QQ_q(t))$ 
-be the change of basis matrix such that $w_j = \sum_{i=1}^b W_{ij} e_i$ for all 
-$1 \leq j \leq b$. Then, by \citep[Corollary 2.6]{KedlayaTuitman2012}, the matrix 
-$\Phi$ %(as always defined with respect to the basis $\cB$) 
-is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
+By \citep[Theorem 2.1]{Lauder2011}, one can always find a matrix $W \in GL_{b}(\QQ_q[t,1/(t-z)])$
+such that the connection matrix has a simple pole at $z$ with respect to the basis 
+$[w_1, \dotsc, w_b]$ defined by $w_j = \sum_{i=1}^b W_{ij} e_i$ for all 
+$1 \leq j \leq b$, where $\cB=[e_1,\dotsc,e_b]$ denotes our basis from 
+Definition~\ref{defn:MonBasis}. Now by \citep[Corollary 2.6]{KedlayaTuitman2012}, 
+the matrix $\Phi$ is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \[
-\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1}).
+\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1})
 \]
+and $\tilde{\Phi}$ has no other poles contained in $D$.
 Here, $\alpha_1$ and $\alpha_2$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 \begin{equation*}
@@ -3073,11 +3077,13 @@ tend to suffer from.
 \label{sec:Examples}
 
 In this section we compute some examples using the (preliminary) implementation of our algorithm 
-that is available at \url{https://github.com/SPancratz/deformation}. All computations were carried
-out on a laptop with two Intel Core i7-3540M processors running at 3GHz and with 8Gb of RAM, but only used 
-a single processor and no more than about 1.5 Gb of RAM. Timings
+that is available at \url{https://github.com/SPancratz/deformation}. This implementation is restricted to
+the case $q=p$, i.e. where the family of hypersurfaces is defined over a prime field. All computations were 
+carried out on a laptop with two Intel Core i7-3540M processors running at 3GHz and with 8Gb of RAM, but only 
+used a single processor and no more than about 1.5 Gb of RAM. Timings
 are obtained using the C function clock() and are stated in minutes (m) or seconds (s). We are still
-working on improving the implementation and hope to include updated timings in the final version of this paper.
+working on improving the implementation and hope to include updated examples and timings in the final 
+version of this paper.
 
 \subsection{Quintic curve}
 
@@ -3206,16 +3212,16 @@ Total           & 0.99s& 83.82m \\ \bottomrule
 \end{center}
 
 \begin{rem}
-Our timings in this example are about 5000 times lower than that of Gerkmann. 
+Our timings in this example are about 5000 times lower than those of Gerkmann. 
 \end{rem}
 
 \begin{rem}
 We should mention that Gerkmann does not include timings for part of his computations.
 For example, he does not mention the time it takes to compute the $p$-adic precision 
 parameter that he calls $\delta$  (which involves solving $b^2$ differential equations 
-similar to the one for the matrix $C$!). Also, he seems to have made some mistakes in 
-the precision analysis. For example, for the quartic surface his final 
-$p$-adic precision does not seem to be high enough to recover the exact zeta function with 
+similar to the one for the matrix $C$!). Also, there seem to be some mistakes in 
+his precision analysis. For example, for the example in this section, Gerkmann's final 
+$p$-adic precision is not high enough to recover the exact zeta function with 
 the precision bounds that he is using.
 \end{rem}
 
@@ -3288,8 +3294,8 @@ P=x_0^4 + x_1^4 + x_2^4 + x_3^4
 The connection matrix $M \in M_{21 \times 21}(\QQ(t))$ has denominator $r=r_1 r_2 r_3$, 
 with $r_1,r_2,r_3 \in \ZZ[t]$ irreducible of degree $16$, $104$ and $108$, respectively. 
 The matrix $M$ has a simple pole at $\infty$ and the set of exponents is $\{1,2,3\}$ there.
-We have not been able to compute the exponents of $M$ at the zeros of $r_1,r_2,r_3$ using 
-MAGMA.
+%We have not been able to compute the exponents of $M$ at the zeros of $r_1,r_2,r_3$ using 
+%MAGMA.
 
 \subsubsection{Precisions}
 
@@ -3299,9 +3305,7 @@ outside the residue disk at infinity. Applying Theorem~\ref{thm:Gerkmann} at all
 the bound $\ord_z(\Delta_k^{-1}) \geq -\ord_z(\det(\Delta_k))$, we find that we can take 
 $s=\det(\Delta_2)\det(\Delta_3)\det(\Delta_4)^{67}$, which has degree $25027$. However, most of the zeros of
 $R$ do not lie in the residue disk of a pole of $M$, so the corresponding factors can be dropped from $s$, which
-brings the degree of $s$ down to $8833$. Note that this does require factorizing the polynomials $\det(\Delta_2)$, 
-$\det(\Delta_3)$, $\det(\Delta_4)$ over $\FF_7[t]$ and lifting a couple of factors to $\ZZ_7[t]$, but this takes 
-almost no time using MAGMA. We can apply Theorem~\ref{thm:KedlayaTuitman} at $\infty$ to find $\theta_{\infty}=-4$,
+brings the degree of $s$ down to $8833$. We can apply Theorem~\ref{thm:KedlayaTuitman} at $\infty$ to find $\theta_{\infty}=-4$,
 so that we can take $K=8830$. We now compute the remaining $p$-adic precisions 
 $N_{\Phi_0}=22$, $N_C=12$, $N_{C^{-1}}=14$, $N_M=30$, $N_C'=29$, $N_{C^{-1}}'=24$, 
 $N_{\Phi_0}'=25$ and $N_M'=30$.
@@ -3319,6 +3323,21 @@ $Z(X_{\tau},T)$ & 6.7s     \\
 Total           & 21.19m     \\ \bottomrule
 \end{tabular}
 \end{center}
+
+\begin{rem}
+In all of our timings, we have not included the time used to compute 
+the $p$-adic and $t$-adic precisions, since we used MAGMA for this. Note 
+that we get $\det(\Delta_k)$ for free, since we already compute the $LUP$ 
+decomposition of $\Delta_k$ anyway. Factorizing the polynomials $r,R$ over 
+$\QQ$ and $\FF_p$ was instantaneous in all cases. The only thing that 
+did take more time was the computation of the exponents in the 
+generic examples. For the family of generic quintic curves this took 
+$10s$,  $47s$ and $1.5s$ at the zeros of $r_1$, the zeros of $r_2$ and
+at $\infty$, respectively. For the family of generic quartic surfaces,
+we were not able to compute the exponents at the zeros of $r_2$ and $r_3$
+within reasonable time. Note however that we did not use them in the
+precision analysis either.
+\end{rem}
 
 \phantomsection
 
