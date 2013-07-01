@@ -638,7 +638,7 @@ The deformation method can now be sketched as follows:
       hypersurface, this can be achieved using a formula of Dwork.
 \item Solve the differential equation from Theorem~\ref{thm:eqphi} for $\Phi$.
 \item Substitute the Teichm\"uller lift $\hat{\tau}$ of an element 
-      $\tau \in S(\FF_{\mathfrak{q}})$ into $\Phi$, to obtain the 
+      $\tau \in S(\FF_{\mathfrak{q}})$ into $\Phi$ to obtain the 
       matrix $\Phi_{\tau}$ of the action of $p^{-1}\Frob_p$ on 
       $\Hrig^n(U_{\tau})$. Compute the matrix $\Phi_{\tau}^{(a)}$ 
       of the action of $\mathfrak{q}^{-1} \Frob_{\mathfrak{q}}$ 
@@ -724,8 +724,7 @@ compute in $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ following the method
 of Griffiths and Dwork.  
 
 \begin{prop}
-Let $\Omega$ denote the $n$-form $\Omega$ on $\mathfrak{U}/\mathfrak{S}$ 
-defined by 
+Let $\Omega$ denote the $n$-form on $\mathfrak{U}/\mathfrak{S}$ defined by 
 \begin{equation*}
 \Omega = \sum_{i=0}^n (-1)^i x_i d x_0 \wedge \dotsb \wedge \widehat{d x_i} \wedge \dotsb \wedge d x_n.
 \end{equation*}
@@ -883,7 +882,8 @@ in Algorithm~\ref{alg:PoleRed}, which given a closed $n$-form $Q\Omega/P^k$
 with $Q \in \QQ_q(t)[x_0, \dotsc, x_n]$ homogeneous of degree $kd - (n+1)$ returns 
 an expression
 \begin{equation*}
-Q \Omega / P^k \equiv \gamma_{1} \Omega / P^{1} + \dotsb + \gamma_n \Omega / P^n,
+\frac{Q \Omega}{P^k} \equiv \frac{\gamma_{1} \Omega}{P^{1}} 
+                            + \dotsb + \frac{\gamma_n \Omega}{P^n},
 \end{equation*}
 with $\gamma_i$ in the $\QQ_q(t)$-span of $B_i$ for $1 \leq i \leq n$ and 
 where $\equiv$ denotes equality in cohomology.
@@ -1061,13 +1061,13 @@ $x^u \Omega / P^k \in \cB_k$.  Following the description in
 Section~\ref{sec:Background}, we compute
 \begin{equation} \label{eqn:nabla}
 \nabla \biggl(\frac{x^u \Omega}{P^k}\biggr) \equiv 
-dt \otimes \frac{- k x^u \frac{\partial P}{\partial t} \Omega}{P^{k+1}},
+    dt \otimes \frac{- k x^u (\partial P / \partial t) \Omega}{P^{k+1}},
 \end{equation}
 where $\equiv$ denotes equality in 
 $\Omega_{\QQ_q(t)} \otimes \HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$. 
 We apply Algorithm~\ref{alg:PoleRed} in order to write
 \begin{equation}
-dt \otimes \frac{- k x^u \frac{\partial P}{ \partial t} \Omega}{P^{k+1}} \equiv 
+dt \otimes \frac{- k x^u (\partial P / \partial t) \Omega}{P^{k+1}} \equiv 
 dt \otimes \left( \frac{\gamma_{1}}{P} + \dotsb + \frac{\gamma_n}{P^n} \right) \Omega,
 \end{equation}
 where $\gamma_i$ is an element in the $\QQ_q(t)$-span of~$B_i$ for $1 \leq i \leq n$. 
@@ -1099,7 +1099,7 @@ This is formalised in Algorithm~\ref{alg:Connection}.
 \State $N'_M \gets N_M + \ord_p(n!)$
 \State \textit{Execute the following steps with $p$-adic working precision $N'_M$}:
 \For{$g \in B$} 
-\State $k \gets  (\deg(g)+(n+1))/d$
+\State $k \gets  \bigl(\deg(g)+(n+1)\bigr)/d$
 \State $Q \gets  - k g (\partial P / \partial t)$
 \State $\gamma_{1}, \dotsc, \gamma_n \gets$ {\sc Reduce($P,Q$)} 
 \For{$f \in B$}
@@ -1143,30 +1143,26 @@ be convenient to choose $\mathcal{S}$ smaller, so that this condition is satisfi
 \end{rem}
 
 \begin{assump} \label{assump:R}
-From now on we will always assume that the zero locus of $R$ in 
-$\mathbf{P}^1_{\ZZ_q}$ does not intersect $\mathcal{S}$. In particular
-this implies that $\cB$ is a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
+From now on we assume that the zero locus of~$R$ in~$\mathbf{P}^1_{\ZZ_q}$ 
+does not intersect $\mathcal{S}$. In particular, this implies that $\cB$ is 
+a basis for $\HdR^n(\mathfrak{U}/\mathfrak{S})$.
 \end{assump}
 
-\begin{rem} 
-Note that in Algorithm~\ref{alg:Connection}, it is sufficient to invert 
-the matrices~$\Delta_k^{-1}$ once. After this, every call to {\sc{Decompose}} 
-reduces to a multiplication by one of the~$\Delta_k^{-1}$. Actually, instead 
-of computing the inverse $\Delta_k^{-1}$, it is better to compute the 
-decomposition $\Delta_k = L U P$, where $L$ is lower triangular, $U$ is 
-upper triangular and $P$ is a permutation matrix, which 
-is guaranteed to exist for any square matrix. Since the matrices $\Delta_k$
-contain a lot of zeros, methods from sparse linear algebra can be used to compute such
-a decomposition. After this, every call to {\sc{Decompose}} reduces to solving a 
-lower and an upper diagonal linear system. Although all of this 
-does not improve the complexity of Algorithm~\ref{alg:Connection}, it does result 
-in an enormous improvement in practice.
+\begin{rem}
+Note that in Algorithm~\ref{alg:Connection}, we solve $\BigOh(\card{\cB})$~linear 
+systems given by the matrices $\Delta_k$ for $k = 2, \dotsc, n+1$.  In practice, 
+it is important to take advantage of this, e.g.\ by computing the decomposition 
+$\Delta_k = LUP$, where $L$ is lower triangular, $U$ is upper triangular, and 
+$P$ is a permutation matrix, which is guaranteed to exist for any square matrix. 
+Since, moreover, the matrices~$\Delta_k$ contain many zeros, methods from sparse 
+linear algebra can be used to compute such a decomposition.  Then, every call to 
+{\sc{Decompose}} reduces to solving a lower and an upper diagonal linear system.
 \end{rem}
 
 In the rest of this section we will freely use the definitions and notation 
 from Section~\ref{sec:Background}. We let all of our matrices be defined with 
 respect to the basis $\cB$. We have seen that there exists a Frobenius 
-structure $\Frob_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$. Let 
+structure $\Frob_p$ on $\HdR^n(\mathfrak{U}/\mathfrak{S})$ and let 
 $\Phi \in M_{b \times b}(\QQ_q \langle t, 1/r \rangle^{\dag})$ 
 denote the matrix of the action of $p^{-1}\Frob_p$, where $r$ is the 
 denominator of the connection matrix $M$. Recall that 
@@ -1218,7 +1214,7 @@ The inclusion on the left follows by explicitly reducing the generators of
 $\Lambda_{\tau,mon}$ to the basis $\cB$ with Algorithm~\ref{alg:PoleRed} using 
 that $R(\hat{\tau}) \in \ZZ_{\mathfrak{q}}^{\times}$, and the inclusion on the right is clear.
 
-Putting these inclusions of lattices together, we find that
+Combining these inclusions of lattices, we find that
 \begin{equation} \label{eq:lattices}
 (n-1)! \Lambda_{\tau,crys} \subset \Lambda_{\tau,\cB} \subset p^{-\sum_{i=1}^{n-1} \floor{\log_p(i)}} \Lambda_{\tau,crys}.
 \end{equation}
@@ -1355,7 +1351,7 @@ p(u_i+1)-(v_i+1)=d(m-pr).
 Let $\omega_1$ denote an element of $\cB$ corresponding to a tuple 
 $u \in \ZZ^{n+1}$ and let $\omega_2$ denote the unique element of~$\cB$ 
 corresponding to a tuple $v \in \ZZ^{n+1}$ such that
-we have $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all $i$. Then
+$p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all $i$. Then
 \begin{equation*}
 p^{-1} \Frob_p (\omega_1) = 
     (-1)^{k(u) + k(v)} \frac{(k(v) - 1)!}{(k(u) - 1)!} p^n \alpha_{u,v}^{-1} \omega_2.
@@ -1377,8 +1373,9 @@ We could eliminate $m$ from Definition~\ref{defn:alpha} by writing
 \[
 m(r)=\frac{p(u_i+1) - (v_i+1)}{d}+pr.
 \]
-%Note that $p(u_i+1) - (v_i+1) \geq 0$, since it is divisible by $d$ and greater than $-d$.
-%So after eliminating $m$, the sum would just be over all $r \geq 0$. 
+% Note that $p(u_i+1) - (v_i+1) \geq 0$, since it is divisible by $d$ 
+% and greater than $-d$.  So after eliminating $m$, the sum would just 
+% be over all $r \geq 0$.
 However, to simplify notation, we will keep the index $m$.
 \end{rem}
 
@@ -1386,7 +1383,7 @@ However, to simplify notation, we will keep the index $m$.
 
 At first sight it appears that this computation genuinely has to 
 take place in the extension field~$\QQ_p(\pi)$ even though the entries
-of the matrix $\Phi_0$ are of course contained in $\QQ_p$.  This is, however, 
+of the matrix $\Phi_0$ are of course contained in~$\QQ_p$.  This is, however, 
 not the case as we will show now.  The terms $\alpha_{u,v}$ 
 will turn out to be elements of~$\ZZ_p$, and we provide expressions 
 for them that are more suitable for computations.
@@ -1496,8 +1493,8 @@ $\mu_m \in \ZZ_2$ for all $m \geq 0$.
 
 \begin{proof}
 In the two cases $m = 3, 7$ we explicitly compute the values of 
-$\mu_m$ as $4/3$ and $232/315$.  Now suppose that $m \neq 3, 7$. 
-From Lemma~\ref{lem:lambdam} we obtain 
+$\mu_m$ as $4/3$ and $232/315$, respectively.  Now suppose that 
+$m \neq 3, 7$.  From Lemma~\ref{lem:lambdam} we obtain 
 \begin{equation*}
 \ord_2 \bigl(\mu_m\bigr) 
     = \floorBig{\frac{3m}{4}} - m + \ord_2(\lambda_m).
@@ -1631,7 +1628,7 @@ Lemma~\ref{lem:mup}.
 If we want to use Theorem~\ref{thm:01-03-diagfrob} to compute the matrix 
 $\Phi_0$ to $p$-adic precision~$N_{\Phi_0}$, we have to compute the elements
 $(k(u)-1)!\alpha_{u,v}$ to a somewhat higher precision~$N'_{\Phi_0}$ than just
-$N_{\Phi_0}-n$, because of the loss of precision in computing their inverses. Note 
+$N_{\Phi_0}-n$ because of the loss of precision in computing their inverses. Note 
 that if a $p$-adic number $x$ is known to precision~$N$, then its inverse 
 is in general only known to precision $N-2\ord_p(x)$. Therefore, we need an 
 upper bound on the $p$-adic valuation of the elements $(k(u)-1)!\alpha_{u,v}$.
@@ -1661,7 +1658,7 @@ In order to compute the matrix $\Phi_0$ to $p$-adic precision $N_{\Phi_0}$,
 it is sufficient to compute the elements $(k(u)-1)!\alpha_{u,v}$ to $p$-adic 
 precision
 \begin{equation*}
-N'_{\Phi_0}=N_{\Phi_0}-n+2(\ord_p\bigl((n-1)!\bigr)+n+\delta).
+N'_{\Phi_0} = N_{\Phi_0} - n + 2 \bigl(\ord_p\bigl((n-1)!\bigr)+n+\delta\bigr).
 \end{equation*}
 \end{cor}
 
@@ -1777,8 +1774,8 @@ with only one $p$-adic inversion as all summands are integers.
 \end{rem}
 
 \begin{assump} \label{assump:diag}
-From now on we will always assume that our family of 
-hypersurfaces $\mathcal{X}/\mathcal{S}$ is defined by a 
+From now on we assume that our family of 
+hypersurfaces~$\mathcal{X}/\mathcal{S}$ is defined by a 
 polynomial $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ for which 
 $P(0) \in \ZZ_q[x_0,\dotsc,x_n]$ is of the form 
 $P_0=a_0 x_0^d + \dotsb + a_n x_n^d$ with $a_0,\dotsc,a_n \in \ZZ_p^{\times}$, 
@@ -1819,7 +1816,7 @@ the differential equation
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action 
 of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$. Our goal is the computation of 
 the power series expansion of~$\Phi$ at $t=0$ to $t$-adic precision $K$ 
-and $p$-adic precision $N_{\Phi}$, i.e. as an element of 
+and $p$-adic precision $N_{\Phi}$, i.e.\ as an element of 
 $M_{b \times b}(\QQ_q[[t]])$ modulo $t^K$ and $p^{N_{\Phi}}$.
 
 We first observe that if 
@@ -1924,18 +1921,20 @@ From these two inequalities and Equation~\eqref{eq:CtildeminusC}, we
 deduce that $\ord_p(\overline{\tilde{C}-C}) \geq N_C$.
 \end{proof}
 
-Now we explain how to compute the solution $C$ to Equation~\eqref{eq:01-GMDE-Homogenous} 
-to $p$-adic precision $N_C$ and $t$-adic precision $K$, assuming that the connection 
-matrix $M$ has been computed to $p$-adic precision $N_M$ as defined in 
-Proposition~\ref{prop:N_M}. We can write $M = G/r$, with 
+Now we explain how to compute the solution $C$ to 
+Equation~\eqref{eq:01-GMDE-Homogenous} to $p$-adic precision~$N_C$ and 
+$t$-adic precision~$K$, assuming that the connection matrix~$M$ has been 
+computed to $p$-adic precision~$N_M$ as defined in Proposition~\ref{prop:N_M}. 
+We can write $M = G/r$, with 
 $G = \sum_{i=0}^{\deg(G)} G_i t^i \in M_{b \times b}(\QQ_q[t])$ 
-and $r = \sum_{i=0}^{\deg(r)} r_i t^i \in \ZZ_q[t]$ a divisor of the polynomial $R$ defined in 
-Definition~\ref{defn:resultant}. 
-%TODO small problem, if M is computed to some p-adic precision, the poles are not determined exactly,
-%so R and r etc. should be computed to infinite precision?? 
-Note that the degree of $r$ might be smaller than the degree 
-of $R$, which will speed up our computations. By Assumption~\ref{assump:diag}, we have
-$r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$.  
+and $r = \sum_{i=0}^{\deg(r)} r_i t^i \in \ZZ_q[t]$ a divisor of the 
+polynomial~$R$ defined in Definition~\ref{defn:resultant}. 
+% TODO small problem, if M is computed to some p-adic precision, the poles 
+% are not determined exactly, so R and r etc. should be computed to infinite 
+% precision?? 
+Note that the degree of~$r$ might be smaller than the degree 
+of~$R$, which will speed up our computations. By Assumption~\ref{assump:diag}, 
+we have $r(0) \neq 0 \pmod{p}$, so in particular $r(0) \neq 0$.  
 
 We can obtain a power series solution $C = \sum_{i=0}^{\infty} C_i t^i$ to
 the equation
@@ -1993,13 +1992,12 @@ from which it follows that
 \begin{equation} \label{eq:integral}
 \tilde{C}(t)-C(t) = C(C^{-1} \tilde{C}-I) = C(t) \Bigl(\int_{0}^t C^{-1}(s) E(s) ds \Bigr).
 \end{equation}
-We know from Theorem~\ref{thm:valC} and 
-Remark~\ref{rem:Cinv} that
+We know from Theorem~\ref{thm:valC} and Remark~\ref{rem:Cinv} that
 \begin{equation} \label{eq:boundCCinv}
 \ord_p(\overline{C}),\ord_p(\overline{C^{-1}}) \geq 
 -(2 \delta + n-1) \ceil{\log_p(K-1)},
 \end{equation}
-hence we obtain
+and we hence obtain
 \[
 \ord_p \Bigl(\overline{\int_{0}^t C^{-1}(s) E(s) ds }\Bigr) \geq 
 N_{C} + \Bigl( \bigl(2 \delta + (n-1)\bigr) \Bigr) \ceil{\log_p(K-1)}.
@@ -2129,12 +2127,12 @@ rational functions at their poles, as a function of~$N$.
 
 The bounds used by Lauder~\citep[\S 8.1]{Lauder2004a} and 
 Gerkmann~\citep[\S 6]{Gerkmann2007} were not very sharp, 
-which significantly slowed down their algorithms.
+and this significantly slowed down their algorithms.
 Recently, under some small additional assumptions, Kedlaya and the second 
 author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a sharper bound 
 that we state below in a simplified form. For $z \in \mathbf{P}^1(\bar{\QQ}_q)$, we
 denote the valuation on $\QQ_q(t)$ corresponding to $z$ by $\ord_z(-)$, and
-we extend $\ord_z(-)$ to polynomials and matrices over $\QQ_q(t)$, by
+we extend $\ord_z(-)$ to polynomials and matrices over $\QQ_q(t)$ by
 taking the minimum over the coefficients and entries, respectively.
 Recall that $M$ denotes the matrix of the Gauss--Manin connection $\nabla$
 with respect to the basis $\cB$ from Definition~\ref{defn:MonBasis}.
