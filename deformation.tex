@@ -3211,6 +3211,16 @@ Total           & 0.99s& 83.82m \\ \bottomrule
 \end{tabular}
 \end{center}
 
+As the final result of the computation we obtain
+\begin{align*}
+\mathfrak{q} \chi(T/\mathfrak{q})=&-3486784401T^{21} - 39675197243T^{20} - 191506614866T^{19} - 482588946510T^{18} \\
+                                  &-552821487569T^{17} + 243001138765T^{16} + 1641410078472T^{15} + 1793016627512T^{14} \\
+                                  &-410199003010T^{13} - 2617001208822T^{12} - 1586643774924T^{11} + 1586643774924T^{10} \\
+                                  &+2617001208822T^9 + 410199003010T^8 - 1793016627512T^7 - 1641410078472T^6 \\
+                                  &-243001138765T^5+ 552821487569T^4 + 482588946510T^3 + 191506614866T^2 \\
+                                  &+39675197243T + 3486784401.
+\end{align*}
+
 \begin{rem}
 Our timings in this example are about 5000 times lower than those of Gerkmann. 
 \end{rem}
@@ -3277,6 +3287,20 @@ Total           & 3.99m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
+As the final result of the computation we obtain
+\begin{align*}
+\chi(T) = &304481639541418099574449295360278774639038415066698088621947601T^{12} \\
+          &+3777543732986291528931322507772938448980494046897871937792T^{11} \\
+          &+23639674223084796290417361507756397439403378558130350T^{10} \\ 
+          &+54141350391870148138663709375646947695242620108T^9 \\
+          &-363231942297281636316475334779570949613459T^8 \\
+          &-4138991673785569248268236480720472276T^7 \\
+          &-28015243113507339254470240817992T^6 \\
+          &-159576046483273177468242676T^5 \\ 
+          &-539921137173243550659T^4 \\
+          &+3102762464729708T^3 + 52231690350T^2 + 321792T + 1.
+\end{align*}
+
 \subsection{Generic quartic surface}
 
 We consider the family of generic quartic K3 surfaces over $\ZZ_{7}$ given by 
@@ -3294,8 +3318,6 @@ P=x_0^4 + x_1^4 + x_2^4 + x_3^4
 The connection matrix $M \in M_{21 \times 21}(\QQ(t))$ has denominator $r=r_1 r_2 r_3$, 
 with $r_1,r_2,r_3 \in \ZZ[t]$ irreducible of degree $16$, $104$ and $108$, respectively. 
 The matrix $M$ has a simple pole at $\infty$ and the set of exponents is $\{1,2,3\}$ there.
-%We have not been able to compute the exponents of $M$ at the zeros of $r_1,r_2,r_3$ using 
-%MAGMA.
 
 \subsubsection{Precisions}
 
@@ -3310,7 +3332,6 @@ so that we can take $K=8830$. We now compute the remaining $p$-adic precisions
 $N_{\Phi_0}=22$, $N_C=12$, $N_{C^{-1}}=14$, $N_M=30$, $N_C'=29$, $N_{C^{-1}}'=24$, 
 $N_{\Phi_0}'=25$ and $N_M'=30$.
 
-
 \subsubsection{Timings}
 
 \begin{center}
@@ -3323,6 +3344,12 @@ $Z(X_{\tau},T)$ & 6.7s     \\
 Total           & 21.19m     \\ \bottomrule
 \end{tabular}
 \end{center}
+
+As the final result of the computation we obtain
+\begin{align*}
+7\chi(T/7) = &7T^{21} - 5T^{20} + 6T^{19} - 6T^{18} + 4T^{17} - 11T^{16} + 5T^{15} - 9T^{14} + 4T^{13} + 3T^{12} \\
+             &+4T^{11} + 4T^{10} + 3T^9 + 4T^8 - 9T^7 + 5T^6 - 11T^5 + 4T^4 - 6T^3 + 6T^2 - 5T + 7.
+\end{align*}
 
 \begin{rem}
 In all of our timings, we have not included the time used to compute 
