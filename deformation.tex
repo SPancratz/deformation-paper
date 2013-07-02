@@ -273,8 +273,8 @@ original algorithm, but perhaps more importantly, which is a lot more efficient
 in practice. The first author has written a (publicly available) 
 implementation of our algorithm using the library FLINT~\citep{FLINT}. 
 This implementation lowers the runtimes of the examples in~\citep{Gerkmann2007} 
-by a factor of $50$ to $5000$. Moreover, it can be used to compute the zeta 
-function in many cases where this was not possible before, e.g. for generic 
+by a factor of $50$ to $5,000$. Moreover, it can be used to compute the zeta 
+function in many cases where this was not possible before, e.g.\ for generic 
 quartic surfaces.
 
 We now briefly describe the contents of the remaining sections,
@@ -396,7 +396,7 @@ the notion of a connection on a vector bundle.
 \begin{defn}
 Let $\mathfrak{E}$ be a vector bundle on $\mathfrak{S}$. A connection on 
 $\mathfrak{E}$ is a map of vector bundles 
-$\nabla: \mathfrak{E} \rightarrow \Omega^1_{\mathfrak{S}} \otimes \mathfrak{E}$
+$\nabla \colon \mathfrak{E} \rightarrow \Omega^1_{\mathfrak{S}} \otimes \mathfrak{E}$
 which satisfies the Leibniz rule
 \begin{align*}
 \nabla(f e)=f\nabla(e)+df \otimes e
@@ -420,7 +420,7 @@ E_1^{p,q}=\Omega^p_{\mathfrak{S}} \otimes \HdR^q(\mathfrak{X}/\mathfrak{S}).
 \]
 The Gauss--Manin connection 
 $\nabla:H^i(\mathfrak{X}/\mathfrak{S}) \rightarrow \Omega^1_{\mathfrak{S}} \otimes H^i(\mathfrak{X}/\mathfrak{S})$ 
-is now defined as the differential $d_1: E_1^{0,i} \rightarrow E_1^{1,i}$ 
+is now defined as the differential $d_1 \colon E_1^{0,i} \rightarrow E_1^{1,i}$ 
 in this spectral sequence.
 \end{defn}
 
@@ -2086,14 +2086,14 @@ in Algorithm~\ref{alg:expansion}.
 \begin{compactenum}[a.] 
 \item[] $C_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $K-2$ \textbf{do} 
-\item[] \hspace{0.6em} $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \biggl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \biggr) \pmod{p^{N'_C}}$
+\item[] \hspace{0.6em} $C_{i+1} \gets \frac{-1}{r_0 (i+1)} \Bigl(\sum_j G_{i-j} C_j + \sum_j r_{i-j+1} (j C_j) \Bigr) \pmod{p^{N'_C}}$
 \item[] $C \gets \sum_{i=0}^{K-1} C_i t^i \pmod{p^{N_C}}$
 \end{compactenum}
 \item Solve Equation~\eqref{eq:01-GMDE-Dual} for $C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic precision $N_{C^{-1}}$:
 \begin{compactenum}[a.]
 \item[] $(C^{-1})_0 \gets I$
 \item[] \textbf{for} $i=0$ \textbf{to} $\ceil{K/p}-2$ \textbf{do}
-\item[] \hspace{0.6em} $(C^{-1})_{i+1} \gets  \frac{-1}{r_0(i+1)} \biggl(\sum_j -G_{i-j}^t (C^{-1})_j + \sum_j r_{i-j+1} (j (C^{-1})_j) \biggr) \pmod{p^{N'_{C^{-1}}}}$
+\item[] \hspace{0.6em} $(C^{-1})_{i+1} \gets  \frac{-1}{r_0(i+1)} \Bigl(\sum_j -G_{i-j}^t (C^{-1})_j + \sum_j r_{i-j+1} (j (C^{-1})_j) \Bigr) \pmod{p^{N'_{C^{-1}}}}$
 \item[] $C^{-1} \gets \sum_{i=0}^{\ceil{K/p}-1} (C^{-1})_i t^{i} \pmod{p^{N_{C^{-1}}}}$
 \end{compactenum}
 \item $\Phi \gets C \Phi_0 \sigma(C^{-1})$
@@ -2115,10 +2115,10 @@ In the previous section we described how to compute the power series
 expansion at $t=0$ of the matrix~$\Phi$ for the action of $p^{-1} \Frob_p$ on 
 $\Hrig^{n}(U/S)$. We now want to evaluate $\Phi$ at the Teichm\"uller 
 lift~$\hat{\tau}$ of some nonzero $\tau \in S(\FF_{\mathfrak{q}})$, 
-where $\FF_{\mathfrak{q}}/\FF_q$ denotes a finite field extension, but 
+where $\FF_{\mathfrak{q}}/\FF_q$ is a finite field extension, but 
 the power series expansion of $\Phi$ 
-at $t=0$ usually only converges on the open unit disc $\abs{t} < 1$, 
-and so cannot be evaluated at $\hat{\tau}$. 
+at $t=0$ usually only converges on the open unit disc $\abs{t} < 1$ 
+and hence cannot be evaluated at $\hat{\tau}$. 
 
 However, since $\Phi$ is a matrix of overconvergent functions, i.e.\ 
 \[
@@ -2132,16 +2132,16 @@ rational functions at their poles, as a function of~$N$.
 
 The bounds used by Lauder~\citep[\S 8.1]{Lauder2004a} and 
 Gerkmann~\citep[\S 6]{Gerkmann2007} were not very sharp, 
-and this significantly slowed down their algorithms.
+and this significantly impacted their algorithms.
 Recently, under some small additional assumptions, Kedlaya and the second 
 author~\citep[Theorem~2.1]{KedlayaTuitman2012} obtained a sharper bound 
 that we state below in a simplified form. For $z \in \mathbf{P}^1(\bar{\QQ}_q)$, we
 denote the valuation on $\QQ_q(t)$ corresponding to $z$ by $\ord_z(-)$, and
 we extend $\ord_z(-)$ to polynomials and matrices over $\QQ_q(t)$ by
 taking the minimum over the coefficients and entries, respectively.
-Recall that $M$ denotes the matrix of the Gauss--Manin connection $\nabla$
-with respect to the basis $\cB$ from Definition~\ref{defn:MonBasis}.
-Let $\delta$ be defined as in Definition~\ref{defn:delta}.
+We recall that $M$ denotes the matrix of the Gauss--Manin connection~$\nabla$
+with respect to the basis~$\cB$ from Definition~\ref{defn:MonBasis} 
+and let $\delta$ be defined as in Definition~\ref{defn:delta}.
 
 \begin{thm} \label{thm:KedlayaTuitman}
 Let $D \subset \mathbf{P}^1(\bar{\QQ}_q)$ be a residue disk and
@@ -2196,8 +2196,8 @@ we might not know them exactly a priori.
 \end{proof}
 
 \begin{rem}
-In practice, the various constants $-(2 \delta + (n-1))$, $c$, $\alpha_1$, $-\delta$ 
-are always very small in absolute value, so that $g(N)$ is about $N$, and 
+In practice, the constants $-(2 \delta + (n-1))$, $c$, $\alpha_1$, and $-\delta$ 
+are always very small in absolute value, so that $g(N)$ is about $N$ and 
 the lower bound for the order of~$\Phi$ modulo $p^N$ at the point $z$ is 
 roughly $-pN$.
 \end{rem}
@@ -2358,21 +2358,22 @@ less than $K$.
 
 \begin{proof}
 On every residue disk $D \subset \mathbf{P}^1(\bar{\QQ}_q)$, we can 
-apply either Theorem~\ref{thm:KedlayaTuitman} (when it applies) or Theorem~\ref{thm:Gerkmann}, to find
-$\theta_z \in \NN_0$ for all $z \in D$, such that $\Phi$ is congruent modulo~$p^N$ to a matrix
-$\tilde{\Phi}\in M_{b \times b}(\QQ_q(t))$ for which $\ord_z(\tilde{\Phi}) \geq -\theta_z$, for
-all $z \in D$. By Theorem~\ref{thm:Gerkmann}, we can take $\theta_z=0$ for $z \neq \infty$ if 
+apply either Theorem~\ref{thm:KedlayaTuitman} (when it applies) or 
+Theorem~\ref{thm:Gerkmann} in order to find, for all $z \in D$, numbers $\theta_z \in \NN_0$ 
+such that $\Phi$ is congruent modulo~$p^N$ to a matrix 
+$\tilde{\Phi}\in M_{b \times b}(\QQ_q(t))$ for which $\ord_z(\tilde{\Phi}) \geq -\theta_z$. 
+By Theorem~\ref{thm:Gerkmann}, we can take $\theta_z=0$ for $z \neq \infty$ if 
 $R(z) \neq 0$, so that $\theta_z$ vanishes for all but finitely many $z \in \mathbf{P}^1(\bar{\QQ}_q)$.
-Moreover, by Theorem~\ref{thm:KedlayaTuitman}, we can also take $\theta_z=0$ if the matrix $M$ does
-not have a pole in the residue disk at $z$. 
-Finally, we may assume that $\theta_z=\theta_{z'}$ if $z,z'$ are conjugated over $\QQ_q$.
+Moreover, by Theorem~\ref{thm:KedlayaTuitman}, we can also take $\theta_z=0$ 
+whenever the matrix~$M$ does not have a pole in the residue disk at~$z$. 
+Finally, we may assume that $\theta_z=\theta_{z'}$ if $z,z'$ are conjugates over~$\QQ_q$.
 We now define
 \begin{align*}
 s &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
      \prod_{z \neq \infty, \ord_p(z) < 0}\Bigl(\frac{t}{z}-1\Bigr)^{\theta_z}, 
 &K&= \Bigl(\sum_{z} \theta_z \Bigr) +1,
 \end{align*}
-which clearly satisfy all the required conditions.
+which satisfy all the required conditions.
 \end{proof}
 
 We compute the matrix $\Phi$ to $t$-adic precision $K$ and $p$-adic
@@ -2384,16 +2385,15 @@ $\tau \in S(\bar{\FF}_q)$, we can now compute
   \bmod{p^{N_{\Phi}}}.
 \end{equation*}
 Since $\ord_p(s(\hat{\tau}))=0$, $\ord_p(\hat{\tau}) \geq 0$ and
-$\ord_p(\Phi) \geq -\delta$, 
+$\ord_p(\Phi) \geq -\delta$, by Proposition~\ref{prop:matrixproductval} 
 the matrix $\Phi_{\tau}$ will also be correct to precision $N_{\Phi}$ 
-provided that $\hat{\tau}$ is computed to $p$-adic precision $N_{\Phi}+\delta$,
-by Proposition~\ref{prop:matrixproductval}.
+provided that $\hat{\tau}$ is computed to $p$-adic precision $N_{\Phi}+\delta$.
 
 \subsection{Computing the zeta function}
 
 Now we want to compute the zeta function of the fibre $X_{\tau}$ of
 our family $X/S$ lying over some $\tau \in S(\FF_{\mathfrak{q}})$, 
-where $\FF_{\mathfrak{q}}/\FF_q$ denotes a finite field extension.  
+where $\FF_{\mathfrak{q}}/\FF_q$ is a finite field extension.  
 Recall from Theorem~\ref{thm:hypersurface} 
 that the zeta function of $X_{\tau}$ is of the form
 \begin{equation*}
@@ -2440,20 +2440,21 @@ Then for all $1 \leq i \leq b$, we have
 \begin{proof} 
 Recall from Theorem~\ref{thm:deltabound} that there exists a matrix 
 $W_{\tau} \in M_{b \times b}(\QQ_q)$ satisfying 
-$\ord_p(W_{\tau})+\ord_p(W_{\tau}^{-1}) \geq -\delta$, such that for 
+$\ord_p(W_{\tau})+\ord_p(W_{\tau}^{-1}) \geq -\delta$ such that for 
 $\Phi_{\tau}'=W_{\tau} \Phi_{\tau} \sigma(W)^{-1}$ 
 we have \mbox{$\ord_p(\Phi_{\tau}') \geq 0$}.
 
 Defining the matrix 
 $\tilde{\Phi}_{\tau}'=W_{\tau} \tilde{\Phi}_{\tau} \sigma(W)^{-1}$, we find that 
-$\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N-\delta$, and in particular
-$\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. So we obtain
+$\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N-\delta$ and in particular
+$\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. Thus, we obtain
 \[
 \ord_p \Bigl( \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr) 
             - \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr) \Bigr) \geq N-\delta.
 \] 
 Note that $(\Phi'_{\tau})^{(a)}= W_{\tau} \Phi_{\tau}^{(a)} W_{\tau}^{-1}$
-and $(\tilde{\Phi}'_{\tau})^{(a)}= W_{\tau} \tilde{\Phi}_{\tau}^{(a)} W_{\tau}^{-1}$, so that
+and $(\tilde{\Phi}'_{\tau})^{(a)}= W_{\tau} \tilde{\Phi}_{\tau}^{(a)} W_{\tau}^{-1}$, 
+so that
 \begin{align*}
 \chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr),
 &\tilde{\chi}(T) &= \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
@@ -2466,7 +2467,7 @@ If we know $\Phi_{\tau}$ to $p$-adic precision $N_{\Phi}$, then
 $\chi(T)$ is determined to precision $N_{\Phi}-\delta$.
 However, we cannot compute $\chi(T)$ as in the proof of 
 Theorem~\ref{thm:preccharpoly}, since we do not know the matrix 
-$W_{\tau}$ explicitly. When computing with respect to our basis $\cB$,
+$W_{\tau}$ explicitly. When computing with respect to our basis~$\cB$,
 there will be loss of $p$-adic precision. The loss of precision 
 in computing $\Phi_{\tau}^{(a)}$ from $\Phi_{\tau}$ is at most 
 $(a-1)\delta$, and the loss of 
@@ -2485,9 +2486,9 @@ account the Hodge numbers $h^{i,n-1-i}$ of $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$
 Recall from Remark~\ref{rem:hnumbers} that $h^{i,n-1-i}=\card{B_i}$.
 
 \begin{defn}
-Define $\Gamma: [0,b] \rightarrow \RR$ to be the function whose graph is the convex 
-polygon in the plane whose left-most point is the origin and which has slope~$i$ over
-the interval of the horizontal axis 
+Define $\Gamma \colon [0,b] \rightarrow \RR$ to be the function whose graph 
+is the convex polygon in the plane whose left-most point is the origin and 
+which has slope~$i$ over the interval of the horizontal axis 
 \[
 [h^{0,n-1} + \dotsb + h^{i-1,n-i}, h^{0,n-1} + \dotsb + h^{i,n-i-1}].
 \]
@@ -2505,7 +2506,7 @@ Then for all $1 \leq i \leq b$, we have
 \end{thm}
  
 \begin{proof} 
-Note that in this case $\delta=0$, so that $\ord_p(\Phi_{\tau}) \geq 0$. 
+Note that in this case $\delta=0$ and hence that $\ord_p(\Phi_{\tau}) \geq 0$. 
 By a theorem of Mazur~\citep{Mazur1972}, the map $p^{-1} \Frob_p$ 
 sends $(H_i)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ into $p^i \Lambda_{\tau,crys}$, 
 where $\Lambda_{\tau,crys}$ is defined as in the proof of 
@@ -2533,7 +2534,7 @@ suggested before in \citep[Remark 1.6.4]{AbbottKedlayaRoe2006}. However, we have
 to find Theorem~\ref{thm:pgeqn} in the literature for $a \neq 1$. 
 \end{rem}
 
-Now we ask to what $p$-adic precision~$N_{\chi_i}$ we need to compute $\chi_i$ 
+Now we determine the $p$-adic precision~$N_{\chi_i}$ to which we need to compute~$\chi_i$ 
 in order to recover the integer polynomial~$\chi(T)$ exactly.
 
 \begin{thm} \label{thm:N0}
@@ -2557,9 +2558,9 @@ $s_j = \sum_{i=1}^{b} \alpha_i^j$, then clearly
 \[
 |s_j| \leq b \mathfrak{q}^{j (n-1)/2}.
 \]
-for all $1 \leq j \leq b$. Moreover, if we denote 
+for all $1 \leq j \leq b$. Moreover, if we write 
 $\chi(T) = 1+\sum_{i=1}^{b} \chi_i T^i$, then by the Newton--Girard 
-identies, we have
+identies we have
 \begin{equation} \label{eq:recursion}
 s_j+j \chi_j = - \sum_{i=1}^{j-1} s_{j-i} \chi_i.
 \end{equation}
@@ -2570,18 +2571,18 @@ if we know each $\chi_i$ to $p$-adic precision $N_{\chi_i}$ satisfying
 \[
 p^{N_{\chi_i}} > 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2},
 \] 
-then we can determine $\chi(T)$ exactly using the recursion~\eqref{eq:recursion}.
+we can determine $\chi(T)$ exactly using the recursion~\eqref{eq:recursion}.
 \end{proof}
 
 \begin{rem}
-This bound was first obtained by Kedlaya in~\citep[]{Kedlaya2007}, although it does not 
-appear there in exactly this form.
+This bound was first obtained by Kedlaya in~\citep[]{Kedlaya2007}, 
+although it does not appear there in exactly this form.
 \end{rem}
 
 \begin{thm} \label{thm:precPhitau}
-Let $N_{\chi_i}$ be defined as in Theorem~\ref{thm:N0}. To compute $\chi(T)$ exactly, 
-it is sufficient to 
-compute $\Phi_{\tau}$ with $p$-adic precision
+Let $N_{\chi_i}$ be defined as in Theorem~\ref{thm:N0}.  In order to 
+compute $\chi(T)$ exactly, it is sufficient to compute~$\Phi_{\tau}$ 
+with $p$-adic precision
 \begin{align*}
 N_{\Phi} &= \max_{1 \leq i \leq b} \{ N_{\chi_i} \} +\delta.
 \intertext{If moreover $p \geq n$, then this can be improved to}
@@ -2748,11 +2749,12 @@ Consequently, we obtain
 \deg(s), K \in \SoftOh(apd^n (de)^n d_t).
 \]
 
-The $p$-adic precisions $N_{\Phi_0},N_C,N_M,N_{C^{-1}},N'_{C}$ and $N'_{C^{-1}}$ in
-Theorem~\ref{thm:Ni} are $\SoftOh(ad^n \log(d_t))$, noting that the logarithms 
-that appear there are to base~$p$. Finally, the remaining $p$-adic precisions 
-$N'_M$ and $N'_{\Phi}$ are also $\SoftOh(a d^n \log(d_t))$ by Remark~\ref{rem:precgm} 
-and Corollary~\ref{cor:Ntilde}, respectively.
+The $p$-adic precisions $N_{\Phi_0}$, $N_C$, $N_M$, $N_{C^{-1}}$, $N'_{C}$, 
+and $N'_{C^{-1}}$ in Theorem~\ref{thm:Ni} are in $\SoftOh(ad^n \log(d_t))$, 
+noting that the logarithms that appear there are to base~$p$. Finally, the 
+remaining $p$-adic precisions $N'_M$ and $N'_{\Phi}$ are also 
+$\SoftOh(a d^n \log(d_t))$ by Remark~\ref{rem:precgm} and 
+Corollary~\ref{cor:Ntilde}, respectively.
 \end{proof}
 
 We now analyse the computation of the connection matrix~$M$.
@@ -2760,28 +2762,29 @@ We now analyse the computation of the connection matrix~$M$.
 The computation of the connection matrix~$M$ using 
 Algorithm~\ref{alg:Connection} requires
 \begin{align*}
-\mbox{time: }  &\SoftOh(a a' \log(p) (d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n}e^{3n} ) d_t), \\
-\mbox{space: } &\SoftOh(a a' \log(p) d^{4n}e^{3n} d_t).
+\mbox{time: }  & \SoftOh\bigl(a a' \log(p) (d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n}e^{3n} ) d_t\bigr), \\
+\mbox{space: } & \SoftOh(a a' \log(p) d^{4n}e^{3n} d_t).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-We first need to construct and invert the matrices~$\Delta_k$.  This 
-is dominated by the inversion, which requires $\BigOh((de)^{n \omega})$ 
+We first need to construct and invert the matrices~$\Delta_k$.  This is 
+dominated by the inversion, which requires $\BigOh\bigl((de)^{n \omega}\bigr)$ 
 operations in the ring $\QQ_q[t]$ to $p$-adic 
 precision~$\SoftOh(a d^n \log(d_t))$. As there are $\BigOh(n)$ of 
 these matrices, this takes time 
 \[
-\SoftOh((de)^{n \omega} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)) = 
-    \SoftOh(a a' \log(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t).
+\SoftOh\bigl((de)^{n \omega} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)\bigr) = 
+    \SoftOh\bigl(a a' \log(p) d^{n(\omega+2)} e^{n(\omega+1)} d_t\bigr).
 \]
-Then we multiply each of the monomials in our basis with $-k \frac{\partial P}{\partial t}$ 
-for some $1 \leq k \leq n$ and reduce the product to the basis by 
-repeatedly using Algorithm~\ref{alg:Decompose}.  For each of these 
-monomials this takes time 
+Then we multiply each of the monomials in our basis with 
+$-k (\partial P / \partial t)$ for some $1 \leq k \leq n$ and 
+reduce the product to the basis by repeatedly using 
+Algorithm~\ref{alg:Decompose}.  For each of these monomials this 
+takes time 
 \[
-\SoftOh((de)^{2n} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)) = 
-    \SoftOh(a a' \log(p) d^{4n}e^{3n} d_t),
+\SoftOh\bigl((de)^{2n} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)\bigr) = 
+    \SoftOh\bigl(a a' \log(p) d^{4n}e^{3n} d_t\bigr),
 \]
 because of the quadratic complexity of the matrix-vector product.  
 There are $b \in \BigOh(d^n)$ monomials in our basis and hence this 
@@ -2790,7 +2793,7 @@ takes time $\SoftOh(a a' \log(p) d^{5n}e^{3n} d_t)$.
 During this computation we have to store $\BigOh(n)$ matrices 
 and vectors of size 
 \[
-\SoftOh((de)^{2n} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)),
+\SoftOh\bigl((de)^{2n} (a' \log(p)) (a d^n \log(d_t)) ((de)^n d_t)\bigr),
 \] 
 which completes the proof.
 \end{proof}
@@ -2800,8 +2803,8 @@ Next we consider the computation of the matrix $\Phi_0$.
 \begin{prop} \label{prop:complexityPhi0}
 The computation of the matrix~$\Phi_0$ with Algorithm~\ref{alg:Diagfrob} requires
 \begin{align*}
-\mbox{time: }  &\SoftOh(a^3 p d^{3n} \log^3(d_t)), \\
-\mbox{space: } &\SoftOh(a^2 \log(p) d^{2n} \log^2(d_t)).
+\mbox{time: }  & \SoftOh\bigl(a^3 p d^{3n} \log^3(d_t)\bigr), \\
+\mbox{space: } & \SoftOh\bigl(a^2 \log(p) d^{2n} \log^2(d_t)\bigr).
 \end{align*}
 \end{prop}
 
@@ -2814,23 +2817,24 @@ $\mathcal{R} \in \SoftOh(N'_{\Phi_0})$.  Thus, the sequence
 $(d^{-r})_{r=0}^{\mathcal{R}}$ can be computed in time 
 $\SoftOh((N'_{\Phi_0})^2 \log(p))$.  Note that we do not 
 need all elements of the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$, but only 
-$\BigOh( \min \{ 1,(n/p) \} \mathcal{M} ) \subset \SoftOh(N'_{\Phi_0})$ 
+$\BigOh\bigl( \min \{ 1,(n/p) \} \mathcal{M} \bigr) \subset \SoftOh(N'_{\Phi_0})$ 
 of them.  Every $\mu_m$ is a sum of $\SoftOh(N'_{\Phi_0})$ terms, each 
 of which can be computed from the previous one in $\BigOh(p)$ operations in 
 $\ZZ/p^{N'_{\Phi_0}}\ZZ$.  Therefore, the required subsequence can be 
-computed in time $\SoftOh((N'_{\Phi_0})^3 p)$.
+computed in time $\SoftOh\bigl((N'_{\Phi_0})^3 p\bigr)$.
 
 Similarly, the computation of $\alpha_{u,v}$ for all of the 
-$b \in \BigOh(d^n)$ basis vectors can be done in time 
-$\SoftOh(d^n (N'_{\Phi_0})^2 \log(p))$.  Hence the whole computation 
+$b \in \BigOh(d^n)$ basis vectors can be carried out in time 
+$\SoftOh\bigl(d^n (N'_{\Phi_0})^2 \log(p)\bigr)$.  Hence the whole computation 
 takes time 
 \[
-\SoftOh((N'_{\Phi_0})^3 p) \subset \SoftOh(a^3 p d^{3n} \log^3(d_t)).
+\SoftOh\bigl((N'_{\Phi_0})^3 p\bigr) 
+    \subset \SoftOh\bigl(a^3 p d^{3n} \log^3(d_t)\bigr).
 \]
 The sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ and the 
 $\SoftOh(N'_{\Phi_0})$ elements that we need from the sequence 
 $(\mu_{m})_{m=0}^{\mathcal{M}}$ can be stored in space 
-$\SoftOh((N'_{\Phi_0})^2 \log (p)) \subset \SoftOh(a^2 \log(p) d^{2n} \log^2(d_t))$.
+$\SoftOh\bigl((N'_{\Phi_0})^2 \log (p)\bigr) \subset \SoftOh\bigl(a^2 \log(p) d^{2n} \log^2(d_t)\bigr)$.
 \end{proof}
 
 \begin{rem}
@@ -2862,7 +2866,7 @@ The key idea is to slightly modify Algorithm~\ref{alg:Diagfrob}
 and compute the $\BigOh(d^n)$ terms $\alpha_{u,v}$ directly from 
 Definition~\ref{defn:alpha}.  We first observe that the valuation 
 of the summands in the definition can be bounded by 
-$\ord_p(\lambda_m ((u_i+1)/d)_r (-1)^r \pi^{-r} a_i^{m-r}) \geq -1/2$. 
+$\ord_p\bigl(\lambda_m ((u_i+1)/d)_r (-1)^r \pi^{-r} a_i^{m-r}\bigr) \geq -1/2$. 
 As the only term with negative valuation is $\pi^{-r}$ and 
 $\mathcal{R} \in \BigOh(N'_{\Phi_0})$, it suffices 
 to compute the terms $\lambda_m$ and $d^{-r}$ to $p$-adic 
@@ -2923,8 +2927,8 @@ The result on the time complexity now follows.
 
 The space requirement is dominated by the matrix~$C$, which has size
 \begin{equation*}
-\SoftOh(b^2 K (a' \log(p)) (a d^n \log(d_t))) \subset 
-    \SoftOh(a^2 a' p d^{5n} e^n d_t). \qedhere
+\SoftOh\bigl(b^2 K (a' \log(p)) (a d^n \log(d_t))\bigr) 
+    \subset \SoftOh(a^2 a' p d^{5n} e^n d_t). \qedhere
 \end{equation*}
 \end{proof}
 
@@ -3061,14 +3065,15 @@ algorithm requires
 \mbox{space: } &\SoftOh\bigl(a^3 p^2 d^{6n} e^{4n} \bigr).
 \end{align*}
 His main goal was to show that these complexities are $(pad^n)^{\BigOh(1)}$, 
-which was not the case for previously known algorithms like 
-\citep{AbbottKedlayaRoe2006, LauderWan2008}. Our Theorem~\ref{thm:totalcomplexity} 
-improves Lauder's complexity bounds somewhat by lowering the constants hidden in the 
-$\BigOh(1)$. As far as we know, the complexity bounds from 
-Theorem~\ref{thm:totalcomplexity} are therefore the best ones known. Note that since
-a natural measure for the input size is $\log(p) a d^n$, these bounds are only
-polynomial in the input size for fixed $p$, which is something all $p$-adic algorithms 
-tend to suffer from.
+which was not the case for previously known algorithms such as 
+\citep{AbbottKedlayaRoe2006, LauderWan2008}. 
+Our Theorem~\ref{thm:totalcomplexity} improves Lauder's complexity bounds 
+by lowering the constants implicit in the exponent~$\BigOh(1)$.  To our 
+knowledge, the complexity bounds presented in Theorem~\ref{thm:totalcomplexity} 
+are therefore the best ones known.  Note that since a natural measure for the 
+input size is $\log(p) a d^n$, these bounds are only polynomial in the 
+input size provided $p$ is fixed, which is something that all $p$-adic 
+point counting algorithms tend to have in common.
 \end{rem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3076,14 +3081,21 @@ tend to suffer from.
 \section{Examples}
 \label{sec:Examples}
 
-In this section we compute some examples using the (preliminary) implementation of our algorithm 
-that is available at \url{https://github.com/SPancratz/deformation}. This implementation is restricted to
-the case $q=p$, i.e. where the family of hypersurfaces is defined over a prime field. All computations were 
-carried out on a laptop with two Intel Core i7-3540M processors running at 3GHz and with 8Gb of RAM, but only 
-used a single processor and no more than about 1.5 Gb of RAM. Timings
-are obtained using the C function clock() and are stated in minutes (m) or seconds (s). We are still
-working on improving the implementation and hope to include updated examples and timings in the final 
-version of this paper.
+In this section we apply Algorithm~\ref{alg:complete} to some examples 
+using our preliminary implementation\footnotemark.  This implementation 
+is restricted to the case $q = p$, i.e.\ the families of hypersurfaces 
+defined over a prime field.  In order to provide some context for the 
+runtimes presented below, note that all computations were carried out 
+on a machine with two Intel Core i7-3540M processors running at 3GHz and 
+with 8GB of RAM, but only used a single processor and no more than about 
+1.5GB of RAM.  Moreover, timings were obtained using the C function 
+{\tt{clock()}} and are stated in minutes~(m) or seconds~(s). 
+
+\footnotetext{This implementation is available at 
+\url{https://github.com/SPancratz/deformation}.}
+ 
+The implementation is still subject to future improvements and we hope 
+to include updated examples and timings in the final version of this paper.
 
 \subsection{Quintic curve}
 
@@ -3148,7 +3160,7 @@ $N_C'=43$, $N_{C^{-1}}'=40$, $N_{\Phi_0}'=40$, and $N_M'=44$.
 \subsubsection{Timings}
 
 We now compare the performance of our FLINT implementation with the 
-timings reported by Gerkmann.  \\ 
+timings reported by Gerkmann.
 
 \begin{center}
 \begin{tabular}{l l l l l l l} \toprule
@@ -3156,19 +3168,16 @@ timings reported by Gerkmann.  \\
                 & \multicolumn{2}{l}{$p = 3$} 
                 & \multicolumn{2}{l}{$p = 7$} \\ \midrule
 Computation     & P--T & G     & P--T  & G       & P--T & G     \\ \midrule
-$M$             & 0.00s& ?     & 0.00s & ?       & 0.00s& ?     \\
+$M$             & 0.00s&       & 0.00s &         & 0.00s&       \\
 $\Phi_0$        & 0.03s& 2.65m & 0.03s & 5.86m   & 0.01s& 1.31m \\
 $\Phi$          & 0.67s& 1.33m & 1.28s & 1.38m   & 0.29s& 0.89m \\
-$Z(X_{\tau},T)$ & 9.20s& 3.96m & 6.42s & 101.40m & 0.15s& 1.09m \\
-Total           & 9.90s& 7.94m & 7.73s & 108.64m & 0.45s& 3.29m \\ \bottomrule
+$Z(X_{\tau},T)$ & 9.20s& 3.96m & 6.42s & 101.40s & 0.15s& 1.09m \\
+Total           & 9.90s& 7.94m & 7.73s & 8.93m   & 0.45s& 3.29m \\ \bottomrule
 \end{tabular}
 \end{center}
 
-\begin{rem}
-Our timings in these examples are $50-500$ lower than those of Gerkmann, 
-taking into account that the 101.40m entry in the second column should probably
-be 101.40s. 
-\end{rem}
+Our timings in these examples are a factor of $50-500$ lower than the ones 
+provided by Gerkmann.
 
 \subsection{Quartic surface}
 
@@ -3203,7 +3212,7 @@ $N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$.
 \begin{center}
 \begin{tabular}{l l l} \toprule
 Computation     & P--T & G      \\ \midrule
-$M$             & 0.00s& ?      \\
+$M$             & 0.00s&        \\
 $\Phi_0$        & 0.01s& 45.26m \\
 $\Phi$          & 0.22s& 19.90m \\
 $Z(X_{\tau},T)$ & 0.76s& 18.66m \\
@@ -3211,37 +3220,35 @@ Total           & 0.99s& 83.82m \\ \bottomrule
 \end{tabular}
 \end{center}
 
-As the final result of the computation we obtain
-\begin{align*}
-\mathfrak{q} \chi(T/\mathfrak{q})=&-3486784401T^{21} - 39675197243T^{20} - 191506614866T^{19} - 482588946510T^{18} \\
-                                  &-552821487569T^{17} + 243001138765T^{16} + 1641410078472T^{15} + 1793016627512T^{14} \\
-                                  &-410199003010T^{13} - 2617001208822T^{12} - 1586643774924T^{11} + 1586643774924T^{10} \\
-                                  &+2617001208822T^9 + 410199003010T^8 - 1793016627512T^7 - 1641410078472T^6 \\
-                                  &-243001138765T^5+ 552821487569T^4 + 482588946510T^3 + 191506614866T^2 \\
-                                  &+39675197243T + 3486784401.
-\end{align*}
+As the final result of the computation we find that 
+$\mathfrak{q} \chi(T/\mathfrak{q})$ is the integer polynomial 
+\begin{multline*}
+-3486784401T^{21} - 39675197243T^{20} - 191506614866T^{19} - 482588946510T^{18} \\
+\shoveright{-552821487569T^{17} + 243001138765T^{16} + 1641410078472T^{15} + 1793016627512T^{14}} \\
+\shoveright{-410199003010T^{13} - 2617001208822T^{12} - 1586643774924T^{11} + 1586643774924T^{10}} \\
+\shoveright{+2617001208822T^9 + 410199003010T^8 - 1793016627512T^7 - 1641410078472T^6} \\
+\shoveright{-243001138765T^5+ 552821487569T^4 + 482588946510T^3 + 191506614866T^2} \\
++39675197243T + 3486784401.
+\end{multline*}
 
-\begin{rem}
-Our timings in this example are about 5000 times lower than those of Gerkmann. 
-\end{rem}
+Our timings in this example are about $5,000$~times lower than the ones 
+presented by Gerkmann. 
 
-\begin{rem}
-We should mention that Gerkmann does not include timings for part of his computations.
-For example, he does not mention the time it takes to compute the $p$-adic precision 
-parameter that he calls $\delta$  (which involves solving $b^2$ differential equations 
-similar to the one for the matrix $C$!). Also, there seem to be some mistakes in 
-his precision analysis. For example, for the example in this section, Gerkmann's final 
-$p$-adic precision is not high enough to recover the exact zeta function with 
-the precision bounds that he is using.
-\end{rem}
+Additionally, we should mention that Gerkmann does not include timings for part 
+of his computations.  For example, he omits the time that is required for the 
+computation of the $p$-adic precision parameter ``$\delta$'', which involves 
+solving $b^2$~differential equations similar to the one for the matrix~$C$. 
+Moreover, it appears that there are mistakes in the precision analysis, e.g.\ 
+the final $p$-adic precision is not sufficient to recover the exact zeta function.
 
-Our remaining examples could not have been computed with previous implementations of the
-deformation method and, as far as we know, not with any other method either. For example, Lauder noted 
-that he could not compute the connection matrix for a family of quintic curves or quartic surfaces given 
-by a polynomial with more than a \emph{few} nonzero terms. This was the main motivation for the work in 
-the Phd-thesis of the first author and the present paper. We are now able to compute the zeta function of
-for example quintic curves and quartic surfaces over small finite fields given by a polynomial with 
-\emph{all} of its coefficients nonzero.
+The remaining examples could not have been computed with previous implementations 
+of the deformation method and, to our knowledge, neither with any other point counting 
+method.  For example, Lauder noted that he could not compute the connection matrix 
+for a family of quintic curves or quartic surfaces given by a polynomial with more 
+than a \emph{few} nonzero terms.  Indeed, this was the main motivation for the work 
+in the PhD~thesis of the first author and the present paper.  We are now able to 
+compute the zeta function of e.g.\ quintic curves and quartic surfaces over small 
+finite fields given by a polynomial with \emph{all} of its coefficients nonzero.
 
 \subsection{Generic quintic curve}
 
@@ -3253,13 +3260,16 @@ We consider the family of generic quintic curves over $\ZZ_{11}$ given by
 %   +X^3*Y*Z+X*Y^3*Z+X*Y*Z^3+X^2*Y^2*Z+X^2*Y*Z^2+X*Y^2*Z^2);
 P=x_0^5 + x_1^5 + x_2^5
 + t \bigl( & 3x_0^4 x_1-x_0^4 x_2+2 x_0 x_1^4+x_1^4 x_2+4 x_0 x_2^4+5 x_1 x_2^4 + x_0^3 x_1^2+x_0^3 x_2^2 \\ 
-           + & x_0^2 x_1^3+ x_1^3 x_2^2+x_0^2 x_2^3+x_1^2 x_2^3 + x_0^3 x_1 x_2 + x_0 x_1^3 x_2 + x_0 x_1 x_2^3 \\ 
-           + & x_0^2 x_1^2 x_3 + x_0^2 x_1 x_2^2 + x_0 x_1^2 x_2^2 \bigr).
+           & + x_0^2 x_1^3+ x_1^3 x_2^2+x_0^2 x_2^3+x_1^2 x_2^3 + x_0^3 x_1 x_2 + x_0 x_1^3 x_2 + x_0 x_1 x_2^3 \\ 
+           & + x_0^2 x_1^2 x_3 + x_0^2 x_1 x_2^2 + x_0 x_1^2 x_2^2 \bigr).
 \end{split}
 \end{equation*}
-The connection matrix $M \in M_{12 \times 12}(\QQ(t))$ has denominator $r=r_1 r_2$, with $r_1,r_2 \in \ZZ[t]$ irreducible
-of degree $30$ and $48$, respectively. The set of exponents is $\{ 0,1 \}$ at the zeros of $r_1$ and $\{ -1,0 \}$ at the
-zeros of $r_2$. Moreover, the matrix $M$ has a simple pole at $\infty$ and the set of exponents is $\{1,2\}$ there.
+The connection matrix $M \in M_{12 \times 12}(\QQ(t))$ has denominator 
+$r = r_1 r_2$, with polynomials $r_1,r_2 \in \ZZ[t]$ that are irreducible 
+of degree $30$ and $48$, respectively. The set of exponents is $\{ 0,1 \}$ 
+at the zeros of $r_1$ and $\{ -1,0 \}$ at the zeros of~$r_2$. Moreover, 
+the matrix $M$ has a simple pole at $\infty$ and the set of exponents 
+is $\{1,2\}$ there.
 
 \subsubsection{Precisions}
 
@@ -3287,19 +3297,18 @@ Total           & 3.99m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
-As the final result of the computation we obtain
-\begin{align*}
-\chi(T) = &304481639541418099574449295360278774639038415066698088621947601T^{12} \\
-          &+3777543732986291528931322507772938448980494046897871937792T^{11} \\
-          &+23639674223084796290417361507756397439403378558130350T^{10} \\ 
-          &+54141350391870148138663709375646947695242620108T^9 \\
-          &-363231942297281636316475334779570949613459T^8 \\
-          &-4138991673785569248268236480720472276T^7 \\
-          &-28015243113507339254470240817992T^6 \\
-          &-159576046483273177468242676T^5 \\ 
-          &-539921137173243550659T^4 \\
-          &+3102762464729708T^3 + 52231690350T^2 + 321792T + 1.
-\end{align*}
+As the final result of the computation we obtain the 
+integer polynomial~$\chi(T)$, 
+\begin{multline*}
+304481639541418099574449295360278774639038415066698088621947601T^{12} \\
+\shoveright{+3777543732986291528931322507772938448980494046897871937792T^{11}} \\
+\shoveright{+23639674223084796290417361507756397439403378558130350T^{10}} \\ 
+\shoveright{+54141350391870148138663709375646947695242620108T^9} \\
+\shoveright{-363231942297281636316475334779570949613459T^8} \\
+\shoveright{-4138991673785569248268236480720472276T^7} \\
+\shoveright{-28015243113507339254470240817992T^6 - 159576046483273177468242676T^5} \\ 
+-539921137173243550659T^4 + 3102762464729708T^3 + 52231690350T^2 + 321792T + 1.
+\end{multline*}
 
 \subsection{Generic quartic surface}
 
@@ -3307,30 +3316,35 @@ We consider the family of generic quartic K3 surfaces over $\ZZ_{7}$ given by
 \begin{equation*}
 \begin{split}
 P=x_0^4 + x_1^4 + x_2^4 + x_3^4 
-+ t \bigl( & -3 x_0^3 x_1 + 2 x_0^3 x_2 - 2 x_0 x_1 x_2 x_3 + x_0^3 x_3 - x_0 x_1^3 - 3 x_1^3 x_2 + x_2^3 x_3 \\ &
-          + 2 x_1^3 x_3 + x_0 x_2^3 - 2 x_1 x_2^3 - x_0 x_3^3 + x_1 x_3^3 + 3 x_2 x_3^3 + x_0^2 x_1^2 \\ & 
-          + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 
-          + 2 x_0^2 x_1 x_2 \\ & + x_0^2 x_1 x_3 + 3 x_0^2 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 
-          + 3 x_1^2 x_2 x_3 - x_0 x_1 x_2^2 \\ & 
-          + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 + 2 x_1 x_2 x_3^2 \bigr),
++ t \bigl( & -3 x_0^3 x_1 + 2 x_0^3 x_2 - 2 x_0 x_1 x_2 x_3 + x_0^3 x_3 - x_0 x_1^3 - 3 x_1^3 x_2 \\ 
+           & + x_2^3 x_3 + 2 x_1^3 x_3 + x_0 x_2^3 - 2 x_1 x_2^3 - x_0 x_3^3 + x_1 x_3^3 + 3 x_2 x_3^3 \\
+           & + x_0^2 x_1^2 + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 + 2 x_0^2 x_1 x_2 \\ 
+           & + x_0^2 x_1 x_3 + 3 x_0^2 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 + 3 x_1^2 x_2 x_3 \\
+           & - x_0 x_1 x_2^2 + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 \\
+           & + 2 x_1 x_2 x_3^2 \bigr),
 \end{split}
 \end{equation*}
-The connection matrix $M \in M_{21 \times 21}(\QQ(t))$ has denominator $r=r_1 r_2 r_3$, 
-with $r_1,r_2,r_3 \in \ZZ[t]$ irreducible of degree $16$, $104$ and $108$, respectively. 
-The matrix $M$ has a simple pole at $\infty$ and the set of exponents is $\{1,2,3\}$ there.
+The connection matrix $M \in M_{21 \times 21}(\QQ(t))$ has denominator 
+$r = r_1 r_2 r_3$, with polynomials $r_1,r_2,r_3 \in \ZZ[t]$ that are 
+irreducible of degree $16$, $104$ and $108$, respectively.  The matrix~$M$ 
+has a simple pole at $\infty$ and the set of exponents is $\{1,2,3\}$ there.
 
 \subsubsection{Precisions}
 
-We take $\tau$ to be  $1 \in \FF_7$. We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=4$. Since we
-do not know the exponents of $M$ at its finite poles, we cannot use Theorem~\ref{thm:KedlayaTuitman} at poles
-outside the residue disk at infinity. Applying Theorem~\ref{thm:Gerkmann} at all the zeros $z$ of $R$, using
-the bound $\ord_z(\Delta_k^{-1}) \geq -\ord_z(\det(\Delta_k))$, we find that we can take 
-$s=\det(\Delta_2)\det(\Delta_3)\det(\Delta_4)^{67}$, which has degree $25027$. However, most of the zeros of
-$R$ do not lie in the residue disk of a pole of $M$, so the corresponding factors can be dropped from $s$, which
-brings the degree of $s$ down to $8833$. We can apply Theorem~\ref{thm:KedlayaTuitman} at $\infty$ to find $\theta_{\infty}=-4$,
-so that we can take $K=8830$. We now compute the remaining $p$-adic precisions 
-$N_{\Phi_0}=22$, $N_C=12$, $N_{C^{-1}}=14$, $N_M=30$, $N_C'=29$, $N_{C^{-1}}'=24$, 
-$N_{\Phi_0}'=25$ and $N_M'=30$.
+We take $\tau$ to be  $1 \in \FF_7$. We first compute $\delta=0$ and 
+$N_{\Phi}=N_{\Phi}'=4$. Since we do not know the exponents of~$M$ at 
+its finite poles, we cannot use Theorem~\ref{thm:KedlayaTuitman} at poles 
+outside the residue disk at infinity. Applying Theorem~\ref{thm:Gerkmann} 
+at all the zeros $z$ of $R$, using the bound 
+$\ord_z(\Delta_k^{-1}) \geq -\ord_z(\det(\Delta_k))$, we find that we can 
+take $s = \det(\Delta_2)\det(\Delta_3)\det(\Delta_4)^{67}$, which has 
+degree~$25027$. However, most of the zeros of $R$ do not lie in the 
+residue disk of a pole of~$M$ and hence the corresponding factors can 
+be removed from~$s$, which decreases the degree of~$s$ to~$8833$.  
+We can apply Theorem~\ref{thm:KedlayaTuitman} at~$\infty$ to find 
+$\theta_{\infty}=-4$, so that we can take $K=8830$. We now compute 
+the remaining $p$-adic precisions $N_{\Phi_0}=22$, $N_C=12$, $N_{C^{-1}}=14$, 
+$N_M=30$, $N_C'=29$, $N_{C^{-1}}'=24$, $N_{\Phi_0}'=25$, and $N_M'=30$.
 
 \subsubsection{Timings}
 
@@ -3345,25 +3359,25 @@ Total           & 21.19m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
-As the final result of the computation we obtain
-\begin{align*}
-7\chi(T/7) = &7T^{21} - 5T^{20} + 6T^{19} - 6T^{18} + 4T^{17} - 11T^{16} + 5T^{15} - 9T^{14} + 4T^{13} + 3T^{12} \\
-             &+4T^{11} + 4T^{10} + 3T^9 + 4T^8 - 9T^7 + 5T^6 - 11T^5 + 4T^4 - 6T^3 + 6T^2 - 5T + 7.
-\end{align*}
+As the final result of the computation we obtain the polynomial~$7 \chi(T/7)$, 
+\begin{multline*}
+7T^{21} - 5T^{20} + 6T^{19} - 6T^{18} + 4T^{17} - 11T^{16} + 5T^{15} - 9T^{14} + 4T^{13} + 3T^{12} \\
++4T^{11} + 4T^{10} + 3T^9 + 4T^8 - 9T^7 + 5T^6 - 11T^5 + 4T^4 - 6T^3 + 6T^2 - 5T + 7.
+\end{multline*}
 
 \begin{rem}
-In all of our timings, we have not included the time used to compute 
-the $p$-adic and $t$-adic precisions, since we used MAGMA for this. Note 
-that we get $\det(\Delta_k)$ for free, since we already compute the $LUP$ 
-decomposition of $\Delta_k$ anyway. Factorizing the polynomials $r,R$ over 
-$\QQ$ and $\FF_p$ was instantaneous in all cases. The only thing that 
-did take more time was the computation of the exponents in the 
-generic examples. For the family of generic quintic curves this took 
-$10s$,  $47s$ and $1.5s$ at the zeros of $r_1$, the zeros of $r_2$ and
-at $\infty$, respectively. For the family of generic quartic surfaces,
-we were not able to compute the exponents at the zeros of $r_2$ and $r_3$
-within reasonable time. Note however that we did not use them in the
-precision analysis either.
+In all of our timings, we have not included the time required to compute 
+the $p$-adic and $t$-adic precisions, since we used MAGMA for this. Note, 
+however, that we can readily determine $\det(\Delta_k)$ from the 
+$LUP$~decomposition of $\Delta_k$ and that the factorisation of the 
+polynomials $r$, $R$ over $\QQ$ and $\FF_p$ was instantaneous in all 
+cases. The only step that required noticeably more time was the 
+computation of the exponents in the generic examples. For the family of 
+generic quintic curves, this required $10s$, $47s$ and $1.5s$ at the 
+zeros of $r_1$, the zeros of $r_2$ and at $\infty$, respectively.  For the 
+family of generic quartic surfaces, we were not able to compute the 
+exponents at the zeros of $r_2$ and $r_3$ within reasonable time and thus 
+refained from using them in the precision analysis.
 \end{rem}
 
 \phantomsection
