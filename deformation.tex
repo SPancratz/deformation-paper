@@ -2359,9 +2359,10 @@ less than $K$.
 \begin{proof}
 On every residue disk $D \subset \mathbf{P}^1(\bar{\QQ}_q)$, we can 
 apply either Theorem~\ref{thm:KedlayaTuitman} (when it applies) or 
-Theorem~\ref{thm:Gerkmann} in order to find, for all $z \in D$, numbers $\theta_z \in \NN_0$ 
+Theorem~\ref{thm:Gerkmann} in order to find numbers $\theta_z \in \NN_0$ 
 such that $\Phi$ is congruent modulo~$p^N$ to a matrix 
-$\tilde{\Phi}\in M_{b \times b}(\QQ_q(t))$ for which $\ord_z(\tilde{\Phi}) \geq -\theta_z$. 
+$\tilde{\Phi}\in M_{b \times b}(\QQ_q(t))$ for which $\ord_z(\tilde{\Phi}) \geq -\theta_z$ 
+for all $z \in D$. 
 By Theorem~\ref{thm:Gerkmann}, we can take $\theta_z=0$ for $z \neq \infty$ if 
 $R(z) \neq 0$, so that $\theta_z$ vanishes for all but finitely many $z \in \mathbf{P}^1(\bar{\QQ}_q)$.
 Moreover, by Theorem~\ref{thm:KedlayaTuitman}, we can also take $\theta_z=0$ 
@@ -3083,7 +3084,7 @@ point counting algorithms tend to have in common.
 
 In this section we apply Algorithm~\ref{alg:complete} to some examples 
 using our preliminary implementation\footnotemark.  This implementation 
-is restricted to the case $q = p$, i.e.\ the families of hypersurfaces 
+is restricted to the case $q = p$, i.e.\ to families of hypersurfaces 
 defined over a prime field.  In order to provide some context for the 
 runtimes presented below, note that all computations were carried out 
 on a machine with two Intel Core i7-3540M processors running at 3GHz and 
@@ -3222,7 +3223,7 @@ Total           & 0.99s& 83.82m \\ \bottomrule
 \end{center}
 
 As the final result of the computation we find that 
-$\mathfrak{q} \chi(T/\mathfrak{q})$ is the integer polynomial 
+$\mathfrak{q} \chi(T/\mathfrak{q})$ is equal to 
 \begin{multline*}
 -3486784401T^{21} - 39675197243T^{20} - 191506614866T^{19} - 482588946510T^{18} \\
 \shoveright{-552821487569T^{17} + 243001138765T^{16} + 1641410078472T^{15} + 1793016627512T^{14}} \\
@@ -3237,12 +3238,12 @@ presented by Gerkmann.
 
 Additionally, we should mention that Gerkmann does not include timings for part 
 of his computations.  For example, he omits the time that is required for the 
-computation of the $p$-adic precision parameter ``$\delta$'', which involves 
-solving $b^2$~differential equations similar to the one for the matrix~$C$. 
+computation of the $p$-adic precision parameter that he calls $\delta$, which 
+involves solving $b^2$~differential equations similar to the one for the matrix~$C$. 
 Moreover, it appears that there are mistakes in the precision analysis, e.g.\ 
 the final $p$-adic precision is not sufficient to recover the exact zeta function. 
 Finally, the polynomial~$\chi(T)$ provided by Gerkmann for this example does 
-not satisfy Theorem~\ref{thm:weildeligne}.
+not satisfy Theorem~\ref{thm:weildeligne}, so cannot be correct.
 
 The remaining examples could not have been computed with previous implementations 
 of the deformation method and, to our knowledge, neither with any other point counting 
@@ -3300,8 +3301,7 @@ Total           & 3.99m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
-As the final result of the computation we obtain the 
-integer polynomial~$\chi(T)$, 
+As the final result of the computation we find that~$\chi(T)$ is equal to 
 \begin{multline*}
 304481639541418099574449295360278774639038415066698088621947601T^{12} \\
 \shoveright{+3777543732986291528931322507772938448980494046897871937792T^{11}} \\
@@ -3324,7 +3324,7 @@ P=x_0^4 + x_1^4 + x_2^4 + x_3^4
            & + x_0^2 x_1^2 + 3 x_0^2 x_2^2 + x_0^2 x_3^2 + 2 x_1^2 x_2^2 - 2 x_1^2 x_3^2 + x_2^2 x_3^2 + 2 x_0^2 x_1 x_2 \\ 
            & + x_0^2 x_1 x_3 + 3 x_0^2 x_2 x_3 - x_0 x_1^2 x_2 + 2 x_0 x_1^2 x_3 + 3 x_1^2 x_2 x_3 \\
            & - x_0 x_1 x_2^2 + 3 x_0 x_2^2 x_3 + x_1 x_2^2 x_3 + 2 x_0 x_1 x_3^2 + 2 x_0 x_2 x_3^2 \\
-           & + 2 x_1 x_2 x_3^2 \bigr),
+           & + 2 x_1 x_2 x_3^2 \bigr).
 \end{split}
 \end{equation*}
 The connection matrix $M \in M_{21 \times 21}(\QQ(t))$ has denominator 
@@ -3362,7 +3362,7 @@ Total           & 21.19m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
-As the final result of the computation we obtain the polynomial~$7 \chi(T/7)$, 
+As the final result of the computation we find that $7 \chi(T/7)$ is equal to 
 \begin{multline*}
 7T^{21} - 5T^{20} + 6T^{19} - 6T^{18} + 4T^{17} - 11T^{16} + 5T^{15} - 9T^{14} + 4T^{13} + 3T^{12} \\
 +4T^{11} + 4T^{10} + 3T^9 + 4T^8 - 9T^7 + 5T^6 - 11T^5 + 4T^4 - 6T^3 + 6T^2 - 5T + 7.
@@ -3377,15 +3377,13 @@ polynomials $r$, $R$ over $\QQ$ and $\FF_p$ was instantaneous in all
 cases. The only step that required noticeably more time was the 
 computation of the exponents in the generic examples. For the family of 
 generic quintic curves, this required $10s$, $47s$ and $1.5s$ at the 
-zeros of $r_1$, the zeros of $r_2$ and at $\infty$, respectively.  For the 
-family of generic quartic surfaces, we were not able to compute the 
-exponents at the zeros of $r_2$ and $r_3$ within reasonable time and thus 
-refained from using them in the precision analysis.  For the family of 
-generic quartic surfaces, this required $13s$ and $59s$ at the zeros of~$r_1$ 
-and at~$\infty$, respectively, but almost four hours for both the zeros 
-of~$r_2$ and $r_3$.  Note, however, that in this last case we only use the 
-exponents at~$\infty$ in the precision analysis in order to guarantee that 
-the computation is provably correct.
+zeros of $r_1$, the zeros of $r_2$ and at $\infty$, respectively. For the 
+family of generic quartic surfaces, this required $13s$ and $59s$ at the 
+zeros of~$r_1$ and at~$\infty$, respectively, but almost four hours for 
+both the zeros of~$r_2$ and $r_3$.  Note, however, that in this last case 
+we only use the exponents at~$\infty$ in the precision analysis and that
+the other exponents are not needed for the result of the computation to
+be provably correct.
 \end{rem}
 
 \phantomsection
