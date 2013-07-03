@@ -3160,7 +3160,8 @@ $N_C'=43$, $N_{C^{-1}}'=40$, $N_{\Phi_0}'=40$, and $N_M'=44$.
 \subsubsection{Timings}
 
 We now compare the performance of our FLINT implementation with the 
-timings reported by Gerkmann.
+timings reported by Gerkmann. To save space, we do not include the 
+polynomials $\chi(T)$ that we obtained from these computations.
 
 \begin{center}
 \begin{tabular}{l l l l l l l} \toprule
@@ -3173,7 +3174,7 @@ $\Phi_0$        & 0.03s& 2.65m & 0.03s & 5.86m   & 0.01s& 1.31m \\
 $\Phi$          & 0.67s& 1.33m & 1.28s & 1.38m   & 0.29s& 0.89m \\
 $Z(X_{\tau},T)$ & 9.20s& 3.96m & 6.42s & 101.40s & 0.15s& 1.09m \\
 Total           & 9.90s& 7.94m & 7.73s & 8.93m   & 0.45s& 3.29m \\ \bottomrule
-\end{tabular}
+\end{tabular} 
 \end{center}
 
 Our timings in these examples are a factor of $50-500$ lower than the ones 
@@ -3212,7 +3213,7 @@ $N_C'=73$, $N_{C^{-1}}'=68$, $N_{\Phi_0}'=68$ and $N_M'=75$.
 \begin{center}
 \begin{tabular}{l l l} \toprule
 Computation     & P--T & G      \\ \midrule
-$M$             & 0.00s&        \\
+$M$             & 0.00s& 7.00s      \\
 $\Phi_0$        & 0.01s& 45.26m \\
 $\Phi$          & 0.22s& 19.90m \\
 $Z(X_{\tau},T)$ & 0.76s& 18.66m \\
@@ -3239,7 +3240,9 @@ of his computations.  For example, he omits the time that is required for the
 computation of the $p$-adic precision parameter ``$\delta$'', which involves 
 solving $b^2$~differential equations similar to the one for the matrix~$C$. 
 Moreover, it appears that there are mistakes in the precision analysis, e.g.\ 
-the final $p$-adic precision is not sufficient to recover the exact zeta function.
+the final $p$-adic precision is not sufficient to recover the exact zeta function. 
+Finally, the polynomial~$\chi(T)$ provided by Gerkmann for this example does 
+not satisfy Theorem~\ref{thm:weildeligne}.
 
 The remaining examples could not have been computed with previous implementations 
 of the deformation method and, to our knowledge, neither with any other point counting 
@@ -3377,7 +3380,12 @@ generic quintic curves, this required $10s$, $47s$ and $1.5s$ at the
 zeros of $r_1$, the zeros of $r_2$ and at $\infty$, respectively.  For the 
 family of generic quartic surfaces, we were not able to compute the 
 exponents at the zeros of $r_2$ and $r_3$ within reasonable time and thus 
-refained from using them in the precision analysis.
+refained from using them in the precision analysis.  For the family of 
+generic quartic surfaces, this required $13s$ and $59s$ at the zeros of~$r_1$ 
+and at~$\infty$, respectively, but almost four hours for both the zeros 
+of~$r_2$ and $r_3$.  Note, however, that in this last case we only use the 
+exponents at~$\infty$ in the precision analysis in order to guarantee that 
+the computation is provably correct.
 \end{rem}
 
 \phantomsection
