@@ -211,8 +211,12 @@ complexities than existing methods.  Moreover, our implementation is
 more practical and can be applied more generally, which we illustrate 
 with examples of generic quintic curves and quartic surfaces.}
 
+\bigskip % looks a lot better
+
 \setcounter{tocdepth}{2}
 \tableofcontents
+
+\bigskip
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -399,10 +403,10 @@ Let $\pi:\mathfrak{X} \rightarrow \mathfrak{S}$ be a smooth family of algebraic 
 defined over $\QQ_q$.
 
 \begin{defn}
-Let $\HdR^i(\mathfrak{X}/\mathfrak{S})$ denote the relative algebraic 
+Let $\HdR^i(\mathfrak{X}/\mathfrak{S})$ denote the $i$-th relative algebraic 
 de Rham cohomology sheaf on $\mathfrak{S}$. 
 If $\mathfrak{X}/\mathfrak{S}$ admits a relative normal crossing 
-compactification, then this is a vector bundle.
+compactification, then the $\HdR^i(\mathfrak{X}/\mathfrak{S})$ are vector bundles.
 \end{defn}
 
 The $\HdR^i(\mathfrak{X}/\mathfrak{S})$ come equipped with an integrable 
@@ -485,15 +489,16 @@ all $\tau \in S(\FF_{\mathfrak{q}})$,
 \[
 (\Hrig^i(X_{\tau}),\Frob_p) \cong (\HdR^i(\mathfrak{X}/\mathfrak{S}),F)_{\hat{\tau}}
 \] 
-as $\QQ_{\mathfrak{q}}$ vector spaces with a $\sigma$-semilinear 
+as $\QQ_{\mathfrak{q}}$-vector spaces with a $\sigma$-semilinear 
 endomorphism, where $\hat{\tau} \in \mathcal{S}(\ZZ_{\mathfrak{q}})$ denotes 
 the Teichm\"uller lift of $\tau$. We will therefore denote this Frobenius 
 structure on $\HdR^i(\mathfrak{X}/\mathfrak{S})$ by $\Frob_p$ as well.
 \end{thm}
 
 \begin{proof}
-This theorem is well known, and can be obtained by combining results of 
-Berthelot from various papers, most notably \citep{Berthelot1986}.   
+This result is well known, see for example \citep[Theorem 6.1.3]{Kedlaya2012}.
+Although it is usually attributed to Berthelot, a complete reference 
+seems to be missing from the literature.
 \end{proof}
 
 \begin{defn}
@@ -600,7 +605,7 @@ p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 \begin{defn}
 We define the ring of overconvergent functions
 \[
-\QQ_q \langle t, \frac{1}{r} \rangle^{\dag} = 
+\QQ_q \langle t, 1/r \rangle^{\dag} = 
 \biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r^j} \; : \; 
 a_{i,j} \in \QQ_q, \; \exists c > 0 \text{ s.t.}  
 \lim_{i+j \rightarrow \infty} \bigl(\ord_p(a_{i,j}) - c(i+j)\bigr) \geq 0
@@ -644,8 +649,10 @@ basis $[e_0,\dotsc,e_b]$.
 \begin{proof}
 That the differential equation is satisfied is an immediate consequence of the 
 fact that $\Frob_p$ is a horizontal map of vector bundles with connection, and 
-that $\Phi(0)=\Phi_0$ is also clear from Theorem~\ref{thm:frobstruc}. Now, if 
-$M$ does not have any poles in a given residue disk, then $\Phi$ cannot have 
+that $\Phi(0)=\Phi_0$ is also clear from Theorem~\ref{thm:frobstruc}. Note that
+by a residue disk on $\mathcal{S}$ we mean all points on $\mathcal{S}(\bar{\QQ}_q)$ 
+that reduce modulo $p$ to a given point of $S(\bar{\FF}_q)$.
+If $M$ does not have any poles in a given residue disk, then $\Phi$ cannot have 
 any poles in that residue disk either, by Theorem~\ref{thm:KedlayaTuitman} 
 below. Hence the entries of $\Phi$ are contained in 
 $\QQ_q \langle t, 1/r \rangle^{\dag}$.
@@ -656,7 +663,8 @@ The deformation method can now be sketched as follows:
 \item Compute the matrix $M$ of the Gauss--Manin connection $\nabla$.
 \item Compute the matrix $\Phi_0$ of the action of $p^{-1}\Frob_p$ on 
       $\Hrig^n(U_0)$. If the family is chosen such that $X_0$ is a diagonal 
-      hypersurface, this can be achieved using a formula of Dwork.
+      hypersurface, this can be achieved using a formula of Dwork as will be
+      explained in Chapter~\ref{sec:Diagonal}.
 \item Solve the differential equation from Theorem~\ref{thm:eqphi} for $\Phi$.
 \item Substitute the Teichm\"uller lift $\hat{\tau}$ of an element 
       $\tau \in S(\FF_{\mathfrak{q}})$ into $\Phi$ to obtain the 
@@ -702,7 +710,7 @@ Therefore, we also have that
 \ord_p \bigl( (x_{i}-\tilde{x}_{i})
     (\tilde{x}_1 \dotsm \tilde{x}_{i-1} x_{i+1} \dotsm x_{\ell} \bigr) \geq N,
 \end{equation*}
-for all $i$. The result now follows by combining these inequalities.
+for all $i$. The result now follows by adding these $\ell$ inequalities.
 \end{proof}
 
 \begin{prop} \label{prop:matrixproductval}
