@@ -773,7 +773,7 @@ derivative operator with respect to~$x_i$.
 \end{prop}
 
 \begin{proof}
-The proof is straightforward, for details see \citep{Griffiths1969}.
+The proof is straightforward, for details see \citep[\S 4]{Griffiths1969}.
 \end{proof}
 
 The cohomology space $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ is 
@@ -782,12 +782,12 @@ $\mbox{Fil}^k \HdR^{n}(\mathfrak{U}/\mathfrak{S})$ consists of all elements
 that can be represented by $n$-forms $Q \Omega / P^k$ with 
 $Q \in H^0(\mathfrak{S},\mathcal{O}_{\mathfrak{S}})[x_0, x_1, \dotsc, x_n]$ 
 homogeneous of degree $kd - (n + 1)$.  It follows from a theorem of 
-Macaulay~\citep[\S 4, (4.11)]{Griffiths1969} that 
+Macaulay~\citep[(4.11)]{Griffiths1969} that 
 $\mbox{Fil}^n \HdR^{n}(\mathfrak{U}/\mathfrak{S}) = \HdR^{n}(\mathfrak{U}/\mathfrak{S})$. 
 Actually, the reverse filtration $H_i=\mbox{Fil}^{n-i} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
 corresponds to the restriction of the Hodge filtration on 
 $\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ 
-by~\citep{Griffiths1969}.
+by~\citep[(8.6.)]{Griffiths1969}.
 
 As we prefer to perform linear 
 algebra operations over a field, we will actually work with the de~Rham 
@@ -962,7 +962,7 @@ where $\equiv$ denotes equality in cohomology.
          $Q \Omega / P^k \equiv \gamma_{1} \Omega / P^{1} + \dotsb + \gamma_n \Omega / P^n$.
 \Procedure{Reduce}{$P,Q$}
 \While{$k \geq n+1$}
-\State $Q_0, \dotsc, Q_n, \bullet \gets \Call{Decompose}{Q}$
+\State $Q_0, \dotsc, Q_n, 0 \gets \Call{Decompose}{Q}$
 \State $k \gets k-1$
 \State $Q \gets k^{-1} \sum_{i=0}^n \partial_i Q_i$
 \EndWhile
@@ -2221,7 +2221,7 @@ we might not know them exactly a priori.
 
 \begin{rem}
 In practice, the constants $-(2 \delta + (n-1))$, $c$, $\alpha_1$, and $-\delta$ 
-are always very small in absolute value, so that $g(N)$ is about $N$ and 
+are very small in absolute value, so that $g(N)$ is about $N$ and 
 the lower bound for the order of~$\Phi$ modulo $p^N$ at the point $z$ is 
 roughly $-pN$.
 \end{rem}
