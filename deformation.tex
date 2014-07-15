@@ -315,10 +315,11 @@ the valuation of the matrix of Frobenius and its inverse that are essential
 for controlling the $p$-adic precision loss in the algorithm.
 
 In Section~\ref{sec:Diagonal}, we show how to compute the Frobenius matrix of
-a diagonal hypersurface over a prime field. Our method is based on a formula 
-of Dwork, but by rewriting this formula we obtain Algorithm~\ref{alg:Diagfrob}, 
-which is a significant improvement to the corresponding algorithms of Lauder 
-and Gerkmann, both in terms of time complexity and in practice.
+a diagonal hypersurface over a prime field. Our method is essentially based 
+on work of Dwork, but by rewriting and slightly generalizing his formulas we 
+obtain Algorithm~\ref{alg:Diagfrob}, which is a significant improvement to the 
+corresponding algorithms of Lauder and Gerkmann, both in terms of time complexity 
+and in practice.
 
 In Section~\ref{sec:DifferentialSystem}, we explain how to solve the 
 differential equation for the Frobenius matrix. We use the same method as 
@@ -663,7 +664,7 @@ The deformation method can now be sketched as follows:
 \item Compute the matrix $M$ of the Gauss--Manin connection $\nabla$.
 \item Compute the matrix $\Phi_0$ of the action of $p^{-1}\Frob_p$ on 
       $\Hrig^n(U_0)$. If the family is chosen such that $X_0$ is a diagonal 
-      hypersurface, this can be achieved using a formula of Dwork as will be
+      hypersurface, this can be done as
       explained in Chapter~\ref{sec:Diagonal}.
 \item Solve the differential equation from Theorem~\ref{thm:eqphi} for $\Phi$.
 \item Substitute the Teichm\"uller lift $\hat{\tau}$ of an element 
@@ -752,7 +753,7 @@ $P \in \ZZ_q[t][x_0,\dotsc,x_n]$ of degree $d$. First we recall how to
 compute in $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$ following the method 
 of Griffiths and Dwork.  
 
-\begin{prop}
+\begin{prop} \label{prop:Omega}
 Let $\Omega$ denote the $n$-form on $\mathfrak{U}/\mathfrak{S}$ defined by 
 \begin{equation*}
 \Omega = \sum_{i=0}^n (-1)^i x_i d x_0 \wedge \dotsb \wedge \widehat{d x_i} \wedge \dotsb \wedge d x_n.
@@ -1316,16 +1317,7 @@ we obtain the required bounds.
 \section{Frobenius on diagonal hypersurfaces}
 \label{sec:Diagonal}
 
-\subsection{A formula of Dwork}
-
-In this section we compute the action of Frobenius on the cohomology 
-space $\Hrig^{n}(U_0) \cong \HdR^{n}(\mathfrak{U}_0)$ associated 
-to the diagonal fibre of the family. Our method is based on an 
-explicit formula of Dwork~\citep[\S 4]{Dwork1964}, which has already 
-been used by Lauder \citep{Lauder2004b} and Gerkmann 
-\citep{Gerkmann2007}. However, by rewriting this formula we obtain an 
-algorithm that performs significantly better in practice than a direct 
-implementation.
+\subsection{A formula for $\Phi_0$}
 
 We consider a single smooth 
 projective diagonal hypersurface~$\mathcal{X}_0$ over $\ZZ_p$ defined by 
@@ -1340,15 +1332,11 @@ fibre of $\mathcal{X}_0$ and let $\mathcal{U}_0$ and $\mathfrak{U}_0$ be the
 complements of $\mathcal{X}_0$ and $\mathfrak{X}_0$, respectively. 
 We fix our choice of basis~$\cB$ for $\HdR^{n}(\mathfrak{U}_0)$ 
 as in Definition~\ref{defn:MonBasis}. 
-
 Our goal is to compute 
 the matrix~$\Phi_0$ representing the action of $p^{-1} \Frob_p$ on 
 $\Hrig^n(U_0) \cong \HdR^n(\mathfrak{U}_0)$, with respect to the basis~$\cB$, 
 to $p$-adic precision~$N_{\Phi_0}$. It will turn out that this matrix has only one
 nonzero element in every row and column.
-
-We define the ramified extension~$\QQ_p(\pi)$ where $\pi^{p-1} = -p$, 
-and extend the valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}.
 
 Let $u = (u_0, \dotsc, u_n)$ and $v = (v_0, \dotsc, v_n)$ be tuples 
 of integers such that $x^u, x^v \in B$ and $p (u_i+1) \equiv v_i+1 \pmod{d}$,
@@ -1356,126 +1344,32 @@ for all $i$. Furthermore, let $k(u) \in \NN$ denote the positive integer such th
 \[
 k(u) d -(n+1) = \sum_{i=0}^n u_i.
 \] 
-For $w \in \QQ$ 
-and $r \geq 0$, we define the rising factorials $(w)_r = \prod_{j=0}^{r-1} (w + j)$, 
-and for $m \geq 0$, we let $\lambda_m$ denote the coefficient of $z^m$ in the 
-power series expansion of $\exp \bigl( \pi (z - z^p) \bigr)$. It is well known, see 
-for example~\citep{Dwork1962}, that 
-\begin{equation} \label{eqn:dworkbound}
-\ord_p(\lambda_m) \geq \frac{p-1}{p^2} m. 
-\end{equation}
+Finally, for all $l \in \QQ$ and integers $r \geq 0$, let the rising factorial $\prod_{j=0}^{r-1} (l + j)$ be
+denoted by $(l)_r$.
 
-\begin{defn} We define \label{defn:alpha}
-\[
-\alpha_{u,v} = \pi^{k(v) - k(u)} \prod_{i = 0}^n \biggl( \sum_{m, r} \lambda_m ((u_i + 1) / d)_r (-1)^r \pi^{-r} a_i^{m-r} \biggr),
-\]
-where the sum in the $i$-th factor of the product is over all $m, r \geq 0$  
-that satisfy
-\[
-p(u_i+1)-(v_i+1)=d(m-pr).
-\]
-\end{defn}
-
-\begin{thm} \label{thm:01-03-diagfrob}
-Let $\omega_1$ denote an element of $\cB$ corresponding to a tuple 
-$u \in \ZZ^{n+1}$ and let $\omega_2$ denote the unique element of~$\cB$ 
-corresponding to a tuple $v \in \ZZ^{n+1}$ such that
-$p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all $i$. Then
-\begin{equation*}
-p^{-1} \Frob_p (\omega_1) = 
-    (-1)^{k(u) + k(v)} \frac{(k(v) - 1)!}{(k(u) - 1)!} p^n \alpha_{u,v}^{-1} \omega_2.
-\end{equation*}
-\end{thm}
-
-\begin{proof}
-The corresponding formula for the Dwork operator on Dwork cohomology can
-be found in %\citep[\S 4]{Dwork1964}, or alternatively in 
-\citep[\S 6.1]{Lauder2004b}. The more general case when $\mathcal{X}_0$ 
-is defined over $\ZZ_q$ is also treated there. The formula for 
-$p^{-1} \Frob_p$ on $\Hrig^n(U_0)$ follows from this by the comparison theorem 
-between Dwork cohomology and rigid cohomology \citep[Theorem 1.12]{Katz}. 
-For more details, see~\citep[Theorem 4.4]{Gerkmann2007}.
-\end{proof}
-
-\begin{rem}
-We could eliminate $m$ from Definition~\ref{defn:alpha} by writing 
-\[
-m(r)=\frac{p(u_i+1) - (v_i+1)}{d}+pr.
-\]
-% Note that $p(u_i+1) - (v_i+1) \geq 0$, since it is divisible by $d$ 
-% and greater than $-d$.  So after eliminating $m$, the sum would just 
-% be over all $r \geq 0$.
-However, to simplify notation, we will keep the index $m$.
-\end{rem}
-
-\subsection{Alternative formulas}
-
-At first sight it appears that this computation genuinely has to 
-take place in the extension field~$\QQ_p(\pi)$ even though the entries
-of the matrix $\Phi_0$ are of course contained in~$\QQ_p$.  This is, however, 
-not the case as we will show now.  The terms $\alpha_{u,v}$ 
-will turn out to be elements of~$\ZZ_p$, and we provide expressions 
-for them that are more suitable for computations.
-
-First, it is straightforward to obtain a more explicit description 
-of the coefficients~$\lambda_m$ via an elementary calculation:
-
-\begin{lem} \label{lem:lambdam}
-Let $\pi^{p-1} = -p$ and, for $m \geq 0$, let $\lambda_m$ 
-be the coefficient of $z^m$ in the power series expansion 
-of $\exp \bigl( \pi (z - z^p) \bigr)$ in $\QQ_p[[z]]$.  Then 
-\begin{equation*}
-\pi^{- (m \bmod{(p-1)})} \lambda_m = (-1)^{\floor{m/(p-1)}} \sum_{j=0}^{\floor{m/p}} p^{\floor{m/(p-1)} - j} \frac{1}{(m-pj)! j!}
-\end{equation*}
-where $m \bmod{(p-1)}$ denotes the remainder of $m$ upon Euclidean 
-division by $p-1$. \hfill $\qedsymbol$
-\end{lem}
-
-\begin{thm} \label{thm:alpha}
+\begin{defn} \label{defn:alpha}
 Let $u, v \in \ZZ^{n+1}$ be such that 
 $x^u, x^v \in B$ and 
 $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$. 
-Then 
+We define
 \begin{equation*}
-\alpha_{u,v} = (-p)^{k(u)} \prod_{i=0}^n a_i^{(p (u_i + 1) - (v_i + 1))/d} 
-    \biggl( \sum_{m,r} a_i^{(p-1)r} \Bigl( \frac{u_i+1}{d} \Bigr)_r 
-        \sum_{j=0}^{\floor{m/p}} \frac{p^{r-j}}{(m-pj)!j!} \biggr),
+\alpha_{u,v} = \prod_{i=0}^n a_i^{(p (u_i + 1) - (v_i + 1))/d} 
+    \biggl( \sum_{m,r} \Bigl( \frac{u_i+1}{d} \Bigr)_r 
+        \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \biggr),
 \end{equation*}
-where the sum in the $i$-th factor of the product is over all $m, r \geq 0$  
-that satisfy
-\[
-p(u_i+1)-(v_i+1)=d(m-pr).
-\]
-\end{thm}
+where the sum in the $i$-th factor of the product is over all integers $m, r \geq 0$  
+that satisfy $p(u_i+1)-(v_i+1)=d(m-pr)$.
+\end{defn}
 
-\begin{proof}
-We start from Definition~\ref{defn:alpha} and use Lemma~\ref{lem:lambdam} to 
-find that $\alpha_{u,v}$ is equal to 
-\begin{gather*}
-\pi^{k(v)-k(u)} \prod_{i=0}^n 
-    \biggl( \sum_{m,r} (-1)^{\floor{m/(p-1)}} \pi^{m \bmod{(p-1)}} 
-    \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r \pi^{-r} a_i^{m-r} 
-    \sum_{j=0}^{\floor{m/p}} \frac{p^{\floor{m/(p-1)}-j}}{(m-pj)!j!} \biggr).
-\intertext{Now we write $m = \floor{m/(p-1)} (p-1) + \bigl(m \bmod{(p-1)}\bigr)$, 
-and simplify using $\pi^{p-1} = -p$, to obtain}
-\alpha_{u,v} = \pi^{k(v)-k(u)} \prod_{i=0}^n \biggl( \sum_{m,r} \pi^{m - r} 
-    \Bigl( \frac{u_i+1}{d} \Bigr)_r (-1)^r a_i^{m-r} 
-    \sum_{j=0}^{\floor{m/p}} \frac{p^{-j}}{(m-pj)!j!} \biggr).
-\end{gather*}
-After substituting $m-r = (p-1)r + \bigl(p(u_i+1) - (v_i+1)\bigr)/d$, we obtain 
-the required formula.
-\end{proof}
+The following lemma will be useful in what follows.
 
-Our aim is to show that $\alpha_{u,v}$ is $p$-adically integral.  First, 
-we collect a few intermediate results.
-
-\begin{prop} \label{prop:mpr}
-Let $x^u, x^v \in B$, $0 \leq i \leq n$, and $m, r$, be such that 
+\begin{lem} \label{lem:mpr}
+Let $x^u, x^v \in B$, $0 \leq i \leq n$ and $m, r \geq 0$ integers, such that 
 \[
 p(u_i + 1) - (v_i + 1) = d(m-pr).
 \] 
 Then we have $r = \floor{m/p}$.
-\end{prop}
+\end{lem}
 
 \begin{proof}
 Since $0 \leq u_i, v_i \leq d-2$, we obtain
@@ -1485,217 +1379,191 @@ p-(d-1) \leq p(u_i + 1) - (v_i + 1) \leq p(d-1)-1,
 and from this the result follows, also using that $m - pr \in \ZZ$.
 \end{proof}
 
+The entries of $\Phi_0$ can be expressed in terms of the $\alpha_{u,v}$ as follows.
+
+\begin{thm} \label{thm:01-03-diagfrob}
+Let $\omega_1$ denote an element of $\cB$ corresponding to a tuple 
+$u \in \ZZ^{n+1}$ and let $\omega_2$ denote the unique element of~$\cB$ 
+corresponding to a tuple $v \in \ZZ^{n+1}$ such that
+$p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all $i$. Then
+\begin{equation} \label{eq:diagfrobformula}
+p^{-1} \Frob_p (\omega_1) = 
+    (-1)^{k(v)} \frac{(k(v) - 1)!}{(k(u) - 1)!} p^{n-k(u)} \alpha_{u,v}^{-1} \cdot \omega_2.
+\end{equation}
+\end{thm}
+
+\begin{proof} First, let $\QQ_p(\pi)$ denote the totally ramified extension of $\QQ_p$ with $\pi^{p-1} = -p$ 
+and extend the $p$-adic valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}. For $0 \leq i \leq n$, 
+define sets
+\begin{align*}
+W^{(i)} &= \{ (w_0,\cdots,w_n) \in \NN_0^{n+1} \colon w_j \geq 1 \text{ for all } j \neq i \text{ and } \lvert w \rvert \equiv 0 \bmod{d} \},
+\end{align*}
+with $\lvert w \rvert=\sum_{i=0}^n w_i$. Note that $\lvert w \rvert=k(w-1)$, where $w-1$ denotes the tuple $(w_0-1,\ldots,w_n-1)$. 
+Furthermore, still for $0 \leq i \leq n$,
+define $\QQ_p(\pi)$-vector spaces
+\begin{align*}
+\mathcal{L}^{(i)} &= \Bigl\{ \sum_{w \in W^{(i)}} b_w x^{w} \; : \; 
+b_{w} \in \QQ_p(\pi), \; \exists c > 0 \text{ s.t.}  
+\lim_{\lvert w \rvert \rightarrow \infty} \bigl(\ord_p(b_w) - c \cdot \lvert w \rvert \bigr) \geq 0 \Bigr\}
+\end{align*}
+and let $\mathcal{L} = \cap_{i=0}^n \mathcal{L}^{(i)}$ be the intersection of the $\mathcal{L}^{(i)}$. Moreover, let
+$D_i: \mathcal{L}^{(i)} \rightarrow \mathcal{L}$ denote the differential operator
+$D_i = x_i \partial_i +  \pi x_i \partial_i(P_0)$.
+Finally, let $\psi_p, \alpha: \mathcal{L} \rightarrow \mathcal{L}$ be the $\QQ_p(\pi)$-linear maps defined by:
+\begin{align*}
+\psi_p(x^w) &= 
+\begin{cases}
+x^{w/p} &\text{ if } p \mid w_i \text{ for all } 0 \leq i \leq n \\
+0                        &\text{ otherwise}
+\end{cases} \\ 
+\alpha(x^w) &= \psi_p \Bigl( \exp\Bigl(\pi \bigl(P_0(x_0,\ldots,x_n)-P_0(x_0^p,\ldots,x_n^p)\bigl) \Bigr) \cdot x^w \Bigr)
+\intertext{and let $\mathcal{R}:\mathcal{L} \rightarrow \Hrig^n(U_0) \otimes \QQ_p(\pi)$ denote the $\QQ_p(\pi)$-linear map defined by}
+\mathcal{R}(x^w) &= \frac{(\lvert w \rvert-1)!}{(-\pi)^{\lvert w \rvert-1}} \frac{x^{w-1} \Omega}{P_0^{\lvert w \rvert}},
+\end{align*}
+where $\Omega$ is defined as in Proposition~\ref{prop:Omega}.
+Then by \citep[Theorem 2.15]{katz}, the diagram
+\[
+\begin{CD}
+\mathcal{L} / \sum_{i=0}^n D_i \mathcal{L}^{(i)} @>  \; \; \; \; \; p^{-n} \alpha \; \; \; \;   >> \mathcal{L} / \sum_{i=0}^n D_i \mathcal{L}^{(i)}  \\
+@VV \mathcal{R} V  @V \mathcal{R} VV \\
+\Hrig^n(U_0) \otimes \QQ_p(\pi) @> (p^{-1} \Frob_p)^{-1}  >> \Hrig^n(U_0) \otimes \QQ_q(\pi)
+\end{CD} 
+\]
+commutes and by \citep[Corollary 1.15]{katz} the vertical maps are isomorphisms. This implies that~\eqref{eq:diagfrobformula}
+is equivalent to
+\[
+\alpha(x^{v+1}) \equiv \pi^{pk(u)-k(v)} \alpha_{u,v} \cdot x^{u+1} \bmod{\sum_{i=0}^n D_i \mathcal{L}^{(i)}}.
+\]
+
+Note that so far we have not used that $P_0$ is diagonal. Since
+$P_0(x_0, x_1, \dotsc, x_n)$ is equal to $a_0 x_0^d + a_1 x_1^d + \dotsb + a_n x_n^d$,
+we can write
+\begin{align*}
+\exp\Bigl(\pi \bigl(P_0(x_0,\ldots,x_n)- P_0(x_0^p,\ldots,x_n^p)\bigl) \Bigr) &= \prod_{i=0}^n \exp \bigl( \pi a_i (x_i^d - x_i^{dp}) \bigr)
+\end{align*}
+and we also have $D_i =x_i \partial_i + (\pi a_i d) x_i^d$. For $0 \leq i \leq n$, we denote
+\begin{align*}
+\QQ_p(\pi) \langle x_i \rangle^{\dag} =  \Bigl\{ \sum_{j=0}^{\infty} b_j x_i^{j} \; : \; 
+b_{j} \in \QQ_p(\pi), \; \exists c > 0 \text{ s.t.}  
+\lim_{j \rightarrow \infty} \bigl(\ord_p(b_j) - c \cdot j \bigr) \geq 0 \Bigr\}
+\end{align*}
+and we define $\psi_p$ and $D_i$ on $\QQ_p(\pi) \langle x_i \rangle^{\dag}$ by the same formulas as above. Then
+\begin{align*}
+\psi_p \Bigl( \exp \bigl(\pi a_i(x_i^d- x_i^{pd})\bigr) x_i^{v_i+1} \Bigr) &= \sum_{\substack{m \geq 0 \text{ s.t. }\\ p \mid dm+v_i+1}}  &&\Bigl(\sum_{j=0}^{\floor{m/p}} \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{j! (m-pj)!} \Bigr) x_i^{(dm+v_i+1)/p}, \\
+									   &= \; \; \; \; \; \sum_{m,r} &&\Bigl(\; \sum_{j=0}^{r} \; \; \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{j! (m-pj)!} \Bigr) x_i^{u_i+1+dr},
+\end{align*}
+where the outer sum on the last line is over all integers $m, r \geq 0$  that satisfy $p(u_i+1)-(v_i+1)=d(m-pr)$ and we have used Lemma~\ref{lem:mpr}. It is clear that
+\begin{align*}
+x_i^{u_i+1+dr} \equiv \Bigl(\frac{u_i+1}{d}\Bigr)_r (-\pi a_i)^{-r} x_i^{u_i+1}  \bmod{D_i \QQ_p(\pi) \langle x_i \rangle^{\dag} }.
+\end{align*}
+Hence the series $\psi_p \Bigl( \exp \bigl(\pi a_i(x_i^d- x_i^{pd})\bigr) x_i^{v_i+1} \Bigr)$ is congruent to
+\begin{align*}
+(\pi a_i)^{(p (u_i + 1) - (v_i + 1))/d} 
+    \biggl( \sum_{m,r} \Bigl( \frac{u_i+1}{d} \Bigr)_r 
+        \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \biggr) x_i^{u_i+1}
+\end{align*}
+modulo $D_i \QQ_p(\pi) \langle x_i \rangle^{\dag}$, where the sum is still over all integers $m, r \geq 0$  that satisfy $p(u_i+1)-(v_i+1)=d(m-pr)$. 
+
+For $G_i \in  \QQ_p(\pi) \langle x_i \rangle^{\dag}$ with $0 \leq i \leq n$, we have
+\begin{align*}
+\psi_p(\prod_{j=0}^n G_j) &= \prod_{j=0}^n \psi_p(G_j), &D_i(\prod_{j=0}^n G_j)&= D_i(G_i) \cdot \prod_{j \neq i} G_j.  
+\end{align*}
+Therefore, we can take the product of the above congruences to conclude that 
+\begin{align*}
+\alpha(x^{v+1}) \equiv \pi^{pk(u)-k(v)} \alpha_{u,v} \cdot x^{u+1} \bmod{\sum_{i=0}^n D_i \QQ_p(\pi) \langle x_i \rangle^{\dag}}.
+\end{align*}
+Since
+$\mathcal{L} \; \cap \; \sum_{i=0}^n D_i \QQ_p(\pi) \langle x_i \rangle^{\dag} =  \sum_{i=0}^n D_i \mathcal{L}^{(i)}$,
+we can replace $\sum_{i=0}^n D_i \QQ_p(\pi) \langle x_i \rangle^{\dag}$ 
+by $\sum_{i=0}^n D_i \mathcal{L}^{(i)}$, completing the proof.
+\end{proof}
+
+\begin{rem}
+The computation in the proof of Theorem~\ref{thm:01-03-diagfrob} essentially goes back to Dwork~\citep[\S 4]{Dwork1964}. He obtained a formula similar to ours, 
+that Lauder \citep{Lauder2004b} and Gerkmann \citep{Gerkmann2007} have used in their computations. However, our approach is different in two ways.
+First, our formula for $\alpha_{u,v}$ is defined over $\QQ_p$ instead of $\QQ_p(\pi)$. By eliminating the $\pi$'s, we are able to improve the complexity of
+the computation of $\Phi_0$ (even of the whole deformation algorithm) by a factor $p$, as we will see in Section~\ref{sec:Complexity}. Second, Dwork's formula 
+is only valid when the $a_i$ are Teichm\"uller lifts (i.e. $a_i^{p-1}=1$). From a theoretical point of view, of course one can always choose the $a_i$ to be 
+Teichm\"uller lifts, but in computations this is unnecessarily restrictive. 
+\end{rem}
+
+\subsection{Some estimates}
+
 \begin{prop} \label{prop:rfac}
-For all integers $u, d, r \geq 1$ with $p \nmid d$, 
+For all integers $j, d, r \geq 1$ with $p \nmid d$, 
 \begin{equation*}
-\ord_p\Bigl(\frac{u}{d}\Bigr)_r \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}.
+\ord_p\Bigl(\frac{j}{d}\Bigr)_r \geq \ord_p(r!) \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}.
 \end{equation*}
 \end{prop}
 
 \begin{proof}
 Let $s_p(r)$ denote the sum of digits in the $p$-adic expansion of~$r$ 
-and observe that $s_p(r) \leq (p-1)\floor{\log_p(r) + 1}$.  Using the 
-standard fact that $\ord_p\bigl((u/d)_r\bigr) \geq \ord_p(r!)$, 
-it follows that 
+and observe that $s_p(r) \leq (p-1)\floor{\log_p(r) + 1}$. Then 
 \begin{equation*}
-\ord_p\Bigl(\frac{u}{d}\Bigr)_r \geq \ord_p(r!) 
-    = \frac{r - s_p(r)}{p-1} \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}
-\end{equation*}
-as required.
-\end{proof}
-
-\subsubsection{The case $p = 2$}
-
-\begin{defn} \label{defn:mu2}
-For $p = 2$ we define a sequence $\bigl(\mu_m^{(2)}\bigr)$ by 
-\begin{equation*}
-\mu_m^{(2)} = 
-    \sum_{j=0}^{\floor{m/2}} \frac{2^{\floor{3m/4} - \nu_m - j}}{(m-2j)! j!}
-\end{equation*}
-where $\nu_m$ is equal to one whenever $m = 3, 7$ and zero otherwise, 
-and we write $\mu_m =\mu_m^{(2)}$ whenever this does not cause confusion. 
-\end{defn}
-
-\begin{lem} \label{lem:mu2}
-$\mu_m \in \ZZ_2$ for all $m \geq 0$.
-\end{lem}
-
-\begin{proof}
-In the two cases $m = 3, 7$ we explicitly compute the values of 
-$\mu_m$ as $4/3$ and $232/315$, respectively.  Now suppose that 
-$m \neq 3, 7$.  From Lemma~\ref{lem:lambdam} we obtain 
-\begin{equation*}
-\ord_2 \bigl(\mu_m\bigr) 
-    = \floorBig{\frac{3m}{4}} - m + \ord_2(\lambda_m).
-\end{equation*}
-Using the bound~\eqref{eqn:dworkbound}, we find that 
-\begin{equation*}
-\ord_2 \bigl(\mu_m\bigr) 
-    \geq \floorBig{\frac{3m}{4}} - m + \ceil{\frac{m}{4}} = 0. \qedhere
+\ord_p\Bigl(\frac{j}{d}\Bigr)_r \geq \ord_p(r!) 
+    = \frac{r - s_p(r)}{p-1} \geq \frac{r}{p-1} - \floor{\log_p(r) + 1}.
 \end{equation*}
 \end{proof}
 
-\begin{thm} \label{thm:alpha2}
-Let $p = 2$ and suppose $u, v \in \ZZ^{n+1}$ are such that 
-$x^u, x^v \in B$ and $p (u_i + 1) \equiv v_i + 1 \pmod{d}$ 
-for all~$i$.  Then $\alpha_{u,v}$ is a $2$-adic integer and can be expressed as 
-\begin{equation*}
-\alpha_{u,v} = (-2)^{k(u)} \prod_{i=0}^n a_i^{(2 (u_i + 1) - (v_i + 1))/d} \biggl( \sum_{m,r} a_i^{r} \Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{-\floor{(m+1)/4}+\nu_m} \mu_m \biggr), 
-\end{equation*}
-where the sum in the $i$-th factor of the product is over all $m, r \geq 0$  
-that satisfy
-\[
-p(u_i+1)-(v_i+1)=d(m-pr).
-\]
-\end{thm}
-
-\begin{proof}
-The expression for $\alpha_{u,v}$ is an immediate consequence 
-of Theorem~\ref{thm:alpha}, Proposition~\ref{prop:mpr}, and 
-Definition~\ref{defn:mu2}. It remains to prove that 
-$\alpha_{u,v}$ is a $2$-adic integer.  Following Lemma~\ref{lem:mu2}, 
-it suffices to show that the valuation of the factor 
-\begin{equation} \label{eq:fr}
-f_r=\Bigl(\frac{u_i+1}{d}\Bigr)_r 2^{- \floor{(m+1)/4} + \nu_m}
-\end{equation}
-in each summand is nonnegative. Since
-\[
-\ord_{2} \Bigl(\frac{u_i+1}{d}\Bigr)_r \geq \ord_{2}(r!) = \ord_{2}(\floor{m/2}!),
-\] 
-we find that 
-\begin{equation} \label{eq:alpha2.1}
-\ord_{2}(f_r)
-\geq \ord_{2} \Bigl(\floor{\frac{m}{2}}!\Bigr) - \floor{\frac{m+1}{4}} + \nu_m.
-\end{equation}
-Applying Proposition~\ref{prop:rfac}, we see that for $m \geq 2$ the 
-right-hand side is bounded below by 
-\begin{equation*}
-\floor{\frac{m}{2}} - \floor{\frac{m+1}{4}} - \floor{\log_2(m)},
-\end{equation*}
-which is nonnegative whenever $m \geq 12$.  In the remaining 
-cases $m = 0, \dotsc, 11$, we explicitly verify that the 
-lower bound in~\eqref{eq:alpha2.1} is nonnegative.
-\end{proof}
-
-\begin{comment}
-\begin{rem}
-We observe that in Theorem~\ref{thm:alpha2} the exponent 
-$-\floor{(m+1)/4}+\nu_m$ is nonpositive for each value $m \geq 0$, 
-so at first sight it seems that the computation of the $f_r$ from
-\eqref{eq:fr} will suffer from precision loss. 
-However, we recall that $m = m(0) + 2r$, $m(0) \in \{0,1\}$, and noting that 
-$d$ is odd let $g_r = d^r f_r$ and $z = u_i + 1$ to temporarily simplify 
-our notation.  We now see that the sequence satisfies 
+\begin{prop} \label{prop:coefbound}
+For all integers $m \geq 0$ and $0 \leq i \leq n$,
 \begin{align*}
-g_0 & = 1, \\
-g_1 & = z, \\
-g_5 & = 2^{-2-m(0)} \bigl( z (z + d) (z + 2d) (z + 3d) (z + 4d) \bigr) \\
-g_r & = g_{r-2} \frac{(z + (r - 2)d)(z + (r - 1)d)}{2}
+\ord_p \Bigl( \sum_{j=0}^{\floor{m/p}} \frac{(p a_i^{p-1})^{\floor{m/p}-j}}{(m-pj)!j!} \Bigr) \geq \frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1}.
 \end{align*}
-for all remaining $r \geq 0$.  Since the numerator is an even integer, 
-it follows that this computation can be carried out without precision loss.
-\end{rem}
-\end{comment}
-
-\subsubsection{The case $p > 2$}
-
-\begin{defn} \label{defn:mup}
-Let $p >2$ be an odd prime and define a sequence 
-$\bigl(\mu_m^{(p)}\bigr)$ by 
-\begin{equation*}
-\mu_m^{(p)} = \sum_{j=0}^{\floor{m/p}} \frac{p^{\floor{m/p} - j}}{(m-pj)! j!}, 
-\end{equation*}
-where we write $\mu_m = \mu_m^{(p)}$ when the prime can be identified 
-from the context.
-\end{defn}
-
-\begin{lem} \label{lem:mup}
-$\mu_m \in \ZZ_p$ for all $m \geq 0$.
-\end{lem}
-
+\end{prop}
 \begin{proof}
-It is clear that $\mu_m \in \QQ$.  From Lemma~\ref{lem:lambdam} 
-we observe that $\lambda_m = \pi^m p^{- \floor{m/p}} \mu_m$, and 
-using the bound~\eqref{eqn:dworkbound}, it follows that 
-\begin{equation*}
-\ord_p (\mu_m) \geq \frac{p-1}{p^2} m + \floor{\frac{m}{p}} - \frac{m}{p-1}.
-\end{equation*}
-Let us write $m = q p + r$ with $0 \leq r \leq p-1$.  As the valuation 
-of $\mu_m$ is an integer, it suffices to show that, for $q \geq 0$, 
-\begin{equation*}
-\frac{p-1}{p} q + q - \frac{q p + p - 1}{p - 1} > -1,
-\end{equation*}
-which is equivalent to $p^2 - 3p + 1 > 0$, and this holds true 
-provided that $p > 2$.
+Let $\QQ_p(\pi)$ denote the totally ramified extension of $\QQ_p$ with $\pi^{p-1} = -p$ and extend the $p$-adic valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}. 
+Expanding
+\begin{align*}
+\exp(\pi a_i(x-x^p)) &= \sum_{m=0}^{\infty} \lambda_m x^m, \\
+\intertext{one checks easily that, for all $m \geq 0$,}
+\lambda_m &= \sum_{j=0}^{\floor{m/p}} \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{(m-pj)!j!} \\
+          &= (-1)^{\floor{m/p}} (\pi a_i)^{m-(p-1)\floor{m/p}} \Bigl( \sum_{j=0}^{\floor{m/p}} \frac{(p a_i^{p-1})^{\floor{m/p}-j}}{(m-pj)!j!} \Bigr).
+\end{align*}
+Therefore, it suffices to show that $\ord_p(\lambda_m) \geq m (p-1)/p^2$. This is well-known in the case $a_i=1$,
+but the proof from \citep[Lemma 4.1]{dwork1962} remains valid when $a_i \in \ZZ_p^{\times}$. 
 \end{proof}
 
-\begin{thm} \label{thm:alphap}
-Let $p > 2$ and suppose that $u, v \in \ZZ^{n+1}$ are such 
-that $x^u, x^v \in B$ and 
-$p (u_i + 1) \equiv v_i + 1 \pmod{d}$ for all~$i$. Then 
-\begin{equation*}
-\alpha_{u,v} = (-p)^{k(u)} \prod_{i=0}^n 
-    a_i^{(p (u_i + 1) - (v_i + 1))/d} \biggl( \sum_{m,r} a_i^{(p-1)r}
-    \Bigl(\frac{u_i+1}{d}\Bigr)_r \mu_m \biggr)
-\end{equation*}
-where the sum in the $i$-th factor of the product is over all $m, r \geq 0$  
-that satisfy
-\[
-p(u_i+1)-(v_i+1)=d(m-pr).
-\]
-In particular, we have that $\alpha_{u, v}$ is a $p$-adic integer. 
+\begin{thm} Let $\alpha_{u,v}$ be defined as in Definition~\ref{defn:alpha}. Then
+\begin{align*}
+0 \leq \ord_p(\alpha_{u,v}) \leq \ord_p\Bigl( \frac{(k(v)-1)!}{(k(u)-1)!} \Bigr)+(n-k(u))+\delta,
+\end{align*}
+where $\delta$ is defined as in Definition~\ref{defn:delta}. 
 \end{thm}
 
 \begin{proof}
-This is an immediate consequence of Theorem~\ref{thm:alpha}, 
-Proposition~\ref{prop:mpr}, Definition~\ref{defn:mup} and 
-Lemma~\ref{lem:mup}.
+First, we prove the left-hand inequality. By Lemma~\ref{lem:mpr}, Proposition~\ref{prop:rfac} 
+and Proposition~\ref{prop:coefbound}, it suffices to show that
+\begin{align} \label{eq:mp}
+\frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1} + \ord_p\Bigl(\floor{\frac{m}{p}}!\Bigr)>-1,
+\end{align}
+for all integers $m \geq p$. From Proposition~\ref{prop:rfac} and the fact that $m \geq p \floor{m/p}$, it follows that
+\begin{align*}
+\frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1} + \ord_p\Bigl(\floor{\frac{m}{p}}!\Bigr) \geq \frac{p-1}{p} \floor{\frac{m}{p}} - \floor{\log_p\Bigl(\floor{\frac{m}{p}}\Bigr)+1}.
+\end{align*}
+One checks easily that the right-hand side is greater than $-1$, unless we have $p=2$ and $m=4,5$. However, in these cases~\eqref{eq:mp} still holds, as can be seen by direct
+substitution.
+
+Next, we prove the right-hand inequality. Recall from Corollary~\ref{cor:delta} that the valuations 
+of the entries of the matrix~$\Phi_0$ are bounded below by $-\delta$. Thus by Theorem~\ref{thm:01-03-diagfrob}, 
+we have
+\begin{equation*}
+-\delta \leq \ord_p\Bigl(\frac{(k(v) - 1)!}{(k(u) - 1)!} \Bigr)+ (n-k(u)) - \ord_p( \alpha_{u,v}),
+\end{equation*}
+from which the result follows.
 \end{proof}
 
-\subsection{Estimates}
-
-If we want to use Theorem~\ref{thm:01-03-diagfrob} to compute the matrix 
-$\Phi_0$ to $p$-adic precision~$N_{\Phi_0}$, we have to compute the elements
-$(k(u)-1)!\alpha_{u,v}$ to a somewhat higher precision~$N'_{\Phi_0}$ than just
-$N_{\Phi_0}-n$ because of the loss of precision in computing their inverses. Note 
-that if a $p$-adic number $x$ is known to precision~$N$, then its inverse 
-is in general only known to precision $N-2\ord_p(x)$. Therefore, we need an 
-upper bound on the $p$-adic valuation of the elements $(k(u)-1)!\alpha_{u,v}$.
-
-\begin{prop}
-The valuation of $(k(u)-1)! \alpha_{u,v}$ satisfies
-\begin{equation*}
-\ord_p\bigl((k(u)-1)! \alpha_{u,v}\bigr) 
-    \leq \ord_p\bigl((n-1)!\bigr) + n + \delta,
-\end{equation*}
-where $\delta$ is defined as in Definition~\ref{defn:delta}. 
-\end{prop}
-
-\begin{proof}
-Recall from Corollary~\ref{cor:delta} that the valuations 
-of the entries of the matrix~$\Phi_0$ are bounded from below by $-\delta$. 
-Thus by Theorem~\ref{thm:01-03-diagfrob}, 
-\begin{equation*}
--\delta \leq \ord_p\bigl((k(v)-1)!\bigr) + n 
-           - \ord_p\bigl((k(u)-1)! \alpha_{u,v}\bigr),
-\end{equation*}
-and since $k(v) \leq n$, the result follows.
-\end{proof}
-
-\begin{cor} \label{cor:Ntilde}
-In order to compute the matrix $\Phi_0$ to $p$-adic precision $N_{\Phi_0}$, 
-it is sufficient to compute the elements $(k(u)-1)!\alpha_{u,v}$ to $p$-adic 
-precision
-\begin{equation*}
-N'_{\Phi_0} = N_{\Phi_0} - n + 2 \bigl(\ord_p\bigl((n-1)!\bigr)+n+\delta\bigr).
-\end{equation*}
+\begin{cor} \label{cor:NPhi0prime}
+In order to compute the matrix $\Phi_0$ to $p$-adic precision $N_{\Phi_0}$, it is sufficient to
+compute the $\alpha_{u,v}$ to $p$-adic precision 
+\[
+N_{\Phi_0}' = N_{\Phi_0} + (n-k(u)) + \ord_p\Bigl(\frac{(k(v) - 1)!}{(k(u) - 1)!} \Bigr) + \delta.
+\]
 \end{cor}
 
-Up to this point, the sums over $m,r$ in our expressions 
-for $\alpha_{u,v}$ have been infinite sums.  We now present 
-a convergence result that will allow us to derive a finite 
-expression for $(k(u)-1)!\alpha_{u,v}$ to precision $N'_{\Phi_0}$.
-We start with an elementary lemma.
+Note that the sums over $m,r$ in Definition~\ref{defn:alpha} consist of
+infinitely many terms.  Below we derive a finite expression for $\alpha_{u,v}$ 
+to precision $N'_{\Phi_0}$. Let us start with an elementary lemma.
 
 \begin{lem} \label{lem:log}
 Given integers $\alpha, \beta \geq 2$ and defining 
@@ -1716,12 +1584,10 @@ $\beta + \log_{\alpha}(\beta) + 1 \leq 2 \beta \leq \alpha \beta$,
 which upon taking logarithms and rearranging yields the result.
 \end{proof}
 
-
 \begin{prop} \label{prop:MR}
-In order to compute $(k(u)-1)!\alpha_{u,v}$ to $p$-adic precision~$N'_{\Phi_0}$, 
-it suffices to restrict the sums in Theorem~\ref{thm:alpha2} or 
-Theorem~\ref{thm:alphap} to pairs $m,r \geq 0$ such that $m \leq \mathcal{M}$, 
-or equivalently $r \leq \mathcal{R}$, where 
+In order to compute $\alpha_{u,v}$ to $p$-adic precision~$N'_{\Phi_0}$, 
+it suffices to restrict the sums in Theorem~\ref{defn:alpha} to pairs $m,r \geq 0$ 
+such that $m \leq \mathcal{M}$, or equivalently $r \leq \mathcal{R}$, where 
 \begin{align*}
 \mathcal{M} &= \ceil{\frac{p^2}{p-1}(N'_{\Phi_0}+\log_p(N'_{\Phi_0}+3)+4)} - 1,
 &\mathcal{R} &= \floor{\mathcal{M}/p}.
@@ -1729,29 +1595,19 @@ or equivalently $r \leq \mathcal{R}$, where
 \end{prop}
 
 \begin{proof}
-We know from the proofs of Theorem~\ref{thm:alpha2} and 
-Theorem~\ref{thm:alphap} that the terms in the sums over $m,r$ are 
-$p$-adically integral. Moreover, the valuations of the terms with 
-$r > 0$ satisfy
+By Proposition~\ref{prop:rfac} and Proposition~\ref{prop:coefbound}, we have
 \begin{align*}
-\ord_p \biggl( \Bigl( \frac{u_i+1}{d} \Bigr)_r 
-               \sum_{j=0}^{\floor{m/p}} \frac{p^{r-j}}{(m-pj)!j!} \biggr) 
-&\geq \frac{r}{p-1} - \floor{\log_p(r)+1} 
-      + \frac{p-1}{p^2} m + \floorBig{\frac{m}{p}} - \frac{m}{p-1} \\
-&\geq \Bigl( \frac{p-1}{p^2} \Bigr) m - \log_p(m) - 1,
+\ord_p \Bigl( \Bigl( \frac{u_i+1}{d} \Bigr)_r \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \Bigr) &\geq  \frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1}+\frac{r}{p-1}-\floor{\log_p(r)+1} \\
+													  &\geq  \frac{p-1}{p^2}m - \log_p(m)-1.
 \end{align*}
-by the bound~\eqref{eqn:dworkbound}, Lemma~\ref{lem:lambdam}, 
-Proposition~\ref{prop:mpr}, and Proposition~\ref{prop:rfac}. 
-Therefore, it is sufficient to restrict the sums in Theorem~\ref{thm:alpha2} 
-or Theorem~\ref{thm:alphap} to $m,r \geq 0$ for which 
-\begin{equation*}
-\frac{p-1}{p^2} m - \log_p(m) - 1 < N'_{\Phi_0}.
-\end{equation*}
-Note that this includes all terms with $r = 0$.
+Therefore, it is sufficient to restrict the sums in Definition~\ref{defn:alpha} to $m,r \geq 0$ for which
+\begin{align*}
+\frac{p-1}{p^2}m - \log_p(m) -1 < N'_{\Phi_0}. 
+\end{align*}
+We can now apply Lemma~\ref{lem:log} with $y=m(p-1)/p^2$, $\alpha=p$ and $\beta=N'_{\Phi_0}+3$ to obtain the result.
 \end{proof}
 
-Finally, we formalise the procedure for computing 
-the entries of~$\Phi_0$ to $p$-adic precision~$N_{\Phi_0}$ in 
+Finally, we formalise the procedure for computing the entries of~$\Phi_0$ to $p$-adic precision~$N_{\Phi_0}$ in 
 Algorithm~\ref{alg:Diagfrob}.
 
 \begin{algorithm}
@@ -1767,40 +1623,20 @@ Algorithm~\ref{alg:Diagfrob}.
          precision $N_{\Phi_0}$.
 \Procedure{DiagFrob}{$P_0,N_{\Phi_0}$}
 \State \begin{compactenum}[{\hspace{1em}} 1.] \vspace{-1.24em}
-\item Determine $N'_{\Phi_0}$ from Corollary~\ref{cor:Ntilde}, and 
-      $\mathcal{M}$,$\mathcal{R}$ from Proposition~\ref{prop:MR}. 
-\item Compute the sequences $(d^{-r})_{r=0}^{\mathcal{R}}$, and 
-      $(\mu_{m})_{m=0}^{\mathcal{M}}$ to $p$-adic precision~$N'_{\Phi_0}$.
+\item Determine $N'_{\Phi_0}$ from Corollary~\ref{cor:NPhi0prime}. 
 \item Let $\Phi_0 \in M_{b \times b}(\QQ_p)$ be the zero matrix.
 \item[] \textbf{for} $x^u \in B$ \textbf{do} 
 \item[] \begin{compactenum}[{\hspace{1em}} 1.]
         \item Determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$.
-        \item Compute $x_1 \gets (-1)^{k(u)+k(v)} (k(v)-1)! p^n$ as an exact integer.
-        \item Compute $x_2 \gets (k(u) - 1)! \alpha_{u,v}$ to $p$-adic 
-              precision $N'_{\Phi_0}$ using Theorem~\ref{thm:alpha2} or 
-              Theorem~\ref{thm:alphap}.
-        \item Compute $x_2^{-1}$ to $p$-adic precision $N_{\Phi_0}-n$.
-        \item Compute $(\Phi_0)_{u,v} \gets x_1 x_2^{-1}$ to $p$-adic precision $N_{\Phi_0}$.
+        \item Compute $\alpha_{u,v}$ to $p$-adic 
+              precision $N'_{\Phi_0}$ using Proposition~\ref{prop:MR}.
+        \item $(\Phi_0)_{u,v} \gets (-1)^{k(v)} \bigl( \frac{ (k(v)-1)!}{(k(u)-1)!} \bigr) p^{n-k(u)} \alpha_{u,v}^{-1}$ with $p$-adic precision $N_{\Phi_0}$.
       \end{compactenum}   
  \item \textbf{return} $\Phi_0$      
 \end{compactenum}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-
-\begin{rem} \label{rem:mup}
-The expressions for $\mu_m$ can be computed using integer arithmetic 
-modulo~$p^{N'_{\Phi_0}}$ via 
-\begin{equation*}
-\mu_m^{(p)} = \begin{cases}
-\frac{1}{m!} \sum_{j=0}^{\floor{m/2}} 2^{\floor{3m/4} - j} \frac{m!}{(m-2j)! j!}
-    & \text{if $p = 2$, $m \neq 3, 7$,} \\
-\frac{1}{m!} \sum_{j=0}^{\floor{m/p}} p^{\floor{m/p} - j} \frac{m!}{(m-pj)! j!}
-    & \text{if $p$ is odd,}
-\end{cases}
-\end{equation*}
-with only one $p$-adic inversion as all summands are integers. 
-\end{rem}
 
 \begin{assump} \label{assump:diag}
 From now on we assume that our family of 
@@ -1876,7 +1712,7 @@ It follows from~\citep[Theorem~{18.3.3}]{Kedlaya2010} that
 \begin{equation*}
 \ord_p(C_i) \geq \bigl( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \bigr) \ceil{\log_p(i)},
 \end{equation*}
-but from Corollary~\ref{cor:delta} we know that $\ord_p(\Phi) \geq -\delta$ and 
+but from Corollary~\ref{cor:delta} we already know that $\ord_p(\Phi) \geq -\delta$ and 
 $\ord_p(\Phi^{-1}) \geq -\delta-(n-1)$.
 \end{proof}
 
@@ -2779,7 +2615,7 @@ and $N'_{C^{-1}}$ in Theorem~\ref{thm:Ni} are in $\SoftOh(ad^n \log(d_t))$,
 noting that the logarithms that appear there are to base~$p$. Finally, the 
 remaining $p$-adic precisions $N'_M$ and $N'_{\Phi}$ are also 
 $\SoftOh(a d^n \log(d_t))$ by Remark~\ref{rem:precgm} and 
-Corollary~\ref{cor:Ntilde}, respectively.
+Corollary~\ref{cor:NPhi0prime}, respectively.
 \end{proof}
 
 We now analyse the computation of the connection matrix~$M$.
@@ -2828,46 +2664,38 @@ Next we consider the computation of the matrix $\Phi_0$.
 \begin{prop} \label{prop:complexityPhi0}
 The computation of the matrix~$\Phi_0$ with Algorithm~\ref{alg:Diagfrob} requires
 \begin{align*}
-\mbox{time: }  & \SoftOh\bigl(a^3 p d^{3n} \log^3(d_t)\bigr), \\
-\mbox{space: } & \SoftOh\bigl(a^2 \log(p) d^{2n} \log^2(d_t)\bigr).
+\mbox{time: }  & \SoftOh\bigl(a^3 p d^{4n} \log^3(d_t)\bigr), \\
+\mbox{space: } & \SoftOh\bigl(a \log(p) d^{2n} \log(d_t)\bigr).
 \end{align*}
 \end{prop}
 
 \begin{proof}
-We first consider the 
-sequences $(d^{-r})_{r=0}^{\mathcal{R}}$ and $(\mu_m)_{m=0}^{\mathcal{M}}$. 
-In Proposition~\ref{prop:MR}, we find that 
-$\mathcal{M} \in \SoftOh(p N'_{\Phi_0})$ and 
-$\mathcal{R} \in \SoftOh(N'_{\Phi_0})$.  Thus, the sequence 
-$(d^{-r})_{r=0}^{\mathcal{R}}$ can be computed in time 
-$\SoftOh((N'_{\Phi_0})^2 \log(p))$.  Note that we do not 
-need all elements of the sequence $( \mu_{m} )_{m=0}^{\mathcal{M}}$, but only 
-$\BigOh\bigl( \min \{ 1,(n/p) \} \mathcal{M} \bigr) \subset \SoftOh(N'_{\Phi_0})$ 
-of them.  Every $\mu_m$ is a sum of $\SoftOh(N'_{\Phi_0})$ terms, each 
-of which can be computed from the previous one in $\BigOh(p)$ operations in 
-$\ZZ/p^{N'_{\Phi_0}}\ZZ$.  Therefore, the required subsequence can be 
-computed in time $\SoftOh\bigl((N'_{\Phi_0})^3 p\bigr)$.
-
-Similarly, the computation of $\alpha_{u,v}$ for all of the 
-$b \in \BigOh(d^n)$ basis vectors can be carried out in time 
-$\SoftOh\bigl(d^n (N'_{\Phi_0})^2 \log(p)\bigr)$.  Hence the whole computation 
-takes time 
+In Proposition~\ref{prop:MR}, we have $\mathcal{R} \in \SoftOh(N'_{\Phi_0})$.
+In Definition~\ref{defn:alpha}, the sums
+\begin{equation*} \label{eqn:ifactor}
+\Bigl(\frac{u_i+1}{d} \Bigr)_r \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!}
+\end{equation*}
+consist of $\BigOh(\mathcal{R})$ terms. Note that each term can be computed from the previous one in $\BigOh(p)$ operations 
+in $\ZZ_p$. For each $r$, the sum can therefore be computed in time $\BigOh(p \mathcal{R} N'_{\Phi_0})$. We have to consider
+$\BigOh(\mathcal{R})$ values of $r$, so each $\alpha_{u,v}$ can be computed in time 
 \[
-\SoftOh\bigl((N'_{\Phi_0})^3 p\bigr) 
-    \subset \SoftOh\bigl(a^3 p d^{3n} \log^3(d_t)\bigr).
+\SoftOh\bigl(np \mathcal{R}^2 N'_{\Phi_0}\bigr) \subset \SoftOh\bigl(a^3 p d^{3n} \log^3(d_t)\bigr).
 \]
-The sequence $(d^{-r})_{r=0}^{\mathcal{R}}$ and the 
-$\SoftOh(N'_{\Phi_0})$ elements that we need from the sequence 
-$(\mu_{m})_{m=0}^{\mathcal{M}}$ can be stored in space 
-$\SoftOh\bigl((N'_{\Phi_0})^2 \log (p)\bigr) \subset \SoftOh\bigl(a^2 \log(p) d^{2n} \log^2(d_t)\bigr)$.
+We need to compute $b \in \BigOh(d^n)$ of these $\alpha_{u,v}$, so the computation of $\Phi_0$
+takes time $\SoftOh(a^3 p d^{4n} \log^3(d_t))$. 
+
+The required space is dominated by the size of the output, which is
+\[
+\SoftOh\bigl(b \log(p) N'_{\Phi_0}\bigr) \subset \SoftOh\bigl(a \log(p) d^{2n} \log(d_t)\bigr). \qedhere
+\]
 \end{proof}
 
 \begin{rem}
 Note that the time complexity in Proposition~\ref{prop:complexityPhi0} 
 is quasilinear in~$p$, while in the work of Lauder~\citep{Lauder2004a} 
 it is quasiquadratic.  The main reason for this is that Lauder computed 
-in the unramified extension~$\QQ_p(\pi)$ of degree~$p$, where a single 
-multiplication already takes time quasilinear in~$p$.  It will turn out 
+in the totally ramified extension~$\QQ_p(\pi)$ with $\pi^{p-1}=-p$, 
+where a single multiplication already takes time quasilinear in~$p$.  It will turn out 
 that this crucial improvement also decreases the overall time complexity 
 of the deformation method from being quasiquadratic to quasilinear in~$p$.
 
@@ -2879,7 +2707,7 @@ entire deformation method.  We address this in the following proposition.
 \end{rem}
 
 \begin{prop} \label{prop:compPhi0}
-The matrix~$\Phi_0$ can be computed to the required precision in 
+Alternatively, the matrix~$\Phi_0$ can be computed in 
 \begin{align*}
 \mbox{time: }  &\SoftOh\bigl(a^2 p d^{2n} (p + d^n) \log^2(d_t) \bigr), \\
 \mbox{space: } &\SoftOh\bigl(a^2 p^2 d^{2n} \log^2(d_t)\bigr).
@@ -2887,24 +2715,34 @@ The matrix~$\Phi_0$ can be computed to the required precision in
 \end{prop}
 
 \begin{proof}
-The key idea is to slightly modify Algorithm~\ref{alg:Diagfrob} 
-and compute the $\BigOh(d^n)$ terms $\alpha_{u,v}$ directly from 
-Definition~\ref{defn:alpha}.  We first observe that the valuation 
-of the summands in the definition can be bounded by 
-$\ord_p\bigl(\lambda_m ((u_i+1)/d)_r (-1)^r \pi^{-r} a_i^{m-r}\bigr) \geq -1/2$. 
-As the only term with negative valuation is $\pi^{-r}$ and 
-$\mathcal{R} \in \BigOh(N'_{\Phi_0})$, it suffices 
-to compute the terms $\lambda_m$ and $d^{-r}$ to $p$-adic 
-precision~$\BigOh(N'_{\Phi_0})$.  This is where the main 
-difference occurs:  we compute the sequence 
-$(\lambda_m)_{m=0}^{\mathcal{M}}$ via the series expansion of 
-$\exp \pi (z - z^p)$ in $\QQ_p(\pi)[[z]]$ modulo $z^{\mathcal{M}+1}$, 
-which can be done in $\SoftOh(\mathcal{M})$ operations in $\QQ_p(\pi)$ 
-following Brent~\citep{Brent1976}.
+In Proposition~\ref{prop:MR}, we have $\mathcal{M} \in \SoftOh(pN'_{\Phi_0})$.
+Let $\QQ_p(\pi)$ denote the totally ramified extension of $\QQ_p$ with $\pi^{p-1}=-p$.
+Recall from the proof of Proposition~\ref{prop:coefbound} that in Definition~\ref{defn:alpha},
+up to a factor $(-1)^r (\pi a_i)^{m-(p-1)r}$, the sum
+\begin{align*}
+\sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!}
+\end{align*}
+is equal to the coefficient of $x^m$ in the power series expansion of $\exp(\pi a_i(x-x^p))$. However,
+the power series expansion of $\exp(\pi a_i(x-x^p))$ modulo $x^{\mathcal{M}+1}$ can be computed in 
+$\SoftOh(\mathcal{M})$ operations in $\QQ_p(\pi)$ following Brent~\citep{Brent1976}. Since
+a single operation in $\QQ_p(\pi)$ takes time $\SoftOh(pN'_{\Phi})$, precomputing these
+power series expansions for all $0 \leq i \leq n$ takes time 
+\[
+\SoftOh\bigl(n p^2 (N'_{\Phi_0})^2\bigr) \subset \SoftOh\bigl(a^2 p^2 d^{2n} \log^2(d_t)\bigr).
+\]
+Each $\alpha_{u,v}$ can now be computed as in Proposition~\ref{prop:complexityPhi0} in time 
+\[
+\SoftOh\bigl(p(N'_{\Phi_0})^2 \bigr) \subset \SoftOh\bigl(a^2 p d^{2n} \log^2(d_t)\bigr),
+\]
+so computing of all $b \in \BigOh(d^n)$ elements $\alpha_{u,v}$ takes time 
+$\SoftOh(a^2 p^2 d^{3n} \log^2(d_t))$. Hence $\Phi_0$
+can be computed in time $\SoftOh(a^2 p d^{2n} (p + d^n) \log^2(d_t))$.
 
-The remaining modifications to Algorithm~\ref{alg:Diagfrob} are 
-straightforward and the proof of the proposition can be completed 
-as before.
+The required space is dominated by storing the power series expansions of $\exp(\pi a_i(x-x^p))$ modulo $x^{\mathcal{M}+1}$ for $0 \leq i \leq n$ and
+is there given by
+\[
+\SoftOh\bigl(n \mathcal{M} p N'_{\Phi_0}\bigr) \subset \SoftOh\bigl(a^2 p^2 d^{2n} \log^2(d_t)\bigr). \qedhere
+\]
 \end{proof}
 
 We now consider the computation of the power series expansion of the 
@@ -3056,7 +2894,7 @@ logarithm and $\omega$ the least exponent for matrix multiplication.
 The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
 \begin{align*}
 \mbox{time: }  &\SoftOh\Bigl( 
-                a^3 p d^{3n} + 
+                a^3 p d^{4n} + 
                 a^2 a' p d^{n(\omega+4)} e^{2n} d_t^2+
                 aa' \bigl(d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n} e^{3n}\bigr) d_t 
                 \Bigr), \\
