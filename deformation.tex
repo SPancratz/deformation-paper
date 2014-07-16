@@ -2383,7 +2383,7 @@ Then for all $1 \leq i \leq b$, we have
  
 \begin{proof} 
 Note that in this case $\delta=0$ and hence that $\ord_p(\Phi_{\tau}) \geq 0$. 
-By a theorem of Mazur~\citep{Mazur1972}, the map $p^{-1} \Frob_p$ 
+By a result of Mazur~\citep[p. 665-666]{Mazur1972}, the map $p^{-1} \Frob_p$ 
 sends $(H_i)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ into $p^i \Lambda_{\tau,crys}$, 
 where $\Lambda_{\tau,crys}$ is defined as in the proof of 
 Theorem~\ref{thm:deltabound}. This implies that the so called Hodge polygon 
@@ -2564,7 +2564,7 @@ operations.  We let $\omega$ denote the least exponent for matrix
 multiplication, so that two $k \times k$ matrices can be multiplied 
 in $\BigOh(k^{\omega})$ ring operations. An invertible $k \times k$ matrix 
 can then be inverted in $\BigOh(k^{\omega})$ ring operations as well. 
-Moreover, it is known that $2 \leq \omega \leq 2.3727$.  Finally, we 
+Moreover, it is known~\citep{Williams2012} that $2 \leq \omega \leq 2.3729$.  Finally, we 
 point out that the characteristic polynomial of a matrix can be 
 computed in $\BigOh(b^{\omega} \log(b))$ field operations using 
 an algorithm of Keller-Gehrig~\citep{KellerGehrig1985}.
@@ -3000,7 +3000,8 @@ half of the coefficients of the polynomial $\chi(T)$ directly.
 \noindent
 \textit{Prime $p=2$.} 
 We take $\log_p(\mathfrak{q})=50$ and let $\tau \in \FF_{\mathfrak{q}}$ be 
-a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$.  We first 
+a zero of the Conway polynomial of $\FF_{\mathfrak{q}}/\FF_p$, i.e. the 
+standard irreducible polynomial used to represent this extension.  We first 
 compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=153$.  As the roots of~$r$ are 
 $2$-adic integers and distinct  modulo~$2$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=320$ at all 
@@ -3117,7 +3118,7 @@ Additionally, we should mention that Gerkmann does not include timings for part
 of his computations.  For example, he omits the time that is required for the 
 computation of the $p$-adic precision parameter that he calls $\delta$, which 
 involves solving $b^2$~differential equations similar to the one for the matrix~$C$. 
-Moreover, it appears that there are mistakes in the precision analysis, e.g.\ 
+Moreover, it appears that there are minor errors in the precision analysis, e.g.\ 
 the final $p$-adic precision is not sufficient to recover the exact zeta function. 
 Finally, the polynomial~$\chi(T)$ provided by Gerkmann for this example does 
 not satisfy Theorem~\ref{thm:weildeligne}, so cannot be correct.
@@ -3152,7 +3153,8 @@ is $\{1,2\}$ there.
 \subsubsection{Precisions}
 
 We take $a=\log_{11}(\mathfrak{q})=10$ and let $\tau$ be a zero of the Conway polynomial of 
-$\FF_{\mathfrak{q}}/\FF_{11}$. We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.
+$\FF_{\mathfrak{q}}/\FF_{11}$. 
+We first compute $\delta=0$ and $N_{\Phi}=N_{\Phi}'=31$.
 Since the zeros of $r$ are $11$-adic integers and different modulo $11$, we can apply 
 Theorem~\ref{thm:KedlayaTuitman} everywhere. We find $\theta_z=352$ at the zeros of $r_2$
 and $\theta_{\infty}=9$ at $\infty$. At the residue disk of a zero $z$ of $r_1$, noting that 
