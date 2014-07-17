@@ -1705,7 +1705,7 @@ in Definition~\ref{defn:sigma}.
 As we saw in Section~\ref{sec:Background}, these matrices satisfy 
 the differential equation
 \begin{align} \label{eq:Phi}
-\Bigl(\frac{d}{dt} + M\Bigr) \Phi &= p t^{p-1} \Phi \sigma(M), &\Phi(0)& = \Phi_0, 
+\left(\frac{d}{dt} + M\right) \Phi &= p t^{p-1} \Phi \sigma(M), &\Phi(0)& = \Phi_0, 
 \end{align}
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action 
 of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$. Our goal is the computation of 
@@ -1732,14 +1732,14 @@ We let $\delta$ be defined as in Definition~\ref{defn:delta}.
 \begin{thm} \label{thm:valC}
 For all $i \geq 1$, we have
 \begin{equation*}
-\ord_p(C_i) \geq - \bigl(2 \delta + (n - 1)\bigr) \ceil{\log_p(i)}.
+\ord_p(C_i) \geq - \left(2 \delta + (n - 1)\right) \ceil{\log_p(i)}.
 \end{equation*}
 \end{thm}
 
 \begin{proof}
 It follows from~\citep[Theorem~{18.3.3}]{Kedlaya2010} that
 \begin{equation*}
-\ord_p(C_i) \geq \bigl( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \bigr) \ceil{\log_p(i)},
+\ord_p(C_i) \geq \left( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \right) \ceil{\log_p(i)},
 \end{equation*}
 but from Corollary~\ref{cor:delta} we already know that $\ord_p(\Phi) \geq -\delta$ and 
 $\ord_p(\Phi^{-1}) \geq -\delta-(n-1)$.
@@ -1749,7 +1749,7 @@ $\ord_p(\Phi^{-1}) \geq -\delta-(n-1)$.
 In~\citep[Remark~18.3.4]{Kedlaya2010} Kedlaya also includes the bound
 \begin{equation*}
 \ord_p(C_i) \geq (b - 1) \ord_p(M) 
-            + \bigl( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \bigr) \floor{\log_p(i)},
+            + \left( \ord_p(\Phi) + \ord_p(\Phi^{-1}) \right) \floor{\log_p(i)},
 \end{equation*}
 which can sometimes be used to improve Theorem \ref{thm:valC} 
 slightly, for example when $\ord_p(M)$ is nonnegative.
@@ -1760,7 +1760,7 @@ The bound from Theorem~\ref{thm:valC}
 also applies to the inverse matrix~$C^{-1}$, as this matrix satisfies 
 the dual differential equation 
 \begin{align} \label{eq:01-GMDE-Dual}
-\Bigl(\frac{d}{dt} - M^t\Bigr) \bigl(C^{-1}\bigr)^t &= 0, &C^{-1}(0)& = I,
+\left(\frac{d}{dt} - M^t\right) \left(C^{-1}\right)^t &= 0, &C^{-1}(0)& = I,
 \end{align}
 that carries a Frobenius structure 
 given by the matrix~$(\Phi^{-1})^t$.
@@ -1785,7 +1785,7 @@ such that $\ord_p(\tilde{M}-M) \geq N_M$, and suppose that
 $\tilde{C}=\sum_{i=0}^{\infty} \tilde{C}_i t^i$ satisfies the
 differential equation
 \begin{align*}
-\Bigl(\frac{d}{dt}+\tilde{M} \Bigr) \tilde{C}&=0, &\tilde{C}(0)=I&.
+\left(\frac{d}{dt}+\tilde{M} \right) \tilde{C}&=0, &\tilde{C}(0)=I&.
 \end{align*}
 Then $\ord_p(\tilde{C}_i-C_i) \geq N_C$ for all $i < K$.
 \end{prop}
@@ -1793,16 +1793,16 @@ Then $\ord_p(\tilde{C}_i-C_i) \geq N_C$ for all $i < K$.
 \begin{proof}
 From the expressions
 \begin{align*}
-C(t)&=\exp\Bigl(- \int_{0}^t M(s) ds\Bigr), &
-\tilde{C}(t)&=\exp\Bigl(-\int_{0}^t \tilde{M}(s) ds\Bigr),
+C(t)&=\exp\left(- \int_{0}^t M(s) ds\right), &
+\tilde{C}(t)&=\exp\left(-\int_{0}^t \tilde{M}(s) ds\right),
 \end{align*}
 it follows that
 \begin{equation} \label{eq:CtildeminusC}
-\tilde{C}(t) - C(t) = C(t) \Bigl( \exp \Bigl( \int_{0}^t \bigl( \tilde{M}(s)-M(s) \bigr) ds \Bigr)- I \Bigr).
+\tilde{C}(t) - C(t) = C(t) \left( \exp \left( \int_{0}^t \left( \tilde{M}(s)-M(s) \right) ds \right)- I \right).
 \end{equation}
 Since $\ord_p(\tilde{M}-M) \geq N_M$, we obtain
 \begin{equation*}
-\ord_p \Bigl( \overline{\frac{1}{i!} \Bigl(\int_{0}^t \bigl( \tilde{M}(s)-M(s) \bigr) ds \Bigr)^i } \Bigr) \geq 
+\ord_p \left( \overline{\frac{1}{i!} \left(\int_{0}^t \left( \tilde{M}(s)-M(s) \right) ds \right)^i } \right) \geq 
 N_C + (2 \delta + n-1) \ceil{\log_p(K-1)}
 \end{equation*}
 for all $1 \leq i \leq K-1$, where we have used that 
@@ -1812,7 +1812,7 @@ Theorem~\ref{thm:valC}, we already know that
 \ord_p(\overline{C}) \geq -(2 \delta + n-1) \ceil{\log_p(K-1)}.
 \] 
 From these two inequalities and Equation~\eqref{eq:CtildeminusC}, we 
-deduce that $\ord_p(\overline{\tilde{C}-C}) \geq N_C$.
+deduce $\ord_p(\overline{\tilde{C}-C}) \geq N_C$. 
 \end{proof}
 
 Now we explain how to compute the solution $C$ to 
@@ -1823,9 +1823,6 @@ We can write $M = G/r$, with
 $G = \sum_{i=0}^{\deg(G)} G_i t^i \in M_{b \times b}(\QQ_q[t])$ 
 and $r = \sum_{i=0}^{\deg(r)} r_i t^i \in \ZZ_q[t]$ a divisor of the 
 polynomial~$R$ defined in Definition~\ref{defn:resultant}. 
-% TODO small problem, if M is computed to some p-adic precision, the poles 
-% are not determined exactly, so R and r etc. should be computed to infinite 
-% precision?? 
 Note that the degree of~$r$ might be smaller than the degree 
 of~$R$, which will speed up our computations. By Assumption~\ref{assump:diag}, 
 we have $r(0) \neq 0 \bmod{p}$, so in particular $r(0) \neq 0$.  
@@ -1839,9 +1836,9 @@ which is clearly equivalent to
 Equation~\eqref{eq:01-GMDE-Homogenous}, using the following recursion:  
 \begin{align} \label{eq:recursiondifeq}
 C_0 &= I, \nonumber \\
-C_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
+C_{i+1} &= \frac{-1}{r_0 (i+1)} \left(
     \sum_{j=\max{\{0,i-\deg(G)\}}}^i G_{i-j} C_j + 
-    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \biggr).
+    \sum_{j=\max{\{0,i-\deg(r)\}}+1}^i r_{i-j+1} (j C_j) \right).
 \end{align}
 Again we will only carry out this computation to some finite $p$-adic 
 working precision~$N'_C$, and if we want $C$ to be correct to $p$-adic 
@@ -1852,12 +1849,12 @@ Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be
 significantly improved using Theorem~\ref{thm:valC}, as we will now show. 
 
 Let $\tilde{C}=\sum_{i=0}^{\infty} \tilde{C}_i t^i$ denote an 
-approximation to $C$ computed using the approximate recursion:  
+approximation to $C$ obtained using the approximate recursion:  
 \begin{align*}
 \tilde{C}_0 &= I, \\
-\tilde{C}_{i+1} &= \frac{-1}{r_0 (i+1)} \biggl(
+\tilde{C}_{i+1} &= \frac{-1}{r_0 (i+1)} \left(
     \sum_{j=\max{\{0,i-\deg({G})\}}}^i {G}_{i-j} \tilde{C}_j + 
-    \sum_{j=\max{\{0,i-\deg({r})\}}+1}^i {r}_{i-j+1} (j \tilde{C}_j) \biggr) + {E}_{i+1},
+    \sum_{j=\max{\{0,i-\deg({r})\}}+1}^i {r}_{i-j+1} (j \tilde{C}_j) \right) + {E}_{i+1},
 \end{align*}
 where $\ord_p({E}_i) \geq N'_{C}$ for all $i \geq 1$, 
 so that the matrices~$\tilde{C}_i$ are computed with $p$-adic working 
@@ -1866,7 +1863,7 @@ precision~$N'_C$.
 \begin{prop} \label{thm:errorprop}
 Let $K,N_{C} \in \NN$, and suppose that
 \begin{align*}
-N'_C          &= N_{C} + \Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p(K-1)}.
+N'_C          &= N_{C} + \left(2 \left(2 \delta + (n-1)\right) + 1\right) \ceil{\log_p(K-1)}.
 \end{align*} 
 Then $\ord_p(\tilde{C}_i-C_i) \geq N_{C}$ for all $i < K$.
 \end{prop}
@@ -1884,7 +1881,7 @@ the differential equation
 \end{align*}
 from which it follows that
 \begin{equation} \label{eq:integral}
-\tilde{C}(t)-C(t) = C(C^{-1} \tilde{C}-I) = C(t) \Bigl(\int_{0}^t C^{-1}(s) E(s) ds \Bigr).
+\tilde{C}(t)-C(t) = C(C^{-1} \tilde{C}-I) = C(t) \left(\int_{0}^t C^{-1}(s) E(s) ds \right).
 \end{equation}
 We know from Theorem~\ref{thm:valC} and Remark~\ref{rem:Cinv} that
 \begin{equation} \label{eq:boundCCinv}
@@ -1893,11 +1890,11 @@ We know from Theorem~\ref{thm:valC} and Remark~\ref{rem:Cinv} that
 \end{equation}
 and we hence obtain
 \[
-\ord_p \Bigl(\overline{\int_{0}^t C^{-1}(s) E(s) ds }\Bigr) \geq 
-N_{C} + \Bigl( \bigl(2 \delta + (n-1)\bigr) \Bigr) \ceil{\log_p(K-1)}.
+\ord_p \left(\overline{\int_{0}^t C^{-1}(s) E(s) ds }\right) \geq 
+N_{C} + \left( \bigl(2 \delta + (n-1)\bigr) \right) \ceil{\log_p(K-1)}.
 \]
 From the bounds~\eqref{eq:boundCCinv} and Equation~\eqref{eq:integral}, 
-we deduce that $\ord_p(\overline{\tilde{C}-C}) \geq N_C$.
+we deduce that $\ord_p\left(\overline{\tilde{C}-C}\right) \geq N_C$.
 \end{proof}
 
 \begin{rem}
@@ -1921,12 +1918,12 @@ precision $N_{\Phi}$.
 \begin{thm} \label{thm:Ni}
 Let $K,N_{\Phi} \in \NN$ and define:
 \begin{eqnarray*}
-N_{\Phi_0}   		&=& N_{\Phi}+\bigl(2\delta+(n-1)\bigr) \bigl( \ceil{\log_p(K-1)} + \ceil{\log_p(\ceil{K/p}-1)}\bigr),\\
-N_{C}				&=& N_{\Phi}+\bigl(2\delta+(n-1)\bigr) \ceil{ \log_p(\ceil{K/p}-1)} + \delta, \\
-N_{C^{-1}}			&=& N_{\Phi}+\bigl(2\delta+(n-1)\bigr) \ceil{\log_p(K-1)} + \delta, \\
-N_M                 &=& N_{\Phi}+\Bigl(2\bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p(K-1)}+1, \\
-N'_C			    &=& N_{\Phi}+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p(K-1)}, \\
-N'_{C^{-1}}	        &=& N_{\Phi}+\Bigl(2 \bigl(2 \delta + (n-1)\bigr) + 1\Bigr) \ceil{\log_p(\ceil{K/p}-1)}.
+N_{\Phi_0}   		&=& N_{\Phi}+\left(2\delta+(n-1)\right) \left( \ceil{\log_p(K-1)} + \ceil{\log_p(\ceil{K/p}-1)}\right),\\
+N_{C}				&=& N_{\Phi}+\left(2\delta+(n-1)\right) \ceil{ \log_p(\ceil{K/p}-1)} + \delta, \\
+N_{C^{-1}}			&=& N_{\Phi}+\left(2\delta+(n-1)\right) \ceil{\log_p(K-1)} + \delta, \\
+N_M                 &=& N_{\Phi}+\left(2\left(2 \delta + (n-1)\right) + 1\right) \ceil{\log_p(K-1)}+1, \\
+N'_C			    &=& N_{\Phi}+\left(2 \left(2 \delta + (n-1)\right) + 1\right) \ceil{\log_p(K-1)}, \\
+N'_{C^{-1}}	        &=& N_{\Phi}+\left(2 \left(2 \delta + (n-1)\right) + 1\right) \ceil{\log_p(\ceil{K/p}-1)}.
 \end{eqnarray*}
 
 In order to compute the power series expansion 
@@ -2011,7 +2008,7 @@ and hence cannot be evaluated at $\hat{\tau}$.
 
 However, since $\Phi$ is a matrix of overconvergent functions, i.e.\ 
 \[
-\Phi \in M_{b \times b}\Bigl(\QQ_q \bigl\langle t,\frac{1}{r} \bigr\rangle^{\dag}\Bigr),
+\Phi \in M_{b \times b}\left(\QQ_q \left\langle t,\frac{1}{r} \right\rangle^{\dag}\right),
 \]
 it can be approximated to any given $p$-adic precision $N$ by a matrix 
 of rational functions, which can then be evaluated at $\hat{\tau}$. To 
