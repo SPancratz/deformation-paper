@@ -169,8 +169,8 @@ on smooth projective hypersurfaces}
 \providecommand{\cC}{\mathcal{C}} % Column index set
 \providecommand{\cM}{\mathcal{M}} % Complexity of multiplication
 
-\providecommand{\BigOh}{\mathcal{O}}          % Big-oh notation
-\providecommand{\SoftOh}{\tilde{\mathcal{O}}} % Soft-oh notation
+\providecommand{\BigOh}{O}          % Big-oh notation
+\providecommand{\SoftOh}{\tilde{O}} % Soft-oh notation
 
 % Theorems etc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2038,9 +2038,9 @@ as the eigenvalues  of the matrix $(t - z) M \vert_{t=z}$ and
 known to be rational numbers, are contained in $\ZZ_p \cap \QQ$. 
 For $i \in \NN$, put
 \begin{align*}
-f(i) = \max \Bigl\{ -\bigl(2 \delta + (n-1) \bigr) \lceil \log_p(i) \rceil, 
-(b-1) \ord_p(M) -\bigl(2 \delta + (n-1) \bigr) \lfloor \log_p(i) \rfloor 
-\Bigr\},
+f(i) = \max \left\{ -\left(2 \delta + (n-1) \right) \lceil \log_p(i) \rceil, 
+(b-1) \ord_p(M) -\left(2 \delta + (n-1) \right) \lfloor \log_p(i) \rfloor 
+\right\},
 \end{align*}
 and define 
 \begin{align*}
@@ -2067,7 +2067,7 @@ and define
 Then the matrix $\Phi$ is congruent 
 modulo $p^{N}$ to a matrix $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \begin{equation*}
-\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)
+\ord_z\left(\tilde{\Phi}\right) \geq -(\alpha_1+p \alpha_2)
 \end{equation*}
 and $\tilde{\Phi}$ has no other poles contained in $D$.
 \end{thm}
@@ -2076,7 +2076,7 @@ and $\tilde{\Phi}$ has no other poles contained in $D$.
 Since the matrix $\Phi$ defines a Frobenius structure on the vector 
 bundle $\Hrig^n(U/S)$ with connection $\nabla$, we can 
 apply~\citep[Theorem~2.1]{KedlayaTuitman2012}. We have 
-replaced $\ord_p(\Phi)$ and $\ord_p(\Phi)+\ord_p(\Phi^{-1})$ 
+replaced $\ord_p\left(\Phi\right)$ and $\ord_p\left(\Phi\right)+\ord_p\left(\Phi^{-1}\right)$ 
 by their respective lower bounds $-\delta$ and $-2 \delta + (n-1)$, since 
 we might not know them exactly a priori.
 \end{proof}
@@ -2098,16 +2098,16 @@ Definition~\ref{defn:MonBasis}. Now by \citep[Corollary 2.6]{KedlayaTuitman2012}
 the matrix $\Phi$ is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \[
-\ord_z(\tilde{\Phi}) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z(W^{-1})
+\ord_z\left(\tilde{\Phi}\right) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z\left(W^{-1}\right)
 \]
 and $\tilde{\Phi}$ has no other poles contained in $D$.
 Here, $\alpha_1$ and $\alpha_2$ are defined as in 
 Theorem~\ref{thm:KedlayaTuitman}, but with $\delta$ replaced by
 \begin{equation*}
-\delta' = \delta-\bigl(\ord_p(W)+\ord_p(W^{-1})\bigr), 
+\delta' = \delta-\left(\ord_p(W)+\ord_p\left(W^{-1}\right)\right), 
 \end{equation*}
 since for the matrix $\Phi'$ of $p^{-1}\Frob_p$ with respect to the basis 
-$[w_1,\dotsc,w_b]$, in general we only have that $\ord_p(\Phi') \geq -\delta'$. 
+$[w_1,\dotsc,w_b]$, in general we only have that $\ord_p\left(\Phi'\right) \geq -\delta'$. 
 \end{rem}
 
 When one of the other conditions in Theorem~\ref{thm:KedlayaTuitman} is not satisfied, 
@@ -2121,12 +2121,12 @@ Definition~\ref{defn:Deltak}.
 Let $D \subset \mathbf{P}^1(\bar{\QQ}_q)$ be a residue disk
 and for any point $z \in D$ put
 \begin{eqnarray*}
-\mu_z &=& \sum_{k=2}^n \ord_z(\Delta_k^{-1}), \\
-\nu_z &=& \ord_z(\Delta_{n+1}^{-1}).
+\mu_z &=& \sum_{k=2}^n \ord_z\left(\Delta_k^{-1}\right), \\
+\nu_z &=& \ord_z\left(\Delta_{n+1}^{-1}\right).
 \end{eqnarray*}
 For $N \in \NN$, define 
 \begin{align*}
-h(N) = \max \{ i \in \NN : i+(n-1)+\ord_p ((n-1)!)-n \floor{\log_p(p(n+i)-1)} < N \},
+h(N) = \max \left\{ i \in \NN : i+(n-1)+\ord_p ((n-1)!)-n \floor{\log_p(p(n+i)-1)} < N \right\},
 \end{align*}
 and put
 \[
@@ -2138,7 +2138,7 @@ and put
 Then $\Phi$ is congruent modulo $p^N$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \begin{equation*}
-\ord_z(\tilde{\Phi}) \geq -\beta_z,
+\ord_z\left(\tilde{\Phi}\right) \geq -\beta_z,
 \end{equation*}
 for all points $z \in D$.
 \end{thm}
@@ -2155,12 +2155,12 @@ c(i_0+\dotsb+i_{n+3})\bigr) \geq 0 \Bigr\},
 \end{align*}
 by putting $\sigma(x_i) = x_i^p$ for $0 \leq i \leq n$. Note that
 \begin{equation*}
-\sigma\Bigl(\frac{1}{P}\Bigr) = 
-    P^{-p} \biggl( 1-\frac{P^p-\sigma(P)}{P^p} \biggr)^{-1}
+\sigma\left(\frac{1}{P}\right) = 
+    P^{-p} \left( 1-\frac{P^p-\sigma(P)}{P^p} \right)^{-1}
 \end{equation*}
 is an element of $A^{\dag}$ since 
 \begin{equation*}
-\ord_p(P^p-\sigma(P)) \geq 1.
+\ord_p\left(P^p-\sigma(P)\right) \geq 1.
 \end{equation*}
 We use the notation and terminology from Section~\ref{sec:Connection}.
 It is known that the de Rham cohomology of 
@@ -2172,16 +2172,16 @@ that our basis vectors for $\Hrig(U/S)$
 are of the form $x^u \Omega / P^{\ell}$ with $x^u \in B_{\ell}$ and 
 $\ell \leq n$.  We observe that
 \begin{equation*}
-p^{-1} \Frob_p \Bigl(\frac{x^u \Omega}{P^{\ell}} \Bigr) \equiv
-\sum_{i=0}^{\infty} \eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(\ell+i)}} \Bigr)
+p^{-1} \Frob_p \left(\frac{x^u \Omega}{P^{\ell}} \right) \equiv
+\sum_{i=0}^{\infty} \eta_i p^{n-1+i} \left(\frac{P^p-\sigma(P)}{p} \right)^i 
+(x_0 \dotsm x_n)^{p-1} \left( \frac{x^{pu} \Omega}{P^{p(\ell+i)}} \right)
 \end{equation*}
 in $\Hrig^n(U/S)$, where $\eta_i \in \NN$ is defined by the equality 
 $(1-y)^{-\ell} = \sum_{i=0}^{\infty} \eta_i y^i$.
 Using Algorithm~\ref{alg:PoleRed}, we can write
 \begin{equation} \label{eqn:Froblift}
-\eta_i p^{n-1+i} \Bigl(\frac{P^p-\sigma(P)}{p} \Bigr)^i 
-(x_0 \dotsm x_n)^{p-1} \Bigl( \frac{x^{pu} \Omega}{P^{p(\ell+i)}} \Bigr) \equiv
+\eta_i p^{n-1+i} \left(\frac{P^p-\sigma(P)}{p} \right)^i 
+(x_0 \dotsm x_n)^{p-1} \left( \frac{x^{pu} \Omega}{P^{p(\ell+i)}} \right) \equiv
 \frac{\gamma_{i,1} \Omega}{P^1}+\dotsb+\frac{\gamma_{i,n} \Omega}{P^n},
 \end{equation}
 where $\gamma_{i,j}$ is contained in the $L$-span of $B_j$ for all $i \geq 0$ and 
@@ -2257,8 +2257,8 @@ Finally, we may assume that $\theta_z=\theta_{z'}$ if $z,z'$ are conjugates over
 We now define
 \begin{align*}
 s &= \prod_{z \neq \infty, \ord_p(z) \geq 0} (t-z)^{\theta_z}
-     \prod_{z \neq \infty, \ord_p(z) < 0}\Bigl(\frac{t}{z}-1\Bigr)^{\theta_z}, 
-&K&= \Bigl(\sum_{z} \theta_z \Bigr) +1,
+     \prod_{z \neq \infty, \ord_p(z) < 0}\left(\frac{t}{z}-1\right)^{\theta_z}, 
+&K&= \left(\sum_{z} \theta_z \right) +1,
 \end{align*}
 which satisfy all the required conditions.
 \end{proof}
@@ -2268,7 +2268,7 @@ precision $N_{\Phi}$ using Algorithm~\ref{alg:expansion}. For any
 $\tau \in S(\bar{\FF}_q)$, we can now compute
 \begin{equation*}
 \Phi_{\tau} = 
-  s(\hat{\tau})^{-1} \bigl( s \Phi \bmod{t^{K}} \bigr)|_{t=\hat{\tau}} 
+  s(\hat{\tau})^{-1} \left( s \Phi \bmod{t^{K}} \right)|_{t=\hat{\tau}} 
   \bmod{p^{N_{\Phi}}}.
 \end{equation*}
 Since $\ord_p(s(\hat{\tau}))=0$, $\ord_p(\hat{\tau}) \geq 0$ and
@@ -2306,7 +2306,7 @@ on $\Hrig^n(U_{\tau})$.
 
 We now analyse the loss of $p$-adic precision when computing 
 the reverse characteristic polynomial 
-$\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det\bigl( 1 - T \Phi_{\tau}^{(a)}\bigr)$.
+$\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det\left( 1 - T \Phi_{\tau}^{(a)}\right)$.
 
 \begin{thm} \label{thm:preccharpoly}
 Let $N_{\Phi} \in \NN$ be such that $N_{\Phi} \geq \delta$, 
@@ -2316,11 +2316,11 @@ $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$.
 Let us denote
 \[
 \tilde{\chi}(T) = 1 + \sum_{i=1}^b \tilde{\chi}_i T^i 
-                = \det\bigl( 1 - T \tilde{\Phi}_{\tau}^{(a)}\bigr).
+                = \det\left( 1 - T \tilde{\Phi}_{\tau}^{(a)}\right).
 \]
 Then for all $1 \leq i \leq b$, we have
 \[
-\ord_p (\chi_i - \tilde{\chi}_i) \geq N_{\Phi}-\delta.
+\ord_p \left(\chi_i - \tilde{\chi}_i \right) \geq N_{\Phi}-\delta.
 \]
 \end{thm}
 
@@ -2336,15 +2336,15 @@ $\tilde{\Phi}_{\tau}'=W_{\tau} \tilde{\Phi}_{\tau} \sigma(W)^{-1}$, we find that
 $\ord_p(\Phi'_{\tau}-\tilde{\Phi}_{\tau}') \geq N-\delta$ and in particular
 $\ord_p(\tilde{\Phi}_{\tau}') \geq 0$. Thus, we obtain
 \[
-\ord_p \Bigl( \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr) 
-            - \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr) \Bigr) \geq N-\delta.
+\ord_p \left( \det\left(1 - T (\Phi'_{\tau})^{(a)}\right) 
+            - \det\left(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\right) \right) \geq N-\delta.
 \] 
 Note that $(\Phi'_{\tau})^{(a)}= W_{\tau} \Phi_{\tau}^{(a)} W_{\tau}^{-1}$
 and $(\tilde{\Phi}'_{\tau})^{(a)}= W_{\tau} \tilde{\Phi}_{\tau}^{(a)} W_{\tau}^{-1}$, 
 so that
 \begin{align*}
-\chi(T) &= \det\bigl(1 - T (\Phi'_{\tau})^{(a)}\bigr),
-&\tilde{\chi}(T) &= \det\bigl(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\bigr).
+\chi(T) &= \det\left(1 - T (\Phi'_{\tau})^{(a)}\right),
+&\tilde{\chi}(T) &= \det\left(1 - T (\tilde{\Phi}'_{\tau})^{(a)}\right).
 \end{align*}
 This completes the proof.
 \end{proof}
@@ -2377,7 +2377,7 @@ Define $\Gamma \colon [0,b] \rightarrow \RR$ to be the function whose graph
 is the convex polygon in the plane whose left-most point is the origin and 
 which has slope~$i$ over the interval of the horizontal axis 
 \[
-[h^{0,n-1} + \dotsb + h^{i-1,n-i}, h^{0,n-1} + \dotsb + h^{i,n-i-1}].
+\left[h^{0,n-1} + \dotsb + h^{i-1,n-i}, h^{0,n-1} + \dotsb + h^{i,n-i-1}\right].
 \]
 Note that $\Gamma(b)=b(n-1)/2$ since $h^{i,n-1-i}=h^{n-1-i,i}$ for all $0 \leq i \leq n-1$.
 \end{defn}
@@ -2388,7 +2388,7 @@ Let $N_{\Phi} \in \NN$ and suppose that $p \geq n$. Let $\tilde{\Phi}_{\tau}$
 be an approximation to $\Phi_{\tau}$ satisfying $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$. 
 Then for all $1 \leq i \leq b$, we have
 \[
-\ord_p(\chi_i-\tilde{\chi}_i) \geq N_{\Phi} + a\Gamma(i-1).
+\ord_p\left(\chi_i-\tilde{\chi}_i\right) \geq N_{\Phi} + a\Gamma(i-1).
 \]
 \end{thm}
  
@@ -2471,9 +2471,9 @@ Let $N_{\chi_i}$ be defined as in Theorem~\ref{thm:N0}.  In order to
 compute $\chi(T)$ exactly, it is sufficient to compute~$\Phi_{\tau}$ 
 with $p$-adic precision
 \begin{align*}
-N_{\Phi} &= \max_{1 \leq i \leq b} \{ N_{\chi_i} \} +\delta.
+N_{\Phi} &= \max_{1 \leq i \leq b} \left\{ N_{\chi_i} \right\} +\delta.
 \intertext{If moreover $p \geq n$, then this can be improved to}
-N_{\Phi} &= \max_{1 \leq i \leq b} \{ N_{\chi_i} -a\Gamma(i-1) \}.
+N_{\Phi} &= \max_{1 \leq i \leq b} \left\{ N_{\chi_i} -a\Gamma(i-1) \right\}.
 \end{align*}
 \end{thm}
 
