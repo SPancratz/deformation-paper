@@ -1063,11 +1063,11 @@ Let $H_i$ denote the restriction of the Hodge filtration on
 $\HdR^{n-1}(\mathfrak{X}/\mathfrak{S})$ to $\HdR^{n}(\mathfrak{U}/\mathfrak{S})$
 and write 
 \[
-h^{i,n-1-i}=\mbox{rank}(H^i/H^{i+1})
+h^{i,n-1-i}=\mbox{rank}(H_i/H_{i+1})
 \] 
 for the corresponding Hodge numbers.
 Recall that $H_i=\mbox{Fil}^{n-i} \HdR^{n}(\mathfrak{U}/\mathfrak{S})$
-for the filtration by the pole order defined in Section~\ref{sec:Connection}. Applying 
+for the filtration by the pole order defined above. Applying 
 the loop in Algorithm~\ref{alg:PoleRed} just once, to lower the pole 
 order from $k$ to $k-1$, we see that $\cB_k$ spans 
 \[
@@ -1350,8 +1350,8 @@ $p (u_i + 1) \equiv v_i + 1 \bmod{d}$ for all~$i$.
 We define
 \begin{equation*}
 \alpha_{u,v} = \prod_{i=0}^n a_i^{(p (u_i + 1) - (v_i + 1))/d} 
-    \biggl( \sum_{m,r} \Bigl( \frac{u_i+1}{d} \Bigr)_r 
-        \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \biggr),
+    \biggl( \sum_{m,r} \left( \frac{u_i+1}{d} \right)_r 
+        \sum_{j=0}^{r} \frac{\bigl(p a_i^{p-1}\bigr)^{r-j}}{(m-pj)!j!} \biggr),
 \end{equation*}
 where the sum in the $i$-th factor of the product is over all integers $m, r \geq 0$  
 that satisfy $p(u_i+1)-(v_i+1)=d(m-pr)$.
@@ -2008,7 +2008,7 @@ and hence cannot be evaluated at $\hat{\tau}$.
 
 However, since $\Phi$ is a matrix of overconvergent functions, i.e.\ 
 \[
-\Phi \in M_{b \times b}\left(\QQ_q \left\langle t,\frac{1}{r} \right\rangle^{\dag}\right),
+\Phi \in M_{b \times b}\left(\QQ_q \left\langle t,1/r \right\rangle^{\dag}\right),
 \]
 it can be approximated to any given $p$-adic precision $N$ by a matrix 
 of rational functions, which can then be evaluated at $\hat{\tau}$. To 
@@ -2310,8 +2310,8 @@ $\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det\left( 1 - T \Phi_{\tau}^{(a)}\right)$.
 
 \begin{thm} \label{thm:preccharpoly}
 Let $N_{\Phi} \in \NN$ be such that $N_{\Phi} \geq \delta$, 
-with $\delta$ defined as in Definition~\ref{defn:delta}.
-Suppose that $\tilde{\Phi}_{\tau}$ is an approximation to $\Phi_{\tau}$ satisfying
+where $\delta$ is defined as in Definition~\ref{defn:delta}.
+Moreover, suppose that $\tilde{\Phi}_{\tau}$ is an approximation to $\Phi_{\tau}$ satisfying
 $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$.
 Let us denote
 \[
@@ -2385,7 +2385,7 @@ Note that $\Gamma(b)=b(n-1)/2$ since $h^{i,n-1-i}=h^{n-1-i,i}$ for all $0 \leq i
 \begin{thm} \label{thm:pgeqn}
 We continue to use the notation of Theorem~\ref{thm:preccharpoly}. 
 Let $N_{\Phi} \in \NN$ and suppose that $p \geq n$. Let $\tilde{\Phi}_{\tau}$ 
-be an approximation to $\Phi_{\tau}$ satisfying $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$. 
+be an approximation to $\Phi_{\tau}$ that satisfies $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$. 
 Then for all $1 \leq i \leq b$, we have
 \[
 \ord_p\left(\chi_i-\tilde{\chi}_i\right) \geq N_{\Phi} + a\Gamma(i-1).
@@ -2397,7 +2397,7 @@ Note that in this case $\delta=0$ and hence that $\ord_p(\Phi_{\tau}) \geq 0$.
 By a result of Mazur~\citep[p. 665-666]{Mazur1972}, the map $p^{-1} \Frob_p$ 
 sends $(H_i)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ into $p^i \Lambda_{\tau,crys}$, 
 where $\Lambda_{\tau,crys}$ is defined as in the proof of 
-Theorem~\ref{thm:deltabound}. This implies that the so called Hodge polygon 
+Theorem~\ref{thm:deltabound} and $H_i$ as in Remark~\ref{rem:hnumbers}. This implies that the so called Hodge polygon 
 of the $F$-crystal $(\Lambda_{\tau,crys},p^{-1} \Frob_p)$ lies above the graph of 
 $\Gamma$. From this it follows that the Hodge polygon of the $F$-crystal 
 $(\Lambda_{\tau,crys},\mathfrak{q}^{-1} \Frob_{\mathfrak{q}})$ lies
@@ -2699,7 +2699,7 @@ The computation of the matrix~$\Phi_0$ with Algorithm~\ref{alg:Diagfrob} require
 In Proposition~\ref{prop:MR}, we have $\mathcal{R} \in \SoftOh(N'_{\Phi_0})$.
 In Definition~\ref{defn:alpha}, the sums
 \begin{equation*} \label{eqn:ifactor}
-\Bigl(\frac{u_i+1}{d} \Bigr)_r \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!}
+\left(\frac{u_i+1}{d} \right)_r \sum_{j=0}^{r} \frac{\bigl(p a_i^{p-1}\bigr)^{r-j}}{(m-pj)!j!}
 \end{equation*}
 consist of $\BigOh(\mathcal{R})$ terms. Note that each term can be computed from the previous one in $\BigOh(p)$ operations 
 in $\ZZ_p$. For each $r$, the sum can therefore be computed in time $\BigOh(p \mathcal{R} N'_{\Phi_0})$. We have to consider
@@ -2976,8 +2976,7 @@ is restricted to the case $q = p$, i.e.\ to families of hypersurfaces
 defined over a prime field.  In order to provide some context for the 
 runtimes presented below, note that all computations were carried out 
 on a machine with two Intel Core i7-3540M processors running at 3GHz and 
-with 8GB of RAM, but only used a single processor and no more than about 
-1.5GB of RAM.  Moreover, timings were obtained using the C function 
+with 8GB of RAM, but only used a single processor.  Moreover, timings were obtained using the C function 
 {\tt{clock()}} and are stated in minutes~(m) or seconds~(s). 
 
 \footnotetext{This implementation is available at 
@@ -3067,6 +3066,8 @@ Total           & 9.90s& 7.94m & 7.73s & 8.93m   & 0.45s& 3.29m \\ \bottomrule
 \end{tabular} 
 \end{center}
 
+\bigskip
+
 Our timings in these examples are a factor of $50-500$ lower than the ones 
 provided by Gerkmann.
 
@@ -3110,6 +3111,8 @@ $Z(X_{\tau},T)$ & 0.76s& 18.66m \\
 Total           & 0.99s& 83.82m \\ \bottomrule
 \end{tabular}
 \end{center}
+
+\bigskip
 
 As the final result of the computation we find that 
 $\mathfrak{q} \chi(T/\mathfrak{q})$ is equal to 
@@ -3188,6 +3191,8 @@ Total           & 3.99m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
+\bigskip
+
 As the final result of the computation we find that~$\chi(T)$ is equal to 
 \begin{equation*}
 \begin{split}
@@ -3252,11 +3257,68 @@ Total           & 21.19m     \\ \bottomrule
 \end{tabular}
 \end{center}
 
+\bigskip
+
 As the final result of the computation we find that $7 \chi(T/7)$ is equal to 
 \begin{multline*}
 7T^{21} - 5T^{20} + 6T^{19} - 6T^{18} + 4T^{17} - 11T^{16} + 5T^{15} - 9T^{14} + 4T^{13} + 3T^{12} \\
 + 4T^{11} + 4T^{10} + 3T^9 + 4T^8 - 9T^7 + 5T^6 - 11T^5 + 4T^4 - 6T^3 + 6T^2 - 5T + 7.
 \end{multline*}
+
+\subsection{Larger values of $p$}
+
+We consider the family of quartic surfaces over $\ZZ$ given by the polynomial 
+\begin{equation*}
+P=x_0^4 + 2x_1^4 + 3x_2^4 + 4x_3^4 + t(x_0x_1x_2x_3 + 2 x_0^2 x_2^2 + 3x_0x_2^3)
+\end{equation*}
+which we consider as an element of $\ZZ_p[t][x_0,x_1,x_2,x_3]$ for various
+primes $p$, most of which are much larger than those in the previous examples.
+The connection matrix $M \in M_{21 \times 21}(\QQ(t))$ has denominator 
+$r = r_1 r_2 r_3 r_4$, with polynomials $r_1,r_2,r_3,r_4 \in \ZZ[t]$ that are 
+irreducible of degree $3$, $5$, $12$ and $16$, respectively. The set of
+exponents at each of the zeros of $r$ is a subset of the set $\{-3/2,-1/2,0,1\}$,
+and after changing basis by 
+\[
+W=\mbox{diag}(t^{-1},1,1,1,1,1,1,1,1,1,1,1,1,1,1,t^{-1},1,1,t^{-1},1,t)
+\] 
+as in Remark~\ref{rem:basischange}, the set of exponents  at $\infty$ is
+$\{1,3/2,2,3\}$. We take $\tau$ to be $1 \in \FF_p$.
+
+\subsubsection{Precisions}
+
+For all primes $p$ that we consider, the zeros of $r$ are $p$-adic integers and different modulo $p$.
+Therefore, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. As an example, we determine the
+precisions in the case $p=2^9$. We first compute $\delta=0$ and $N_{\Phi}=N'_{\Phi}=3$. We find
+$\theta_z=1824$ at all zeros $z$ of $r$ and $\theta_{\infty}=4$, so that we can take $s=r^{1824}$ and $K=65668$.
+We now compute the remaining $p$-adic precisions $N_{\Phi_0}=9$, $N_C=5$, $N_{C^{-1}}=7$, $N_M=14$, 
+$N_C'=13$, $N_{C^{-1}}'=8$, $N_{\Phi_0}'=11$ and $N_M'=14$.
+
+\subsubsection{Timings}
+
+\begin{center}
+\begin{tabular}{l l l l l l l l l} \toprule
+$p$             & $2^2+1$ & $2^3+3$ & $2^4+1$ & $2^5+5$ & $2^6+3$ & $2^7 + 3$ & $ 2^8+1$ & $2^9+9$	\\ \midrule
+Computation     & 	  &         &         &                                                    	\\ \midrule  
+$M$             & 0.08s   & 0.08s   & 0.08s   & 0.08s  	& 0.08s	  & 0.08s     & 0.08s	 & 0.08s	\\
+$\Phi_0$        & 0.00s   & 0.00s   & 0.01s   & 0.01s 	& 0.00s	  & 0.00s     &	0.00s	 & 0.01s	\\
+$\Phi$          & 9.46s   & 12.14s  & 18.06s  & 36.16s 	& 67.12s  & 123.75s   &	216.15s	 & 513.77s	\\
+$Z(X_{\tau},T)$ & 0.19s   & 0.20s   & 0.29s   & 0.64s 	& 1.17s	  & 2.17s     & 4.60s	 & 11.31s	\\
+Total           & 9.73s   & 12.42s  & 18.44s  & 36.89s 	& 68.37s  & 126.00s   &	220.83s	 & 525.17	\\ \bottomrule
+\end{tabular} 
+\end{center}
+
+\bigskip
+
+Our timings in this example seem to confirm that the running time of the algorithm is quasilinear in $p$, although $2^9+9$ is
+of course still quite small. Since the space requirement is also quasilinear in $p$ and our implementation already uses $5.4$Gb for 
+$p=2^9+9$, the computation runs out of memory for $p=2^{10}+7$. 
+In the case $p=2^9+9$ we find that $p \chi(T/p)$ is equal to
+\begin{multline*}
+-521T^{21} + 1654T^{20} - 3325T^{19} + 5617T^{18} - 6462T^{17} + 5381T^{16} - 2776T^{15} - 1808T^{14} + \\
+5798T^{13} - 8220T^{12} + 9910T^{11} - 9910T^{10} +  8220T^{9} - 5798T^{8} + 1808T^{7} + \\
+2776T^{6} - 5381T^{5} + 6462T^{4} - 5617T^3 + 3325T^2 - 1654T + 521
+\end{multline*}
+
 
 \begin{rem}
 In all of our timings, we have not included the time required to compute 
