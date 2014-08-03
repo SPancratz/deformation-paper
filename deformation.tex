@@ -2938,7 +2938,7 @@ of characteristic $p$.
 Moreover, we write $a=\log_p(\mathfrak{q})$, $a'=\log_p(q)$ and let
 $d_t$ be the degree of $P$ in the variable $t$. Finally,
 we let $e$ denote the base of the natural
-logarithm and $\omega$ the least exponent for matrix multiplication.
+logarithm and $\omega$ an exponent for matrix multiplication.
 
 \begin{thm} \label{thm:totalcomplexity}
 The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
@@ -2948,7 +2948,7 @@ The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
                 a^2 a' p d^{n(\omega+4)} e^{2n} d_t^2+
                 aa' \bigl(d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n} e^{3n}\bigr) d_t 
                 \Bigr), \\
-\mbox{space: } &\SoftOh\bigl( a^2 a' p d^{5n} d_t + a a' d^{4n} e^{3n} d_t \bigr).
+\mbox{space: } &\SoftOh\bigl( a^2 a' p d^{5n} e^n d_t + a a' d^{4n} e^{3n} d_t \bigr).
 \end{align*}
 Alternatively, computing the matrix $\Phi_0$ as in the proof of Proposition~\ref{prop:compPhi0}, 
 the computation of $Z(X_{\tau},T)$ requires
@@ -2960,7 +2960,7 @@ the computation of $Z(X_{\tau},T)$ requires
                 \Bigr), \\
 \mbox{space: } &\SoftOh\bigl( 
                 a^2 p^2 d^{2n} + 
-                a^2 a' p d^{5n} d_t + 
+                a^2 a' p d^{5n} e^n d_t + 
                 a a' d^{4n} e^{3n} d_t \bigr).
 \end{align*}
 \end{thm}
