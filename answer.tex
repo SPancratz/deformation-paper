@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\title{Improvements to the deformation method for counting points on smooth projective hypersurfaces: answer to referees}
+\author{S. Pancratz and J. Tuitman}
+
+\begin{document}
+\maketitle
+
+\section*{General remarks}
+
+We want to thank the referees for their very useful comments and corrections. We have changed the paper accordingly, with a few
+exceptions that are detailed below. 
+However, the most important change is probably that we have rewritten section~$4$.
+
+It became clear
+after submission that the output of our code was not correct for families for which the coefficients $a_0,\ldots,a_n$ of the diagonal fibre 
+at $t=0$ where not Teichmueller lifts. This turned out to be due to the fact that the formulas of Dwork and Lauder that we used to compute
+the entries of the Frobenius matrix of a diagonal hypersurface are derived under the assumption that these coefficients are Teichmueller lifts. In 
+theory one can always choose a lift of the family satisfying this assumption, but in practice (because our code computes the connection
+matrix to exact precision over $\mathbf{Q}$), this is unnecesarilly restrictive.
+
+Therefore, we went through Lauder's proof of the formula for the entries of the Frobenius matrix of a diagonal hypersurface and eliminated
+the Teichmueller assumption. This has resulted in Definition~4.1 and Theorem~4.3, which together contain the new more general formula. 
+Note that if the $a_i$ are Teichmueller lifts (i.e. if $a_i^{p-1}=1$), then the new formula reduces to the old one. The code has been updated 
+to use the new formula and has been tested extensively: all output is now correct. 
+
+As the new formula does not seem to appear in the literature,
+we have included a proof (which is very similar to Lauder's proof). Moreover, we noted that the precision analysis in section~4 could be simplified considerably (e.g.
+the distinction between $p=2$ and $p$ odd is not necessary). Finally, the proofs of the complexity estimates in Propositions~7.4 and~7.5 
+have been changed according to the changes in section 4. That the runtime in Proposition~7.4 now has a factor $d^{4n}$ instead of $d^{3n}$ is not due to the use of the new
+formula, but to a minor error in the previous version. 
+
+We were asked by someone about timings for larger primes $p$, so we have included a new example in section 8.5 with larger primes $p$. As the coefficients of the diagonal 
+fibre in this example are not Teichmueller lifts, this example also confirms the correctness of the changes to section 4 mentioned above. \\
+
+Finally, we briefly mention the comments/corrections where we have not completely followed the advice of the referees.
+
+\section*{Remarks referee 1}
+
+\begin{enumerate}
+\item page 12, Remark 3.11: It is not clear to us how the \'etale local analysis from AKR can be used to improve the bound. In our understanding, the techniques from AKR can be used to
+bound the $p$-adic denominator obtained when reducing a differential with pole order $k \gg n$ to one of pole order at most $n$. This way one obtains a bound that is logarithmic in $k$ instead
+of linear. 
+However, here we are reducing a differential of pole order $n+1$ to the basis $\mathcal{B}$. This is a different problem since in the terminology of the proof of Theorem 3.17, the
+lattice $\Lambda_{\tau,mon}$ is in general strictly contained in the lattice $\Lambda_{\tau,\mathcal{B}}$. For this problem, the only bound we know is the linear one. Note that  
+the linear term also appears in the definition of $\delta$ in Definition~3.18. Both in terms of complexity and in practice $\mbox{ord}_p(n!)$ is very small, so this is not a problem.
+\item Section 4: it is hard to say anything about how our approach to compute the Frobenius matrix of a diagonal hypersurfaces compares to that of Kedlaya in [18], since it seems that there the
+Frobenius matrix (as opposed to just the number of points) is only really computed in a very special case. As far as we can tell, only for Fermat hypersurfaces (so all coefficients equal 
+to $1$), of degree $d=3$, over a field $\mathbb{F}_q$ with $q \equiv 1 \bmod{3}$ is it completely clear from [18] how the entries of the Frobenius matrix can be expressed in terms of cube 
+roots of unity. It would be interesting to know in what generality Kedlaya's approach works and how efficient it really is, but for now we do not have the answers to these questions. Note that in all
+our examples the computation of $\Phi_0$ takes negligible time, so that possible further improvements in this step will not have any noticeable impact.
+\end{enumerate}
+
+
+\section*{Remarks referee 2}
+
+\begin{enumerate}
+\item Page 5, `Proof' of Theorem 2.10: The reason we were so vague about a reference here is that there really is no good reference. Unfortunately, in the theory of rigid cohomology some things that are well
+known are not written down anywhere. Giving a reference to the results of Berthelot that should allow one to write down a complete proof would not be useful to the reader you 
+are talking about in our opinion. However, we have changed the `Proof' to better reflect the lack of a good reference. 
+\item Page 13, line 3: According to different sources on the web, whether to write a comma after e.g. and i.e. or not seems to be a matter of british vs. american english. We are not native speakers, so do not have a very good feeling 
+for this. However, since we have tried to use british conventions throughout the paper, it seems better for now to leave this as it is.
+\item Page 35, Line 02, Remark 7.11. We are not entirely sure, but Kedlaya's quantum speed up for point counting seems to be (1) only for curves, and (2) not $p$-adic, since it computes in the class group of the curve 
+itself (so in characteristic $p$). Note that the $\ell$-adic algorithm of Schoof and Pila is also polynomial in $\log(p)$, so in the remark we are only talking about $p$-adic algorithms. Actually, a better `counterexample' to $p$-adic algorithms never being polynomial in $\log(p)$ would be the recent work of Harvey and Harvey/Sutherland on counting points 
+in average polynomial time, so for lots of $p$ at once. However, for a single $p$ these algorithms are still not polynomial in $\log(p)$ and we think the risk of confusing the reader is rather great. Note that the 
+phrasing is already quite weak: `something that all $p$-adic point counting algorithms tend to have in common'. Therefore, we have left the remark unchanged.
+\end{enumerate}
+
+
+\end{document}
+
