@@ -277,17 +277,17 @@ are more easily stated and proved in the context of rigid cohomology.  In~\citep
 Gerkmann reformulated Lauder's deformation method in terms of rigid 
 cohomology.  Moreover, he improved various precision bounds, making 
 the algorithm more practical, which he demonstrated with many examples. Kedlaya 
-introduced a lot of new ideas and results to further lower precision bounds for 
+introduced new ideas and results to further lower the precision bounds for 
 the deformation method in \citep{Kedlaya2012}.
 
 The aim of this paper is to continue where Lauder, Gerkmann and Kedlaya left 
-off. We make improvements to about every step of the algorithm. This results 
+off. We make improvements to almost every step of the algorithm. This results 
 in an algorithm with both lower time and space complexity than Lauder's 
 original algorithm, but perhaps more importantly, which is a lot more efficient
 in practice. The first author has written a (publicly available) 
 implementation of our algorithm using the library FLINT~\citep{FLINT}. 
 This implementation lowers the runtimes of the examples in~\citep{Gerkmann2007} 
-by a factor of $50$ to $5,000$. Moreover, it can be used to compute the zeta 
+by factors of $50$ to $5,000$. Moreover, it can be used to compute the zeta 
 function in many cases where this was not possible before, e.g.\ for generic 
 quartic surfaces.
 
@@ -316,8 +316,8 @@ for controlling the $p$-adic precision loss in the algorithm.
 
 In Section~\ref{sec:Diagonal}, we show how to compute the Frobenius matrix of
 a diagonal hypersurface over a prime field. Our method is essentially based 
-on a computation of Dwork, but by rewriting and slightly generalizing his formulas we 
-obtain Algorithm~\ref{alg:Diagfrob}, which is a significant improvement to the 
+on a computation of Dwork, but by rewriting and slightly generalising his formulas 
+we obtain Algorithm~\ref{alg:Diagfrob}, which is a significant improvement to the 
 corresponding algorithms of Lauder and Gerkmann, both in terms of time complexity 
 and in practice.
 
@@ -331,7 +331,7 @@ series expansion of the Frobenius matrix in Algorithm~\ref{alg:expansion}.
 In Section~\ref{sec:ZetaFunctions}, we describe how to evaluate the Frobenius 
 matrix at some fibre and compute its zeta function. We combine various bounds 
 from different sources to lower the required $p$-adic and $t$-adic precisions. 
-Finally, this results in Algorithm~\ref{alg:complete}, which combines all of 
+This finally results in Algorithm~\ref{alg:complete}, which combines all of 
 our previous algorithms, and is the main result of the paper.
 
 In Section~\ref{sec:Complexity}, we analyse the time and space complexity of 
@@ -389,10 +389,10 @@ The relation between the zeta function and the rigid cohomology spaces
 is given by the so called Lefschetz formula.
 
 \begin{thm}[Lefschetz formula] \label{thm:Lefschetz}
-If $X$ is a smooth proper algebraic variety over $\FF_q$ of dimension~$m$, 
+If $X$ is a smooth proper algebraic variety over~$\FF_q$ of dimension~$m$, 
 then 
 \[
-Z(X,T) = \prod_{i=0}^{2m} \det(1- T \Frob_q | \Hrig^i(X))^{(-1)^{i+1}}.
+Z(X,T) = \prod_{i=0}^{2m} \det \bigl(1- T \Frob_q | \Hrig^i(X) \bigr)^{(-1)^{i+1}}.
 \]
 \end{thm}
 
@@ -400,8 +400,8 @@ Z(X,T) = \prod_{i=0}^{2m} \det(1- T \Frob_q | \Hrig^i(X))^{(-1)^{i+1}}.
 See for example \citep[Theorem 6.3]{EtesseLeStum1993}.
 \end{proof}
 
-Let $\pi:\mathfrak{X} \rightarrow \mathfrak{S}$ be a smooth family of algebraic varieties 
-defined over $\QQ_q$.
+Let $\pi \colon \mathfrak{X} \rightarrow \mathfrak{S}$ be a smooth family of 
+algebraic varieties defined over~$\QQ_q$.
 
 \begin{defn}
 Let $\HdR^i(\mathfrak{X}/\mathfrak{S})$ denote the $i$-th relative algebraic 
@@ -465,9 +465,9 @@ Frobenius map on $\mathbf{P}^1_{\FF_q}$ and satisfies $\sigma(t)=t^p$.
 
 Now suppose that $\mathfrak{E}$ is a vector bundle with connection on 
 some Zariski open subset~$\mathfrak{S}$ of $\mathbf{P}^1_{\QQ_q}$ with 
-complement~$\mathfrak{Z}$. Let $V$ denote the rigid analytic subspace 
-of $\mathbf{P}^1_{\QQ_q}$ which is the complement of the union of the 
-open disks of radius~$1$ around the points of $\mathfrak{Z}$.
+complement~$\mathfrak{Z}$. Let~$V$ denote the rigid analytic subspace 
+of~$\mathbf{P}^1_{\QQ_q}$ which is the complement of the union of the 
+open disks of radius~$1$ around the points of~$\mathfrak{Z}$.
 
 \begin{defn}
 A Frobenius structure on $\mathfrak{E}$ is an isomorphism of vector bundles 
@@ -563,7 +563,8 @@ This theorem is well known, see for example~\citep{AbbottKedlayaRoe2006}.
 Since we need some intermediate results from the proof later on, we will 
 give a brief sketch here. First, by Theorem~\ref{thm:Lefschetz}, we have 
 \[
-Z(X_{\tau},T) = \prod_{i=0}^{2(n-1)} \det(1- T \Frob_{\mathfrak{q}} | \Hrig^i(X_{\tau}))^{(-1)^{i+1}}.
+Z(X_{\tau},T) = \prod_{i=0}^{2(n-1)} 
+    \det\bigl(1- T \Frob_{\mathfrak{q}} | \Hrig^i(X_{\tau})\bigr)^{(-1)^{i+1}}.
 \]
 Then, by the Lefschetz hyperplane theorem and Poincar\'e duality, we see 
 that $\Hrig^i(X_{\tau}) \cong \Hrig^i(\mathbf{P}^n_{\FF_{\mathfrak{q}}})$ 
@@ -607,10 +608,10 @@ p^{-1} \Frob_p (e_j) = \sum_{i=1}^b \Phi_{i,j} e_i.
 We define the ring of overconvergent functions
 \begin{align*}
 \QQ_q \left\langle t, 1/r \right\rangle^{\dag} = 
-\left\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r^j} \; : \; 
+\Biggl\{\sum_{i,j=0}^{\infty} a_{i,j} \frac{t^i}{r^j} \; : \; 
 a_{i,j} \in \QQ_q, \; \exists c > 0 \text{ s.t.}  
 \lim_{i+j \rightarrow \infty} \bigl(\ord_p(a_{i,j}) - c(i+j)\bigr) \geq 0
-\right\},
+\Biggr\},
 \end{align*}
 as the $p$-adically meromorphic functions on $\mathbf{P}^1_{\QQ_q}$ that are 
 analytic outside of the open disks of radius $\rho$ around the zeros of $r$ 
@@ -692,20 +693,21 @@ $x_1, \dotsc, x_{\ell}$ such that
 \] 
 for all $i$.  Then 
 \begin{equation*}
-\ord_p\left(x_1 \dotsm x_{\ell} - \tilde{x}_1 \dotsm \tilde{x}_{\ell}\right) \geq N.
+\ord_p(x_1 \dotsm x_{\ell} - \tilde{x}_1 \dotsm \tilde{x}_{\ell}) \geq N.
 \end{equation*}
 \end{prop}
 
 \begin{proof}
 For all $i$,
 \begin{align*}
-\ord_p\left(\tilde{x}_i \right) &\geq \min \left\{ \ord_p\left(x_i-\tilde{x}_i\right), \ord_p(x_i) \right\} \\
-                    &\geq \min \left\{ N- \sum_{j \neq i} v_j, \ord_p(x_i)\right\} \geq v_i.
+\ord_p\left(\tilde{x}_i \right) 
+    & \geq \min \{ \ord_p\left(x_i-\tilde{x}_i\right), \ord_p(x_i) \} \\
+    & \geq \min \biggl\{ N- \sum_{j \neq i} v_j, \ord_p(x_i)\biggr\} \geq v_i.
 \end{align*}
 Therefore, we also have that
 \begin{equation*}
-\ord_p \left( (x_{i}-\tilde{x}_{i})
-    (\tilde{x}_1 \dotsm \tilde{x}_{i-1} x_{i+1} \dotsm x_{\ell}) \right) \geq N,
+\ord_p \bigl( (x_{i}-\tilde{x}_{i})
+    (\tilde{x}_1 \dotsm \tilde{x}_{i-1} x_{i+1} \dotsm x_{\ell}) \bigr) \geq N,
 \end{equation*}
 for all $i$. The result now follows by adding these $\ell$ inequalities.
 \end{proof}
@@ -718,11 +720,11 @@ satisfies $N \geq \sum_{j=1}^{\ell} v_j$.
 Let $\tilde{A}_1, \dotsc, \tilde{A}_{\ell}$ denote $p$-adic approximations 
 to $A_1, \dotsc A_{\ell}$ such that
 \[
-\ord_p\left(A_i - \tilde{A}_i\right) \geq N - \sum_{j \neq i} v_j
+\ord_p\bigl(A_i - \tilde{A}_i\bigr) \geq N - \sum_{j \neq i} v_j
 \]
 for all $i$.  Then 
 \begin{equation}
-\ord_p\left(A_1 \dotsm A_{\ell} - \tilde{A}_1 \dotsm \tilde{A}_{\ell}\right) \geq N.
+\ord_p\bigl(A_1 \dotsm A_{\ell} - \tilde{A}_1 \dotsm \tilde{A}_{\ell}\bigr) \geq N.
 \end{equation}
 \end{prop}
 
@@ -1053,7 +1055,7 @@ $kd - (n+1)$ for $k \in \NN$. Applying Algorithm~\ref{alg:PoleRed}, we
 obtain an expression for the class of $Q \Omega / P^k$ as a 
 $\QQ_q(t)$-linear combination of elements in $\cB$.  This shows that 
 $\cB$ spans the vector space $\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$. 
-However, by the two propositions above,the dimension of 
+However, by the two propositions above, the dimension of 
 $\HdR^n\bigl(\mathfrak{U}_{\QQ_q(t)}\bigr)$ is equal to the cardinality of
 $\cB$, so that $\cB$ is linearly independent as well.
 \end{proof}
@@ -1100,7 +1102,7 @@ where $\gamma_i$ is an element in the $\QQ_q(t)$-span of~$B_i$ for $1 \leq i \le
 
 \begin{rem} \label{rem:precgm}
 For the matrix $M$ of $\nabla$ to be correct to $p$-adic precision $N_M$, we have to 
-carry out this computation to a somewhat higher working precision $N'_M$, because of 
+carry out this computation to a somewhat higher working precision $N'_M$ due to the 
 precision loss in Algorithm~\ref{alg:PoleRed}. 
 For all $k \in \NN$, by definition $\ord_p(\Delta_k) \geq 0$, and from the proof
 of Theorem~\ref{thm:Isomorphism} we know that $\ord_p(\det(\Delta_k))=0$. 
@@ -1247,7 +1249,7 @@ Combining these inclusions of lattices, we find that
 Now let $[d_1, \dotsc, d_b]$ be a $\ZZ_{\mathfrak{q}}$-basis for 
 $\Lambda_{\tau,crys}$ and let $W_{\tau} \in M_{b \times b}(\QQ_q)$ be 
 the matrix in which the $i$-th column 
-consists of the coordinates of $d_i$ with respect to the basis $\cB$. From the 
+consists of the coordinates of $d_i$ with respect to the basis~$\cB$. From the 
 inclusions~\eqref{eq:lattices} it is clear that 
 \begin{eqnarray*}
 \ord_p(W_{\tau}) &\geq& -\sum_{i=1}^{n-1} \floor{\log_p(i)}, \\
@@ -1395,18 +1397,19 @@ define sets
 \begin{align*}
 W^{(i)} &= \{ (w_0,\cdots,w_n) \in \NN_0^{n+1} \colon w_j \geq 1 \text{ for all } j \neq i \text{ and } \lvert w \rvert \equiv 0 \bmod{d} \},
 \end{align*}
-with $\lvert w \rvert=\sum_{i=0}^n w_i$. Note that $\lvert w \rvert=k(w-1)$, where $w-1$ denotes the tuple $(w_0-1,\ldots,w_n-1)$. 
-Furthermore, still for $0 \leq i \leq n$,
-define $\QQ_p(\pi)$-vector spaces
+with $\lvert w \rvert=\sum_{i=0}^n w_i$. Note that $\lvert w \rvert=k(w-1)$, 
+where $w-1$ denotes the tuple $(w_0-1,\ldots,w_n-1)$.  Furthermore, still 
+for $0 \leq i \leq n$, define $\QQ_p(\pi)$-vector spaces
 \begin{align*}
 \mathcal{L}^{(i)} &= \Bigl\{ \sum_{w \in W^{(i)}} b_w x^{w} \; : \; 
 b_{w} \in \QQ_p(\pi), \; \exists c > 0 \text{ s.t.}  
 \lim_{\lvert w \rvert \rightarrow \infty} \bigl(\ord_p(b_w) - c \cdot \lvert w \rvert \bigr) \geq 0 \Bigr\}
 \end{align*}
-and let $\mathcal{L} = \cap_{i=0}^n \mathcal{L}^{(i)}$ be the intersection of the $\mathcal{L}^{(i)}$. Moreover, let
-$D_i: \mathcal{L}^{(i)} \rightarrow \mathcal{L}$ denote the differential operator
-$D_i = x_i \partial_i +  \pi x_i \partial_i(P_0)$.
-Finally, let $\psi_p, \alpha: \mathcal{L} \rightarrow \mathcal{L}$ be the $\QQ_p(\pi)$-linear maps defined by:
+and let $\mathcal{L} = \cap_{i=0}^n \mathcal{L}^{(i)}$ be the intersection of the 
+$\mathcal{L}^{(i)}$. Moreover, let $D_i \colon \mathcal{L}^{(i)} \rightarrow \mathcal{L}$ 
+denote the differential operator $D_i = x_i \partial_i +  \pi x_i \partial_i(P_0)$.
+Finally, let $\psi_p, \alpha \colon \mathcal{L} \rightarrow \mathcal{L}$ be the 
+$\QQ_p(\pi)$-linear maps defined by:
 \begin{align*}
 \psi_p(x^w) &= 
 \begin{cases}
@@ -1414,7 +1417,8 @@ x^{w/p} &\text{ if } p \mid w_i \text{ for all } 0 \leq i \leq n \\
 0                        &\text{ otherwise}
 \end{cases} \\ 
 \alpha(x^w) &= \psi_p \Bigl( \exp\Bigl(\pi \bigl(P_0(x_0,\ldots,x_n)-P_0(x_0^p,\ldots,x_n^p)\bigl) \Bigr) \cdot x^w \Bigr)
-\intertext{and let $\mathcal{R}:\mathcal{L} \rightarrow \Hrig^n(U_0) \otimes \QQ_p(\pi)$ denote the $\QQ_p(\pi)$-linear map defined by}
+\intertext{and let $\mathcal{R} \colon \mathcal{L} \rightarrow \Hrig^n(U_0) \otimes \QQ_p(\pi)$ 
+denote the $\QQ_p(\pi)$-linear map defined by}
 \mathcal{R}(x^w) &= \frac{(\lvert w \rvert-1)!}{(-\pi)^{\lvert w \rvert-1}} \frac{x^{w-1} \Omega}{P_0^{\lvert w \rvert}},
 \end{align*}
 where $\Omega$ is defined as in Proposition~\ref{prop:Omega}.
@@ -1427,8 +1431,8 @@ Then by \citep[Theorem 2.15]{katz}, the diagram
 \Hrig^n(U_0) \otimes \QQ_p(\pi) @> \left(p^{-1} \Frob_p \right)^{-1}  >> \Hrig^n(U_0) \otimes \QQ_p(\pi)
 \end{CD} 
 \]
-commutes and by \citep[Corollary 1.15]{katz} the vertical maps are isomorphisms. This implies that~\eqref{eq:diagfrobformula}
-is equivalent to
+commutes and by \citep[Corollary 1.15]{katz} the vertical maps are isomorphisms. 
+This implies that~\eqref{eq:diagfrobformula} is equivalent to
 \[
 \alpha(x^{v+1}) \equiv \pi^{pk(u)-k(v)} \alpha_{u,v} \cdot x^{u+1} \bmod{\sum_{i=0}^n D_i \mathcal{L}^{(i)}},
 \]
@@ -1438,7 +1442,8 @@ Note that so far we have not used that $P_0$ is diagonal. Since
 $P_0(x_0, x_1, \dotsc, x_n)$ is equal to $a_0 x_0^d + a_1 x_1^d + \dotsb + a_n x_n^d$,
 we have
 \begin{align*}
-\exp \left(\pi \bigl(P_0(x_0,\ldots,x_n)- P_0(x_0^p,\ldots,x_n^p)\bigl) \right) = \prod_{i=0}^n \exp \left( \pi a_i (x_i^d - x_i^{dp}) \right)
+\exp \Bigl(\pi \bigl(P_0(x_0,\ldots,x_n)- P_0(x_0^p,\ldots,x_n^p)\bigl) \Bigr) 
+    = \prod_{i=0}^n \exp \Bigl( \pi a_i (x_i^d - x_i^{dp}) \Bigr)
 \end{align*}
 and also
 \begin{align*}
@@ -1450,26 +1455,33 @@ For $0 \leq i \leq n$, we denote
 b_{j} \in \QQ_p(\pi), \; \exists c > 0 \text{ s.t.}  
 \lim_{j \rightarrow \infty} \left(\ord_p(b_j) - c \cdot j \right) \geq 0 \right\}
 \end{align*}
-and we define $\QQ_p(\pi)$-linear maps $\psi_p, D_i$ on $\QQ_p(\pi) \langle x_i \rangle^{\dag}$ by the same formulas as before. Then
+and we define $\QQ_p(\pi)$-linear maps $\psi_p, D_i$ on $\QQ_p(\pi) \langle x_i \rangle^{\dag}$ 
+by the same formulas as before. Then
 \begin{align*}
-\psi_p \Bigl( \exp \bigl(\pi a_i(x_i^d- x_i^{pd})\bigr) x_i^{v_i+1} \Bigr) &= \sum_{\substack{m \geq 0 \text{ s.t. }\\ p \mid dm+v_i+1}}  \left(\sum_{j=0}^{\floor{m/p}} \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{j! (m-pj)!} \right) x_i^{(dm+v_i+1)/p} \\
-									   &= \sum_{\; \; \; \; \; \; m,r \; \; \; \; \; \;} \left(\; \sum_{j=0}^{r} \; \; \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{j! (m-pj)!} \right) x_i^{u_i+1+dr},
+\psi_p \Bigl( \exp \bigl(\pi a_i(x_i^d- x_i^{pd})\bigr) x_i^{v_i+1} \Bigr) 
+    & = \sum_{\substack{m \geq 0 \text{ s.t. }\\ p \mid dm+v_i+1}}
+        \biggl(\sum_{j=0}^{\floor{m/p}} \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{j! (m-pj)!} \biggr) x_i^{(dm+v_i+1)/p} \\
+    & = \sum_{\; \; \; \; \; \; m,r \; \; \; \; \; \;} 
+        \biggl(\; \sum_{j=0}^{r} \; \; \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{j! (m-pj)!} \biggr) x_i^{u_i+1+dr},
 \end{align*}
-where the outer sum on the last line is over all integers $m, r \geq 0$  that satisfy $p(u_i+1)-(v_i+1)=d(m-pr)$ and we have used Lemma~\ref{lem:mpr}. It is clear that
-\begin{align*}
-x_i^{u_i+1+dr} \equiv \Bigl(\frac{u_i+1}{d}\Bigr)_r (-\pi a_i)^{-r} x_i^{u_i+1}  \bmod{D_i \QQ_p(\pi) \langle x_i \rangle^{\dag} }.
-\end{align*}
+where the outer sum on the last line is over all integers $m, r \geq 0$ 
+that satisfy $p(u_i+1)-(v_i+1)=d(m-pr)$ and we have used Lemma~\ref{lem:mpr}. 
+It is clear that
+\begin{equation*}
+x_i^{u_i+1+dr} \equiv \Bigl(\frac{u_i+1}{d}\Bigr)_r (-\pi a_i)^{-r} x_i^{u_i+1} \bmod{D_i \QQ_p(\pi) \langle x_i \rangle^{\dag} }.
+\end{equation*}
 Hence, it follows that
 \begin{align*}
-&\psi_p \left( \exp \left(\pi a_i(x_i^d- x_i^{pd})\right) x_i^{v_i+1} \right) \equiv \\
+&\psi_p \Bigl( \exp \bigl(\pi a_i \bigl( x_i^d- x_i^{pd} \bigr) \bigr) x_i^{v_i+1} \Bigr) \equiv \\
 &(\pi a_i)^{(p (u_i + 1) - (v_i + 1))/d} 
-    \left( \sum_{m,r} \left( \frac{u_i+1}{d} \right)_r 
-        \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \right) x_i^{u_i+1} \bmod{D_i \QQ_p(\pi) \langle x_i \rangle^{\dag}},
+    \biggl( \sum_{m,r} \left( \frac{u_i+1}{d} \right)_r 
+        \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \biggr) x_i^{u_i+1} \bmod{D_i \QQ_p(\pi) \langle x_i \rangle^{\dag}},
 \end{align*}
 where the sum is still over all integers $m, r \geq 0$  that satisfy $p(u_i+1)-(v_i+1)=d(m-pr)$. 
 For $G_i \in  \QQ_p(\pi) \langle x_i \rangle^{\dag}$ with $0 \leq i \leq n$, we have
 \begin{align*}
-\psi_p(\prod_{j=0}^n G_j) &= \prod_{j=0}^n \psi_p(G_j), &D_i(\prod_{j=0}^n G_j)&= D_i(G_i) \cdot \prod_{j \neq i} G_j.  
+  \psi_p \biggl( \prod_{j=0}^n G_j \biggr) &= \prod_{j=0}^n \psi_p(G_j), 
+& D_i \biggl( \prod_{j=0}^n G_j \biggr) &= D_i(G_i) \cdot \prod_{j \neq i} G_j.  
 \end{align*}
 Therefore, we can take the product of the congruences above to conclude that 
 \begin{align*}
@@ -1482,25 +1494,33 @@ by $\sum_{i=0}^n D_i \mathcal{L}^{(i)}$ in this expression, completing the proof
 \end{proof}
 
 \begin{rem}
-The computation in the proof of Theorem~\ref{thm:01-03-diagfrob} essentially goes back to Dwork~\citep[\S 4]{Dwork1964}. 
-Following Dwork's work, Lauder obtained a formula similar to ours~\citep[Proposition 10]{Lauder2004b}, that
-was used both by him~\citep{Lauder2004b} and Gerkmann~\citep{Gerkmann2007} in their algorithms. 
+The computation in the proof of Theorem~\ref{thm:01-03-diagfrob} essentially 
+goes back to Dwork~\citep[\S 4]{Dwork1964}.  Following Dwork's work, Lauder 
+obtained a formula similar to ours~\citep[Proposition 10]{Lauder2004b}, that
+was used both by him~\citep{Lauder2004b} and Gerkmann~\citep{Gerkmann2007} 
+in their algorithms. 
 
-However, our approach is different in two ways.
-First, our formula for $\alpha_{u,v}$ is defined over $\QQ_p$ instead of $\QQ_p(\pi)$. By eliminating the $\pi$'s, we are able to improve the complexity of
-the computation of $\Phi_0$ (even of the whole deformation algorithm) by a factor $p$, as we will see in Section~\ref{sec:Complexity}. Second, Lauder's
-formula is only valid when the $a_i$ are Teichm\"uller lifts (i.e. $a_i^{p-1}=1$). From a theoretical point of view, of course one can always choose the $a_i$ to be 
-Teichm\"uller lifts, but in computations this is unnecessarily restrictive. 
+However, our approach is different in two ways.  Firstly, our formula 
+for~$\alpha_{u,v}$ is defined over~$\QQ_p$ instead of $\QQ_p(\pi)$. By 
+eliminating the $\pi$'s, we are able to improve the complexity of
+the computation of $\Phi_0$, and even of the whole deformation algorithm, 
+by a factor~$p$, as we will see in Section~\ref{sec:Complexity}. Secondly, 
+Lauder's formula is only valid when the $a_i$ are Teichm\"uller lifts, 
+i.e.\ $a_i^{p-1}=1$. From a theoretical point of view, of course one can 
+always choose the $a_i$ to be Teichm\"uller lifts, but in computations 
+this is unnecessarily restrictive. 
 \end{rem}
 
 \subsection{Some estimates}
 
-There are two remaining problems for computing the matrix $\Phi_0$.
-First, to compute $\Phi_0$ to $p$-adic precision $N_{\Phi_0}$ using Theorem~\ref{thm:01-03-diagfrob}, we have to
-compute the elements $\alpha_{u,v}$ to a somewhat higher precision $N'_{\Phi_0}$ because of loss of precision in the
-computation. In Corollary~\ref{cor:NPhi0prime} we will obtain a bound for $N'_{\Phi_0}$. Second, the sums over $m,r$ in 
-Definition~\ref{defn:alpha} consist of infinitely many terms.  In Proposition~\ref{prop:MR} we will derive a finite 
-expression for $\alpha_{u,v}$ to precision $N'_{\Phi_0}$. We start with some estimates that will be needed in the proofs.
+There are two remaining problems for computing the matrix~$\Phi_0$. Firstly, to 
+compute~$\Phi_0$ to $p$-adic precision $N_{\Phi_0}$ using Theorem~\ref{thm:01-03-diagfrob}, 
+we have to compute the elements~$\alpha_{u,v}$ to a somewhat higher precision~$N'_{\Phi_0}$ 
+because of loss of precision in the computation. In Corollary~\ref{cor:NPhi0prime} we will 
+obtain a bound for~$N'_{\Phi_0}$. Secondly, the sums over $m,r$ in Definition~\ref{defn:alpha} 
+consist of infinitely many terms.  In Proposition~\ref{prop:MR} we will derive a finite 
+expression for $\alpha_{u,v}$ to precision $N'_{\Phi_0}$. We start with some estimates that 
+will be needed in the proofs.
 
 \begin{prop} \label{prop:rfac}
 For all integers $j, d, r \geq 1$ with $p \nmid d$, 
@@ -1521,28 +1541,31 @@ and observe that $s_p(r) \leq (p-1)\floor{\log_p(r) + 1}$. Then
 \begin{prop} \label{prop:coefbound}
 For all integers $m \geq 0$ and $0 \leq i \leq n$,
 \begin{align*}
-\ord_p \left( \sum_{j=0}^{\floor{m/p}} \frac{(p a_i^{p-1})^{\floor{m/p}-j}}{(m-pj)!j!} \right) \geq \frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1}.
+\ord_p \biggl( \sum_{j=0}^{\floor{m/p}} \frac{(p a_i^{p-1})^{\floor{m/p}-j}}{(m-pj)!j!} \biggr) 
+    \geq \frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1}.
 \end{align*}
 \end{prop}
 \begin{proof}
-Let $\QQ_p(\pi)$ denote the totally ramified extension of $\QQ_p$ with $\pi^{p-1} = -p$ and extend the $p$-adic valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}. 
-Expanding
+Let $\QQ_p(\pi)$ denote the totally ramified extension of $\QQ_p$ with $\pi^{p-1} = -p$ and 
+extend the $p$-adic valuation such that \mbox{$\ord_p(\pi) = (p-1)^{-1}$}. Expanding
 \begin{align*}
-\exp(\pi a_i(x-x^p)) &= \sum_{m=0}^{\infty} \lambda_m x^m,
+\exp \bigl( \pi a_i(x-x^p) \bigr) &= \sum_{m=0}^{\infty} \lambda_m x^m,
 \end{align*}
 one checks easily that, for all $m \geq 0$,
 \begin{align*}
 \lambda_m &= \sum_{j=0}^{\floor{m/p}} \frac{(-1)^j (\pi a_i)^{m-(p-1)j}}{(m-pj)!j!} \\
-          &= (-1)^{\floor{m/p}} (\pi a_i)^{m-(p-1)\floor{m/p}} \left( \sum_{j=0}^{\floor{m/p}} \frac{(p a_i^{p-1})^{\floor{m/p}-j}}{(m-pj)!j!} \right).
+          &= (-1)^{\floor{m/p}} (\pi a_i)^{m-(p-1)\floor{m/p}} \biggl( \sum_{j=0}^{\floor{m/p}} \frac{(p a_i^{p-1})^{\floor{m/p}-j}}{(m-pj)!j!} \biggr).
 \end{align*}
-Therefore, it suffices to show that $\ord_p(\lambda_m) \geq m (p-1)/p^2$. This is well-known in the case $a_i=1$,
-but the proof from \citep[Lemma 4.1]{dwork1962} remains valid when $a_i \in \ZZ_p^{\times}$. 
+Therefore, it suffices to show that $\ord_p(\lambda_m) \geq m (p-1)/p^2$. This is 
+well-known in the case $a_i=1$, but the proof from \citep[Lemma 4.1]{dwork1962} 
+remains valid when $a_i \in \ZZ_p^{\times}$. 
 \end{proof}
 
-\begin{thm} \label{thm:alphabound} Let $\alpha_{u,v}$ be defined as in Definition~\ref{defn:alpha}. Then
-\begin{align*}
+\begin{thm} \label{thm:alphabound} 
+Let $\alpha_{u,v}$ be defined as in Definition~\ref{defn:alpha}. Then
+\begin{equation*}
 0 \leq \ord_p(\alpha_{u,v}) \leq \ord_p\left( \frac{(k(v)-1)!}{(k(u)-1)!} \right)+(n-k(u))+\delta,
-\end{align*}
+\end{equation*}
 where $\delta$ is defined as in Definition~\ref{defn:delta}. 
 \end{thm}
 
@@ -1591,13 +1614,12 @@ N_{\Phi_0} + (n-1) + \ord_p\left((n-1)!\right)  + 2\delta,
 where we have used that $1 \leq k(u),k(v) \leq n$.
 \end{proof}
 
-To derive a finite 
-expression for $\alpha_{u,v}$ to precision $N'_{\Phi_0}$, we start with the following elementary lemma.
+To derive a finite expression for $\alpha_{u,v}$ to precision $N'_{\Phi_0}$, 
+we start with the following elementary lemma.
 
 \begin{lem} \label{lem:log}
 Given integers $\alpha, \beta \geq 2$ and defining 
-$x = \beta + \log_{\alpha}(\beta) + 1$, 
-for all real numbers $y \geq x$,
+$x = \beta + \log_{\alpha}(\beta) + 1$, for all real numbers $y \geq x$,
 we have 
 \begin{equation*}
 y - \log_{\alpha}(y) \geq \beta.
@@ -1607,7 +1629,7 @@ y - \log_{\alpha}(y) \geq \beta.
 \begin{proof}
 We first note that the function $y \mapsto y - \log_{\alpha}(y)$ is increasing 
 for $y \geq 2$ because it has derivative $1 - \log_{\alpha}(e)/y > 0$.  Thus, 
-it suffices to verify the result for $x$.  Indeed, as $\beta \geq 2$ we have 
+it suffices to verify the result for~$x$.  Indeed, as $\beta \geq 2$ we have 
 that $\log_{\alpha}(\beta) + 1 \leq \beta$, hence 
 $\beta + \log_{\alpha}(\beta) + 1 \leq 2 \beta \leq \alpha \beta$,
 which upon taking logarithms and rearranging yields the result.
@@ -1626,18 +1648,21 @@ such that $m \leq \mathcal{M}$, or equivalently $r \leq \mathcal{R}$, where
 \begin{proof}
 By Proposition~\ref{prop:rfac} and Proposition~\ref{prop:coefbound}, we have
 \begin{align*}
-\ord_p \left( \left( \frac{u_i+1}{d} \right)_r \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \right) &\geq  \frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1}+\frac{r}{p-1}-\floor{\log_p(r)+1} \\
-													  &\geq  \frac{p-1}{p^2}m - \log_p(m)-1.
+\ord_p \biggl( \Bigl( \frac{u_i+1}{d} \Bigr)_r \sum_{j=0}^{r} \frac{(p a_i^{p-1})^{r-j}}{(m-pj)!j!} \biggr) 
+    &\geq  \frac{p-1}{p^2}m + \floor{\frac{m}{p}}-\frac{m}{p-1}+\frac{r}{p-1}-\floor{\log_p(r)+1} \\
+    &\geq  \frac{p-1}{p^2}m - \log_p(m)-1.
 \end{align*}
-Therefore, it is sufficient to restrict the sums in Definition~\ref{defn:alpha} to $m,r \geq 0$ for which
+Therefore, it is sufficient to restrict the sums in Definition~\ref{defn:alpha} 
+to $m,r \geq 0$ for which
 \begin{align*}
 \frac{p-1}{p^2}m - \log_p(m) -1 < N'_{\Phi_0}. 
 \end{align*}
-We can now apply Lemma~\ref{lem:log} with $y=m(p-1)/p^2$, $\alpha=p$ and $\beta=N'_{\Phi_0}+3$ to obtain the result.
+We can now apply Lemma~\ref{lem:log} with $y=m(p-1)/p^2$, $\alpha=p$ 
+and $\beta=N'_{\Phi_0}+3$ to obtain the result.
 \end{proof}
 
-Finally, we formalise the procedure for computing the entries of~$\Phi_0$ to $p$-adic precision~$N_{\Phi_0}$ in 
-Algorithm~\ref{alg:Diagfrob}.
+Finally, we formalise the procedure for computing the entries of~$\Phi_0$ to 
+$p$-adic precision~$N_{\Phi_0}$ in Algorithm~\ref{alg:Diagfrob}.
 
 \begin{algorithm}
 \caption{Compute the matrix $\Phi_0$.}
@@ -1659,7 +1684,7 @@ Algorithm~\ref{alg:Diagfrob}.
         \item Determine the unique $x^v \in B$ such that $v_i = p (u_i + 1) - 1 \bmod{d}$.
         \item Compute $\alpha_{u,v}$ to $p$-adic 
               precision $N'_{\Phi_0}$ using Proposition~\ref{prop:MR}.
-        \item $(\Phi_0)_{u,v} \gets (-1)^{k(v)} \left( \frac{ (k(v)-1)!}{(k(u)-1)!} \right) p^{n-k(u)} \alpha_{u,v}^{-1} \bmod{p^{N_{\Phi_0}}}$.
+        \item Set $(\Phi_0)_{u,v} \gets (-1)^{k(v)} \left( \frac{ (k(v)-1)!}{(k(u)-1)!} \right) p^{n-k(u)} \alpha_{u,v}^{-1} \bmod{p^{N_{\Phi_0}}}$.
       \end{compactenum}   
  \item \textbf{return} $\Phi_0$      
 \end{compactenum}
@@ -1709,7 +1734,7 @@ the differential equation
 \end{align}
 where $\Phi_0 \in M_{b \times b}(\QQ_p)$ is the matrix for the action 
 of $p^{-1} \Frob_p$ on $\Hrig^n(U_0)$. Our goal is the computation of 
-the power series expansion of~$\Phi$ at $t=0$ to $t$-adic precision $K$ 
+the power series expansion of~$\Phi$ at $t=0$ to $t$-adic precision~$K$ 
 and $p$-adic precision $N_{\Phi}$, i.e.\ as an element of 
 $M_{b \times b}(\QQ_q[[t]])$ modulo $t^K$ and $p^{N_{\Phi}}$.
 
@@ -1842,9 +1867,9 @@ C_{i+1} &= \frac{-1}{r_0 (i+1)} \left(
 \end{align}
 Again we will only carry out this computation to some finite $p$-adic 
 working precision~$N'_C$, and if we want $C$ to be correct to $p$-adic 
-precision~$N_C$, then the precision $N'_C$ has to be somewhat higher 
-because of error propagation. An expression for $N'_C$, in terms of 
-$N_C$ and the desired $t$-adic precision $K$, was given by 
+precision~$N_C$, then the precision~$N'_C$ has to be somewhat higher 
+because of error propagation. An expression for~$N'_C$, in terms of~$N_C$ 
+and the desired $t$-adic precision~$K$, was given by 
 Lauder~\citep[Theorem~5.1]{Lauder2006}, but his result can be
 significantly improved using Theorem~\ref{thm:valC}, as we will now show. 
 
@@ -1926,14 +1951,12 @@ N'_C			    &=& N_{\Phi}+\left(2 \left(2 \delta + (n-1)\right) + 1\right) \ceil{\
 N'_{C^{-1}}	        &=& N_{\Phi}+\left(2 \left(2 \delta + (n-1)\right) + 1\right) \ceil{\log_p(\ceil{K/p}-1)}.
 \end{eqnarray*}
 
-In order to compute the power series expansion 
-of the matrix $\Phi$ at $t=0$ with $t$-adic precision $K$ and $p$-adic precision $N_{\Phi}$,
-it is sufficient to compute
-the matrix $\Phi_0$ to $p$-adic precision $N_{\Phi_0}$,
-the matrix $C$ to $t$-adic precision $K$ and $p$-adic precision $N_{C}$, 
-the matrix $C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic precision 
-$N_{C^{-1}}$, and 
-the matrix $M$ to $p$-adic precision $N_M$.
+In order to compute the power series expansion of the matrix~$\Phi$ at $t=0$ 
+with $t$-adic precision~$K$ and $p$-adic precision~$N_{\Phi}$, it is 
+sufficient to compute the matrix~$\Phi_0$ to $p$-adic precision~$N_{\Phi_0}$,
+the matrix~$C$ to $t$-adic precision~$K$ and $p$-adic precision~$N_{C}$, 
+the matrix~$C^{-1}$ to $t$-adic precision $\ceil{K/p}$ and $p$-adic 
+precision~$N_{C^{-1}}$, and the matrix~$M$ to $p$-adic precision~$N_M$.
 
 Therefore, while solving Equation~\eqref{eq:01-GMDE-Homogenous} for $C$ and 
 Equation~\eqref{eq:01-GMDE-Dual} for $C^{-1}$, using a recursion like in 
@@ -2036,7 +2059,7 @@ and no other poles contained in $D$. Suppose that
 the exponents $\lambda_1, \dotsc, \lambda_{b}$ of $M$ at $z$, which are defined 
 as the eigenvalues  of the matrix $(t - z) M \vert_{t=z}$ and 
 known to be rational numbers, are contained in $\ZZ_p \cap \QQ$. 
-For $i \in \NN$, put
+For $i \in \NN$, let 
 \begin{align*}
 f(i) = \max \left\{ -\left(2 \delta + (n-1) \right) \lceil \log_p(i) \rceil, 
 (b-1) \ord_p(M) -\left(2 \delta + (n-1) \right) \lfloor \log_p(i) \rfloor 
@@ -2049,7 +2072,7 @@ c = \begin{cases}
 \min\{0, i + f(i): i \in \NN\} & \mbox{if $\ord_p(M) < 0$}.
 \end{cases}
 \end{align*}
-For $N \in \NN$, put
+For $N \in \NN$, let 
 \begin{align*}
 g(N) &= \max \{i \in \NN : i + f(i) - \delta + c  < N \},
 \end{align*}
@@ -2098,7 +2121,7 @@ Definition~\ref{defn:MonBasis}. Now by \citep[Corollary 2.6]{KedlayaTuitman2012}
 the matrix $\Phi$ is congruent modulo $p^{N+\ord_p(W)+\ord_p(W^{-1})}$ 
 to a matrix $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \[
-\ord_z\left(\tilde{\Phi}\right) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z\left(W^{-1}\right)
+\ord_z\bigl(\tilde{\Phi}\bigr) \geq -(\alpha_1+p \alpha_2)+\ord_z(W)+p\ord_z\bigl(W^{-1}\bigr)
 \]
 and $\tilde{\Phi}$ has no other poles contained in $D$.
 Here, $\alpha_1$ and $\alpha_2$ are defined as in 
@@ -2138,7 +2161,7 @@ and put
 Then $\Phi$ is congruent modulo $p^N$ to a matrix 
 $\tilde{\Phi} \in M_{b \times b}(\QQ_q(t))$ for which
 \begin{equation*}
-\ord_z\left(\tilde{\Phi}\right) \geq -\beta_z,
+\ord_z\bigl(\tilde{\Phi}\bigr) \geq -\beta_z,
 \end{equation*}
 for all points $z \in D$.
 \end{thm}
@@ -2197,7 +2220,7 @@ noting that $B_{n+1}=\emptyset$, and multiply the output by~$x^w$ to obtain
 the decomposition of~$x^v$.
 
 Note that the left-hand side of Equation~\eqref{eqn:Froblift} does not have a 
-pole at $z \neq \infty$, and has order at least $-pi\deg_t(P)$ at $z=\infty$. 
+pole at $z \neq \infty$, and has order at least $-i p \deg_t(P)$ at $z=\infty$. 
 When applying Algorithm~\ref{alg:PoleRed} to this expression, as long as the 
 pole order is at least~$n+1$, the order at~$z$ drops by at most $\nu_z$ in every 
 reduction step, and it drops by at most $\mu_z$ in the remaining reduction steps. 
@@ -2231,7 +2254,7 @@ and we can compute the order at $z$ of these terms using
 \end{proof}
 
 \begin{rem}
-A result similar to (but weaker than) Theorem \ref{thm:Gerkmann} 
+A result similar to, but weaker than, Theorem \ref{thm:Gerkmann} 
 was obtained by Gerkmann in \citep[Section 6]{Gerkmann2007}.
 \end{rem}
 
@@ -2306,7 +2329,7 @@ on $\Hrig^n(U_{\tau})$.
 
 We now analyse the loss of $p$-adic precision when computing 
 the reverse characteristic polynomial 
-$\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det\left( 1 - T \Phi_{\tau}^{(a)}\right)$.
+$\chi(T)=1+\sum_{i=1}^b \chi_i T^i=\det\bigl( 1 - T \Phi_{\tau}^{(a)}\bigr)$.
 
 \begin{thm} \label{thm:preccharpoly}
 Let $N_{\Phi} \in \NN$ be such that $N_{\Phi} \geq \delta$, 
@@ -2383,10 +2406,10 @@ Note that $\Gamma(b)=b(n-1)/2$ since $h^{i,n-1-i}=h^{n-1-i,i}$ for all $0 \leq i
 \end{defn}
 
 \begin{thm} \label{thm:pgeqn}
-We continue to use the notation of Theorem~\ref{thm:preccharpoly}. 
-Let $N_{\Phi} \in \NN$ and suppose that $p \geq n$. Let $\tilde{\Phi}_{\tau}$ 
-be an approximation to $\Phi_{\tau}$ that satisfies $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$. 
-Then for all $1 \leq i \leq b$, we have
+We continue with the notation of Theorem~\ref{thm:preccharpoly}. 
+Let \mbox{$N_{\Phi} \in \NN$} and suppose that $p \geq n$. If $\tilde{\Phi}_{\tau}$ 
+is an approximation to $\Phi_{\tau}$ such that $\ord_p (\Phi_{\tau}-\tilde{\Phi}_{\tau}) \geq N_{\Phi}$ 
+then, for all $1 \leq i \leq b$, we have
 \[
 \ord_p\left(\chi_i-\tilde{\chi}_i\right) \geq N_{\Phi} + a\Gamma(i-1).
 \]
@@ -2394,16 +2417,17 @@ Then for all $1 \leq i \leq b$, we have
  
 \begin{proof} 
 Note that in this case $\delta=0$ and hence that $\ord_p(\Phi_{\tau}) \geq 0$. 
-By a result of Mazur~\citep[p. 665-666]{Mazur1972}, the map $p^{-1} \Frob_p$ 
+By a result of Mazur~\citep[p.\ 665--666]{Mazur1972}, the map $p^{-1} \Frob_p$ 
 sends $(H_i)_{\hat{\tau}} \cap \Lambda_{\tau,crys}$ into $p^i \Lambda_{\tau,crys}$, 
 where $\Lambda_{\tau,crys}$ is defined as in the proof of 
-Theorem~\ref{thm:deltabound} and $H_i$ as in Remark~\ref{rem:hnumbers}. This implies that the so called Hodge polygon 
-of the $F$-crystal $(\Lambda_{\tau,crys},p^{-1} \Frob_p)$ lies above the graph of 
+Theorem~\ref{thm:deltabound} and $H_i$ as in Remark~\ref{rem:hnumbers}. 
+This implies that the so called Hodge polygon of the 
+$F$-crystal $(\Lambda_{\tau,crys},p^{-1} \Frob_p)$ lies above the graph of 
 $\Gamma$. From this it follows that the Hodge polygon of the $F$-crystal 
 $(\Lambda_{\tau,crys},\mathfrak{q}^{-1} \Frob_{\mathfrak{q}})$ lies
 above the graph of $a\Gamma$. Hence we can find an invertible matrix 
 $W_{\tau} \in M_{b \times b}(\ZZ_{\mathfrak{q}})$ such that for all 
-$1 \leq i \leq b$, the sum of the valuations of any $i$ different columns
+$1 \leq i \leq b$, the sum of the valuations of any~$i$ different columns
 of $W_{\tau} \Phi_{\tau}^{(a)} W_{\tau}^{-1}$ is at least $a\Gamma(i)$.
 Note that 
 \[ \ord_p(W_{\tau }\Phi_{\tau}^{(a)} W_{\tau}^{-1}-W_{\tau } \tilde{\Phi}_{\tau}^{(a)} W_{\tau}^{-1}) \geq N_{\Phi}.\]
@@ -2456,7 +2480,7 @@ we can limit $\chi_j$ to an explicit  disk in the complex plane of
 radius $(b/j) \mathfrak{q}^{j (n-1) / 2}$. Therefore, 
 if we know each $\chi_i$ to $p$-adic precision $N_{\chi_i}$ satisfying
 \[
-p^{N_{\chi_i}} > 2 \bigl( b/i \bigr) \mathfrak{q}^{i (n-1) / 2},
+p^{N_{\chi_i}} > \frac{2 b}{i} \mathfrak{q}^{i (n-1) / 2},
 \] 
 we can determine $\chi(T)$ exactly using the recursion~\eqref{eq:recursion}.
 \end{proof}
@@ -2484,8 +2508,8 @@ Theorem~\ref{thm:preccharpoly} and Theorem~\ref{thm:pgeqn}, respectively.
 
 \begin{rem} \label{rem:epsilon}
 If the sign $\epsilon = \pm 1$ is known for which 
-$\det(\Phi_{\tau}^{(a)}) = \epsilon \mathfrak{q}^{b(n-1)/2}$, then this can 
-be improved further. Since 
+$\det \bigl(\Phi_{\tau}^{(a)} \bigr) = \epsilon \mathfrak{q}^{b(n-1)/2}$, 
+then this can be improved further. Since 
 $\prod_{i=1}^b \alpha_i = \epsilon \mathfrak{q}^{b(n-1)/2}$, and 
 the $\alpha_i$ are permuted under the map 
 $\alpha \mapsto \mathfrak{q}^{n-1}/\alpha$, we have
@@ -2914,7 +2938,7 @@ of characteristic $p$.
 Moreover, we write $a=\log_p(\mathfrak{q})$, $a'=\log_p(q)$ and let
 $d_t$ be the degree of $P$ in the variable $t$. Finally,
 we let $e$ denote the base of the natural
-logarithm and $\omega$ the least exponent for matrix multiplication.
+logarithm and $\omega$ an exponent for matrix multiplication.
 
 \begin{thm} \label{thm:totalcomplexity}
 The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
@@ -2924,7 +2948,7 @@ The computation of $Z(X_{\tau},T)$ using Algorithm~\ref{alg:complete} requires
                 a^2 a' p d^{n(\omega+4)} e^{2n} d_t^2+
                 aa' \bigl(d^{n(\omega+2)} e^{n(\omega+1)}+ d^{5n} e^{3n}\bigr) d_t 
                 \Bigr), \\
-\mbox{space: } &\SoftOh\bigl( a^2 a' p d^{5n} d_t + a a' d^{4n} e^{3n} d_t \bigr).
+\mbox{space: } &\SoftOh\bigl( a^2 a' p d^{5n} e^n d_t + a a' d^{4n} e^{3n} d_t \bigr).
 \end{align*}
 Alternatively, computing the matrix $\Phi_0$ as in the proof of Proposition~\ref{prop:compPhi0}, 
 the computation of $Z(X_{\tau},T)$ requires
@@ -2936,7 +2960,7 @@ the computation of $Z(X_{\tau},T)$ requires
                 \Bigr), \\
 \mbox{space: } &\SoftOh\bigl( 
                 a^2 p^2 d^{2n} + 
-                a^2 a' p d^{5n} d_t + 
+                a^2 a' p d^{5n} e^n d_t + 
                 a a' d^{4n} e^{3n} d_t \bigr).
 \end{align*}
 \end{thm}
@@ -3301,7 +3325,7 @@ $M$             & 0.08s   & 0.08s   & 0.08s   & 0.08s  	& 0.08s	  & 0.08s     & 
 $\Phi_0$        & 0.00s   & 0.00s   & 0.01s   & 0.01s 	& 0.00s	  & 0.00s     &	0.00s	 & 0.01s	\\
 $\Phi$          & 9.46s   & 12.14s  & 18.06s  & 36.16s 	& 67.12s  & 123.75s   &	216.15s	 & 513.77s	\\
 $Z(X_{\tau},T)$ & 0.19s   & 0.20s   & 0.29s   & 0.64s 	& 1.17s	  & 2.17s     & 4.60s	 & 11.31s	\\
-Total           & 9.73s   & 12.42s  & 18.44s  & 36.89s 	& 68.37s  & 126.00s   &	220.83s	 & 525.17	\\ \bottomrule
+Total           & 9.73s   & 12.42s  & 18.44s  & 36.89s 	& 68.37s  & 126.00s   &	220.83s	 & 525.17s	\\ \bottomrule
 \end{tabular} 
 \end{center}
 
@@ -3323,7 +3347,7 @@ In the case $p=2^9+9$ we find that $p \chi(T/p)$ is equal to
 In all of our timings, we have not included the time required to compute 
 the $p$-adic and $t$-adic precisions, since we used MAGMA for this. Note, 
 however, that we can readily determine $\det(\Delta_k)$ from the 
-$LUP$~decomposition of $\Delta_k$ and that the factorisation of the 
+$LUP$~decomposition of~$\Delta_k$ and that the factorisation of the 
 polynomials $r$, $R$ over $\QQ$ and $\FF_p$ was instantaneous in all 
 cases. The only step that required noticeably more time was the 
 computation of the exponents in the generic examples. For the family of 
