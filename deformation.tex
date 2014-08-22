@@ -2995,7 +2995,7 @@ point counting algorithms tend to have in common.
 \label{sec:Examples}
 
 In this section we apply Algorithm~\ref{alg:complete} to some examples 
-using our preliminary implementation\footnotemark.  This implementation 
+using our implementation\footnotemark.  This implementation 
 is restricted to the case $q = p$, i.e.\ to families of hypersurfaces 
 defined over a prime field.  In order to provide some context for the 
 runtimes presented below, note that all computations were carried out 
@@ -3310,7 +3310,7 @@ $\{1,3/2,2,3\}$. We take $\tau$ to be $1 \in \FF_p$.
 
 For all primes $p$ that we consider, the zeros of $r$ are $p$-adic integers and different modulo $p$.
 Therefore, we can apply Theorem~\ref{thm:KedlayaTuitman} everywhere. As an example, we determine the
-precisions in the case $p=2^9$. We first compute $\delta=0$ and $N_{\Phi}=N'_{\Phi}=3$. We find
+precisions in the case $p=2^9+9$. We first compute $\delta=0$ and $N_{\Phi}=N'_{\Phi}=3$. We find
 $\theta_z=1824$ at all zeros $z$ of $r$ and $\theta_{\infty}=4$, so that we can take $s=r^{1824}$ and $K=65668$.
 We now compute the remaining $p$-adic precisions $N_{\Phi_0}=9$, $N_C=5$, $N_{C^{-1}}=7$, $N_M=14$, 
 $N_C'=13$, $N_{C^{-1}}'=8$, $N_{\Phi_0}'=11$ and $N_M'=14$.
@@ -3318,28 +3318,38 @@ $N_C'=13$, $N_{C^{-1}}'=8$, $N_{\Phi_0}'=11$ and $N_M'=14$.
 \subsubsection{Timings}
 
 \begin{center}
-\begin{tabular}{l l l l l l l l l} \toprule
-$p$             & $2^2+1$ & $2^3+3$ & $2^4+1$ & $2^5+5$ & $2^6+3$ & $2^7 + 3$ & $ 2^8+1$ & $2^9+9$	\\ \midrule
-Computation     & 	  &         &         &                                                    	\\ \midrule  
-$M$             & 0.08s   & 0.08s   & 0.08s   & 0.08s  	& 0.08s	  & 0.08s     & 0.08s	 & 0.08s	\\
-$\Phi_0$        & 0.00s   & 0.00s   & 0.01s   & 0.01s 	& 0.00s	  & 0.00s     &	0.00s	 & 0.01s	\\
-$\Phi$          & 9.46s   & 12.14s  & 18.06s  & 36.16s 	& 67.12s  & 123.75s   &	216.15s	 & 513.77s	\\
-$Z(X_{\tau},T)$ & 0.19s   & 0.20s   & 0.29s   & 0.64s 	& 1.17s	  & 2.17s     & 4.60s	 & 11.31s	\\
-Total           & 9.73s   & 12.42s  & 18.44s  & 36.89s 	& 68.37s  & 126.00s   &	220.83s	 & 525.17s	\\ \bottomrule
+\begin{tabular}{l l l l l l} \toprule
+$p$             & $2^2+1$ & $2^3+3$ & $2^4+1$ & $2^5+5$ & $2^6+3$ 	\\ \midrule
+Computation     & 	  &         &         &         &               \\ \midrule  
+$M$             & 0.10s   & 0.10s   & 0.10s   & 0.10s  	& 0.10s	  	\\
+$\Phi_0$        & 0.01s   & 0.00s   & 0.01s   & 0.01s 	& 0.00s	  	\\
+$\Phi$          & 5.89s   & 9.19s   & 9.38s   & 20.06s 	& 42.18s       	\\
+$Z(X_{\tau},T)$ & 0.07s   & 0.14s   & 0.08s   & 0.37s 	& 0.91s	  	\\
+Total           & 6.07s   & 9.43s   & 9.57s   & 20.54s 	& 43.19s      	\\ \bottomrule
+\end{tabular} 
+\end{center}
+
+\begin{center}
+\begin{tabular}{l l l l l l} \toprule
+$p$             & $2^7 + 3$ & $ 2^8+1$	& $2^9+9$  	& $2^{10}+7$ 	& $2^{11}+5$	\\ \midrule
+Computation     & 	    &          	&          	&            	& \\ \midrule  
+$M$             & 0.10s     & 0.10s	& 0.10s    	& 0.10s	 	& 0.10s \\
+$\Phi_0$        & 0.00s     & 0.00s	& 0.00s       	& 0.00s	      	& 0.00s\\
+$\Phi$          & 84.78s    & 166.68s	& 359.06s    	& 748.57s	& 1569.01s\\
+$Z(X_{\tau},T)$ & 1.61s     & 3.62s	& 7.09s      	& 14.50s	& 32.03s\\
+Total           & 86.49s    & 170.40s	& 366.25s    	& 763.18s	& 1601.15s\\ \bottomrule
 \end{tabular} 
 \end{center}
 
 \bigskip
 
-Our timings in this example confirm that the running time of the algorithm is quasilinear in $p$, although $2^9+9$ is
-of course still quite small. Since the space requirement is also quasilinear in $p$ and our implementation already uses $5.4$Gb for 
-$p=2^9+9$, the computation runs out of memory for $p=2^{10}+7$. 
-
-In the case $p=2^9+9$ we find that $p \chi(T/p)$ is equal to
+Our timings in this example confirm that the running time of the algorithm is (quasi)linear in $p$
+and the memory usage also turns out to be (quasi)linear in $p$ as predicted. In the case $p=2^{11}+5$, the computation 
+requires about 6 GB of memory. As an example, for the prime $p=2^{11}+5$ we find that $p \chi(T/p)$ is equal to
 \begin{multline*}
--521T^{21} + 1654T^{20} - 3325T^{19} + 5617T^{18} - 6462T^{17} + 5381T^{16} - 2776T^{15} - 1808T^{14} + \\
-5798T^{13} - 8220T^{12} + 9910T^{11} - 9910T^{10} +  8220T^{9} - 5798T^{8} + 1808T^{7} + \\
-2776T^{6} - 5381T^{5} + 6462T^{4} - 5617T^3 + 3325T^2 - 1654T + 521
+2053 T^{21} - 4885 T^{20} + 6922 T^{19} - 7050 T^{18} + 1163 T^{17} + 7077 T^{16} - 12948 T^{15} \\ 
++ 12948 T^{14} - 9130 T^{13} + 3722 T^{12} + 128 T^{11} + 128 T^{10} + 3722 T^9 - 9130 T^8 \\ 
++ 12948 T^7 - 12948 T^6 + 7077 T^5 + 1163 T^4 - 7050 T^3 + 6922 T^2 - 4885 T + 2053.
 \end{multline*}
 
 
