@@ -48,6 +48,12 @@ on smooth projective hypersurfaces}
     }
 \fi
 
+% footnotes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
+\makeatother
+
 % algorithmic %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[section]{algorithm}
@@ -212,6 +218,8 @@ more practical and can be applied more generally, which we illustrate
 with examples of generic quintic curves and quartic surfaces.}
 
 \bigskip % looks a lot better
+
+\blfootnote{Communicated by Felipe Cucker. Mathematics Subject Classification 2010: 11Y99, 11M38.}
 
 \setcounter{tocdepth}{2}
 \tableofcontents
